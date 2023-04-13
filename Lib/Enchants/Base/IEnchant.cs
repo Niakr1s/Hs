@@ -1,4 +1,4 @@
-﻿namespace Models.Stats.Enchant
+﻿namespace Models.Enchants.Base
 {
     public interface IEnchant<T>
     {

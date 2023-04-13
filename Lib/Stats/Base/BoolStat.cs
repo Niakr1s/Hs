@@ -1,4 +1,4 @@
-﻿namespace Models.Stats.Stat
+﻿namespace Models.Stats.Base
 {
     public class BoolStat : Stat<bool>
     {
@@ -6,9 +6,11 @@
         {
         }
 
-        public override void Silence()
+        public void Silence()
         {
             _value = false;
+            Auras.Clear();
+            Buffs.Clear();
         }
 
         protected sealed override bool Sum(bool a1, bool a2)

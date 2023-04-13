@@ -1,4 +1,4 @@
-﻿using Models.Stats.Stat;
+﻿using Models.Stats.Base;
 
 namespace Models.Stats
 {

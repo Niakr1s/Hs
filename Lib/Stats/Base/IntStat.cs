@@ -1,17 +1,9 @@
-﻿namespace Models.Stats.Stat
+﻿namespace Models.Stats.Base
 {
     public class IntStat : Stat<int>
     {
         protected IntStat(int value) : base(value)
         {
-        }
-
-        public override void Silence()
-        {
-            if (_value > _initialValue)
-            {
-                _value = _initialValue;
-            }
         }
 
         protected sealed override int Sum(int a1, int a2)

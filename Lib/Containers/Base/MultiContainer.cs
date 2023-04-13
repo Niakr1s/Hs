@@ -1,7 +1,7 @@
 ﻿using Models.Cards;
 using Models.Common;
 
-namespace Models.Containers.Container
+namespace Models.Containers.Base
 {
 
     public abstract class MultiContainer<TCard> : Container<TCard>

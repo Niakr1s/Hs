@@ -1,7 +1,7 @@
 ﻿using Models.Cards;
 using Models.Common;
 
-namespace Models.Containers.Container
+namespace Models.Containers.Base
 {
     public class SingleContainer<TCard> : Container<TCard>
         where TCard : Card

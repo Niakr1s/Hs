@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Models.Stats.Enchant
+namespace Models.Enchants.Base
 {
     public class EnchantList<T>
     {

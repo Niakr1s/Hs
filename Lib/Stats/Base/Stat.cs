@@ -1,6 +1,6 @@
-﻿using Models.Stats.Enchant;
+﻿using Models.Enchants.Base;
 
-namespace Models.Stats.Stat
+namespace Models.Stats.Base
 {
     public abstract class Stat<T>
         where T : struct
@@ -69,11 +69,6 @@ namespace Models.Stats.Stat
             Auras.Clear();
             _value = _initialValue;
         }
-
-        /// <summary>
-        /// Simply silences stat. Removes all buffs.
-        /// </summary>
-        public abstract void Silence();
 
         protected abstract T Sum(T a1, T a2);
 
