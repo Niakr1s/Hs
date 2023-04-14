@@ -1,6 +1,7 @@
 ﻿using Models.Cards;
 using Models.Common;
 using Models.Events;
+using Models.Services.Battle;
 
 namespace Models.Containers
 {
@@ -16,6 +17,8 @@ namespace Models.Containers
             Event += UpdateCards;
 
             Turn = new Turn();
+
+            BattleService = new BattleService(this);
         }
 
         public Battlefield(HeroId p1, HeroId p2) : this(new StartingDeck(p1), new StartingDeck(p2))
@@ -30,6 +33,10 @@ namespace Models.Containers
         }
 
         public Turn Turn { get; }
+
+        #region Services
+        public BattleService BattleService { get; }
+        #endregion
 
         /// <summary>
         /// All cards in all containers in their add order.
