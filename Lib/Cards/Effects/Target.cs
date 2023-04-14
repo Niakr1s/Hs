@@ -4,7 +4,7 @@ namespace Models.Cards.Effects
 {
     public readonly struct Target
     {
-        public TargetPlace Place { get; init; }
+        public TargetContainer Container { get; init; }
 
         public TargetSide Side { get; init; }
 
@@ -14,7 +14,7 @@ namespace Models.Cards.Effects
 
             if (target is null)
             {
-                return Place == TargetPlace.None;
+                return Container == TargetContainer.None;
             }
             else
             {
@@ -26,8 +26,8 @@ namespace Models.Cards.Effects
                     (Side.HasFlag(TargetSide.He) && !sameSide);
 
                 bool placeIsCorrect =
-                    (Place.HasFlag(TargetPlace.Field) && target.Loc == Loc.Field) ||
-                    (Place.HasFlag(TargetPlace.Hero) && target.Loc == Loc.Hero);
+                    (Container.HasFlag(TargetContainer.Field) && target.Loc == Loc.Field) ||
+                    (Container.HasFlag(TargetContainer.Hero) && target.Loc == Loc.Hero);
 
                 return sideIsCorrect && placeIsCorrect;
             }
@@ -35,7 +35,7 @@ namespace Models.Cards.Effects
     }
 
     [Flags]
-    public enum TargetPlace
+    public enum TargetContainer
     {
         None = 0,
         Field = 1,

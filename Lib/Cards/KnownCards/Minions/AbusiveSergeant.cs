@@ -20,7 +20,7 @@ namespace Models.Cards.KnownCards.Minions
         {
             Target = new Target
             {
-                Place = TargetPlace.Field,
+                Container = TargetContainer.Field,
                 Side = TargetSide.Me | TargetSide.He
             };
         }
