@@ -4,7 +4,7 @@ using Models.Stats;
 
 namespace Models.Cards
 {
-    public abstract class Minion : Card, IAttacker, IDefender
+    public abstract class Minion : Card, IAttacker, IDamageable
     {
         protected Minion(int mp, int atk, int hp) : base(mp)
         {

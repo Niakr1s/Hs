@@ -4,7 +4,7 @@ using Models.Stats;
 
 namespace Models.Containers
 {
-    public class Hero : IDefender
+    public class Hero : IDamageable
     {
         public Hero(Pid pid, HeroId heroId = HeroId.Jaina)
         {

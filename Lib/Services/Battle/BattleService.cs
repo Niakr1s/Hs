@@ -20,11 +20,11 @@ namespace Models.Services.Battle
         /// <param name="defender"></param>
         /// <param name="attackDefender">Is a defender, who takes counterattack. If no defender provided, attacker will try defend by himself.</param>
         /// <returns>True, if attack was actually made.</returns>
-        private bool MeleeAttack(IAttacker attacker, IDefender defender,
-            IDefender? attackDefender = null,
+        private bool MeleeAttack(IAttacker attacker, IDamageable defender,
+            IDamageable? attackDefender = null,
             bool isCounterAttack = false)
         {
-            attackDefender ??= attacker as IDefender;
+            attackDefender ??= attacker as IDamageable;
             if (attackDefender?.Dead == true) return false;
 
             if (!isCounterAttack)
@@ -44,7 +44,7 @@ namespace Models.Services.Battle
             return true;
         }
 
-        public bool MinionAttack(Minion attacker, IDefender defender)
+        public bool MinionAttack(Minion attacker, IDamageable defender)
         {
             return MeleeAttack(attacker, defender, attackDefender: attacker);
         }

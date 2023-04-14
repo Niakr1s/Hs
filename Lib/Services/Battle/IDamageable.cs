@@ -2,7 +2,7 @@
 
 namespace Models.Services.Battle
 {
-    public interface IDefender
+    public interface IDamageable
     {
         public Pid Pid { get; }
 
