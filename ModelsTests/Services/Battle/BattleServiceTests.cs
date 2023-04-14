@@ -29,5 +29,25 @@ namespace Models.Services.Battle.Tests
             Assert.AreEqual(1, yeti1.Hp.Value);
             Assert.AreEqual(0, yeti2.Hp.Value);
         }
+
+        [TestMethod()]
+        public void MinionAttackHeroTest()
+        {
+            Battlefield bf = new Battlefield(HeroId.Jaina, HeroId.Rexxar);
+            Minion yeti1 = new ChillwindYeti();
+            Hero p2Hero = bf[Pid.P2].Hero;
+
+            bf[Pid.P1].Deck.Add(yeti1);
+            Assert.AreEqual(5, yeti1.Hp.Value);
+            Assert.AreEqual(30, p2Hero.Hp.Value);
+
+            bf.BattleService.MinionAttack(yeti1, p2Hero);
+            Assert.AreEqual(5, yeti1.Hp.Value);
+            Assert.AreEqual(26, p2Hero.Hp.Value);
+
+            bf.BattleService.MinionAttack(yeti1, p2Hero);
+            Assert.AreEqual(5, yeti1.Hp.Value);
+            Assert.AreEqual(22, p2Hero.Hp.Value);
+        }
     }
 }

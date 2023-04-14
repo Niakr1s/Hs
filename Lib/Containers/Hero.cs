@@ -1,9 +1,10 @@
 ﻿using Models.Common;
+using Models.Services.Battle;
 using Models.Stats;
 
 namespace Models.Containers
 {
-    public class Hero
+    public class Hero : IDefender
     {
         public Hero(Pid pid, HeroId heroId = HeroId.Jaina)
         {
@@ -25,6 +26,15 @@ namespace Models.Containers
         public Hp Hp { get; }
 
         public Armor Armor { get; }
+
+        public Loc Loc => throw new NotImplementedException();
+
+        public bool Dead => Hp.Value <= 0;
+
+        public int GetDamage(int value)
+        {
+            return Hp.GetDamage(value);
+        }
     }
 
     public enum HeroId
