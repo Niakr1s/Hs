@@ -27,7 +27,7 @@ namespace Models.Containers
 
         public Armor Armor { get; }
 
-        public Loc Loc => throw new NotImplementedException();
+        public Loc Loc => Loc.Hero;
 
         public bool Dead => Hp.Value <= 0;
 

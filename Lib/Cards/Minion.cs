@@ -1,6 +1,7 @@
 ﻿using Models.Cards.Effects;
 using Models.Services.Battle;
 using Models.Stats;
+using Models.Stats.Base;
 
 namespace Models.Cards
 {
@@ -15,6 +16,12 @@ namespace Models.Cards
         public Atk Atk { get; }
 
         public Hp Hp { get; }
+
+        public BoolStat Taunt { get; init; } = new BoolStat(false);
+        public BoolStat Charge { get; init; } = new BoolStat(false);
+        public BoolStat Windfury { get; init; } = new BoolStat(false);
+        public BoolStat DivineShield { get; init; } = new BoolStat(false);
+        public BoolStat Stealth { get; init; } = new BoolStat(false);
 
         public Battlecry? Battlecry { get; protected set; }
 

@@ -2,7 +2,7 @@
 {
     public class BoolStat : Stat<bool>
     {
-        protected BoolStat(bool value) : base(value)
+        public BoolStat(bool value) : base(value)
         {
         }
 
