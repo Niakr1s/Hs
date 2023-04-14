@@ -1,4 +1,6 @@
-﻿namespace Models.Common.Turn
+﻿using Models.Events;
+
+namespace Models.Common
 {
     public enum Status
     {

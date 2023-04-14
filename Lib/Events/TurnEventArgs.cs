@@ -1,4 +1,4 @@
-﻿namespace Models.Common.Turn
+﻿namespace Models.Events
 {
     public abstract class TurnEventArgs : EventArgs { }
 

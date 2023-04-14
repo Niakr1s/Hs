@@ -1,4 +1,4 @@
-﻿namespace Models.Containers.Events
+﻿namespace Models.Events
 {
     public abstract class BattlefieldEventArgs : EventArgs
     {

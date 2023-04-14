@@ -1,6 +1,6 @@
 ﻿using Models.Cards;
 using Models.Common;
-using Models.Containers.Events;
+using Models.Events;
 
 namespace Models.Containers.Base
 {

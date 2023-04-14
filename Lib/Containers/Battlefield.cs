@@ -1,7 +1,6 @@
 ﻿using Models.Cards;
 using Models.Common;
-using Models.Common.Turn;
-using Models.Containers.Events;
+using Models.Events;
 
 namespace Models.Containers
 {

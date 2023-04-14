@@ -1,6 +1,6 @@
 ﻿using Models.Cards.Effects;
-using Models.Common.Turn;
 using Models.Containers;
+using Models.Events;
 using Models.Reactive;
 using Models.Stats.Base;
 

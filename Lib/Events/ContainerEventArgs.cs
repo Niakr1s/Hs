@@ -1,7 +1,7 @@
 ﻿using Models.Cards;
 using Models.Common;
 
-namespace Models.Containers.Events
+namespace Models.Events
 {
     public abstract class ContainerEventArgs : BattlefieldEventArgs
     {
