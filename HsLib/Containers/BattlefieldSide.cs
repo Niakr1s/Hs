@@ -1,4 +1,6 @@
-﻿using Models.Common;
+﻿using HsLib.Cards.KnownCards.Weapons;
+using HsLib.Containers;
+using Models.Common;
 using Models.Common.Place;
 
 namespace Models.Containers
@@ -15,6 +17,7 @@ namespace Models.Containers
             Field = new(pid);
 
             Hero = new Hero(pid);
+            Weapon = new WeaponContainer(pid, new NoWeapon());
 
             Graveyard = new(pid);
         }
@@ -30,6 +33,8 @@ namespace Models.Containers
         public Field Field { get; }
 
         public Hero Hero { get; }
+
+        public WeaponContainer Weapon { get; }
 
         public Graveyard Graveyard { get; }
     }

@@ -31,6 +31,7 @@ namespace Models.Services.Battle
 
             attackDefender ??= attacker as IDamageable;
             if (attackDefender?.Dead == true) return false;
+            if (attacker.Atk.Value <= 0) return false;
 
             if (!isCounterAttack)
             {
@@ -52,6 +53,16 @@ namespace Models.Services.Battle
         public bool MinionAttack(Minion attacker, IDamageable defender)
         {
             return MeleeAttack(attacker, defender, attackDefender: attacker);
+        }
+
+        public bool WeaponAttack(Weapon weapon, IDamageable defender)
+        {
+            bool success = MeleeAttack(weapon, defender);
+            if (success)
+            {
+                weapon.Hp.Decrease();
+            }
+            return success;
         }
     }
 }

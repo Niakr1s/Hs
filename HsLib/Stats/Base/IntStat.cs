@@ -15,5 +15,10 @@
         {
             return value < 0 ? 0 : value;
         }
+
+        public void Decrease(int value = 1)
+        {
+            _value -= value;
+        }
     }
 }

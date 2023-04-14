@@ -64,5 +64,23 @@ namespace Models.Services.Battle.Tests
             Assert.AreEqual(5, yeti1.Hp.Value);
             Assert.AreEqual(22, p2Hero.Hp.Value);
         }
+
+        [TestMethod()]
+        public void WeaponAttackTest()
+        {
+            Battlefield bf = new Battlefield(HeroId.Jaina, HeroId.Rexxar);
+            bf.BattleService.Rules = null;
+
+            Minion yeti1 = new ChillwindYeti();
+            bf[Pid.P2].Field.Add(yeti1);
+
+            Weapon weapon = bf[Pid.P1].Weapon.Card;
+            Assert.AreEqual(false, bf.BattleService.WeaponAttack(bf[Pid.P1].Weapon.Card, yeti1));
+
+            weapon.Atk.AddBuff(2);
+            int hpBefore = weapon.Hp.Value;
+            Assert.AreEqual(true, bf.BattleService.WeaponAttack(bf[Pid.P1].Weapon.Card, yeti1));
+            Assert.AreEqual(1, hpBefore - weapon.Hp.Value);
+        }
     }
 }
