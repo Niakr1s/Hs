@@ -17,23 +17,27 @@ namespace Models.Services.Battle
         /// </summary>
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
+        /// <param name="attackDefender">Is a defender, who takes counterattack. If no defender provided, attacker will try defend by himself.</param>
         /// <returns>True, if attack was actually made.</returns>
-        public bool MeleeAttack(IAttacker attacker, IDefender defender, bool isCounterAttack = false)
+        public bool MeleeAttack(IAttacker attacker, IDefender defender,
+            IDefender? attackDefender = null,
+            bool isCounterAttack = false)
         {
-            if (attacker.Dead) return false;
+            attackDefender ??= attacker as IDefender;
+            if (attackDefender?.Dead == true) return false;
 
             if (!isCounterAttack)
             {
                 Bf.Invoke(this, new MeleePreAttackEventArgs(attacker, defender));
-                if (attacker.Dead) return false;
+                if (attackDefender?.Dead == true) return false;
             }
 
             int dmg = defender.GetDamage(attacker.Atk.Value);
             Bf.Invoke(this, new GotDamageEventArgs(defender, dmg));
 
-            if (!isCounterAttack && attacker is IDefender cDefender && defender is IAttacker cAttacker)
+            if (!isCounterAttack && attackDefender is not null && defender is IAttacker counterAttacker)
             {
-                MeleeAttack(cAttacker, cDefender, isCounterAttack: true);
+                MeleeAttack(counterAttacker, attackDefender, isCounterAttack: true);
             }
 
             return true;

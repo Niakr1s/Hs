@@ -8,6 +8,8 @@ namespace Models.Services.Battle
 
         public Loc Loc { get; }
 
+        public bool Dead { get; }
+
         /// <summary>
         /// Gets some damage.
         /// </summary>

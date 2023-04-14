@@ -10,7 +10,5 @@ namespace Models.Services.Battle
         public Loc Loc { get; }
 
         public Atk Atk { get; }
-
-        public bool Dead { get; }
     }
 }
