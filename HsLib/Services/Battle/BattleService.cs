@@ -9,9 +9,12 @@ namespace Models.Services.Battle
         public BattleService(Battlefield bf)
         {
             Bf = bf;
+            Rules = new BattleServiceRules(Bf);
         }
 
         public Battlefield Bf { get; }
+
+        public BattleServiceRules? Rules { get; set; }
 
         /// <summary>
         /// Attacker attacks defender.
@@ -24,6 +27,8 @@ namespace Models.Services.Battle
             IDamageable? attackDefender = null,
             bool isCounterAttack = false)
         {
+            if (Rules?.CanMeleeAttack(attacker, defender) == false) return false;
+
             attackDefender ??= attacker as IDamageable;
             if (attackDefender?.Dead == true) return false;
 
