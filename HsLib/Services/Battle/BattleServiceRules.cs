@@ -17,7 +17,7 @@ namespace Models.Services.Battle
 
         private readonly Loc[] _canAttackFrom = new Loc[] { Loc.Field, Loc.Hero };
 
-        public bool CanMeleeAttack(IAttacker attacker, IDamageable defender)
+        public bool CanBeMeleeAttacked(IWithPlace attacker, IDamageable defender)
         {
             if (!_canAttackFrom.Contains(attacker.Loc)) return false;
 

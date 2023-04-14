@@ -27,7 +27,7 @@ namespace Models.Services.Battle
             IDamageable? attackDefender = null,
             bool isCounterAttack = false)
         {
-            if (Rules?.CanMeleeAttack(attacker, defender) == false) return false;
+            if (Rules?.CanBeMeleeAttacked(attacker, defender) == false) return false;
 
             attackDefender ??= attacker as IDamageable;
             if (attackDefender?.Dead == true) return false;
