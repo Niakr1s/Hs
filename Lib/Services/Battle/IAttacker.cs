@@ -3,12 +3,8 @@ using Models.Stats;
 
 namespace Models.Services.Battle
 {
-    public interface IAttacker
+    public interface IAttacker : IWithPlace
     {
-        public Pid Pid { get; }
-
-        public Loc Loc { get; }
-
         public Atk Atk { get; }
     }
 }

@@ -2,12 +2,8 @@
 
 namespace Models.Services.Battle
 {
-    public interface IDamageable
+    public interface IDamageable : IWithPlace
     {
-        public Pid Pid { get; }
-
-        public Loc Loc { get; }
-
         public bool Dead { get; }
 
         /// <summary>
