@@ -1,9 +1,10 @@
 ﻿using Models.Common;
+using Models.Containers;
 using Models.Stats;
 
 namespace Models.Cards
 {
-    public abstract class Card
+    public abstract class Card : IWithPlace
     {
         protected Card(int mp)
         {
