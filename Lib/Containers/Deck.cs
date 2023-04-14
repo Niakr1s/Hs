@@ -6,8 +6,7 @@ namespace Models.Containers
 {
     public class Deck : MultiContainer<Card>
     {
-        public Deck(Battlefield bf, Pid pid, IEnumerable<Card>? cards = null) :
-            base(bf, pid, Loc.Deck, startCards: cards)
+        public Deck(Pid pid, IEnumerable<Card>? cards = null) : base(pid, Loc.Deck, startCards: cards)
         {
         }
     }

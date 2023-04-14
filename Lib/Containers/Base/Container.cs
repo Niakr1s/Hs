@@ -1,23 +1,23 @@
 ﻿using Models.Cards;
 using Models.Common;
+using Models.Containers.Events;
 
 namespace Models.Containers.Base
 {
     public abstract class Container<TCard>
         where TCard : Card
     {
-        protected Container(Battlefield bf, Pid pid, Loc loc)
+        protected Container(Pid pid, Loc loc)
         {
-            Bf = bf;
             Pid = pid;
             Loc = loc;
         }
 
+        public Pid Pid { get; }
+
         public Loc Loc { get; }
 
-        public Battlefield Bf { get; }
-
-        public Pid Pid { get; }
+        public EventHandler<ContainerEventArgs>? Event { get; }
 
         /// <summary>
         /// Children should call this after insterting a card.

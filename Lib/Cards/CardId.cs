@@ -3,5 +3,6 @@
     public enum CardId
     {
         AbusiveSergeant,
+        ChillwindYeti,
     }
 }

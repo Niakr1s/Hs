@@ -1,4 +1,5 @@
-﻿using Models.Stats;
+﻿using Models.Cards.Effects;
+using Models.Stats;
 
 namespace Models.Cards
 {
@@ -13,5 +14,7 @@ namespace Models.Cards
         public Atk Atk { get; }
 
         public Hp Hp { get; }
+
+        public Battlecry? Battlecry { get; protected set; }
     }
 }

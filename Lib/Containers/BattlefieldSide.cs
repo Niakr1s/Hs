@@ -9,10 +9,13 @@ namespace Models.Containers
             Bf = bf;
             Pid = pid;
 
-            Deck = new(bf, pid, cards: startingDeck.Cards);
-            Hand = new(bf, pid);
-            Field = new(bf, pid);
-            Graveyard = new(bf, pid);
+            Deck = new(pid, cards: startingDeck.Cards);
+            Hand = new(pid);
+            Field = new(pid);
+
+            Hero = new Hero(pid);
+
+            Graveyard = new(pid);
         }
 
         public Pid Pid { get; }
@@ -24,6 +27,8 @@ namespace Models.Containers
         public Hand Hand { get; }
 
         public Field Field { get; }
+
+        public Hero Hero { get; }
 
         public Graveyard Graveyard { get; }
     }

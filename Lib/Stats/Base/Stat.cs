@@ -1,6 +1,4 @@
-﻿using Models.Enchants.Base;
-
-namespace Models.Stats.Base
+﻿namespace Models.Stats.Base
 {
     public abstract class Stat<T>
         where T : struct
@@ -23,15 +21,15 @@ namespace Models.Stats.Base
                 Auras.ClearInactiveEnchants();
                 Buffs.ClearInactiveEnchants();
 
-                foreach (IEnchant<T> aura in Buffs.Enchants)
+                foreach (Enchant<T> buff in Buffs.Enchants)
                 {
-                    resultValue = aura.Apply(resultValue);
+                    resultValue = Sum(buff.Value, resultValue);
                     resultValue = Sanitize(resultValue);
                 }
 
-                foreach (IEnchant<T> aura in Auras.Enchants)
+                foreach (Enchant<T> aura in Auras.Enchants)
                 {
-                    resultValue = aura.Apply(resultValue);
+                    resultValue = Sum(aura.Value, resultValue);
                 }
 
                 return Sanitize(resultValue);
@@ -43,20 +41,34 @@ namespace Models.Stats.Base
         /// <summary>
         /// Buffs can be silenced.
         /// </summary>
-        public EnchantList<T> Buffs { get; } = new();
+        protected EnchantList<T> Buffs { get; } = new();
 
         /// <summary>
         /// Auras cannot be silenced.
         /// </summary>
-        public EnchantList<T> Auras { get; } = new();
+        protected EnchantList<T> Auras { get; } = new();
 
+        public Enchant<T> AddBuff(T value)
+        {
+            Enchant<T> enchant = new Enchant<T>(value);
+            Buffs.Add(enchant);
+            return enchant;
+        }
+
+        public Enchant<T> AddAura(T value)
+        {
+            Enchant<T> enchant = new Enchant<T>(value);
+            Auras.Add(enchant);
+            return enchant;
+        }
 
         /// <summary>
-        /// Sets value. Doesn't clean auras.
+        /// Sets value. Doesn't clean auras. Cleans buffs.
         /// </summary>
         /// <param name="value"></param>
         public void Set(T value)
         {
+            Buffs.Clear();
             _value = value;
         }
 

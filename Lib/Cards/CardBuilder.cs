@@ -1,4 +1,6 @@
-﻿namespace Models.Cards
+﻿using Models.Cards.KnownCards.Minions;
+
+namespace Models.Cards
 {
     public class CardBuilder
     {
@@ -7,7 +9,9 @@
 
             return id switch
             {
-                CardId.AbusiveSergeant => null,
+                CardId.AbusiveSergeant => new AbusiveSergeant(),
+                CardId.ChillwindYeti => new ChillwindYeti(),
+
                 _ => null,
             };
         }

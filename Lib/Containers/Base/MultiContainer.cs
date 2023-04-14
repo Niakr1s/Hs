@@ -8,8 +8,8 @@ namespace Models.Containers.Base
         where TCard : Card
     {
 
-        protected MultiContainer(Battlefield bf, Pid pid, Loc loc,
-            int? limit = null, IEnumerable<TCard>? startCards = null) : base(bf, pid, loc)
+        protected MultiContainer(Pid pid, Loc loc,
+            int? limit = null, IEnumerable<TCard>? startCards = null) : base(pid, loc)
         {
             Limit = limit;
             foreach (var c in startCards ?? new List<TCard>(limit ?? 0)) { Add(c); }

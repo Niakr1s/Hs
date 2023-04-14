@@ -1,10 +1,11 @@
 ﻿using Models.Cards;
 using Models.Common;
-using Models.Events;
+using Models.Common.Turn;
+using Models.Containers.Events;
 
 namespace Models.Containers
 {
-    public class Battlefield
+    public class Battlefield : IWithEvent<BattlefieldEventArgs>
     {
         public Battlefield(StartingDeck p1, StartingDeck p2)
         {
@@ -14,14 +15,22 @@ namespace Models.Containers
                 [Pid.P2] = new(this, Pid.P2, p2),
             };
             Event += UpdateCards;
+
+            Turn = new Turn();
         }
 
-        public event EventHandler<EventArgs>? Event;
+        public Battlefield(HeroId p1, HeroId p2) : this(new StartingDeck(p1), new StartingDeck(p2))
+        {
+        }
 
-        public void Invoke(object? sender, EventArgs args)
+        public event EventHandler<BattlefieldEventArgs>? Event;
+
+        public void Invoke(object? sender, BattlefieldEventArgs args)
         {
             Event?.Invoke(sender, args);
         }
+
+        public Turn Turn { get; }
 
         /// <summary>
         /// All cards in all containers in their add order.

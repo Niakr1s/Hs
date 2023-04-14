@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 
-namespace Models.Enchants.Base
+namespace Models.Stats.Base
 {
     public class EnchantList<T>
     {
-        private List<IEnchant<T>> _enchants = new List<IEnchant<T>>();
+        private List<Enchant<T>> _enchants = new List<Enchant<T>>();
         public IEnumerable Enchants => _enchants;
 
-        public void Add(IEnchant<T> enchant)
+        public void Add(Enchant<T> enchant)
         {
             _enchants.Add(enchant);
         }

@@ -6,7 +6,7 @@ namespace Models.Containers.Base
     public class SingleContainer<TCard> : Container<TCard>
         where TCard : Card
     {
-        public SingleContainer(Battlefield bf, Pid pid, Loc loc, TCard card) : base(bf, pid, loc)
+        public SingleContainer(Pid pid, Loc loc, TCard card) : base(pid, loc)
         {
             _card = card;
             AfterInsert(card);

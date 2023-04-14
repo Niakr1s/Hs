@@ -19,11 +19,17 @@ namespace Models.Cards
         /// <summary>
         /// It will be called after card is added to container.
         /// </summary>
-        public abstract void AfterContainerAdded();
+        public virtual void AfterContainerAdded()
+        {
+
+        }
 
         /// <summary>
         /// It will be called before card was removed from container.
         /// </summary>
-        public abstract void BeforeContainerRemoved();
+        public virtual void BeforeContainerRemoved()
+        {
+
+        }
     }
 }

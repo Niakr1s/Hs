@@ -1,21 +1,22 @@
 ﻿using Models.Cards;
+using Models.Containers;
 
 namespace Models.Common
 {
     public class StartingDeck
     {
-        public StartingDeck(Card hero) : this(hero, new List<Card>())
+        public StartingDeck(HeroId heroId) : this(heroId, new List<Card>())
         {
 
         }
 
-        public StartingDeck(Card hero, IEnumerable<Card> cards)
+        public StartingDeck(HeroId heroId, IEnumerable<Card> cards)
         {
-            Hero = hero;
+            HeroId = heroId;
             Cards = cards.ToList();
         }
 
-        public Card Hero { get; }
+        public HeroId HeroId { get; }
         public List<Card> Cards { get; }
     }
 }

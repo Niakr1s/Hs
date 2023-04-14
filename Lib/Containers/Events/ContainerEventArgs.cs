@@ -1,13 +1,13 @@
 ﻿using Models.Cards;
 using Models.Common;
 
-namespace Models.Events
+namespace Models.Containers.Events
 {
-    public abstract class ContainerEventArgs : EventArgs
+    public abstract class ContainerEventArgs : BattlefieldEventArgs
     {
         protected ContainerEventArgs(Card card, Pid pid, Loc loc)
         {
-            this.Card = card;
+            Card = card;
             Pid = pid;
             Loc = loc;
         }

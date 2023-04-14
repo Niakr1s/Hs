@@ -6,7 +6,7 @@ namespace Models.Containers
 {
     public class Graveyard : MultiContainer<Card>
     {
-        public Graveyard(Battlefield bf, Pid pid) : base(bf, pid, Loc.Graveyard)
+        public Graveyard(Pid pid) : base(pid, Loc.Graveyard)
         {
         }
     }
