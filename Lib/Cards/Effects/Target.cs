@@ -2,11 +2,11 @@
 
 namespace Models.Cards.Effects
 {
-    public readonly struct EffectTarget
+    public readonly struct Target
     {
-        public EffectTargetPlace Place { get; init; }
+        public TargetPlace Place { get; init; }
 
-        public EffectTargetSide Side { get; init; }
+        public TargetSide Side { get; init; }
 
         public bool IsValidTarget(Card owner, Card? target)
         {
@@ -14,7 +14,7 @@ namespace Models.Cards.Effects
 
             if (target is null)
             {
-                return Place == EffectTargetPlace.None;
+                return Place == TargetPlace.None;
             }
             else
             {
@@ -22,12 +22,12 @@ namespace Models.Cards.Effects
 
                 bool sameSide = owner.Pid == target.Pid;
                 bool sideIsCorrect =
-                    (Side.HasFlag(EffectTargetSide.Me) && sameSide) ||
-                    (Side.HasFlag(EffectTargetSide.He) && !sameSide);
+                    (Side.HasFlag(TargetSide.Me) && sameSide) ||
+                    (Side.HasFlag(TargetSide.He) && !sameSide);
 
                 bool placeIsCorrect =
-                    (Place.HasFlag(EffectTargetPlace.Field) && target.Loc == Loc.Field) ||
-                    (Place.HasFlag(EffectTargetPlace.Hero) && target.Loc == Loc.Hero);
+                    (Place.HasFlag(TargetPlace.Field) && target.Loc == Loc.Field) ||
+                    (Place.HasFlag(TargetPlace.Hero) && target.Loc == Loc.Hero);
 
                 return sideIsCorrect && placeIsCorrect;
             }
@@ -35,7 +35,7 @@ namespace Models.Cards.Effects
     }
 
     [Flags]
-    public enum EffectTargetPlace
+    public enum TargetPlace
     {
         None = 0,
         Field = 1,
@@ -43,7 +43,7 @@ namespace Models.Cards.Effects
     }
 
     [Flags]
-    public enum EffectTargetSide
+    public enum TargetSide
     {
         None = 0,
         Me = 1,

@@ -5,7 +5,7 @@ namespace Models.Cards.Effects
 {
     public abstract class Battlecry : IEffect
     {
-        protected EffectTarget Target { get; set; }
+        protected Target Target { get; set; }
 
         /// <summary>
         /// It's called after target validity check passes.

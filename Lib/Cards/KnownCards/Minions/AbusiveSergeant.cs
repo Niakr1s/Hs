@@ -18,10 +18,10 @@ namespace Models.Cards.KnownCards.Minions
     {
         public AbusiveSergeantBattlecry()
         {
-            Target = new EffectTarget
+            Target = new Target
             {
-                Place = EffectTargetPlace.Field,
-                Side = EffectTargetSide.Me | EffectTargetSide.He
+                Place = TargetPlace.Field,
+                Side = TargetSide.Me | TargetSide.He
             };
         }
 
