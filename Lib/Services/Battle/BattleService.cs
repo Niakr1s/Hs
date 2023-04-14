@@ -1,4 +1,5 @@
-﻿using Models.Containers;
+﻿using Models.Cards;
+using Models.Containers;
 using Models.Events;
 
 namespace Models.Services.Battle
@@ -19,7 +20,7 @@ namespace Models.Services.Battle
         /// <param name="defender"></param>
         /// <param name="attackDefender">Is a defender, who takes counterattack. If no defender provided, attacker will try defend by himself.</param>
         /// <returns>True, if attack was actually made.</returns>
-        public bool MeleeAttack(IAttacker attacker, IDefender defender,
+        private bool MeleeAttack(IAttacker attacker, IDefender defender,
             IDefender? attackDefender = null,
             bool isCounterAttack = false)
         {
@@ -41,6 +42,11 @@ namespace Models.Services.Battle
             }
 
             return true;
+        }
+
+        public bool MinionAttack(Minion attacker, IDefender defender)
+        {
+            return MeleeAttack(attacker, defender, attackDefender: attacker);
         }
     }
 }
