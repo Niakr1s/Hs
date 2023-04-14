@@ -1,4 +1,5 @@
 ﻿using Models.Common;
+using Models.Containers;
 
 namespace Models.Cards.Effects
 {
@@ -8,7 +9,7 @@ namespace Models.Cards.Effects
 
         public TargetSide Side { get; init; }
 
-        public bool IsValidTarget(Card owner, Card? target)
+        public bool IsValidTarget(IWithPlace owner, IWithPlace? target)
         {
             if (owner.Pid == Pid.None || owner.Loc == Loc.None) return false;
 
