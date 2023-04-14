@@ -21,5 +21,10 @@ namespace Models.Stats.Base
         {
             _enchants.Clear();
         }
+
+        public void AddRange(EnchantList<T> other)
+        {
+            _enchants.AddRange(other._enchants);
+        }
     }
 }

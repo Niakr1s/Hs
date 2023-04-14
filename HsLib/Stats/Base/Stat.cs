@@ -82,6 +82,11 @@
             _value = _initialValue;
         }
 
+        public void CopyBuffs(Stat<T> from)
+        {
+            Buffs.AddRange(from.Buffs);
+        }
+
         protected abstract T Sum(T a1, T a2);
 
         /// <summary>
