@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lib\Models.csproj" />
+    <ProjectReference Include="..\HsLib\HsLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
