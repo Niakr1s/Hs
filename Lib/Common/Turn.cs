@@ -1,4 +1,5 @@
-﻿using Models.Events;
+﻿using Models.Common.Place;
+using Models.Events;
 
 namespace Models.Common
 {

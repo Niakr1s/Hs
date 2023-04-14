@@ -1,4 +1,4 @@
-﻿
+﻿using Models.Common.Place;
 using Models.Containers;
 
 namespace Models.Cards.Effects

@@ -1,4 +1,4 @@
-﻿using Models.Common;
+﻿using Models.Common.Place;
 
 namespace Models.Services.Battle
 {

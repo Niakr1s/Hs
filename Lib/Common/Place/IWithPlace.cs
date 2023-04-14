@@ -1,6 +1,4 @@
-﻿using Models.Common;
-
-namespace Models.Containers
+﻿namespace Models.Common.Place
 {
     public interface IWithPlace
     {

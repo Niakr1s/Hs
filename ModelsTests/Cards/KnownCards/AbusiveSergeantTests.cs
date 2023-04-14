@@ -1,5 +1,5 @@
 ﻿using Models.Cards.KnownCards.Minions;
-using Models.Common;
+using Models.Common.Place;
 using Models.Containers;
 
 namespace Models.Cards.KnownCards.Tests

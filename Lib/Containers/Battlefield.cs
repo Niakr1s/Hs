@@ -1,5 +1,6 @@
 ﻿using Models.Cards;
 using Models.Common;
+using Models.Common.Place;
 using Models.Events;
 using Models.Services.Battle;
 

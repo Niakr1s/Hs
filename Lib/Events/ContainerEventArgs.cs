@@ -1,5 +1,5 @@
 ﻿using Models.Cards;
-using Models.Common;
+using Models.Common.Place;
 
 namespace Models.Events
 {

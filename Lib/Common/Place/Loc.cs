@@ -1,4 +1,4 @@
-﻿namespace Models.Common
+﻿namespace Models.Common.Place
 {
     public enum Loc
     {

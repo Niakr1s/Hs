@@ -1,4 +1,4 @@
-﻿using Models.Common;
+﻿using Models.Common.Place;
 using Models.Services.Battle;
 using Models.Stats;
 

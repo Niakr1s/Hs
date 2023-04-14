@@ -1,6 +1,6 @@
 ﻿using Models.Cards;
 using Models.Cards.KnownCards.Minions;
-using Models.Common;
+using Models.Common.Place;
 using Models.Containers;
 
 namespace Models.Services.Battle.Tests

@@ -1,7 +1,4 @@
-﻿using Models.Common;
-using Models.Containers;
-
-namespace Models.Cards.Effects
+﻿namespace Models.Common.Place
 {
     public readonly struct Target
     {
@@ -23,12 +20,12 @@ namespace Models.Cards.Effects
 
                 bool sameSide = owner.Pid == target.Pid;
                 bool sideIsCorrect =
-                    (Side.HasFlag(TargetSide.Me) && sameSide) ||
-                    (Side.HasFlag(TargetSide.He) && !sameSide);
+                    Side.HasFlag(TargetSide.Me) && sameSide ||
+                    Side.HasFlag(TargetSide.He) && !sameSide;
 
                 bool placeIsCorrect =
-                    (Container.HasFlag(TargetContainer.Field) && target.Loc == Loc.Field) ||
-                    (Container.HasFlag(TargetContainer.Hero) && target.Loc == Loc.Hero);
+                    Container.HasFlag(TargetContainer.Field) && target.Loc == Loc.Field ||
+                    Container.HasFlag(TargetContainer.Hero) && target.Loc == Loc.Hero;
 
                 return sideIsCorrect && placeIsCorrect;
             }

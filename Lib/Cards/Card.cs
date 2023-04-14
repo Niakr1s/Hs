@@ -1,5 +1,4 @@
-﻿using Models.Common;
-using Models.Containers;
+﻿using Models.Common.Place;
 using Models.Stats;
 
 namespace Models.Cards
