@@ -3,7 +3,7 @@ using HsLib.Cards.KnownCards.Minions;
 using HsLib.Common.Place;
 using HsLib.Containers;
 
-namespace HsLibTests.Services.Battle
+namespace HsLib.Services.Battle.Tests
 {
     [TestClass()]
     public class BattleServiceTests

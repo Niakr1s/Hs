@@ -1,9 +1,7 @@
-﻿using HsLib.Cards;
-using HsLib.Cards.KnownCards.Minions;
-using HsLib.Common.Place;
+﻿using HsLib.Common.Place;
 using HsLib.Containers;
 
-namespace HsLibTests.Cards.KnownCards
+namespace HsLib.Cards.KnownCards.Minions.Tests
 {
     [TestClass()]
     public class AbusiveSergeantTests
