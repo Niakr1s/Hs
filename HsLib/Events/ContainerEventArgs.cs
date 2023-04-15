@@ -3,7 +3,7 @@ using HsLib.Common.Place;
 
 namespace HsLib.Events
 {
-    public abstract class ContainerEventArgs : BattlefieldEventArgs
+    public abstract class ContainerEventArgs : EventArgs
     {
         protected ContainerEventArgs(Card card, Pid pid, Loc loc)
         {

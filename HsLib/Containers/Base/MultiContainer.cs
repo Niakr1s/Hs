@@ -76,5 +76,21 @@ namespace HsLib.Containers.Base
             AfterRemove(card);
             return card;
         }
+
+        public TCard? Left(TCard card)
+        {
+            if (_cards[0] == card) { return null; }
+            int index = _cards.IndexOf(card);
+            if (index == -1) { return null; }
+            return _cards[index - 1];
+        }
+
+        public TCard? Right(TCard card)
+        {
+            if (_cards[^1] == card) { return null; }
+            int index = _cards.IndexOf(card);
+            if (index == -1) { return null; }
+            return _cards[index + 1];
+        }
     }
 }

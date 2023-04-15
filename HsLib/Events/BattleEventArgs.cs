@@ -2,7 +2,7 @@
 
 namespace HsLib.Events
 {
-    public abstract class BattleEventArgs : BattlefieldEventArgs
+    public abstract class BattleEventArgs : EventArgs
     {
     }
 

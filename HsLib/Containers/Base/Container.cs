@@ -22,8 +22,6 @@ namespace HsLib.Containers.Base
 
         public Loc Loc { get; }
 
-        public EventHandler<ContainerEventArgs>? Event { get; }
-
         /// <summary>
         /// Children should call this after insterting a card.
         /// </summary>
@@ -33,6 +31,8 @@ namespace HsLib.Containers.Base
             card.Pid = Pid;
             card.Loc = Loc;
             card.TurnAdded = Bf.Turn.No;
+
+            Bf.Invoke(this, new ContainerCardAddedEventArgs(card, Pid, Loc));
             card.AfterContainerInsert(Bf);
         }
 
@@ -45,7 +45,9 @@ namespace HsLib.Containers.Base
             card.Pid = Pid.None;
             card.Loc = Loc.None;
             card.TurnAdded = 0;
+
             card.AfterContainerRemove(Bf);
+            Bf?.Invoke(this, new ContainerCardRemovedEventArgs(card, Pid, Loc));
         }
 
         /// <summary>

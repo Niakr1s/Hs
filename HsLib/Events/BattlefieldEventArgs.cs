@@ -1,6 +1,17 @@
-﻿namespace HsLib.Events
+﻿using HsLib.Containers;
+
+namespace HsLib.Events
 {
-    public abstract class BattlefieldEventArgs : EventArgs
+    public class BattlefieldEventArgs : EventArgs
     {
+        public BattlefieldEventArgs(Battlefield bf, EventArgs eventArgs)
+        {
+            Bf = bf;
+            EventArgs = eventArgs;
+        }
+
+        public Battlefield Bf { get; }
+
+        public EventArgs EventArgs { get; }
     }
 }

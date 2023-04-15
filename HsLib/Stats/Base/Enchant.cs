@@ -1,6 +1,6 @@
 ﻿namespace HsLib.Stats.Base
 {
-    public class Enchant<T>
+    public class Enchant<T> : IEnchantHandler
     {
         public Enchant(T value)
         {

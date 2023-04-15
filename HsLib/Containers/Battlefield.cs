@@ -27,9 +27,9 @@ namespace HsLib.Containers
 
         public event EventHandler<BattlefieldEventArgs>? Event;
 
-        public void Invoke(object? sender, BattlefieldEventArgs args)
+        public void Invoke(object? sender, EventArgs args)
         {
-            Event?.Invoke(sender, args);
+            Event?.Invoke(sender, new BattlefieldEventArgs(this, args));
         }
 
         public Turn Turn { get; }

@@ -5,6 +5,7 @@
         // minions
         AbusiveSergeant,
         ChillwindYeti,
+        FlametongTotem,
 
         // heros and abilities
         JainaProudmoore, Fireblast,
