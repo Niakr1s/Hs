@@ -9,7 +9,7 @@ namespace Models.Services.Battle.Tests
     public class BattleServiceTests
     {
         [TestMethod()]
-        public void RulesTest()
+        public void CanTurnOffRulesTest()
         {
             Battlefield bf = new Battlefield(HeroId.Jaina, HeroId.Rexxar);
             Minion yeti1 = new ChillwindYeti();
