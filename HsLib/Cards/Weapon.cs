@@ -1,9 +1,9 @@
-﻿using Models.Containers;
-using Models.Services.Battle;
-using Models.Stats;
-using Models.Stats.Base;
+﻿using HsLib.Containers;
+using HsLib.Services.Battle;
+using HsLib.Stats;
+using HsLib.Stats.Base;
 
-namespace Models.Cards
+namespace HsLib.Cards
 {
     public abstract class Weapon : Card, IAttacker
     {

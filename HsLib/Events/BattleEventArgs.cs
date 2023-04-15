@@ -1,6 +1,6 @@
-﻿using Models.Services.Battle;
+﻿using HsLib.Services.Battle;
 
-namespace Models.Events
+namespace HsLib.Events
 {
     public abstract class BattleEventArgs : BattlefieldEventArgs
     {

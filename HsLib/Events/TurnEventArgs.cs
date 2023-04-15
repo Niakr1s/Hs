@@ -1,4 +1,4 @@
-﻿namespace Models.Events
+﻿namespace HsLib.Events
 {
     public abstract class TurnEventArgs : EventArgs { }
 

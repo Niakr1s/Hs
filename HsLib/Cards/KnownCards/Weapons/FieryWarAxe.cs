@@ -1,6 +1,4 @@
-﻿using Models.Cards;
-
-namespace HsLib.Cards.KnownCards.Weapons
+﻿namespace HsLib.Cards.KnownCards.Weapons
 {
     public class FieryWarAxe : Weapon
     {

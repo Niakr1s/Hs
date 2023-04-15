@@ -1,4 +1,4 @@
-﻿namespace Models.Cards
+﻿namespace HsLib.Cards
 {
     public enum CardId
     {

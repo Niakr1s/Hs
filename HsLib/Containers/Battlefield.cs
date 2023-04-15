@@ -1,10 +1,10 @@
-﻿using Models.Cards;
-using Models.Common;
-using Models.Common.Place;
-using Models.Events;
-using Models.Services.Battle;
+﻿using HsLib.Cards;
+using HsLib.Common;
+using HsLib.Common.Place;
+using HsLib.Events;
+using HsLib.Services.Battle;
 
-namespace Models.Containers
+namespace HsLib.Containers
 {
     public class Battlefield : IWithEvent<BattlefieldEventArgs>
     {

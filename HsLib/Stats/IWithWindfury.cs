@@ -1,4 +1,4 @@
-﻿using Models.Stats.Base;
+﻿using HsLib.Stats.Base;
 
 namespace HsLib.Stats
 {

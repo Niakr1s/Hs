@@ -1,8 +1,8 @@
-﻿using Models.Common.Place;
-using Models.Containers;
-using Models.Stats;
+﻿using HsLib.Common.Place;
+using HsLib.Containers;
+using HsLib.Stats;
 
-namespace Models.Cards
+namespace HsLib.Cards
 {
     public abstract class Card : IWithPlace
     {

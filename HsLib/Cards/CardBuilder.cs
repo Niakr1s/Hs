@@ -1,6 +1,6 @@
-﻿using Models.Cards.KnownCards.Minions;
+﻿using HsLib.Cards.KnownCards.Minions;
 
-namespace Models.Cards
+namespace HsLib.Cards
 {
     public class CardBuilder
     {

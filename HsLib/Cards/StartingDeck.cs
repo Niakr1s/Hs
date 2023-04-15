@@ -1,7 +1,6 @@
-﻿using Models.Cards;
-using Models.Containers;
+﻿using HsLib.Containers;
 
-namespace Models.Common
+namespace HsLib.Cards
 {
     public class StartingDeck
     {

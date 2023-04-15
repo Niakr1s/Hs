@@ -1,6 +1,7 @@
-﻿using Models.Containers;
+﻿using HsLib.Cards;
+using HsLib.Containers;
 
-namespace Models.Cards.Effects
+namespace HsLib.Cards.Effects
 {
     public interface IEffect
     {

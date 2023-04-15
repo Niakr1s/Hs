@@ -1,8 +1,8 @@
-﻿using Models.Common.Place;
-using Models.Services.Battle;
-using Models.Stats;
+﻿using HsLib.Common.Place;
+using HsLib.Services.Battle;
+using HsLib.Stats;
 
-namespace Models.Containers
+namespace HsLib.Containers
 {
     public class Hero : IDamageable
     {

@@ -1,4 +1,4 @@
-﻿namespace Models.Common
+﻿namespace HsLib.Common
 {
     public interface IWithEvent<TEventArgs>
         where TEventArgs : EventArgs

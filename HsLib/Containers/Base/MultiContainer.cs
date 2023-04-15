@@ -1,7 +1,7 @@
-﻿using Models.Cards;
-using Models.Common.Place;
+﻿using HsLib.Cards;
+using HsLib.Common.Place;
 
-namespace Models.Containers.Base
+namespace HsLib.Containers.Base
 {
 
     public abstract class MultiContainer<TCard> : Container<TCard>

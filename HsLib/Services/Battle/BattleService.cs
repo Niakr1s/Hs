@@ -1,7 +1,7 @@
-﻿using Models.Containers;
-using Models.Events;
+﻿using HsLib.Containers;
+using HsLib.Events;
 
-namespace Models.Services.Battle
+namespace HsLib.Services.Battle
 {
     public class BattleService
     {

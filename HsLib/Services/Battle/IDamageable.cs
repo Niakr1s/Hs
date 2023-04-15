@@ -1,6 +1,6 @@
-﻿using Models.Common.Place;
+﻿using HsLib.Common.Place;
 
-namespace Models.Services.Battle
+namespace HsLib.Services.Battle
 {
     public interface IDamageable : IWithPlace
     {

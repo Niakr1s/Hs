@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Models.Stats.Base
+namespace HsLib.Stats.Base
 {
     public class EnchantList<T>
     {

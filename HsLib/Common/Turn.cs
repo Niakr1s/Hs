@@ -1,7 +1,7 @@
-﻿using Models.Common.Place;
-using Models.Events;
+﻿using HsLib.Common.Place;
+using HsLib.Events;
 
-namespace Models.Common
+namespace HsLib.Common
 {
     public class Turn : IWithEvent<TurnEventArgs>
     {

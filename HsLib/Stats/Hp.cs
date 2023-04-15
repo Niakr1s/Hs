@@ -1,6 +1,6 @@
-﻿using Models.Stats.Base;
+﻿using HsLib.Stats.Base;
 
-namespace Models.Stats
+namespace HsLib.Stats
 {
     public class Hp : IntStat
     {

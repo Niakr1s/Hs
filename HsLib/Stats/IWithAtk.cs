@@ -1,6 +1,4 @@
-﻿using Models.Stats;
-
-namespace HsLib.Stats
+﻿namespace HsLib.Stats
 {
     public interface IWithAtk
     {

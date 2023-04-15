@@ -1,4 +1,4 @@
-﻿namespace Models.Stats.Base
+﻿namespace HsLib.Stats.Base
 {
     public abstract class Stat<T>
         where T : struct

@@ -1,9 +1,9 @@
-﻿using Models.Cards;
-using Models.Cards.KnownCards.Minions;
-using Models.Common.Place;
-using Models.Containers;
+﻿using HsLib.Cards;
+using HsLib.Cards.KnownCards.Minions;
+using HsLib.Common.Place;
+using HsLib.Containers;
 
-namespace Models.Services.Battle.Tests
+namespace HsLibTests.Services.Battle
 {
     [TestClass()]
     public class BattleServiceTests

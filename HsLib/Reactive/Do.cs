@@ -1,6 +1,6 @@
-﻿using Models.Common;
+﻿using HsLib.Common;
 
-namespace Models.Reactive
+namespace HsLib.Reactive
 {
     public static class Do
     {

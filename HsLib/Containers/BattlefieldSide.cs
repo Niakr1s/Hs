@@ -1,9 +1,8 @@
-﻿using HsLib.Cards.KnownCards.Weapons;
-using HsLib.Containers;
-using Models.Common;
-using Models.Common.Place;
+﻿using HsLib.Cards;
+using HsLib.Cards.KnownCards.Weapons;
+using HsLib.Common.Place;
 
-namespace Models.Containers
+namespace HsLib.Containers
 {
     public class BattlefieldSide
     {

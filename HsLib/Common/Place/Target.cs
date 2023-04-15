@@ -1,4 +1,4 @@
-﻿namespace Models.Common.Place
+﻿namespace HsLib.Common.Place
 {
     public readonly struct Target
     {

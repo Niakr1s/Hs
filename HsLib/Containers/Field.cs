@@ -1,8 +1,8 @@
-﻿using Models.Cards;
-using Models.Common.Place;
-using Models.Containers.Base;
+﻿using HsLib.Cards;
+using HsLib.Common.Place;
+using HsLib.Containers.Base;
 
-namespace Models.Containers
+namespace HsLib.Containers
 {
     public class Field : MultiContainer<Minion>
     {

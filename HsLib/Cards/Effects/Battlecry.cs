@@ -1,7 +1,8 @@
-﻿using Models.Common.Place;
-using Models.Containers;
+﻿using HsLib.Cards;
+using HsLib.Common.Place;
+using HsLib.Containers;
 
-namespace Models.Cards.Effects
+namespace HsLib.Cards.Effects
 {
     public abstract class Battlecry : IEffect
     {

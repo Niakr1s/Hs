@@ -1,7 +1,6 @@
-﻿using Models.Cards;
-using Models.Common.Place;
-using Models.Containers;
-using Models.Containers.Base;
+﻿using HsLib.Cards;
+using HsLib.Common.Place;
+using HsLib.Containers.Base;
 
 namespace HsLib.Containers
 {

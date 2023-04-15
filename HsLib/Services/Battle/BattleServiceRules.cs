@@ -1,9 +1,9 @@
-﻿using Models.Cards;
-using Models.Common;
-using Models.Common.Place;
-using Models.Containers;
+﻿using HsLib.Cards;
+using HsLib.Common;
+using HsLib.Common.Place;
+using HsLib.Containers;
 
-namespace Models.Services.Battle
+namespace HsLib.Services.Battle
 {
     public class BattleServiceRules
     {

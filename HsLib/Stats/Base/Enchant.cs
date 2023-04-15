@@ -1,4 +1,4 @@
-﻿namespace Models.Stats.Base
+﻿namespace HsLib.Stats.Base
 {
     public class Enchant<T>
     {

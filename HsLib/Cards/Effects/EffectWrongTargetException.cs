@@ -1,4 +1,4 @@
-﻿namespace Models.Cards.Effects
+﻿namespace HsLib.Cards.Effects
 {
     public class EffectWrongTargetException : Exception
     {

@@ -1,8 +1,8 @@
-﻿using Models.Cards;
-using Models.Common.Place;
-using Models.Events;
+﻿using HsLib.Cards;
+using HsLib.Common.Place;
+using HsLib.Events;
 
-namespace Models.Containers.Base
+namespace HsLib.Containers.Base
 {
     public abstract class Container<TCard>
         where TCard : Card

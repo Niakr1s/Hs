@@ -1,4 +1,4 @@
-﻿namespace Models.Cards.KnownCards.Minions
+﻿namespace HsLib.Cards.KnownCards.Minions
 {
     public class ChillwindYeti : Minion
     {

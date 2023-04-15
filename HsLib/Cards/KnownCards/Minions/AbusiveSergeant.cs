@@ -1,11 +1,11 @@
-﻿using Models.Cards.Effects;
-using Models.Common.Place;
-using Models.Containers;
-using Models.Events;
-using Models.Reactive;
-using Models.Stats.Base;
+﻿using HsLib.Cards.Effects;
+using HsLib.Common.Place;
+using HsLib.Containers;
+using HsLib.Events;
+using HsLib.Reactive;
+using HsLib.Stats.Base;
 
-namespace Models.Cards.KnownCards.Minions
+namespace HsLib.Cards.KnownCards.Minions
 {
     public class AbusiveSergeant : Minion
     {

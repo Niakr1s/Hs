@@ -1,7 +1,7 @@
-﻿using Models.Cards;
-using Models.Common.Place;
+﻿using HsLib.Cards;
+using HsLib.Common.Place;
 
-namespace Models.Events
+namespace HsLib.Events
 {
     public abstract class ContainerEventArgs : BattlefieldEventArgs
     {
