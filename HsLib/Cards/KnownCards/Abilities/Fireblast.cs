@@ -21,7 +21,7 @@ namespace HsLib.Cards.KnownCards.Abilities
         {
             if (_effectTarget.IsValidTarget(this, target) && target is IDamageable d)
             {
-                d.GetDamage(2);
+                d.GetDamage(1);
             }
             else
             {
