@@ -1,6 +1,6 @@
 ﻿using HsLib.Common.Place;
 
-namespace HsLib.Services.Battle
+namespace HsLib.Battle
 {
     public interface IDamageable : IWithPlace
     {

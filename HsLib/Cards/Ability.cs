@@ -1,5 +1,5 @@
-﻿using HsLib.Cards.Effects;
-using HsLib.Containers;
+﻿using HsLib.Battle;
+using HsLib.Cards.Effects;
 
 namespace HsLib.Cards
 {

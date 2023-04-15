@@ -19,17 +19,17 @@ namespace HsLib.Events
         public Loc Loc { get; }
     }
 
-    public class ContainerCardAddedEventArgs : ContainerEventArgs
+    public class ContainerCardInsertEventArgs : ContainerEventArgs
     {
-        public ContainerCardAddedEventArgs(Card card, Pid pid, Loc loc) : base(card, pid, loc)
+        public ContainerCardInsertEventArgs(Card card, Pid pid, Loc loc) : base(card, pid, loc)
         {
 
         }
     }
 
-    public class ContainerCardRemovedEventArgs : ContainerEventArgs
+    public class ContainerCardRemoveEventArgs : ContainerEventArgs
     {
-        public ContainerCardRemovedEventArgs(Card card, Pid pid, Loc loc) : base(card, pid, loc)
+        public ContainerCardRemoveEventArgs(Card card, Pid pid, Loc loc) : base(card, pid, loc)
         {
 
         }

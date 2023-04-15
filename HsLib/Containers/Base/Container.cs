@@ -1,10 +1,12 @@
-﻿using HsLib.Cards;
+﻿using HsLib.Battle;
+using HsLib.Cards;
+using HsLib.Common;
 using HsLib.Common.Place;
 using HsLib.Events;
 
 namespace HsLib.Containers.Base
 {
-    public abstract class Container<TCard>
+    public abstract class Container<TCard> : IWithEvent<ContainerEventArgs>
         where TCard : Card
     {
         protected Container(Battlefield bf, Pid pid, Loc loc)
@@ -12,8 +14,6 @@ namespace HsLib.Containers.Base
             Bf = bf;
             Pid = pid;
             Loc = loc;
-
-            Bf.Turn.Event += Turn_Event;
         }
 
         public Battlefield Bf { get; }
@@ -21,6 +21,8 @@ namespace HsLib.Containers.Base
         public Pid Pid { get; }
 
         public Loc Loc { get; }
+
+        public event EventHandler<ContainerEventArgs>? Event;
 
         /// <summary>
         /// Children should call this after insterting a card.
@@ -32,8 +34,7 @@ namespace HsLib.Containers.Base
             card.Loc = Loc;
             card.TurnAdded = Bf.Turn.No;
 
-            Bf.Invoke(this, new ContainerCardAddedEventArgs(card, Pid, Loc));
-            card.AfterContainerInsert(Bf);
+            Event?.Invoke(this, new ContainerCardInsertEventArgs(card, Pid, Loc));
         }
 
         /// <summary>
@@ -46,8 +47,7 @@ namespace HsLib.Containers.Base
             card.Loc = Loc.None;
             card.TurnAdded = 0;
 
-            card.AfterContainerRemove(Bf);
-            Bf?.Invoke(this, new ContainerCardRemovedEventArgs(card, Pid, Loc));
+            Event?.Invoke(this, new ContainerCardRemoveEventArgs(card, Pid, Loc));
         }
 
         /// <summary>
@@ -57,18 +57,5 @@ namespace HsLib.Containers.Base
         public abstract IEnumerable<TCard> Cards { get; }
 
         public int Count => Cards.Count();
-
-        private void Turn_Event(object? sender, TurnEventArgs e)
-        {
-            switch (e)
-            {
-                case TurnStartEventArgs:
-                    foreach (var c in Cards) c.OnTurnStart(Bf);
-                    break;
-                case TurnEndEventArgs:
-                    foreach (var c in Cards) c.OnTurnEnd(Bf);
-                    break;
-            }
-        }
     }
 }

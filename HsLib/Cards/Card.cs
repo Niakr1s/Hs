@@ -1,9 +1,17 @@
-﻿using HsLib.Common.Place;
-using HsLib.Containers;
+﻿using HsLib.Battle;
+using HsLib.Common.Place;
 using HsLib.Stats;
 
 namespace HsLib.Cards
 {
+    /// <summary>
+    /// Parent for all cards.<br/><br/>
+    /// Card reacts on 4 Battlefield events:<br/>
+    /// <see cref="AfterContainerInsert(Battlefield)"/><br/>
+    /// <see cref="AfterContainerRemove(Battlefield)"/><br/>
+    /// <see cref="OnTurnEnd(Battlefield)"/><br/>
+    /// <see cref="OnTurnStart(Battlefield)"/>.<br/><br/>
+    /// </summary>
     public abstract class Card : IWithPlace
     {
         protected Card(int mp)
@@ -23,7 +31,7 @@ namespace HsLib.Cards
         public int TurnAdded { get; set; }
 
         /// <summary>
-        /// It will be called after card is added to container.
+        /// Use this to subscribe to events.
         /// </summary>
         public virtual void AfterContainerInsert(Battlefield bf)
         {
@@ -31,7 +39,7 @@ namespace HsLib.Cards
         }
 
         /// <summary>
-        /// It will be called before card was removed from container.
+        /// Use this to unsubscribe from events.
         /// </summary>
         public virtual void AfterContainerRemove(Battlefield bf)
         {

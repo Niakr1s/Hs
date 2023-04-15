@@ -1,7 +1,7 @@
-﻿using HsLib.Cards.Effects;
+﻿using HsLib.Battle;
+using HsLib.Cards.Effects;
 using HsLib.Common.Place;
 using HsLib.Containers;
-using HsLib.Services.Battle;
 
 namespace HsLib.Cards.KnownCards.Abilities
 {

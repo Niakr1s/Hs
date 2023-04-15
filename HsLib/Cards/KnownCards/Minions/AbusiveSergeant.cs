@@ -1,6 +1,6 @@
-﻿using HsLib.Cards.Effects;
+﻿using HsLib.Battle;
+using HsLib.Cards.Effects;
 using HsLib.Common.Place;
-using HsLib.Containers;
 using HsLib.Events;
 using HsLib.Reactive;
 using HsLib.Stats.Base;
@@ -31,7 +31,7 @@ namespace HsLib.Cards.KnownCards.Minions
             if (target is not null && target is Minion m)
             {
                 Enchant<int> buff = m.Atk.AddBuff(2);
-                Do.Once(bf.Turn, e => e is TurnEndEventArgs, () => buff.Active = false);
+                Do.Once(bf, e => e.EventArgs is TurnEndEventArgs, () => buff.Active = false);
             }
         }
     }

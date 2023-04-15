@@ -1,7 +1,7 @@
-﻿using HsLib.Cards;
+﻿using HsLib.Battle;
+using HsLib.Cards;
 using HsLib.Cards.KnownCards.Minions;
 using HsLib.Common.Place;
-using HsLib.Containers;
 
 namespace HsLib.Services.Battle.Tests
 {

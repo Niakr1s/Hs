@@ -3,7 +3,7 @@ using HsLib.Common;
 using HsLib.Common.Place;
 using HsLib.Containers;
 
-namespace HsLib.Services.Battle
+namespace HsLib.Battle
 {
     public class BattleServiceRules
     {

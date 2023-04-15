@@ -1,5 +1,5 @@
-﻿using HsLib.Containers;
-using HsLib.Services.Battle;
+﻿using HsLib.Battle;
+using HsLib.Containers;
 using HsLib.Stats;
 using HsLib.Stats.Base;
 

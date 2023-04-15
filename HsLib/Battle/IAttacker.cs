@@ -2,7 +2,7 @@
 using HsLib.Containers;
 using HsLib.Stats;
 
-namespace HsLib.Services.Battle
+namespace HsLib.Battle
 {
     public interface IAttacker : IWithPlace, IWithAtk, IWithCharge, IWithWindfury
     {

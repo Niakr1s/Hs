@@ -1,4 +1,5 @@
-﻿using HsLib.Cards;
+﻿using HsLib.Battle;
+using HsLib.Cards;
 using HsLib.Common.Place;
 using HsLib.Containers.Base;
 

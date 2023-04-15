@@ -1,4 +1,4 @@
-﻿using HsLib.Services.Battle;
+﻿using HsLib.Battle;
 
 namespace HsLib.Events
 {
@@ -6,9 +6,9 @@ namespace HsLib.Events
     {
     }
 
-    public class GotDamageEventArgs : BattleEventArgs
+    public class BattleGotDamageEventArgs : BattleEventArgs
     {
-        public GotDamageEventArgs(IDamageable defender, int amount)
+        public BattleGotDamageEventArgs(IDamageable defender, int amount)
         {
             Defender = defender;
             Amount = amount;
@@ -18,9 +18,9 @@ namespace HsLib.Events
         public int Amount { get; }
     }
 
-    public class MeleePreAttackEventArgs : BattleEventArgs
+    public class BattleMeleePreAttackEventArgs : BattleEventArgs
     {
-        public MeleePreAttackEventArgs(IAttacker attacker, IDamageable defender)
+        public BattleMeleePreAttackEventArgs(IAttacker attacker, IDamageable defender)
         {
             Attacker = attacker;
             Defender = defender;
