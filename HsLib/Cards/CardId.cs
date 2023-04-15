@@ -6,8 +6,8 @@
         AbusiveSergeant,
         ChillwindYeti,
 
-        // heros
-        JainaProudmoore,
+        // heros and abilities
+        JainaProudmoore, Fireblast,
     }
 
     public static class CardIdExtensions

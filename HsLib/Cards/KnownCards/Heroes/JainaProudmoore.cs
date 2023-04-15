@@ -1,10 +1,9 @@
-﻿namespace HsLib.Cards.KnownCards.Heroes
+﻿using HsLib.Cards.KnownCards.Abilities;
+
+namespace HsLib.Cards.KnownCards.Heroes
 {
     public class JainaProudmoore : Hero
     {
-        public JainaProudmoore() : base()
-        {
-
-        }
+        public override Ability ProduceAbility() => new Fireblast();
     }
 }

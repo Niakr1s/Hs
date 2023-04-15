@@ -22,5 +22,11 @@ namespace HsLib.Cards
         {
             return Hp.GetDamage(value);
         }
+
+        /// <summary>
+        /// Produces ability to set in ability container by.
+        /// </summary>
+        /// <returns>new ability</returns>
+        public abstract Ability ProduceAbility();
     }
 }

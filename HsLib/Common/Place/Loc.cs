@@ -10,6 +10,8 @@
 
         Hero,
         Weapon,
+        Ability,
+
         Secret,
 
         Graveyard,

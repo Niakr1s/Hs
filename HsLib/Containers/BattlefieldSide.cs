@@ -16,7 +16,9 @@ namespace HsLib.Containers
             Field = new(bf, pid);
 
             Hero = new HeroC(bf, pid, (Hero)startingDeck.HeroId.ToCard());
+            Ability = new AbilityC(bf, pid, Hero.Card.ProduceAbility());
             Weapon = new WeaponC(bf, pid, new NoWeapon());
+
             Secrets = new SecretC(bf, pid);
 
             Graveyard = new(bf, pid);
@@ -33,6 +35,8 @@ namespace HsLib.Containers
         public Field Field { get; }
 
         public HeroC Hero { get; }
+
+        public AbilityC Ability { get; }
 
         public WeaponC Weapon { get; }
 
