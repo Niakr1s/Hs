@@ -6,6 +6,12 @@ namespace HsLib.Cards
 {
     public static class CardBuilder
     {
+        /// <summary>
+        /// Builds new card from id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>new card</returns>
+        /// <exception cref="NotSupportedException"></exception>
         public static Card FromId(CardId id)
         {
 
