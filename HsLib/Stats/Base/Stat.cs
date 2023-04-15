@@ -73,7 +73,7 @@
         }
 
         /// <summary>
-        /// Resets value to initial state. Clears all auras
+        /// Resets value to initial state. Clears all auras and buffs.
         /// </summary>
         public void Reset()
         {
