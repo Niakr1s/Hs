@@ -17,6 +17,7 @@ namespace HsLib.Containers
 
             Hero = new Hero(bf, pid);
             Weapon = new WeaponContainer(bf, pid, new NoWeapon());
+            Secrets = new Secrets(bf, pid);
 
             Graveyard = new(bf, pid);
         }
@@ -34,6 +35,8 @@ namespace HsLib.Containers
         public Hero Hero { get; }
 
         public WeaponContainer Weapon { get; }
+
+        public Secrets Secrets { get; }
 
         public Graveyard Graveyard { get; }
     }

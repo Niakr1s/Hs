@@ -8,8 +8,9 @@
         Hand,
         Field,
 
-        Weapon,
         Hero,
+        Weapon,
+        Secrets,
 
         Graveyard,
     }
