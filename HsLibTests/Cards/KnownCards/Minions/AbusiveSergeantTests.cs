@@ -9,7 +9,7 @@ namespace HsLib.Cards.KnownCards.Minions.Tests
         [TestMethod()]
         public void AbusiveSergeantTest()
         {
-            Battlefield bf = new Battlefield(HeroId.Jaina, HeroId.Rexxar);
+            Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
             bf.Turn.Next();
 
             Minion yeti = new ChillwindYeti();

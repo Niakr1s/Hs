@@ -1,18 +1,19 @@
-﻿using HsLib.Cards.KnownCards.Minions;
+﻿using HsLib.Cards.KnownCards.Heroes;
+using HsLib.Cards.KnownCards.Minions;
 
 namespace HsLib.Cards
 {
     public class CardBuilder
     {
-        public Card? FromId(CardId id)
+        public static Card FromId(CardId id)
         {
 
             return id switch
             {
                 CardId.AbusiveSergeant => new AbusiveSergeant(),
                 CardId.ChillwindYeti => new ChillwindYeti(),
-
-                _ => null,
+                CardId.JainaProudmoore => new JainaProudmoore(),
+                _ => throw new NotSupportedException()
             };
         }
     }

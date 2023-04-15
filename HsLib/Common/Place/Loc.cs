@@ -10,7 +10,7 @@
 
         Hero,
         Weapon,
-        Secrets,
+        Secret,
 
         Graveyard,
     }

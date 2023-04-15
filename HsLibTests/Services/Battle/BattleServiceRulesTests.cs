@@ -11,13 +11,13 @@ namespace HsLib.Services.Battle.Tests
         [TestMethod()]
         public void CanBeMeleeAttackedTest()
         {
-            Battlefield bf = new(HeroId.Jaina, HeroId.Rexxar);
+            Battlefield bf = new(CardId.JainaProudmoore, CardId.JainaProudmoore);
             BattleServiceRules rules = new BattleServiceRules(bf);
 
             Minion y1 = new ChillwindYeti();
             Minion y2 = new ChillwindYeti();
-            Hero p1 = bf[Pid.P1].Hero;
-            Hero p2 = bf[Pid.P2].Hero;
+            Hero p1 = bf[Pid.P1].Hero.Card;
+            Hero p2 = bf[Pid.P2].Hero.Card;
             TestAttackSelf();
             Assert.AreEqual(true, rules.CanBeMeleeAttacked(p1, p2));
             Assert.AreEqual(true, rules.CanBeMeleeAttacked(p2, p1));
@@ -91,7 +91,7 @@ namespace HsLib.Services.Battle.Tests
         [TestMethod()]
         public void CanMeleeAttackWeaponTest()
         {
-            Battlefield bf = new(HeroId.Jaina, HeroId.Rexxar);
+            Battlefield bf = new(CardId.JainaProudmoore, CardId.JainaProudmoore);
             Weapon w1 = bf[Pid.P1].Weapon.Card;
             CanMeleeAttackTest(bf, w1);
         }
@@ -99,7 +99,7 @@ namespace HsLib.Services.Battle.Tests
         [TestMethod()]
         public void CanMeleeAttackMinionTest()
         {
-            Battlefield bf = new(HeroId.Jaina, HeroId.Rexxar);
+            Battlefield bf = new(CardId.JainaProudmoore, CardId.JainaProudmoore);
             Minion y1 = new ChillwindYeti();
             bf[Pid.P1].Field.Add(y1);
             CanMeleeAttackTest(bf, y1);
@@ -137,13 +137,13 @@ namespace HsLib.Services.Battle.Tests
             bf.Turn.Skip(attacker.Pid);
             DoTest(true);
             // doing 1st attack
-            Assert.AreEqual(true, bf.BattleService.MeleeAttack(attacker, bf[Pid.P2].Hero));
+            Assert.AreEqual(true, bf.BattleService.MeleeAttack(attacker, bf[Pid.P2].Hero.Card));
             DoTest(false);
             // adding windfury
             attacker.Windfury.AddBuff(true);
             DoTest(true);
             // doing 2 attack
-            Assert.AreEqual(true, bf.BattleService.MeleeAttack(attacker, bf[Pid.P2].Hero));
+            Assert.AreEqual(true, bf.BattleService.MeleeAttack(attacker, bf[Pid.P2].Hero.Card));
             DoTest(false);
 
             // checking if he can attack only self turn

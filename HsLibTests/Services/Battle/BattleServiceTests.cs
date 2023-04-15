@@ -11,7 +11,7 @@ namespace HsLib.Services.Battle.Tests
         [TestMethod()]
         public void CanTurnOffRulesTest()
         {
-            Battlefield bf = new Battlefield(HeroId.Jaina, HeroId.Rexxar);
+            Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
             Minion yeti1 = new ChillwindYeti();
             Minion yeti2 = new ChillwindYeti();
 
@@ -26,7 +26,7 @@ namespace HsLib.Services.Battle.Tests
         [TestMethod()]
         public void MinionAttackMinionTest()
         {
-            Battlefield bf = new Battlefield(HeroId.Jaina, HeroId.Rexxar);
+            Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
             bf.BattleService.Rules = null;
             Minion yeti1 = new ChillwindYeti();
             Minion yeti2 = new ChillwindYeti();
@@ -49,11 +49,11 @@ namespace HsLib.Services.Battle.Tests
         [TestMethod()]
         public void MinionAttackHeroTest()
         {
-            Battlefield bf = new Battlefield(HeroId.Jaina, HeroId.Rexxar);
+            Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
             bf.BattleService.Rules = null;
 
             Minion yeti1 = new ChillwindYeti();
-            Hero p2Hero = bf[Pid.P2].Hero;
+            Hero p2Hero = bf[Pid.P2].Hero.Card;
 
             bf[Pid.P1].Field.Add(yeti1);
             Assert.AreEqual(5, yeti1.Hp.Value);
@@ -71,7 +71,7 @@ namespace HsLib.Services.Battle.Tests
         [TestMethod()]
         public void WeaponAttackTest()
         {
-            Battlefield bf = new Battlefield(HeroId.Jaina, HeroId.Rexxar);
+            Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
             bf.BattleService.Rules = null;
 
             Minion yeti1 = new ChillwindYeti();

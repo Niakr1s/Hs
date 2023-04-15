@@ -1,21 +1,19 @@
-﻿using HsLib.Containers;
-
-namespace HsLib.Cards
+﻿namespace HsLib.Cards
 {
     public class StartingDeck
     {
-        public StartingDeck(HeroId heroId) : this(heroId, new List<Card>())
+        public StartingDeck(CardId heroId) : this(heroId, new List<Card>())
         {
 
         }
 
-        public StartingDeck(HeroId heroId, IEnumerable<Card> cards)
+        public StartingDeck(CardId heroId, IEnumerable<Card> cards)
         {
             HeroId = heroId;
             Cards = cards.ToList();
         }
 
-        public HeroId HeroId { get; }
+        public CardId HeroId { get; }
         public List<Card> Cards { get; }
     }
 }

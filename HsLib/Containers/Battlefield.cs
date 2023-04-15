@@ -21,7 +21,7 @@ namespace HsLib.Containers
             BattleService = new BattleService(this);
         }
 
-        public Battlefield(HeroId p1, HeroId p2) : this(new StartingDeck(p1), new StartingDeck(p2))
+        public Battlefield(CardId p1, CardId p2) : this(new StartingDeck(p1), new StartingDeck(p2))
         {
         }
 
