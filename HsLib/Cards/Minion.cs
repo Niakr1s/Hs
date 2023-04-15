@@ -1,4 +1,5 @@
 ﻿using Models.Cards.Effects;
+using Models.Containers;
 using Models.Services.Battle;
 using Models.Stats;
 using Models.Stats.Base;
@@ -30,6 +31,15 @@ namespace Models.Cards
         public int GetDamage(int value)
         {
             return Hp.GetDamage(value);
+        }
+
+        public virtual void AfterAttack(Battlefield bf)
+        {
+        }
+
+        public override void OnTurnEnd(Battlefield bf)
+        {
+            Atk.AtksThisTurn = 0;
         }
     }
 }

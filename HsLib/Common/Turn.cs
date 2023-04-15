@@ -3,28 +3,13 @@ using Models.Events;
 
 namespace Models.Common
 {
-    public enum Status
-    {
-        PreGame,
-        Running,
-        EndGame,
-    }
-
     public class Turn : IWithEvent<TurnEventArgs>
     {
-        public Turn()
-        {
-            Status = Status.PreGame;
-        }
-
-
-        public Status Status { get; private set; }
-
         /// <summary>
         /// Starts with 1.
         /// 0 means game is not even started.
         /// </summary>
-        public int TurnNo { get; private set; } = 0;
+        public int No { get; private set; } = 0;
 
         public event EventHandler<TurnEventArgs>? Event;
 
@@ -33,45 +18,37 @@ namespace Models.Common
         /// </summary>
         public Pid Pid
         {
-            get => TurnNo switch
+            get => No switch
             {
                 <= 0 => Pid.None,
-                _ => TurnNo % 2 == 1 ? Pid.P1 : Pid.P2,
+                _ => No % 2 == 1 ? Pid.P1 : Pid.P2,
             };
         }
 
-        public bool Next()
+        public void Next()
         {
-            if (Status is Status.EndGame) { return false; }
-
-            if (Status is Status.Running)
-            {
-                Event?.Invoke(this, new TurnEndEventArgs());
-            }
-
-            if (Status is Status.PreGame)
-            {
-                Status = Status.Running;
-                Event?.Invoke(this, new TurnStatusChangedEventArgs());
-            }
-
-            TurnNo++;
+            Event?.Invoke(this, new TurnEndEventArgs());
+            No++;
             Event?.Invoke(this, new TurnStartEventArgs());
-
-            return true;
         }
 
-        public bool Stop()
+        public void Skip(Pid pid)
         {
-            if (Status is Status.EndGame or Status.PreGame) { return false; }
+            if (pid == Pid.None) throw new Exception("pid is None");
 
-            Event?.Invoke(this, new TurnEndEventArgs());
+            do
+            {
+                Next();
+            }
+            while (Pid != pid);
+        }
 
-            Status = Status.EndGame;
-            TurnNo = -1;
-            Event?.Invoke(this, new TurnStatusChangedEventArgs());
-
-            return true;
+        public void Skip(int turns)
+        {
+            while (turns-- > 0)
+            {
+                Next();
+            }
         }
     }
 }

@@ -12,14 +12,14 @@ namespace Models.Containers
             Bf = bf;
             Pid = pid;
 
-            Deck = new(pid, cards: startingDeck.Cards);
-            Hand = new(pid);
-            Field = new(pid);
+            Deck = new(bf, pid, cards: startingDeck.Cards);
+            Hand = new(bf, pid);
+            Field = new(bf, pid);
 
-            Hero = new Hero(pid);
-            Weapon = new WeaponContainer(pid, new NoWeapon());
+            Hero = new Hero(bf, pid);
+            Weapon = new WeaponContainer(bf, pid, new NoWeapon());
 
-            Graveyard = new(pid);
+            Graveyard = new(bf, pid);
         }
 
         public Pid Pid { get; }

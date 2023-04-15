@@ -14,5 +14,7 @@ namespace Models.Stats
             Buffs.Clear();
             _value = _initialValue;
         }
+
+        public int AtksThisTurn { get; set; }
     }
 }

@@ -7,11 +7,16 @@ namespace Models.Containers.Base
     public abstract class Container<TCard>
         where TCard : Card
     {
-        protected Container(Pid pid, Loc loc)
+        protected Container(Battlefield bf, Pid pid, Loc loc)
         {
+            Bf = bf;
             Pid = pid;
             Loc = loc;
+
+            Bf.Turn.Event += Turn_Event;
         }
+
+        public Battlefield Bf { get; }
 
         public Pid Pid { get; }
 
@@ -27,6 +32,8 @@ namespace Models.Containers.Base
         {
             card.Pid = Pid;
             card.Loc = Loc;
+            card.TurnAdded = Bf.Turn.No;
+            card.AfterContainerInsert(Bf);
         }
 
         /// <summary>
@@ -37,6 +44,8 @@ namespace Models.Containers.Base
         {
             card.Pid = Pid.None;
             card.Loc = Loc.None;
+            card.TurnAdded = 0;
+            card.AfterContainerRemove(Bf);
         }
 
         /// <summary>
@@ -46,5 +55,18 @@ namespace Models.Containers.Base
         public abstract IEnumerable<TCard> Cards { get; }
 
         public int Count => Cards.Count();
+
+        private void Turn_Event(object? sender, TurnEventArgs e)
+        {
+            switch (e)
+            {
+                case TurnStartEventArgs:
+                    foreach (var c in Cards) c.OnTurnStart(Bf);
+                    break;
+                case TurnEndEventArgs:
+                    foreach (var c in Cards) c.OnTurnEnd(Bf);
+                    break;
+            }
+        }
     }
 }

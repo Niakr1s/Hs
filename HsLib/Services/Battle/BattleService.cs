@@ -1,5 +1,4 @@
-﻿using Models.Cards;
-using Models.Containers;
+﻿using Models.Containers;
 using Models.Events;
 
 namespace Models.Services.Battle
@@ -23,10 +22,11 @@ namespace Models.Services.Battle
         /// <param name="defender"></param>
         /// <param name="attackDefender">Is a defender, who takes counterattack. If no defender provided, attacker will try defend by himself.</param>
         /// <returns>True, if attack was actually made.</returns>
-        private bool MeleeAttack(IAttacker attacker, IDamageable defender,
+        public bool MeleeAttack(IAttacker attacker, IDamageable defender,
             IDamageable? attackDefender = null,
             bool isCounterAttack = false)
         {
+            if (Rules?.CanMeleeAttack(attacker, Bf.Turn) == false) return false;
             if (Rules?.CanBeMeleeAttacked(attacker, defender) == false) return false;
 
             attackDefender ??= attacker as IDamageable;
@@ -47,22 +47,9 @@ namespace Models.Services.Battle
                 MeleeAttack(counterAttacker, attackDefender, isCounterAttack: true);
             }
 
+            attacker.AfterAttack(Bf);
+            attacker.Atk.AtksThisTurn++;
             return true;
-        }
-
-        public bool MinionAttack(Minion attacker, IDamageable defender)
-        {
-            return MeleeAttack(attacker, defender, attackDefender: attacker);
-        }
-
-        public bool WeaponAttack(Weapon weapon, IDamageable defender)
-        {
-            bool success = MeleeAttack(weapon, defender);
-            if (success)
-            {
-                weapon.Hp.Decrease();
-            }
-            return success;
         }
     }
 }

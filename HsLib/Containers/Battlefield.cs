@@ -10,15 +10,14 @@ namespace Models.Containers
     {
         public Battlefield(StartingDeck p1, StartingDeck p2)
         {
+            Turn = new Turn();
+
             _bf = new()
             {
                 [Pid.P1] = new(this, Pid.P1, p1),
                 [Pid.P2] = new(this, Pid.P2, p2),
             };
             Event += UpdateCards;
-
-            Turn = new Turn();
-
             BattleService = new BattleService(this);
         }
 

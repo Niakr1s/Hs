@@ -21,4 +21,14 @@
             }
         }
     }
+
+    public static class PidExtensions
+    {
+        public static Pid He(this Pid pid) => pid switch
+        {
+            Pid.P1 => Pid.P2,
+            Pid.P2 => Pid.P1,
+            _ => throw new Exception("pid is None")
+        };
+    }
 }

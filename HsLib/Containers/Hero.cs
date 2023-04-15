@@ -6,8 +6,9 @@ namespace Models.Containers
 {
     public class Hero : IDamageable
     {
-        public Hero(Pid pid, HeroId heroId = HeroId.Jaina)
+        public Hero(Battlefield bf, Pid pid, HeroId heroId = HeroId.Jaina)
         {
+            Bf = bf;
             Pid = pid;
             HeroId = heroId;
 
@@ -16,7 +17,11 @@ namespace Models.Containers
             Armor = new Armor(0);
         }
 
+        public Battlefield Bf { get; }
+
         public Pid Pid { get; }
+
+        public int TurnAdded { get; set; }
 
         public HeroId HeroId { get; }
 
@@ -30,6 +35,7 @@ namespace Models.Containers
         public Loc Loc => Loc.Hero;
 
         public bool Dead => Hp.Value <= 0;
+
 
         public int GetDamage(int value)
         {

@@ -1,4 +1,5 @@
-﻿using Models.Services.Battle;
+﻿using Models.Containers;
+using Models.Services.Battle;
 using Models.Stats;
 using Models.Stats.Base;
 
@@ -16,9 +17,19 @@ namespace Models.Cards
 
         public Hp Hp { get; }
 
-        public static BoolStat Charge => new BoolStat(true);
+        public BoolStat Charge => new BoolStat(true);
         public BoolStat Windfury { get; init; } = new BoolStat(false);
 
         public bool Dead => Hp.Value <= 0;
+
+        public void AfterAttack(Battlefield bf)
+        {
+            Hp.Decrease();
+        }
+
+        public override void OnTurnEnd(Battlefield bf)
+        {
+            Atk.AtksThisTurn = 0;
+        }
     }
 }

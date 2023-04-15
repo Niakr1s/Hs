@@ -6,7 +6,7 @@ namespace Models.Containers
 {
     public class Field : MultiContainer<Minion>
     {
-        public Field(Pid pid) : base(pid, Loc.Field, limit: 7)
+        public Field(Battlefield bf, Pid pid) : base(bf, pid, Loc.Field, limit: 7)
         {
         }
     }

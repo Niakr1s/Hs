@@ -17,16 +17,17 @@ namespace Models.Services.Battle.Tests
 
             bf[Pid.P1].Deck.Add(yeti1);
             bf[Pid.P2].Deck.Add(yeti2);
-            Assert.AreEqual(false, bf.BattleService.MinionAttack(yeti1, yeti2));
+            Assert.AreEqual(false, bf.BattleService.MeleeAttack(yeti1, yeti2));
 
             bf.BattleService.Rules = null;
-            Assert.AreEqual(true, bf.BattleService.MinionAttack(yeti1, yeti2));
+            Assert.AreEqual(true, bf.BattleService.MeleeAttack(yeti1, yeti2));
         }
 
         [TestMethod()]
         public void MinionAttackMinionTest()
         {
             Battlefield bf = new Battlefield(HeroId.Jaina, HeroId.Rexxar);
+            bf.BattleService.Rules = null;
             Minion yeti1 = new ChillwindYeti();
             Minion yeti2 = new ChillwindYeti();
 
@@ -36,11 +37,11 @@ namespace Models.Services.Battle.Tests
             Assert.AreEqual(5, yeti1.Hp.Value);
             Assert.AreEqual(5, yeti2.Hp.Value);
 
-            Assert.AreEqual(true, bf.BattleService.MinionAttack(yeti1, yeti2));
+            Assert.AreEqual(true, bf.BattleService.MeleeAttack(yeti1, yeti2));
             Assert.AreEqual(1, yeti1.Hp.Value);
             Assert.AreEqual(1, yeti2.Hp.Value);
 
-            Assert.AreEqual(true, bf.BattleService.MinionAttack(yeti1, yeti2));
+            Assert.AreEqual(true, bf.BattleService.MeleeAttack(yeti1, yeti2));
             Assert.AreEqual(1, yeti1.Hp.Value);
             Assert.AreEqual(0, yeti2.Hp.Value);
         }
@@ -49,6 +50,8 @@ namespace Models.Services.Battle.Tests
         public void MinionAttackHeroTest()
         {
             Battlefield bf = new Battlefield(HeroId.Jaina, HeroId.Rexxar);
+            bf.BattleService.Rules = null;
+
             Minion yeti1 = new ChillwindYeti();
             Hero p2Hero = bf[Pid.P2].Hero;
 
@@ -56,11 +59,11 @@ namespace Models.Services.Battle.Tests
             Assert.AreEqual(5, yeti1.Hp.Value);
             Assert.AreEqual(30, p2Hero.Hp.Value);
 
-            Assert.AreEqual(true, bf.BattleService.MinionAttack(yeti1, p2Hero));
+            Assert.AreEqual(true, bf.BattleService.MeleeAttack(yeti1, p2Hero));
             Assert.AreEqual(5, yeti1.Hp.Value);
             Assert.AreEqual(26, p2Hero.Hp.Value);
 
-            Assert.AreEqual(true, bf.BattleService.MinionAttack(yeti1, p2Hero));
+            Assert.AreEqual(true, bf.BattleService.MeleeAttack(yeti1, p2Hero));
             Assert.AreEqual(5, yeti1.Hp.Value);
             Assert.AreEqual(22, p2Hero.Hp.Value);
         }
@@ -75,11 +78,11 @@ namespace Models.Services.Battle.Tests
             bf[Pid.P2].Field.Add(yeti1);
 
             Weapon weapon = bf[Pid.P1].Weapon.Card;
-            Assert.AreEqual(false, bf.BattleService.WeaponAttack(bf[Pid.P1].Weapon.Card, yeti1));
+            Assert.AreEqual(false, bf.BattleService.MeleeAttack(bf[Pid.P1].Weapon.Card, yeti1));
 
             weapon.Atk.AddBuff(2);
             int hpBefore = weapon.Hp.Value;
-            Assert.AreEqual(true, bf.BattleService.WeaponAttack(bf[Pid.P1].Weapon.Card, yeti1));
+            Assert.AreEqual(true, bf.BattleService.MeleeAttack(bf[Pid.P1].Weapon.Card, yeti1));
             Assert.AreEqual(1, hpBefore - weapon.Hp.Value);
         }
     }

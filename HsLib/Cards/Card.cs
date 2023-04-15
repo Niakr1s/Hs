@@ -1,4 +1,5 @@
 ﻿using Models.Common.Place;
+using Models.Containers;
 using Models.Stats;
 
 namespace Models.Cards
@@ -17,9 +18,14 @@ namespace Models.Cards
         public Pid Pid { get; set; } = Pid.None;
 
         /// <summary>
+        /// Is set by Container.
+        /// </summary>
+        public int TurnAdded { get; set; }
+
+        /// <summary>
         /// It will be called after card is added to container.
         /// </summary>
-        public virtual void AfterContainerAdded()
+        public virtual void AfterContainerInsert(Battlefield bf)
         {
 
         }
@@ -27,9 +33,13 @@ namespace Models.Cards
         /// <summary>
         /// It will be called before card was removed from container.
         /// </summary>
-        public virtual void BeforeContainerRemoved()
+        public virtual void AfterContainerRemove(Battlefield bf)
         {
 
         }
+
+        public virtual void OnTurnEnd(Battlefield bf) { }
+
+        public virtual void OnTurnStart(Battlefield bf) { }
     }
 }

@@ -6,7 +6,7 @@ namespace Models.Containers
 {
     public class Hand : MultiContainer<Card>
     {
-        public Hand(Pid pid) : base(pid, Loc.Hand)
+        public Hand(Battlefield bf, Pid pid) : base(bf, pid, Loc.Hand)
         {
         }
     }
