@@ -269,7 +269,7 @@
 - [ ] War Golem
 - [ ] Mana Wraith
 - [ ] Southsea Deckhand
-- [ ] Armor Up!
+- [x] Armor Up!
 - [ ] Hand of Protection
 - [ ] Dagger Mastery
 - [ ] Mind Control Tech
