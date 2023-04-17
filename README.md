@@ -1,1 +1,519 @@
-# Hs
+## Card list:
+
+- [x] Garrosh Hellscream
+- [ ] Mind Control
+- [ ] Prophet Velen
+- [ ] Mana Addict
+- [ ] Barrel
+- [ ] Inner Rage
+- [ ] Bane of Doom
+- [ ] Kor'kron Elite
+- [ ] Thoughtsteal
+- [ ] Rexxar
+- [ ] Al'Akir the Windlord
+- [ ] Silvermoon Guardian
+- [ ] Cenarius
+- [ ] Pint-Sized Summoner
+- [ ] Frostwolf Grunt
+- [ ] Tauren Warrior
+- [ ] Voidwalker
+- [ ] Windfury
+- [ ] Emboldener 3000
+- [ ] Whelp
+- [ ] Mechanical Dragonling
+- [ ] Summon a Panther
+- [ ] Spiteful Smith
+- [ ] Cat Form
+- [ ] Swipe
+- [ ] Silverback Patriarch
+- [ ] Stranglethorn Tiger
+- [ ] Silver Hand Knight
+- [ ] Blessing of Might
+- [ ] Brawl
+- [ ] Imp
+- [ ] Polymorph
+- [ ] Starfall
+- [x] Chillwind Yeti
+- [ ] Nourish
+- [ ] Bear Form
+- [ ] Huffer
+- [ ] Defender
+- [ ] Counterspell
+- [ ] Voodoo Doctor
+- [ ] Ravenholdt Assassin
+- [ ] Wrath
+- [ ] Doomsayer
+- [ ] Redemption
+- [ ] Hunter's Mark
+- [ ] Mindgames
+- [ ] Poultryizer
+- [ ] Shadowflame
+- [ ] Ancestral Healing
+- [ ] Mark of Nature
+- [ ] Lord of the Arena
+- [ ] Secretkeeper
+- [ ] Sacrificial Pact
+- [ ] Ice Lance
+- [ ] Dalaran Mage
+- [ ] Windspeaker
+- [ ] Wisp
+- [ ] Backstab
+- [ ] Uproot
+- [ ] Ancient Brewmaster
+- [ ] Fire Elemental
+- [ ] Murloc Raider
+- [ ] Ice Block
+- [ ] Mirror Entity
+- [ ] Vanish
+- [ ] Defias Ringleader
+- [ ] Snake
+- [ ] Ironbark Protector
+- [ ] Ancient Secrets
+- [ ] Sea Giant
+- [ ] Mark of the Wild
+- [ ] Bloodfen Raptor
+- [ ] Nightmare
+- [ ] Shadow Madness
+- [ ] Leokk
+- [ ] Homing Chicken
+- [ ] Steady Shot
+- [ ] Repentance
+- [ ] Naturalize
+- [ ] Auchenai Soulpriest
+- [ ] Feral Spirit
+- [ ] Rockbiter Weapon
+- [x] Abusive Sergeant
+- [ ] Hammer of Wrath
+- [ ] Loot Hoarder
+- [ ] Wrath
+- [ ] Innervate
+- [ ] Razorfen Hunter
+- [ ] Chicken
+- [ ] Cold Blood
+- [ ] Cabal Shadow Priest
+- [ ] Malfurion Stormrage
+- [ ] Holy Smite
+- [ ] Argent Commander
+- [ ] Betrayal
+- [ ] Novice Engineer
+- [ ] Cruel Taskmaster
+- [ ] Vaporize
+- [ ] Kidnapper
+- [ ] Wolfrider
+- [ ] Ironbeak Owl
+- [ ] Holy Light
+- [ ] Multi-Shot
+- [ ] Kill Command
+- [ ] Boar
+- [ ] Forked Lightning
+- [ ] Life Tap
+- [ ] Ysera Awakens
+- [ ] Arcanite Reaper
+- [ ] Edwin VanCleef
+- [ ] Gnomish Inventor
+- [ ] Gladiator's Longbow
+- [ ] Ancient Teachings
+- [ ] Fireball
+- [ ] Bananas
+- [ ] Baine Bloodhoof
+- [ ] Dispel
+- [ ] Nourish
+- [ ] Repair Bot
+- [ ] Devilsaur
+- [ ] Baron Geddon
+- [ ] Grommash Hellscream
+- [ ] Ironforge Rifleman
+- [ ] Laughing Sister
+- [ ] Charge
+- [ ] Assassinate
+- [ ] Dark Iron Dwarf
+- [ ] Master Swordsmith
+- [ ] Doomhammer
+- [ ] Treant
+- [ ] Onyxia
+- [ ] Shan'do's Lesson
+- [ ] Shadowstep
+- [ ] Spellbender
+- [ ] Ragnaros the Firelord
+- [ ] Inner Fire
+- [ ] Violet Apprentice
+- [ ] Soul of the Forest
+- [ ] Light's Justice
+- [ ] Elven Archer
+- [ ] Perdition's Blade
+- [ ] Explosive Shot
+- [ ] Water Elemental
+- [ ] Flesheating Ghoul
+- [ ] Battle Rage
+- [x] Fiery War Axe
+- [ ] Ancestral Spirit
+- [ ] Mana Wyrm
+- [ ] Nozdormu
+- [ ] Stormpike Commando
+- [ ] Youthful Brewmaster
+- [ ] Cairne Bloodhoof
+- [ ] Assassin's Blade
+- [ ] Priestess of Elune
+- [ ] Cone of Cold
+- [ ] Holy Wrath
+- [ ] Malygos
+- [ ] Animal Companion
+- [x] Abomination
+- [ ] Hungry Crab
+- [ ] Reckless Rocketeer
+- [ ] Arcane Explosion
+- [ ] Nourish
+- [ ] Coldlight Seer
+- [ ] Snake Trap
+- [ ] Captain Greenskin
+- [ ] Blizzard
+- [ ] Wrath of Air Totem
+- [ ] Deadly Poison
+- [ ] Gnoll
+- [ ] Sap
+- [ ] Eye for an Eye
+- [ ] Arcane Golem
+- [ ] Moonfire
+- [ ] Mark of Nature
+- [ ] Blood Imp
+- [ ] Damaged Golem
+- [ ] Reinforce
+- [ ] Murloc Tidecaller
+- [ ] Consecration
+- [ ] Lesser Heal
+- [ ] Savagery
+- [ ] Squire
+- [ ] Wicked Knife
+- [ ] Defias Bandit
+- [ ] Emerald Drake
+- [ ] Hidden Gnome
+- [ ] Lord Jaraxxus
+- [ ] Force of Nature
+- [ ] Frostwolf Warlord
+- [ ] Power of the Wild
+- [ ] Lightning Bolt
+- [ ] Grimscale Oracle
+- [ ] Upgrade!
+- [ ] Frost Elemental
+- [ ] Mana Tide Totem
+- [ ] Felguard
+- [ ] Freezing Trap
+- [ ] Dragonling Mechanic
+- [ ] Archmage
+- [ ] Gruul
+- [ ] Captain's Parrot
+- [ ] Faceless Manipulator
+- [ ] Spirit Wolf
+- [ ] Searing Totem
+- [ ] Arathi Weaponsmith
+- [ ] Mind Blast
+- [ ] Shield Slam
+- [ ] Frog
+- [ ] Arcane Intellect
+- [ ] Illidan Stormrage
+- [ ] Leeroy Jenkins
+- [ ] Arcane Missiles
+- [ ] Windfury Harpy
+- [ ] Tinkmaster Overspark
+- [ ] Shiv
+- [ ] Bite
+- [ ] Rooted
+- [ ] Alexstrasza
+- [ ] Darkscale Healer
+- [ ] Noble Sacrifice
+- [ ] Explosive Trap
+- [ ] Frost Nova
+- [ ] Succubus
+- [ ] Lay on Hands
+- [ ] Armorsmith
+- [ ] Treant
+- [ ] Keeper of the Grove
+- [ ] Fen Creeper
+- [ ] Ancient Watcher
+- [ ] Timber Wolf
+- [ ] Shattered Sun Cleric
+- [ ] Faerie Dragon
+- [ ] Power Word: Shield
+- [ ] Sorcerer's Apprentice
+- [ ] Dust Devil
+- [ ] Ice Barrier
+- [ ] Stormwind Knight
+- [ ] Lightning Storm
+- [ ] Sprint
+- [ ] Doomguard
+- [ ] Sen'jin Shieldmasta
+- [ ] Whirlwind
+- [ ] Jaina Proudmoore
+- [ ] Hogger
+- [ ] Young Dragonhawk
+- [ ] Scarlet Crusader
+- [ ] Sword of Justice
+- [ ] Stonetusk Boar
+- [ ] Frothing Berserker
+- [ ] Leper Gnome
+- [ ] Frostbolt
+- [ ] Fan of Knives
+- [ ] Nightblade
+- [ ] Uther Lightbringer
+- [ ] Kobold Geomancer
+- [ ] Treant
+- [ ] Divine Favor
+- [ ] Southsea Captain
+- [ ] Totemic Call
+- [ ] Mark of Nature
+- [ ] Druid of the Claw
+- [ ] Tundra Rhino
+- [ ] Mogu'shan Warden
+- [ ] Headcrack
+- [ ] Sinister Strike
+- [ ] War Golem
+- [ ] Mana Wraith
+- [ ] Southsea Deckhand
+- [x] Armor Up!
+- [ ] Hand of Protection
+- [ ] Dagger Mastery
+- [ ] Mind Control Tech
+- [ ] Old Murk-Eye
+- [ ] Bluegill Warrior
+- [ ] Savage Roar
+- [ ] Kirin Tor Mage
+- [ ] Bloodmage Thalnos
+- [ ] Stormwind Champion
+- [ ] Spellbreaker
+- [ ] Blood Knight
+- [ ] Equality
+- [ ] Argent Squire
+- [ ] Sunwalker
+- [ ] Mad Bomber
+- [ ] Defender of Argus
+- [ ] Healing Totem
+- [ ] Thrallmar Farseer
+- [ ] Hex
+- [ ] Earth Shock
+- [ ] Gurubashi Berserker
+- [ ] Healing Touch
+- [ ] Unbound Elemental
+- [ ] Lord Jaraxxus
+- [ ] Harvest Golem
+- [ ] Pit Lord
+- [ ] Barrel Toss
+- [ ] Execute
+- [ ] Amani Berserker
+- [ ] Questing Adventurer
+- [ ] Sheep
+- [ ] Lightwell
+- [ ] Crazed Alchemist
+- [ ] Mortal Strike
+- [x] Fireblast
+- [ ] Dream
+- [ ] Gorehowl
+- [ ] Cult Master
+- [ ] Panther
+- [ ] Anduin Wrynn
+- [ ] Snipe
+- [ ] Far Sight
+- [ ] Starfire
+- [ ] Azure Drake
+- [ ] Totemic Might
+- [ ] Deathwing
+- [ ] Leader of the Pack
+- [ ] Wrath
+- [ ] Holy Nova
+- [ ] Power Overwhelming
+- [ ] Truesilver Champion
+- [ ] Stoneclaw Totem
+- [ ] Humility
+- [ ] Millhouse Manastorm
+- [ ] Gelbin Mekkatorque
+- [ ] Twisting Nether
+- [ ] Sense Demons
+- [ ] Lava Burst
+- [ ] Shieldbearer
+- [ ] Arcane Shot
+- [ ] Dread Corsair
+- [ ] Lightspawn
+- [ ] Master of Disguise
+- [ ] Tirion Fordring
+- [ ] Sunfury Protector
+- [ ] Gul'dan
+- [ ] Flare
+- [ ] Bestial Wrath
+- [ ] Eviscerate
+- [ ] Acidic Swamp Ooze
+- [ ] Harrison Jones
+- [ ] Shadow Bolt
+- [ ] Ancient Mage
+- [ ] Drain Life
+- [ ] Ancient of Lore
+- [ ] Jungle Panther
+- [ ] Goldshire Footman
+- [ ] Imp Master
+- [ ] Starfall
+- [ ] Valeera Sanguinar
+- [ ] Gadgetzan Auctioneer
+- [ ] Cleave
+- [ ] Blessing of Kings
+- [ ] Hellfire
+- [ ] Misha
+- [ ] Stormforged Axe
+- [ ] The Beast
+- [ ] Mirror Image
+- [ ] Summoning Portal
+- [ ] Frost Shock
+- [ ] Soulfire
+- [ ] Murloc Tidehunter
+- [ ] Demolisher
+- [ ] Corruption
+- [ ] Dire Wolf Alpha
+- [ ] Moonfire
+- [ ] Stomp
+- [ ] Conceal
+- [ ] Mountain Giant
+- [ ] Worgen Infiltrator
+- [ ] Ogre Magi
+- [ ] Bloodsail Corsair
+- [ ] Bloodsail Raider
+- [ ] Houndmaster
+- [ ] Flamestrike
+- [ ] Finkle Einhorn
+- [ ] Heroic Strike
+- [x] Flametongue Totem
+- [ ] Warsong Commander
+- [ ] Wild Pyromancer
+- [ ] Coldlight Oracle
+- [ ] Dread Infernal
+- [ ] Argent Protector
+- [ ] Shield Block
+- [ ] Commanding Shout
+- [ ] Violet Teacher
+- [ ] Ancient of War
+- [ ] Twilight Drake
+- [ ] Tracking
+- [ ] Claw
+- [ ] Murloc Warleader
+- [ ] Blade Flurry
+- [ ] Thrall
+- [ ] Guardian of Kings
+- [ ] Knife Juggler
+- [ ] Slam
+- [ ] Skeleton
+- [ ] Murloc Scout
+- [ ] Archmage Antonidas
+- [ ] Mirror Image
+- [ ] Spellbender
+- [ ] Pyroblast
+- [ ] Flame Imp
+- [ ] Misdirection
+- [ ] Mortal Coil
+- [ ] Deadly Shot
+- [ ] Emperor Cobra
+- [ ] Mind Vision
+- [ ] Siphon Soul
+- [ ] Rampage
+- [ ] Injured Blademaster
+- [ ] SI:7 Agent
+- [ ] Venture Co. Mercenary
+- [ ] Shapeshift
+- [ ] Wild Growth
+- [ ] Patient Assassin
+- [ ] Lorewalker Cho
+- [ ] Booty Bay Bodyguard
+- [ ] Earth Elemental
+- [ ] Demonfire
+- [ ] Infernal
+- [ ] King Krush
+- [ ] Demigod's Favor
+- [ ] Nat Pagle
+- [ ] Raging Worgen
+- [ ] Preparation
+- [ ] Starfall
+- [ ] Aldor Peacekeeper
+- [ ] Bloodlust
+- [ ] Avenging Wrath
+- [ ] INFERNO!
+- [ ] Ironfur Grizzly
+- [ ] Ysera
+- [ ] Silence
+- [ ] Squirrel
+- [ ] Void Terror
+- [ ] Starving Buzzard
+- [ ] Unleash the Hounds
+- [ ] Savannah Highmane
+- [ ] Scavenging Hyena
+- [ ] Hogger
+- [ ] Riverpaw Gnoll
+- [ ] Gnoll
+- [ ] Hogger SMASH!
+- [ ] Massive Gnoll
+- [x] Jaina Proudmoore
+- [ ] Divine Spirit
+- [ ] Circle of Healing
+- [ ] Shadow Word: Death
+- [ ] Temple Enforcer
+- [ ] Holy Fire
+- [ ] Mass Dispel
+- [ ] Shadow Word: Pain
+- [ ] Shadowform
+- [ ] River Crocolisk
+- [ ] Oasis Snapjaw
+- [ ] Stampeding Kodo
+- [ ] Molten Giant
+- [ ] Blessing of Wisdom
+- [ ] Millhouse Manastorm
+- [ ] Raid Leader
+- [ ] King Mukla
+- [ ] Mukla's Big Brother
+- [ ] Blessed Champion
+- [ ] Will of Mukla
+- [ ] Hemet Nesingwary
+- [ ] Crazed Hunter
+- [ ] Mind Spike
+- [ ] Mind Shatter
+- [ ] Hyena
+- [ ] Young Priestess
+- [ ] Illidan Stormrage
+- [ ] Flames of Azzinoth
+- [ ] Naga Myrmidon
+- [ ] Warglaive of Azzinoth
+- [ ] Flame Burst
+- [ ] Metamorphosis
+- [ ] Dual Warglaives
+- [ ] Flame of Azzinoth
+- [ ] Northshire Cleric
+- [ ] Earthen Ring Farseer
+- [ ] Silver Hand Recruit
+- [ ] Magma Rager
+- [ ] Lightwarden
+- [ ] The Black Knight
+- [ ] Big Game Hunter
+- [ ] Alarm-o-Bot
+- [ ] Acolyte of Pain
+- [ ] Blood Fury
+- [ ] Heavy Axe
+- [ ] Eaglehorn Bow
+- [ ] Lorewalker Cho
+- [ ] Pandaren Scout
+- [ ] Shado-Pan Monk
+- [ ] Legacy of the Emperor
+- [ ] Brewmaster
+- [ ] Transcendence
+- [ ] Crazy Monkey
+- [ ] Druid of the Claw
+- [ ] Druid of the Claw
+- [ ] Shotgun Blast
+- [ ] Boulderfist Ogre
+- [ ] Core Hound
+- [ ] Angry Chicken
+- [ ] King Mukla
+- [ ] Bananas
+- [ ] Battle Axe
+- [ ] Shadow of Nothing
+- [ ] Sylvanas Windrunner
+- [ ] Worthless Imp
+- [ ] Excess Mana
+- [ ] Ashbringer
+- [ ] Avatar of the Coin
+- [ ] Ethereal Arcanist
+- [ ] The Coin
+- [ ] NOOOOOOOOOOOO
+- [ ] Flame of Azzinoth
