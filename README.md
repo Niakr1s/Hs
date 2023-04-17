@@ -1,4 +1,7 @@
-## Card list:
+## Card list
+
+<details>
+  <summary>Click me</summary>
 
 - [x] Garrosh Hellscream
 - [ ] Mind Control
@@ -517,3 +520,4 @@
 - [ ] The Coin
 - [ ] NOOOOOOOOOOOO
 - [ ] Flame of Azzinoth
+</details>
