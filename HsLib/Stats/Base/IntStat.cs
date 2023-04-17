@@ -20,5 +20,10 @@
         {
             _value -= value;
         }
+
+        public void Increase(int value = 1)
+        {
+            _value += value;
+        }
     }
 }

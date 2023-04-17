@@ -10,6 +10,7 @@
 
         // heros and abilities
         JainaProudmoore, Fireblast,
+        GarroshHellscream, ArmorUp,
     }
 
     public static class CardIdExtensions

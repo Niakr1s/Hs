@@ -24,6 +24,8 @@ namespace HsLib.Cards
 
                 CardId.JainaProudmoore => new JainaProudmoore(),
                 CardId.Fireblast => new Fireblast(),
+                CardId.GarroshHellscream => new GarroshHellscream(),
+                CardId.ArmorUp => new ArmorUp(),
 
                 _ => throw new NotSupportedException()
             };

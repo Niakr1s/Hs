@@ -11,7 +11,7 @@ namespace HsLib.Cards.KnownCards.Abilities
         {
         }
 
-        private Target _effectTarget = new Target
+        private readonly Target _effectTarget = new Target
         {
             Locs = new() { Loc.Field, Loc.Hero },
             Sides = new() { PidSide.Me, PidSide.He },

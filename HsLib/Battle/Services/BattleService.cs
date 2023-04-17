@@ -59,7 +59,7 @@ namespace HsLib.Battle.Services
             return true;
         }
 
-        public bool UseAbility(Pid pid, Card? target)
+        public bool UseAbility(Pid pid, Card? target = null)
         {
             Ability ability = Bf[pid].Ability.Card;
             try

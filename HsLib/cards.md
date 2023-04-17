@@ -1,6 +1,6 @@
 ## Card list:
 
-- [ ] Garrosh Hellscream
+- [x] Garrosh Hellscream
 - [ ] Mind Control
 - [ ] Prophet Velen
 - [ ] Mana Addict
