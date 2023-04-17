@@ -1,4 +1,5 @@
 ﻿using HsLib.Cards;
+using HsLib.Cards.Effects;
 using HsLib.Common;
 using HsLib.Common.Interfaces;
 using HsLib.Common.Place;
@@ -64,6 +65,17 @@ namespace HsLib.Battle.Services
             bool sameTurn = attacker.TurnAdded == turn.No;
 
             return !sameTurn || attacker.Charge;
+        }
+
+        public bool CanUseEffect(IEffect effect, Card? target = null)
+        {
+            List<Card> targets = effect.UseEffectTargets(Bf).ToList();
+
+            // nullable to simplify target checks
+            if (target is null) { return targets.Count == 0; }
+            if (!targets.Contains(target)) { return false; }
+
+            return true;
         }
     }
 }

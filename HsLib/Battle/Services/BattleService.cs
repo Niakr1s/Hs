@@ -1,5 +1,4 @@
 ﻿using HsLib.Cards;
-using HsLib.Cards.Effects;
 using HsLib.Common.Interfaces;
 using HsLib.Common.Place;
 using HsLib.Events;
@@ -62,15 +61,10 @@ namespace HsLib.Battle.Services
         public bool UseAbility(Pid pid, Card? target = null)
         {
             Ability ability = Bf[pid].Ability.Card;
-            try
-            {
-                ability.UseEffect(Bf, ability, target);
-                return true;
-            }
-            catch (EffectWrongTargetException)
-            {
-                return false;
-            }
+
+            if (Rules?.CanUseEffect(ability) == false) { return false; }
+            ability.UseEffect(Bf, target);
+            return true;
         }
 
         /// <summary>

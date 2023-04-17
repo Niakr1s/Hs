@@ -5,25 +5,28 @@ namespace HsLib.Cards.Effects
 {
     public abstract class Battlecry : IEffect
     {
-        protected Target Target { get; set; }
-
-        /// <summary>
-        /// It's called after target validity check passes.
-        /// </summary>
-        /// <param name="bf"></param>
-        /// <param name="owner"></param>
-        /// <param name="target"></param>
-        protected abstract void DoUseEffect(Battlefield bf, Card owner, Card? target);
-
-        public void UseEffect(Battlefield bf, Card owner, Card? target)
+        protected Battlecry(Minion minion)
         {
-            if (!Target.IsValidTarget(owner, target))
-            {
-                // TODO: add stealth checks etc
-                throw new EffectWrongTargetException();
-            }
-
-            DoUseEffect(bf, owner, target);
+            Minion = minion;
         }
+
+        public Minion Minion { get; }
+
+        protected Target? EffectTargets { get; set; }
+
+        public IEnumerable<Card> UseEffectTargets(Battlefield bf)
+        {
+            if (EffectTargets is null) { yield break; }
+
+            foreach (Card card in bf.Cards)
+            {
+                if (EffectTargets?.IsValidTarget(Minion, card) == true)
+                {
+                    yield return card;
+                }
+            }
+        }
+
+        public abstract void UseEffect(Battlefield bf, Card? target);
     }
 }

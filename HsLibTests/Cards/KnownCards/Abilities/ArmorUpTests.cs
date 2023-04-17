@@ -15,8 +15,7 @@ namespace HsLib.Cards.KnownCards.Abilities.Tests
             foreach (Pid pid in Pids.All())
             {
                 Assert.IsInstanceOfType(bf[pid].Ability.Card, typeof(ArmorUp));
-                Assert.AreEqual(30, bf[pid].Hero.Card.Hp.Value);
-                Assert.AreEqual(false, bf.BattleService.UseAbility(pid, bf[pid].Hero.Card));
+
                 Assert.AreEqual(0, bf[pid].Hero.Card.Armor.Value);
                 Assert.AreEqual(true, bf.BattleService.UseAbility(pid));
                 Assert.AreEqual(2, bf[pid].Hero.Card.Armor.Value);

@@ -11,22 +11,22 @@ namespace HsLib.Cards.KnownCards.Minions
     {
         public AbusiveSergeant() : base(2, 2, 1)
         {
-            Battlecry = new AbusiveSergeantBattlecry();
+            Battlecry = new AbusiveSergeantBattlecry(this);
         }
     }
 
     file class AbusiveSergeantBattlecry : Battlecry
     {
-        public AbusiveSergeantBattlecry()
+        public AbusiveSergeantBattlecry(Minion m) : base(m)
         {
-            Target = new Target
+            EffectTargets = new Target
             {
                 Locs = new() { Loc.Field },
                 Sides = new() { PidSide.Me, PidSide.He }
             };
         }
 
-        protected override void DoUseEffect(Battlefield bf, Card owner, Card? target)
+        public override void UseEffect(Battlefield bf, Card? target)
         {
             if (target is not null && target is Minion m)
             {

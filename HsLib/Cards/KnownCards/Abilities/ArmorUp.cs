@@ -1,5 +1,4 @@
 ﻿using HsLib.Battle;
-using HsLib.Cards.Effects;
 
 namespace HsLib.Cards.KnownCards.Abilities
 {
@@ -7,18 +6,12 @@ namespace HsLib.Cards.KnownCards.Abilities
     {
         public ArmorUp() : base(2)
         {
+            EffectTargets = null;
         }
 
-        public override void UseEffect(Battlefield bf, Card owner, Card? target)
+        public override void UseEffect(Battlefield bf, Card? target)
         {
-            if (target is null)
-            {
-                bf[owner.Pid].Hero.Card.Armor.Increase(2);
-            }
-            else
-            {
-                throw new EffectWrongTargetException();
-            }
+            bf[Pid].Hero.Card.Armor.Increase(2);
         }
     }
 }

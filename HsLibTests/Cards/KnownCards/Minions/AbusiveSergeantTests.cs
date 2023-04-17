@@ -20,7 +20,7 @@ namespace HsLib.Cards.KnownCards.Minions.Tests
             bf[Pid.P1].Hand.Add(abusiveSergeant);
             Assert.AreEqual(4, yeti.Atk.Value);
 
-            abusiveSergeant.Battlecry?.UseEffect(bf, abusiveSergeant, yeti);
+            abusiveSergeant.Battlecry?.UseEffect(bf, yeti);
             Assert.AreEqual(6, yeti.Atk.Value);
 
             bf.Turn.Next();
