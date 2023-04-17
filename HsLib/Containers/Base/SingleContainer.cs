@@ -4,7 +4,7 @@ using HsLib.Common.Place;
 
 namespace HsLib.Containers.Base
 {
-    public class SingleContainer<TCard> : Container<TCard>
+    public abstract class SingleContainer<TCard> : Container<TCard>
         where TCard : Card
     {
         public SingleContainer(Battlefield bf, Pid pid, Loc loc, TCard card) : base(bf, pid, loc)

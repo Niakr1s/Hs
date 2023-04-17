@@ -10,5 +10,10 @@ namespace HsLib.Containers
         public Deck(Battlefield bf, Pid pid, IEnumerable<Card>? cards = null) : base(bf, pid, Loc.Deck, startCards: cards)
         {
         }
+
+        public override IEnumerable<Card> CleanInactiveCards()
+        {
+            yield break;
+        }
     }
 }

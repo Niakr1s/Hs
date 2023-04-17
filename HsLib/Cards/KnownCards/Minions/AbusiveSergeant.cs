@@ -21,8 +21,8 @@ namespace HsLib.Cards.KnownCards.Minions
         {
             Target = new Target
             {
-                Container = TargetContainer.Field,
-                Side = TargetSide.Me | TargetSide.He
+                Locs = new() { Loc.Field },
+                Sides = new() { PidSide.Me, PidSide.He }
             };
         }
 

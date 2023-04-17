@@ -10,5 +10,10 @@ namespace HsLib.Containers
         public AbilityC(Battlefield bf, Pid pid, Ability card) : base(bf, pid, Loc.Ability, card)
         {
         }
+
+        public override IEnumerable<Card> CleanInactiveCards()
+        {
+            yield break;
+        }
     }
 }

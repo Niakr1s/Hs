@@ -1,12 +1,11 @@
 ﻿using HsLib.Battle;
 using HsLib.Common.Interfaces;
-using HsLib.Containers;
 using HsLib.Stats;
 using HsLib.Stats.Base;
 
 namespace HsLib.Cards
 {
-    public abstract class Weapon : Card, IAttacker
+    public abstract class Weapon : Card, IAttacker, IMortal
     {
         protected Weapon(int mp, int atk, int hp) : base(mp)
         {
@@ -22,6 +21,8 @@ namespace HsLib.Cards
         public BoolStat Windfury { get; init; } = new BoolStat(false);
 
         public bool Dead => Hp.Value <= 0;
+
+        public virtual bool ActivateDeathrattle(Battlefield bf) { return false; }
 
         public void AfterAttack(Battlefield bf)
         {

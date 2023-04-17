@@ -42,7 +42,7 @@ namespace HsLibTests.Battle.Services
             Assert.AreEqual(1, yeti2.Hp.Value);
 
             Assert.AreEqual(true, bf.BattleService.MeleeAttack(yeti1, yeti2));
-            Assert.AreEqual(1, yeti1.Hp.Value);
+            Assert.AreEqual(0, yeti1.Hp.Value);
             Assert.AreEqual(0, yeti2.Hp.Value);
         }
 

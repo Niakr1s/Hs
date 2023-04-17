@@ -57,5 +57,12 @@ namespace HsLib.Containers.Base
         public abstract IEnumerable<TCard> Cards { get; }
 
         public int Count => Cards.Count();
+
+        /// <summary>
+        /// Remove inactive cards from container and return them. 
+        /// Each container should decide if card is inactive by itself.
+        /// </summary>
+        /// <returns>Cleaned cards</returns>
+        public abstract IEnumerable<Card> CleanInactiveCards();
     }
 }

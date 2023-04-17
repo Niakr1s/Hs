@@ -20,6 +20,9 @@ namespace HsLib.Battle
                 [Pid.P2] = new(this, Pid.P2, p2),
             };
             BattleService = new BattleService(this);
+            DeathService = new DeathService(this);
+
+            TargetChooser = new TargetChooser(this);
 
             new EventConnector(this).Connect();
         }
@@ -39,12 +42,15 @@ namespace HsLib.Battle
 
         #region Services
         public BattleService BattleService { get; }
+        public DeathService DeathService { get; }
         #endregion
 
         /// <summary>
         /// Get all cards in all containers (not ordered).
         /// </summary>
         public IEnumerable<Card> Cards => this[Pid.P1].Cards.Concat(this[Pid.P2].Cards);
+
+        public TargetChooser TargetChooser { get; }
 
         private readonly Dictionary<Pid, BattlefieldSide> _bf;
 

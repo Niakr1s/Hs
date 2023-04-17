@@ -10,5 +10,10 @@ namespace HsLib.Containers
         public Graveyard(Battlefield bf, Pid pid) : base(bf, pid, Loc.Graveyard)
         {
         }
+
+        public override IEnumerable<Card> CleanInactiveCards()
+        {
+            yield break;
+        }
     }
 }

@@ -72,5 +72,21 @@ namespace HsLib.Containers
                     .Concat(Graveyard.Cards);
             }
         }
+
+        /// <summary>
+        /// Remove inactive cards from all containers and return them.
+        /// </summary>
+        /// <returns>Cleaned cards</returns>
+        public IEnumerable<Card> CleanInactiveCards()
+        {
+            return Deck.CleanInactiveCards()
+                .Concat(Hand.CleanInactiveCards())
+                .Concat(Field.CleanInactiveCards())
+                .Concat(Hero.CleanInactiveCards())
+                .Concat(Ability.CleanInactiveCards())
+                .Concat(Weapon.CleanInactiveCards())
+                .Concat(Secrets.CleanInactiveCards())
+                .Concat(Graveyard.CleanInactiveCards());
+        }
     }
 }

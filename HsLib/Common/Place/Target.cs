@@ -2,9 +2,9 @@
 {
     public readonly struct Target
     {
-        public TargetContainer Container { get; init; }
+        public HashSet<Loc> Locs { get; init; }
 
-        public TargetSide Side { get; init; }
+        public HashSet<PidSide> Sides { get; init; }
 
         public bool IsValidTarget(IWithPlace owner, IWithPlace? target)
         {
@@ -12,39 +12,16 @@
 
             if (target is null)
             {
-                return Container == TargetContainer.None;
+                return Locs.Count == 0;
             }
             else
             {
                 if (target.Pid == Pid.None || target.Loc == Loc.None) return false;
 
-                bool sameSide = owner.Pid == target.Pid;
-                bool sideIsCorrect =
-                    Side.HasFlag(TargetSide.Me) && sameSide ||
-                    Side.HasFlag(TargetSide.He) && !sameSide;
-
-                bool placeIsCorrect =
-                    Container.HasFlag(TargetContainer.Field) && target.Loc == Loc.Field ||
-                    Container.HasFlag(TargetContainer.Hero) && target.Loc == Loc.Hero;
-
+                bool sideIsCorrect = Sides.Contains(owner.Pid.Side(target.Pid));
+                bool placeIsCorrect = Locs.Contains(target.Loc);
                 return sideIsCorrect && placeIsCorrect;
             }
         }
-    }
-
-    [Flags]
-    public enum TargetContainer
-    {
-        None = 0,
-        Field = 1,
-        Hero = 2,
-    }
-
-    [Flags]
-    public enum TargetSide
-    {
-        None = 0,
-        Me = 1,
-        He = 2,
     }
 }

@@ -7,6 +7,14 @@
         P2,
     }
 
+
+    public enum PidSide
+    {
+        None,
+        Me,
+        He,
+    }
+
     public static class Pids
     {
         public static Pid[] All(bool withNone = false)
@@ -30,5 +38,15 @@
             Pid.P2 => Pid.P1,
             _ => throw new Exception("pid is None")
         };
+
+        public static PidSide Side(this Pid pid, Pid other)
+        {
+            if (pid == Pid.None || other == Pid.None) return PidSide.None;
+            return (pid == other) switch
+            {
+                true => PidSide.Me,
+                false => PidSide.He,
+            };
+        }
     }
 }

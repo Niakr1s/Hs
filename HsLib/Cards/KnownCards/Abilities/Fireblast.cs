@@ -2,7 +2,6 @@
 using HsLib.Cards.Effects;
 using HsLib.Common.Interfaces;
 using HsLib.Common.Place;
-using HsLib.Containers;
 
 namespace HsLib.Cards.KnownCards.Abilities
 {
@@ -14,8 +13,8 @@ namespace HsLib.Cards.KnownCards.Abilities
 
         private Target _effectTarget = new Target
         {
-            Container = TargetContainer.Field | TargetContainer.Hero,
-            Side = TargetSide.Me | TargetSide.He
+            Locs = new() { Loc.Field, Loc.Hero },
+            Sides = new() { PidSide.Me, PidSide.He },
         };
 
         public override void UseEffect(Battlefield bf, Card owner, Card? target)

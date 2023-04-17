@@ -32,17 +32,16 @@ namespace HsLib.Battle.Services
             if (Rules?.CanBeMeleeAttacked(attacker, defender) == false) return false;
 
             attackDefender ??= attacker as IDamageable;
-            if (attackDefender?.Dead == true) return false;
+            //if (attackDefender?.Dead == true) return false; // seems should always counterattack
             if (attacker.Atk.Value <= 0) return false;
 
             if (!isCounterAttack)
             {
                 Event?.Invoke(this, new BattleMeleePreAttackEventArgs(attacker, defender));
-                if (attackDefender?.Dead == true) return false;
+                if (attackDefender is IMortal m && m.Dead) return false;
             }
 
-            int dmg = defender.GetDamage(attacker.Atk.Value);
-            Event?.Invoke(this, new BattleGotDamageEventArgs(defender, dmg));
+            DealDamage(attacker.Atk.Value, defender);
 
             if (!isCounterAttack && attackDefender is not null && defender is IAttacker counterAttacker)
             {
@@ -51,7 +50,23 @@ namespace HsLib.Battle.Services
 
             attacker.AfterAttack(Bf);
             attacker.Atk.AtksThisTurn++;
+
+            Bf.DeathService.ProcessDeaths();
+
             return true;
+        }
+
+        /// <summary>
+        /// Deals damage and invokes <see cref="BattleGotDamageEventArgs"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="defender"></param>
+        /// <returns>Amount of damage received</returns>
+        public int DealDamage(int value, IDamageable defender)
+        {
+            int dmg = defender.GetDamage(value);
+            Event?.Invoke(this, new BattleGotDamageEventArgs(defender, dmg));
+            return dmg;
         }
     }
 }

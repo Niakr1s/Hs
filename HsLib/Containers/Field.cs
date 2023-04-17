@@ -10,5 +10,10 @@ namespace HsLib.Containers
         public Field(Battlefield bf, Pid pid) : base(bf, pid, Loc.Field, limit: 7)
         {
         }
+
+        public override IEnumerable<Card> CleanInactiveCards()
+        {
+            return RemoveIf(m => m.Dead);
+        }
     }
 }

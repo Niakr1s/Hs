@@ -6,7 +6,7 @@ using HsLib.Stats.Base;
 
 namespace HsLib.Cards
 {
-    public abstract class Minion : Card, IAttacker, IDamageable
+    public abstract class Minion : Card, IAttacker, IDamageable, IMortal
     {
         protected Minion(int mp, int atk, int hp) : base(mp)
         {
@@ -41,5 +41,7 @@ namespace HsLib.Cards
         {
             Atk.AtksThisTurn = 0;
         }
+
+        public virtual bool ActivateDeathrattle(Battlefield bf) { return false; }
     }
 }

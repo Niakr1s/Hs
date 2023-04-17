@@ -10,5 +10,10 @@ namespace HsLib.Containers
         public Hand(Battlefield bf, Pid pid) : base(bf, pid, Loc.Hand)
         {
         }
+
+        public override IEnumerable<Card> CleanInactiveCards()
+        {
+            yield break;
+        }
     }
 }

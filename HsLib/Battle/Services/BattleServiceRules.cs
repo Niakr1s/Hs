@@ -2,7 +2,6 @@
 using HsLib.Common;
 using HsLib.Common.Interfaces;
 using HsLib.Common.Place;
-using HsLib.Containers;
 
 namespace HsLib.Battle.Services
 {
@@ -16,7 +15,7 @@ namespace HsLib.Battle.Services
         private Battlefield Bf { get; }
 
         private readonly Target _meleeAttackTarget =
-            new Target { Container = TargetContainer.Field | TargetContainer.Hero, Side = TargetSide.He };
+            new Target { Locs = new() { Loc.Field, Loc.Hero }, Sides = new() { PidSide.He } };
 
         /// <summary>
         /// Checks if <paramref name="attacker"/> can melee attack <paramref name="defender"/>.

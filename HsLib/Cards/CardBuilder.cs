@@ -20,6 +20,7 @@ namespace HsLib.Cards
                 CardId.AbusiveSergeant => new AbusiveSergeant(),
                 CardId.ChillwindYeti => new ChillwindYeti(),
                 CardId.FlametongTotem => new FlametongTotem(),
+                CardId.Abomination => new Abomintaion(),
 
                 CardId.JainaProudmoore => new JainaProudmoore(),
                 CardId.Fireblast => new Fireblast(),

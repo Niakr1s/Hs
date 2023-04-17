@@ -60,6 +60,20 @@ namespace HsLib.Containers.Base
             return true;
         }
 
+        /// <summary>
+        /// Remove if predicate is true.
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns>Number of removed cards</returns>
+        public IEnumerable<Card> RemoveIf(Predicate<TCard> predicate)
+        {
+            // doing ToList to evade errors while removing in loop
+            foreach (TCard card in Cards.Where(c => predicate(c)).ToList())
+            {
+                if (Remove(card)) yield return card;
+            }
+        }
+
         private void RemoveAt(int index)
         {
             TCard card = _cards[index];

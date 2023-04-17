@@ -4,8 +4,6 @@ namespace HsLib.Common.Interfaces
 {
     public interface IDamageable : IWithPlace
     {
-        public bool Dead { get; }
-
         /// <summary>
         /// Gets some damage.
         /// </summary>

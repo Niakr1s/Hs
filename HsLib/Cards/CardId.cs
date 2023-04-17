@@ -6,6 +6,7 @@
         AbusiveSergeant,
         ChillwindYeti,
         FlametongTotem,
+        Abomination,
 
         // heros and abilities
         JainaProudmoore, Fireblast,
