@@ -1,4 +1,7 @@
-﻿using HsLib.Common.Interfaces;
+﻿using HsLib.Cards;
+using HsLib.Cards.Effects;
+using HsLib.Common.Interfaces;
+using HsLib.Common.Place;
 using HsLib.Events;
 
 namespace HsLib.Battle.Services
@@ -54,6 +57,20 @@ namespace HsLib.Battle.Services
             Bf.DeathService.ProcessDeaths();
 
             return true;
+        }
+
+        public bool UseAbility(Pid pid, Card? target)
+        {
+            Ability ability = Bf[pid].Ability.Card;
+            try
+            {
+                ability.UseEffect(Bf, ability, target);
+                return true;
+            }
+            catch (EffectWrongTargetException)
+            {
+                return false;
+            }
         }
 
         /// <summary>
