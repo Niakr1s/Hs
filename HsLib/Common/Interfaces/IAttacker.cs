@@ -1,8 +1,7 @@
-﻿using HsLib.Common.Place;
-using HsLib.Containers;
-using HsLib.Stats;
+﻿using HsLib.Battle;
+using HsLib.Common.Place;
 
-namespace HsLib.Battle
+namespace HsLib.Common.Interfaces
 {
     public interface IAttacker : IWithPlace, IWithAtk, IWithCharge, IWithWindfury
     {

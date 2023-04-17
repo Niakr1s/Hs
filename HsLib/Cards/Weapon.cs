@@ -1,4 +1,5 @@
 ﻿using HsLib.Battle;
+using HsLib.Common.Interfaces;
 using HsLib.Containers;
 using HsLib.Stats;
 using HsLib.Stats.Base;

@@ -6,9 +6,9 @@ namespace HsLib.Battle
 {
     public partial class Battlefield
     {
-        private class Battlefield_EventConnector
+        private class EventConnector
         {
-            public Battlefield_EventConnector(Battlefield bf)
+            public EventConnector(Battlefield bf)
             {
                 Bf = bf;
             }
@@ -26,8 +26,14 @@ namespace HsLib.Battle
                     card.AfterContainerInsert(Bf);
                     card.OnTurnStart(Bf);
                 }
+                Bf.BattleService.Event += BattleService_Event;
 
                 Bf.Event += Bf_Event;
+            }
+
+            private void BattleService_Event(object? sender, BattleEventArgs e)
+            {
+                Bf.Invoke(sender, e);
             }
 
             private void Turn_Event(object? sender, TurnEventArgs e)

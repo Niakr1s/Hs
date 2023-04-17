@@ -1,4 +1,6 @@
-﻿namespace HsLib.Stats
+﻿using HsLib.Stats;
+
+namespace HsLib.Common.Interfaces
 {
     public interface IWithAtk
     {

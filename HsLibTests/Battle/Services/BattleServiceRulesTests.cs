@@ -1,9 +1,11 @@
 ﻿using HsLib.Battle;
+using HsLib.Battle.Services;
 using HsLib.Cards;
 using HsLib.Cards.KnownCards.Minions;
+using HsLib.Common.Interfaces;
 using HsLib.Common.Place;
 
-namespace HsLibTests.Battle
+namespace HsLibTests.Battle.Services
 {
     [TestClass()]
     public class BattleServiceRulesTests

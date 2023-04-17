@@ -1,7 +1,7 @@
 ﻿using HsLib.Battle;
 using HsLib.Cards;
 using HsLib.Cards.KnownCards.Weapons;
-using HsLib.Common;
+using HsLib.Common.Interfaces;
 using HsLib.Common.Place;
 using HsLib.Events;
 

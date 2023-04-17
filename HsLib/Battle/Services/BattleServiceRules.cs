@@ -1,9 +1,10 @@
 ﻿using HsLib.Cards;
 using HsLib.Common;
+using HsLib.Common.Interfaces;
 using HsLib.Common.Place;
 using HsLib.Containers;
 
-namespace HsLib.Battle
+namespace HsLib.Battle.Services
 {
     public class BattleServiceRules
     {

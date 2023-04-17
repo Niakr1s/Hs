@@ -1,5 +1,7 @@
-﻿using HsLib.Cards;
+﻿using HsLib.Battle.Services;
+using HsLib.Cards;
 using HsLib.Common;
+using HsLib.Common.Interfaces;
 using HsLib.Common.Place;
 using HsLib.Containers;
 using HsLib.Events;
@@ -17,9 +19,9 @@ namespace HsLib.Battle
                 [Pid.P1] = new(this, Pid.P1, p1),
                 [Pid.P2] = new(this, Pid.P2, p2),
             };
-            BattleService = new Battlefield_BattleService(this);
+            BattleService = new BattleService(this);
 
-            new Battlefield_EventConnector(this).Connect();
+            new EventConnector(this).Connect();
         }
 
         public Battlefield(CardId p1, CardId p2) : this(new StartingDeck(p1), new StartingDeck(p2))
@@ -36,7 +38,7 @@ namespace HsLib.Battle
         public Turn Turn { get; }
 
         #region Services
-        public Battlefield_BattleService BattleService { get; }
+        public BattleService BattleService { get; }
         #endregion
 
         /// <summary>

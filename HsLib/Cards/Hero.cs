@@ -1,4 +1,4 @@
-﻿using HsLib.Battle;
+﻿using HsLib.Common.Interfaces;
 using HsLib.Stats;
 
 namespace HsLib.Cards

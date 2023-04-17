@@ -1,5 +1,6 @@
 ﻿using HsLib.Battle;
 using HsLib.Cards.Effects;
+using HsLib.Common.Interfaces;
 using HsLib.Stats;
 using HsLib.Stats.Base;
 

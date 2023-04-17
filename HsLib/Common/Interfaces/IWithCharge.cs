@@ -1,6 +1,6 @@
 ﻿using HsLib.Stats.Base;
 
-namespace HsLib.Stats
+namespace HsLib.Common.Interfaces
 {
     public interface IWithCharge
     {

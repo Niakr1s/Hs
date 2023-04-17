@@ -1,4 +1,4 @@
-﻿using HsLib.Common;
+﻿using HsLib.Common.Interfaces;
 
 namespace HsLib.Reactive
 {

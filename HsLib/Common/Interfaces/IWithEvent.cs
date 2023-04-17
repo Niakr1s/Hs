@@ -1,4 +1,4 @@
-﻿namespace HsLib.Common
+﻿namespace HsLib.Common.Interfaces
 {
     public interface IWithEvent<TEventArgs>
         where TEventArgs : EventArgs

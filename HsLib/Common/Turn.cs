@@ -1,4 +1,5 @@
-﻿using HsLib.Common.Place;
+﻿using HsLib.Common.Interfaces;
+using HsLib.Common.Place;
 using HsLib.Events;
 
 namespace HsLib.Common
