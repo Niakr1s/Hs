@@ -4,7 +4,7 @@
   <summary>Click me</summary>
 
 - [x] Garrosh Hellscream
-- [ ] Mind Control
+- [x] Mind Control
 - [ ] Prophet Velen
 - [ ] Mana Addict
 - [ ] Barrel

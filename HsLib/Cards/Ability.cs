@@ -11,8 +11,6 @@ namespace HsLib.Cards
 
         }
 
-        public virtual bool CanBeUsedThisTurn { get; set; }
-
         protected Target? EffectTargets { get; set; }
 
         public virtual IEnumerable<Card> UseEffectTargets(Battlefield bf)
@@ -28,13 +26,25 @@ namespace HsLib.Cards
             }
         }
 
-        public abstract void UseEffect(Battlefield bf, Card? target);
+        private bool EffectUsedThisTurn { get; set; }
+
+        public void UseEffect(Battlefield bf, Card? target)
+        {
+            DoUseEffect(bf, target);
+            EffectUsedThisTurn = true;
+        }
+
+        protected abstract void DoUseEffect(Battlefield bf, Card? target);
+
+        public bool CanUseEffect(Battlefield bf)
+        {
+            return !EffectUsedThisTurn;
+        }
 
         public override void OnTurnStart(Battlefield bf)
         {
             base.OnTurnStart(bf);
-            CanBeUsedThisTurn = true;
+            EffectUsedThisTurn = false;
         }
-
     }
 }

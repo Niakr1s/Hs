@@ -23,5 +23,17 @@
                 return sideIsCorrect && placeIsCorrect;
             }
         }
+
+        public IEnumerable<TWithPlace> GetValidTargets<TWithPlace>(IWithPlace owner, IEnumerable<TWithPlace> targets)
+            where TWithPlace : IWithPlace
+        {
+            foreach (var t in targets)
+            {
+                if (IsValidTarget(owner, t))
+                {
+                    yield return t;
+                }
+            }
+        }
     }
 }

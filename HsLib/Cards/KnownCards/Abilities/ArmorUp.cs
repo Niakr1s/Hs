@@ -9,7 +9,7 @@ namespace HsLib.Cards.KnownCards.Abilities
             EffectTargets = null;
         }
 
-        public override void UseEffect(Battlefield bf, Card? target)
+        protected override void DoUseEffect(Battlefield bf, Card? target)
         {
             bf[Pid].Hero.Card.Armor.Increase(2);
         }

@@ -16,7 +16,7 @@ namespace HsLib.Cards.Effects
 
         public IEnumerable<Card> UseEffectTargets(Battlefield bf)
         {
-            if (EffectTargets is null) { yield break; }
+            if (!CanUseEffect(bf)) { yield break; }
 
             foreach (Card card in bf.Cards)
             {
@@ -28,5 +28,10 @@ namespace HsLib.Cards.Effects
         }
 
         public abstract void UseEffect(Battlefield bf, Card? target);
+
+        public bool CanUseEffect(Battlefield bf)
+        {
+            return EffectTargets is not null;
+        }
     }
 }
