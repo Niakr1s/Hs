@@ -95,7 +95,7 @@
 - [ ] Cold Blood
 - [ ] Cabal Shadow Priest
 - [ ] Malfurion Stormrage
-- [ ] Holy Smite
+- [x] Holy Smite
 - [ ] Argent Commander
 - [ ] Betrayal
 - [ ] Novice Engineer
