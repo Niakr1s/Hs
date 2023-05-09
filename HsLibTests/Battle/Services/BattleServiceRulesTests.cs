@@ -1,7 +1,9 @@
 ﻿using HsLib.Battle;
 using HsLib.Battle.Services;
 using HsLib.Cards;
+using HsLib.Cards.KnownCards.Abilities;
 using HsLib.Cards.KnownCards.Minions;
+using HsLib.Cards.KnownCards.Spells;
 using HsLib.Common.Interfaces;
 using HsLib.Common.Place;
 
@@ -158,6 +160,68 @@ namespace HsLibTests.Battle.Services
             {
                 Assert.AreEqual(expected, rules.CanMeleeAttack(attacker, bf.Turn));
             }
+        }
+
+        [TestMethod()]
+        public void CanUseEffectTest()
+        {
+            Battlefield bf = new(CardId.GarroshHellscream, CardId.JainaProudmoore);
+            BattleServiceRules rules = new BattleServiceRules(bf);
+
+            Spell targetEffect = new MindControl();
+            Ability nonTargetEffect = new ArmorUp();
+
+            Minion y = new ChillwindYeti();
+
+            bf[Pid.P1].Deck.Add(targetEffect);
+            bf[Pid.P1].Deck.Add(nonTargetEffect);
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, y));
+            Assert.AreEqual(true, rules.CanUseEffect(nonTargetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(nonTargetEffect, y));
+
+            bf[Pid.P1].Deck.Remove(targetEffect);
+            bf[Pid.P1].Deck.Remove(nonTargetEffect);
+            bf[Pid.P1].Hand.Add(targetEffect);
+            bf[Pid.P1].Hand.Add(nonTargetEffect);
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, y));
+            Assert.AreEqual(true, rules.CanUseEffect(nonTargetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(nonTargetEffect, y));
+
+            bf[Pid.P1].Deck.Add(y);
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, y));
+            Assert.AreEqual(true, rules.CanUseEffect(nonTargetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(nonTargetEffect, y));
+
+            bf[Pid.P1].Deck.Remove(y);
+            bf[Pid.P1].Hand.Add(y);
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, y));
+            Assert.AreEqual(true, rules.CanUseEffect(nonTargetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(nonTargetEffect, y));
+
+            bf[Pid.P1].Hand.Remove(y);
+            bf[Pid.P2].Hand.Add(y);
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, y));
+            Assert.AreEqual(true, rules.CanUseEffect(nonTargetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(nonTargetEffect, y));
+
+            bf[Pid.P2].Hand.Remove(y);
+            bf[Pid.P2].Field.Add(y);
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, null));
+            Assert.AreEqual(true, rules.CanUseEffect(targetEffect, y));
+            Assert.AreEqual(true, rules.CanUseEffect(nonTargetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(nonTargetEffect, y));
+
+            bf[Pid.P2].Field.Remove(y);
+            bf[Pid.P1].Field.Add(y);
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(targetEffect, y));
+            Assert.AreEqual(true, rules.CanUseEffect(nonTargetEffect, null));
+            Assert.AreEqual(false, rules.CanUseEffect(nonTargetEffect, y));
         }
     }
 }

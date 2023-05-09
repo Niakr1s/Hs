@@ -1,6 +1,7 @@
 ﻿using HsLib.Battle;
 using HsLib.Cards;
 using HsLib.Cards.KnownCards.Minions;
+using HsLib.Cards.KnownCards.Spells;
 using HsLib.Common.Place;
 
 namespace HsLibTests.Battle.Services
@@ -84,6 +85,27 @@ namespace HsLibTests.Battle.Services
             int hpBefore = weapon.Hp.Value;
             Assert.AreEqual(true, bf.BattleService.MeleeAttack(bf[Pid.P1].Weapon.Card, yeti1));
             Assert.AreEqual(1, hpBefore - weapon.Hp.Value);
+        }
+
+        [TestMethod()]
+        public void CastSpellTest()
+        {
+            Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
+            bf.BattleService.Rules = null;
+
+            Spell mindControl = new MindControl();
+            Minion yeti = new ChillwindYeti();
+            bf[Pid.P2].Field.Add(yeti);
+            Assert.AreEqual(false, bf.BattleService.CastSpell(mindControl, yeti));
+
+            bf[Pid.P1].Deck.Add(mindControl);
+            Assert.AreEqual(false, bf.BattleService.CastSpell(mindControl, yeti));
+
+            bf[Pid.P1].Deck.Remove(mindControl);
+            bf[Pid.P1].Hand.Add(mindControl);
+            Assert.AreEqual(true, bf.BattleService.CastSpell(mindControl, yeti));
+            Assert.AreEqual(0, bf[Pid.P1].Hand.Cards.Count());
+            Assert.AreEqual(1, bf[Pid.P1].Graveyard.Cards.Count());
         }
     }
 }

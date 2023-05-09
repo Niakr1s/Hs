@@ -69,13 +69,13 @@ namespace HsLib.Battle.Services
 
         public bool CanUseEffect(IEffect effect, Card? target = null)
         {
+            if (!effect.CanUseEffect(Bf)) return false;
+
             List<Card> targets = effect.UseEffectTargets(Bf).ToList();
 
             // nullable to simplify target checks
             if (target is null) { return targets.Count == 0; }
-            if (!targets.Contains(target)) { return false; }
-
-            return true;
+            return targets.Contains(target);
         }
     }
 }

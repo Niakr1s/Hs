@@ -62,8 +62,21 @@ namespace HsLib.Battle.Services
         {
             Ability ability = Bf[pid].Ability.Card;
 
-            if (Rules?.CanUseEffect(ability) == false) { return false; }
+            if (Rules?.CanUseEffect(ability, target) == false) { return false; }
             ability.UseEffect(Bf, target);
+            return true;
+        }
+
+        public bool CastSpell(Spell spell, Card? target = null)
+        {
+            if (spell.Pid == Pid.None || !Bf[spell.Pid].Hand.Cards.Contains(spell)) return false;
+            if (Rules?.CanUseEffect(spell, target) == false) { return false; }
+
+            spell.UseEffect(Bf, target);
+
+            Pid spellPid = spell.Pid;
+            Bf[spellPid].Hand.Remove(spell);
+            Bf[spellPid].Graveyard.Add(spell);
             return true;
         }
 
