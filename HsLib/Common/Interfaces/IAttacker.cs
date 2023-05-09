@@ -5,6 +5,8 @@ namespace HsLib.Common.Interfaces
 {
     public interface IAttacker : IWithPlace, IWithAtk, IWithCharge, IWithWindfury
     {
+        public int AtksThisTurn { get; set; }
+
         /// <summary>
         /// Will be called after minion successfully attacked.
         /// </summary>

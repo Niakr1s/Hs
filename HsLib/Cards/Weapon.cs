@@ -15,6 +15,8 @@ namespace HsLib.Cards
 
         public Atk Atk { get; }
 
+        public int AtksThisTurn { get; set; }
+
         public Hp Hp { get; }
 
         public BoolStat Charge => new BoolStat(true);
@@ -29,9 +31,21 @@ namespace HsLib.Cards
             Hp.Decrease();
         }
 
+        public override void AfterContainerInsert(Battlefield bf)
+        {
+            base.AfterContainerInsert(bf);
+            AtksThisTurn = 0;
+        }
+
+        public override void AfterContainerRemove(Battlefield bf)
+        {
+            base.AfterContainerRemove(bf);
+            AtksThisTurn = 0;
+        }
+
         public override void OnTurnEnd(Battlefield bf)
         {
-            Atk.AtksThisTurn = 0;
+            AtksThisTurn = 0;
         }
     }
 }

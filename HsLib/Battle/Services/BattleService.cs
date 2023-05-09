@@ -51,7 +51,7 @@ namespace HsLib.Battle.Services
             }
 
             attacker.AfterAttack(Bf);
-            attacker.Atk.AtksThisTurn++;
+            attacker.AtksThisTurn++;
 
             Bf.DeathService.ProcessDeaths();
 

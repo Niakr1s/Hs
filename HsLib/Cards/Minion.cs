@@ -16,6 +16,8 @@ namespace HsLib.Cards
 
         public Atk Atk { get; }
 
+        public int AtksThisTurn { get; set; }
+
         public Hp Hp { get; }
 
         public BoolStat Taunt { get; init; } = new BoolStat(false);
@@ -37,9 +39,21 @@ namespace HsLib.Cards
         {
         }
 
+        public override void AfterContainerInsert(Battlefield bf)
+        {
+            base.AfterContainerInsert(bf);
+            AtksThisTurn = 0;
+        }
+
+        public override void AfterContainerRemove(Battlefield bf)
+        {
+            base.AfterContainerRemove(bf);
+            AtksThisTurn = 0;
+        }
+
         public override void OnTurnEnd(Battlefield bf)
         {
-            Atk.AtksThisTurn = 0;
+            AtksThisTurn = 0;
         }
 
         public virtual bool ActivateDeathrattle(Battlefield bf) { return false; }

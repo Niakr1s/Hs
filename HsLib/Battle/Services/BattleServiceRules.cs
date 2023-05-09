@@ -58,7 +58,7 @@ namespace HsLib.Battle.Services
             if (attacker.Pid == Pid.None || attacker.Pid != turn.Pid) { return false; }
 
             int attacksAllowed = attacker.Windfury.Value ? 2 : 1;
-            int attacksLeft = attacksAllowed - attacker.Atk.AtksThisTurn;
+            int attacksLeft = attacksAllowed - attacker.AtksThisTurn;
 
             if (attacksLeft <= 0) { return false; }
 

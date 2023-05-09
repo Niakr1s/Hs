@@ -35,7 +35,6 @@ namespace HsLib.Cards
         /// </summary>
         public virtual void AfterContainerInsert(Battlefield bf)
         {
-
         }
 
         /// <summary>
@@ -43,7 +42,6 @@ namespace HsLib.Cards
         /// </summary>
         public virtual void AfterContainerRemove(Battlefield bf)
         {
-
         }
 
         public virtual void OnTurnEnd(Battlefield bf) { }
