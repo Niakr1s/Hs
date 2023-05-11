@@ -1,4 +1,4 @@
-﻿namespace HsLib.Common.Interfaces
+﻿namespace HsLib.Common.MeleeAttack
 {
     public interface IWithEvent<TEventArgs>
         where TEventArgs : EventArgs

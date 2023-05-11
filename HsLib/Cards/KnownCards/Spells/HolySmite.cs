@@ -1,5 +1,5 @@
 ﻿using HsLib.Battle;
-using HsLib.Common.Interfaces;
+using HsLib.Common.MeleeAttack;
 using HsLib.Common.Place;
 
 namespace HsLib.Cards.KnownCards.Spells

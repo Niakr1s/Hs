@@ -1,4 +1,4 @@
-﻿using HsLib.Common.Interfaces;
+﻿using HsLib.Common.MeleeAttack;
 using HsLib.Common.Place;
 using HsLib.Events;
 
@@ -50,6 +50,16 @@ namespace HsLib.Common
             {
                 Next();
             }
+        }
+
+        public bool IsFirstTurn(int turnAdded)
+        {
+            return turnAdded == No;
+        }
+
+        public bool IsActivePid(Pid pid)
+        {
+            return pid == Pid;
         }
     }
 }

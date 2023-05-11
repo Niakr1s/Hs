@@ -1,5 +1,5 @@
 ﻿using HsLib.Cards;
-using HsLib.Common.Interfaces;
+using HsLib.Common.MeleeAttack;
 using HsLib.Common.Place;
 using HsLib.Events;
 
@@ -10,12 +10,14 @@ namespace HsLib.Battle.Services
         public BattleService(Battlefield bf)
         {
             Bf = bf;
-            Rules = new BattleServiceRules(Bf);
+            BSRules = new BattleServiceRules(Bf);
         }
 
         public Battlefield Bf { get; }
 
-        public BattleServiceRules? Rules { get; set; }
+        public bool WithRules { get; set; } = true;
+
+        public BattleServiceRules? BSRules { get; set; }
 
         public event EventHandler<BattleEventArgs>? Event;
 
@@ -30,8 +32,8 @@ namespace HsLib.Battle.Services
             IDamageable? attackDefender = null,
             bool isCounterAttack = false)
         {
-            if (Rules?.CanMeleeAttack(attacker, Bf.Turn) == false) return false;
-            if (Rules?.CanBeMeleeAttacked(attacker, defender) == false) return false;
+            if (WithRules && !attacker.CanMeleeAttack(Bf)) return false;
+            if (WithRules && !defender.CanBeMeleeAttacked(Bf)) return false;
 
             attackDefender ??= attacker as IDamageable;
             //if (attackDefender?.Dead == true) return false; // seems should always counterattack
@@ -51,7 +53,6 @@ namespace HsLib.Battle.Services
             }
 
             attacker.AfterAttack(Bf);
-            attacker.AtksThisTurn++;
 
             Bf.DeathService.ProcessDeaths();
 
@@ -62,7 +63,7 @@ namespace HsLib.Battle.Services
         {
             Ability ability = Bf[pid].Ability.Card;
 
-            if (Rules?.CanUseEffect(ability, target) == false) { return false; }
+            if (BSRules?.CanUseEffect(ability, target) == false) { return false; }
             ability.UseEffect(Bf, target);
             return true;
         }
@@ -70,7 +71,7 @@ namespace HsLib.Battle.Services
         public bool CastSpell(Spell spell, Card? target = null)
         {
             if (spell.Pid == Pid.None || !Bf[spell.Pid].Hand.Cards.Contains(spell)) return false;
-            if (Rules?.CanUseEffect(spell, target) == false) { return false; }
+            if (BSRules?.CanUseEffect(spell, target) == false) { return false; }
 
             spell.UseEffect(Bf, target);
 

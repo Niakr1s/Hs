@@ -11,7 +11,7 @@ namespace HsLib.Cards.KnownCards.Spells.Tests
         public void HolySmiteTest()
         {
             Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.BattleService.Rules = null;
+            bf.BattleService.BSRules = null;
 
             Spell holySmite = new HolySmite();
             bf[Pid.P1].Hand.Add(holySmite);

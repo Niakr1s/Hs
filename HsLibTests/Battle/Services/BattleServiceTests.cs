@@ -20,7 +20,8 @@ namespace HsLibTests.Battle.Services
             bf[Pid.P2].Deck.Add(yeti2);
             Assert.AreEqual(false, bf.BattleService.MeleeAttack(yeti1, yeti2));
 
-            bf.BattleService.Rules = null;
+            bf.BattleService.BSRules = null;
+            bf.BattleService.WithRules = false;
             Assert.AreEqual(true, bf.BattleService.MeleeAttack(yeti1, yeti2));
         }
 
@@ -28,7 +29,8 @@ namespace HsLibTests.Battle.Services
         public void MinionAttackMinionTest()
         {
             Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.BattleService.Rules = null;
+            bf.BattleService.BSRules = null;
+            bf.BattleService.WithRules = false;
             Minion yeti1 = new ChillwindYeti();
             Minion yeti2 = new ChillwindYeti();
 
@@ -51,7 +53,8 @@ namespace HsLibTests.Battle.Services
         public void MinionAttackHeroTest()
         {
             Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.BattleService.Rules = null;
+            bf.BattleService.BSRules = null;
+            bf.BattleService.WithRules = false;
 
             Minion yeti1 = new ChillwindYeti();
             Hero p2Hero = bf[Pid.P2].Hero.Card;
@@ -73,7 +76,8 @@ namespace HsLibTests.Battle.Services
         public void WeaponAttackTest()
         {
             Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.BattleService.Rules = null;
+            bf.BattleService.BSRules = null;
+            bf.BattleService.WithRules = false;
 
             Minion yeti1 = new ChillwindYeti();
             bf[Pid.P2].Field.Add(yeti1);
@@ -91,7 +95,8 @@ namespace HsLibTests.Battle.Services
         public void CastSpellTest()
         {
             Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.BattleService.Rules = null;
+            bf.BattleService.BSRules = null;
+            bf.BattleService.WithRules = false;
 
             Spell mindControl = new MindControl();
             Minion yeti = new ChillwindYeti();

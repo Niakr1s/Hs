@@ -1,6 +1,6 @@
 ﻿using HsLib.Battle;
 
-namespace HsLib.Common.Interfaces
+namespace HsLib.Common.MeleeAttack
 {
     public interface IWithDeathrattle
     {

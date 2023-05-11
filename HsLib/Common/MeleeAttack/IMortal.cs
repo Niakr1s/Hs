@@ -1,6 +1,6 @@
 ﻿using HsLib.Common.Place;
 
-namespace HsLib.Common.Interfaces
+namespace HsLib.Common.MeleeAttack
 {
     public interface IMortal : IWithPlace, IWithDeathrattle
     {

@@ -1,4 +1,4 @@
-﻿using HsLib.Common.Interfaces;
+﻿using HsLib.Common.MeleeAttack;
 
 namespace HsLib.Events
 {

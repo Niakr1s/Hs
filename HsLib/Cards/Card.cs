@@ -1,4 +1,5 @@
 ﻿using HsLib.Battle;
+using HsLib.Common.MeleeAttack;
 using HsLib.Common.Place;
 using HsLib.Stats;
 
@@ -12,7 +13,7 @@ namespace HsLib.Cards
     /// <see cref="OnTurnEnd(Battlefield)"/><br/>
     /// <see cref="OnTurnStart(Battlefield)"/>.<br/><br/>
     /// </summary>
-    public abstract class Card : IWithPlace
+    public abstract class Card : IWithPlace, IWithTurn
     {
         protected Card(int mp)
         {

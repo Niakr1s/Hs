@@ -1,6 +1,6 @@
 ﻿using HsLib.Stats;
 
-namespace HsLib.Common.Interfaces
+namespace HsLib.Common.MeleeAttack
 {
     public interface IWithAtk
     {

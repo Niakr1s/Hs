@@ -15,5 +15,10 @@ namespace HsLib.Containers
         {
             return RemoveIf(m => m.Dead);
         }
+
+        public bool HasAnyActiveTaunt()
+        {
+            return Cards.Any(c => c.Taunt.Value && !c.Stealth.Value);
+        }
     }
 }

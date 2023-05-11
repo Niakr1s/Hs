@@ -1,5 +1,5 @@
 ﻿using HsLib.Cards;
-using HsLib.Common.Interfaces;
+using HsLib.Common.MeleeAttack;
 using HsLib.Common.Place;
 using HsLib.Events;
 

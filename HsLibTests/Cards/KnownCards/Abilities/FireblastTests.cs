@@ -12,7 +12,7 @@ namespace HsLib.Cards.KnownCards.Abilities.Tests
         public void UseEffectTest()
         {
             Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.BattleService.Rules = null;
+            bf.BattleService.BSRules = null;
             Assert.IsInstanceOfType(bf[Pid.P1].Ability.Card, typeof(Fireblast));
 
             foreach (Pid pid in Pids.All())

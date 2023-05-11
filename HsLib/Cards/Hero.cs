@@ -1,4 +1,5 @@
-﻿using HsLib.Common.Interfaces;
+﻿using HsLib.Battle;
+using HsLib.Common.MeleeAttack;
 using HsLib.Stats;
 
 namespace HsLib.Cards
@@ -17,6 +18,12 @@ namespace HsLib.Cards
 
         public bool Dead => Hp.Value <= 0;
 
+        public bool CanBeMeleeAttacked(Battlefield bf)
+        {
+            if (Loc != Common.Place.Loc.Hero) { return false; }
+            if (Dead) { return false; }
+            return !bf[Pid].Field.HasAnyActiveTaunt();
+        }
 
         public int GetDamage(int value)
         {

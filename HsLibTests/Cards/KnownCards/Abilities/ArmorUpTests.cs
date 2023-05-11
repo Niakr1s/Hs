@@ -10,7 +10,7 @@ namespace HsLib.Cards.KnownCards.Abilities.Tests
         public void ArmorUpTest()
         {
             Battlefield bf = new Battlefield(CardId.GarroshHellscream, CardId.GarroshHellscream);
-            bf.BattleService.Rules = null;
+            bf.BattleService.BSRules = null;
 
             foreach (Pid pid in Pids.All())
             {

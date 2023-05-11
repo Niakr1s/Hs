@@ -1,11 +1,11 @@
 ﻿using HsLib.Battle;
 using HsLib.Common.Place;
 
-namespace HsLib.Common.Interfaces
+namespace HsLib.Common.MeleeAttack
 {
-    public interface IAttacker : IWithPlace, IWithAtk, IWithCharge, IWithWindfury
+    public interface IAttacker : IWithPlace, IWithAtk
     {
-        public int AtksThisTurn { get; set; }
+        bool CanMeleeAttack(Battlefield bf);
 
         /// <summary>
         /// Will be called after minion successfully attacked.

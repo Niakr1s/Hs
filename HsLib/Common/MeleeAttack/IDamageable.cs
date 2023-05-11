@@ -1,14 +1,17 @@
-﻿using HsLib.Common.Place;
+﻿using HsLib.Battle;
+using HsLib.Common.Place;
 
-namespace HsLib.Common.Interfaces
+namespace HsLib.Common.MeleeAttack
 {
     public interface IDamageable : IWithPlace
     {
+        bool CanBeMeleeAttacked(Battlefield bf);
+
         /// <summary>
         /// Gets some damage.
         /// </summary>
         /// <param name="value"></param>
         /// <returns>Amount of damage got</returns>
-        public int GetDamage(int value);
+        int GetDamage(int value);
     }
 }

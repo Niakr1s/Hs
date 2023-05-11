@@ -1,5 +1,5 @@
 ﻿using HsLib.Battle;
-using HsLib.Common.Interfaces;
+using HsLib.Common.MeleeAttack;
 using HsLib.Stats;
 using HsLib.Stats.Base;
 
@@ -15,12 +15,11 @@ namespace HsLib.Cards
 
         public Atk Atk { get; }
 
-        public int AtksThisTurn { get; set; }
+        public int AtksThisTurn { get; private set; }
 
         public Hp Hp { get; }
 
-        public BoolStat Charge => new BoolStat(true);
-        public BoolStat Windfury { get; init; } = new BoolStat(false);
+        public Windfury Windfury { get; init; } = new Windfury(false);
 
         public bool Dead => Hp.Value <= 0;
 
@@ -28,6 +27,7 @@ namespace HsLib.Cards
 
         public void AfterAttack(Battlefield bf)
         {
+            AtksThisTurn++;
             Hp.Decrease();
         }
 
@@ -41,6 +41,16 @@ namespace HsLib.Cards
         {
             base.AfterContainerRemove(bf);
             AtksThisTurn = 0;
+        }
+
+        public bool CanMeleeAttack(Battlefield bf)
+        {
+            if (bf[Pid].Hero.Card.Dead) { return false; }
+            if (Atk == 0) { return false; }
+            if (Loc != Common.Place.Loc.Field) { return false; }
+            if (!bf.Turn.IsActivePid(Pid)) { return false; }
+            if (Windfury.AttacksLeft(AtksThisTurn) <= 0) { return false; }
+            return true;
         }
 
         public override void OnTurnEnd(Battlefield bf)

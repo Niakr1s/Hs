@@ -1,6 +1,6 @@
 ﻿using HsLib.Battle;
 using HsLib.Cards.Effects;
-using HsLib.Common.Interfaces;
+using HsLib.Common.MeleeAttack;
 using HsLib.Stats;
 using HsLib.Stats.Base;
 
@@ -16,13 +16,13 @@ namespace HsLib.Cards
 
         public Atk Atk { get; }
 
-        public int AtksThisTurn { get; set; }
+        public int AtksThisTurn { get; private set; }
 
         public Hp Hp { get; }
 
         public BoolStat Taunt { get; init; } = new BoolStat(false);
         public BoolStat Charge { get; init; } = new BoolStat(false);
-        public BoolStat Windfury { get; init; } = new BoolStat(false);
+        public Windfury Windfury { get; init; } = new Windfury(false);
         public BoolStat DivineShield { get; init; } = new BoolStat(false);
         public BoolStat Stealth { get; init; } = new BoolStat(false);
 
@@ -37,6 +37,7 @@ namespace HsLib.Cards
 
         public virtual void AfterAttack(Battlefield bf)
         {
+            AtksThisTurn++;
         }
 
         public override void AfterContainerInsert(Battlefield bf)
@@ -57,5 +58,22 @@ namespace HsLib.Cards
         }
 
         public virtual bool ActivateDeathrattle(Battlefield bf) { return false; }
+
+        public bool CanMeleeAttack(Battlefield bf)
+        {
+            if (Dead) { return false; }
+            if (Atk == 0) { return false; }
+            if (Loc != Common.Place.Loc.Field) { return false; }
+            if (!bf.Turn.IsActivePid(Pid)) { return false; }
+            if (Windfury.AttacksLeft(AtksThisTurn) <= 0) { return false; }
+            return !bf.Turn.IsFirstTurn(TurnAdded) || Charge;
+        }
+
+        public bool CanBeMeleeAttacked(Battlefield bf)
+        {
+            if (Loc != Common.Place.Loc.Field) { return false; }
+            if (Dead) { return false; }
+            return Stealth.Value && (Taunt.Value || !bf[Pid].Field.HasAnyActiveTaunt());
+        }
     }
 }

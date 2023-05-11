@@ -11,7 +11,7 @@ namespace HsLib.Cards.KnownCards.Spells.Tests
         public void MindControlTest()
         {
             Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.BattleService.Rules = null;
+            bf.BattleService.BSRules = null;
 
             Spell mindControl = new MindControl();
             Assert.AreEqual(false, mindControl.CanUseEffect(bf));

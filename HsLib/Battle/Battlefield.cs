@@ -1,7 +1,7 @@
 ﻿using HsLib.Battle.Services;
 using HsLib.Cards;
 using HsLib.Common;
-using HsLib.Common.Interfaces;
+using HsLib.Common.MeleeAttack;
 using HsLib.Common.Place;
 using HsLib.Containers;
 using HsLib.Events;
