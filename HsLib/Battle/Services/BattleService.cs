@@ -1,4 +1,5 @@
 ﻿using HsLib.Cards;
+using HsLib.Cards.Effects;
 using HsLib.Common.MeleeAttack;
 using HsLib.Common.Place;
 using HsLib.Events;
@@ -10,14 +11,11 @@ namespace HsLib.Battle.Services
         public BattleService(Battlefield bf)
         {
             Bf = bf;
-            BSRules = new BattleServiceRules(Bf);
         }
 
         public Battlefield Bf { get; }
 
         public bool WithRules { get; set; } = true;
-
-        public BattleServiceRules? BSRules { get; set; }
 
         public event EventHandler<BattleEventArgs>? Event;
 
@@ -59,21 +57,25 @@ namespace HsLib.Battle.Services
             return true;
         }
 
+        public bool UseEffect(IEffect effect, Card? target = null)
+        {
+            if (WithRules && effect.EffectMustHaveTarget && target is null) { return false; }
+            if (WithRules && !effect.UseEffectTargets(Bf).Contains(target)) { return false; }
+            if (WithRules && !effect.CanUseEffect(Bf)) { return false; }
+
+            effect.UseEffect(Bf, target);
+            return true;
+        }
+
         public bool UseAbility(Pid pid, Card? target = null)
         {
             Ability ability = Bf[pid].Ability.Card;
-
-            if (BSRules?.CanUseEffect(ability, target) == false) { return false; }
-            ability.UseEffect(Bf, target);
-            return true;
+            return UseEffect(ability, target);
         }
 
         public bool CastSpell(Spell spell, Card? target = null)
         {
-            if (spell.Pid == Pid.None || !Bf[spell.Pid].Hand.Cards.Contains(spell)) return false;
-            if (BSRules?.CanUseEffect(spell, target) == false) { return false; }
-
-            spell.UseEffect(Bf, target);
+            if (!UseEffect(spell, target)) return false;
 
             Pid spellPid = spell.Pid;
             Bf[spellPid].Hand.Remove(spell);

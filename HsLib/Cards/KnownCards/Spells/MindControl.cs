@@ -22,15 +22,11 @@ namespace HsLib.Cards.KnownCards.Spells
 
         private readonly Target _target = new Target { Locs = new() { Loc.Field }, Sides = new() { PidSide.He } };
 
+        public override bool EffectMustHaveTarget => true;
+
         public override IEnumerable<Card> UseEffectTargets(Battlefield bf)
         {
             return _target.GetValidTargets(this, bf.Cards);
-        }
-
-        public override bool CanUseEffect(Battlefield bf)
-        {
-            if (Pid == Pid.None) return false;
-            return !bf[Pid].Field.IsFull && bf[Pid.He()].Field.Count > 0;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using HsLib.Battle;
 using HsLib.Cards.Effects;
+using HsLib.Common.Place;
+using HsLib.Stats;
 
 namespace HsLib.Cards
 {
@@ -9,8 +11,18 @@ namespace HsLib.Cards
         {
         }
 
-        public abstract bool CanUseEffect(Battlefield bf);
+        public abstract bool EffectMustHaveTarget { get; }
+
+        public bool CanUseEffect(Battlefield bf)
+        {
+            if (!bf.Turn.IsActivePid(Pid)) { return false; }
+            if (Loc != Loc.Hand) { return false; }
+            if (bf[Pid].Mp.Value < Mp.Value) { return false; }
+            return true;
+        }
+
         public abstract void UseEffect(Battlefield bf, Card? target);
+
         public abstract IEnumerable<Card> UseEffectTargets(Battlefield bf);
     }
 }

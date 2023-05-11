@@ -20,7 +20,6 @@ namespace HsLibTests.Battle.Services
             bf[Pid.P2].Deck.Add(yeti2);
             Assert.AreEqual(false, bf.BattleService.MeleeAttack(yeti1, yeti2));
 
-            bf.BattleService.BSRules = null;
             bf.BattleService.WithRules = false;
             Assert.AreEqual(true, bf.BattleService.MeleeAttack(yeti1, yeti2));
         }
@@ -29,7 +28,6 @@ namespace HsLibTests.Battle.Services
         public void MinionAttackMinionTest()
         {
             Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.BattleService.BSRules = null;
             bf.BattleService.WithRules = false;
             Minion yeti1 = new ChillwindYeti();
             Minion yeti2 = new ChillwindYeti();
@@ -53,7 +51,6 @@ namespace HsLibTests.Battle.Services
         public void MinionAttackHeroTest()
         {
             Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.BattleService.BSRules = null;
             bf.BattleService.WithRules = false;
 
             Minion yeti1 = new ChillwindYeti();
@@ -76,7 +73,6 @@ namespace HsLibTests.Battle.Services
         public void WeaponAttackTest()
         {
             Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.BattleService.BSRules = null;
             bf.BattleService.WithRules = false;
 
             Minion yeti1 = new ChillwindYeti();
@@ -95,8 +91,6 @@ namespace HsLibTests.Battle.Services
         public void CastSpellTest()
         {
             Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.BattleService.BSRules = null;
-            bf.BattleService.WithRules = false;
 
             Spell mindControl = new MindControl();
             Minion yeti = new ChillwindYeti();
@@ -108,6 +102,12 @@ namespace HsLibTests.Battle.Services
 
             bf[Pid.P1].Deck.Remove(mindControl);
             bf[Pid.P1].Hand.Add(mindControl);
+            Assert.AreEqual(false, bf.BattleService.CastSpell(mindControl, yeti));
+
+            bf[Pid.P1].Mp.Set(10);
+            Assert.AreEqual(false, bf.BattleService.CastSpell(mindControl, yeti));
+
+            bf.Turn.Next();
             Assert.AreEqual(true, bf.BattleService.CastSpell(mindControl, yeti));
             Assert.AreEqual(0, bf[Pid.P1].Hand.Cards.Count());
             Assert.AreEqual(1, bf[Pid.P1].Graveyard.Cards.Count());

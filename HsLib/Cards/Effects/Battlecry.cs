@@ -13,6 +13,7 @@ namespace HsLib.Cards.Effects
         public Minion Minion { get; }
 
         protected Target? EffectTargets { get; set; }
+        public abstract bool EffectMustHaveTarget { get; }
 
         public IEnumerable<Card> UseEffectTargets(Battlefield bf)
         {
@@ -28,10 +29,6 @@ namespace HsLib.Cards.Effects
         }
 
         public abstract void UseEffect(Battlefield bf, Card? target);
-
-        public bool CanUseEffect(Battlefield bf)
-        {
-            return EffectTargets is not null;
-        }
+        public abstract bool CanUseEffect(Battlefield bf);
     }
 }

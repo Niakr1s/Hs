@@ -24,14 +24,11 @@ namespace HsLib.Cards.KnownCards.Spells
             Sides = new() { PidSide.He, PidSide.Me }
         };
 
+        public override bool EffectMustHaveTarget => true;
+
         public override IEnumerable<Card> UseEffectTargets(Battlefield bf)
         {
             return _target.GetValidTargets(this, bf.Cards);
-        }
-
-        public override bool CanUseEffect(Battlefield bf)
-        {
-            return true;
         }
     }
 }

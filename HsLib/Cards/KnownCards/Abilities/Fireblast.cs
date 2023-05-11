@@ -15,6 +15,8 @@ namespace HsLib.Cards.KnownCards.Abilities
             };
         }
 
+        public override bool EffectMustHaveTarget => true;
+
         protected override void DoUseEffect(Battlefield bf, Card? target)
         {
             if (target is IDamageable d)

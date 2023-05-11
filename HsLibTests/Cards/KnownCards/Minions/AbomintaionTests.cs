@@ -21,7 +21,6 @@ namespace HsLib.Cards.KnownCards.Minions.Tests
             bf[Pid.P2].Field.Add(yeti2);
 
             bf.BattleService.WithRules = false;
-            bf.BattleService.BSRules = null;
             Assert.AreEqual(true, bf.BattleService.MeleeAttack(abom1, abom2));
             Assert.AreEqual(0, abom1.Hp);
             Assert.AreEqual(0, abom1.Hp);

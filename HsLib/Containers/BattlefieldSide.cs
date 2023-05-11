@@ -4,6 +4,7 @@ using HsLib.Cards.KnownCards.Weapons;
 using HsLib.Common.MeleeAttack;
 using HsLib.Common.Place;
 using HsLib.Events;
+using HsLib.Stats;
 
 namespace HsLib.Containers
 {
@@ -38,6 +39,8 @@ namespace HsLib.Containers
         public Battlefield Bf { get; }
 
         public event EventHandler<ContainerEventArgs>? Event;
+
+        public Mp Mp { get; } = new Mp(0);
 
         public Deck Deck { get; }
 

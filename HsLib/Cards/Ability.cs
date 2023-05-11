@@ -26,6 +26,8 @@ namespace HsLib.Cards
             }
         }
 
+        public abstract bool EffectMustHaveTarget { get; }
+
         private bool EffectUsedThisTurn { get; set; }
 
         public void UseEffect(Battlefield bf, Card? target)
@@ -38,6 +40,9 @@ namespace HsLib.Cards
 
         public bool CanUseEffect(Battlefield bf)
         {
+            if (!bf.Turn.IsActivePid(Pid)) { return false; }
+            if (Loc != Loc.Hand) { return false; }
+            if (bf[Pid].Mp.Value < Mp.Value) { return false; }
             return !EffectUsedThisTurn;
         }
 

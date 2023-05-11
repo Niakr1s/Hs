@@ -26,6 +26,13 @@ namespace HsLib.Cards.KnownCards.Minions
             };
         }
 
+        public override bool EffectMustHaveTarget => true;
+
+        public override bool CanUseEffect(Battlefield bf)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void UseEffect(Battlefield bf, Card? target)
         {
             if (target is not null && target is Minion m)

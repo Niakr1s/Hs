@@ -12,6 +12,8 @@ namespace HsLib.Cards.Effects
         /// <returns>All targets. If returned null, IEffect can not be applied. If effect can be applied without target, just return</returns>
         public IEnumerable<Card> UseEffectTargets(Battlefield bf);
 
+        public bool EffectMustHaveTarget { get; }
+
         /// <summary>
         /// Shows if effect can be used physically.
         /// <br/>Examples: Ability should return false, if it was already played;
