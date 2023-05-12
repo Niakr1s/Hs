@@ -36,5 +36,14 @@ namespace HsLib.Containers.Base
         {
             get { yield return Card; }
         }
+
+        public override TCard this[int index]
+        {
+            get
+            {
+                if (index != 0) { throw new IndexOutOfRangeException(); }
+                return Card;
+            }
+        }
     }
 }

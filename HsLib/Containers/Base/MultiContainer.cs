@@ -18,14 +18,9 @@ namespace HsLib.Containers.Base
 
         private readonly IList<TCard> _cards = new List<TCard>();
 
-        public TCard this[int index]
+        public override TCard this[int index]
         {
             get => _cards[index];
-            set
-            {
-                RemoveAt(index);
-                Insert(index, value);
-            }
         }
 
         public override IEnumerable<TCard> Cards => _cards;
@@ -49,6 +44,12 @@ namespace HsLib.Containers.Base
             _cards.Insert(index, card);
             AfterInsert(card);
             return true;
+        }
+
+        public void Replace(int index, TCard card)
+        {
+            RemoveAt(index);
+            Insert(index, card);
         }
 
         public bool Remove(TCard card)

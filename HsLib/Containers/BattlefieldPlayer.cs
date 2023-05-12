@@ -58,6 +58,22 @@ namespace HsLib.Containers
 
         public Graveyard Graveyard { get; }
 
+        public Card GetCard(Loc loc, int index)
+        {
+            return loc switch
+            {
+                Loc.Deck => Deck[index],
+                Loc.Hand => Hand[index],
+                Loc.Field => Field[index],
+                Loc.Hero => Hero[index],
+                Loc.Weapon => Weapon[index],
+                Loc.Ability => Ability[index],
+                Loc.Secret => Secrets[index],
+                Loc.Graveyard => Graveyard[index],
+                Loc.None => null,
+            } ?? throw new ArgumentException("wrong loc");
+        }
+
         /// <summary>
         /// Gets all cards in all containers.
         /// </summary>

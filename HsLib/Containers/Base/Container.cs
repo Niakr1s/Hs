@@ -56,6 +56,8 @@ namespace HsLib.Containers.Base
         /// <returns></returns>
         public abstract IEnumerable<TCard> Cards { get; }
 
+        public abstract TCard this[int index] { get; }
+
         public int Count => Cards.Count();
 
         /// <summary>
