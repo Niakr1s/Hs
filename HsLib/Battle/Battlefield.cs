@@ -50,33 +50,40 @@ namespace HsLib.Battle
 
         private readonly Dictionary<Pid, BattlefieldPlayer> _bf;
 
-        public BattlefieldPlayer this[Pid pid]
+        /// <summary>
+        /// Gets player.
+        /// </summary>
+        /// <param name="pid"></param>
+        public BattlefieldPlayer this[Pid pid] => _bf[pid];
+
+        /// <summary>
+        /// Current player.
+        /// </summary>
+        public BattlefieldPlayer Player => this[Turn.Pid];
+
+        /// <summary>
+        /// Current enemy.
+        /// </summary>
+        public BattlefieldPlayer Enemy => this[Turn.Pid.He()];
+
+        public bool WeaponAttack(IDamageable defender)
         {
-            get => _bf[pid];
+            return BattleService.MeleeAttack(Player.Weapon.Card, defender, Player.Hero.Card);
         }
 
-        #region Main methods
-
-        public void WeaponAttack(Card target)
+        public bool MinionAttack(Minion attacker, IDamageable defender)
         {
-
+            return BattleService.MeleeAttack(attacker, defender);
         }
 
-        public void MinionAttack(Minion from, Card target)
+        public bool PlayFromHand(Card card)
         {
-
+            return true; // TODO
         }
 
-        public void PlayFromHand(Card card)
+        public bool UseAbility(Card? target = null)
         {
-
+            return BattleService.UseAbility(Turn.Pid, target);
         }
-
-        public void UseAbility()
-        {
-
-        }
-
-        #endregion
     }
 }

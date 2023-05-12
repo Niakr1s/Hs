@@ -12,6 +12,11 @@ namespace HsLib.Common
         /// </summary>
         public int No { get; private set; } = 0;
 
+        public bool IsStarted()
+        {
+            return No > 0;
+        }
+
         public event EventHandler<TurnEventArgs>? Event;
 
         /// <summary>
@@ -24,6 +29,12 @@ namespace HsLib.Common
                 <= 0 => Pid.None,
                 _ => No % 2 == 1 ? Pid.P1 : Pid.P2,
             };
+        }
+
+        public void Start()
+        {
+            if (IsStarted()) { return; }
+            Next();
         }
 
         public void Next()

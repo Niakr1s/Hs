@@ -1,6 +1,5 @@
 ﻿using HsLib.Battle;
 using HsLib.Cards.KnownCards.Minions;
-using HsLib.Common.Place;
 
 namespace HsLib.Cards.KnownCards.Spells.Tests
 {
@@ -11,15 +10,14 @@ namespace HsLib.Cards.KnownCards.Spells.Tests
         public void HolySmiteTest()
         {
             Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.BattleService.WithRules = false;
-            bf.Turn.Next();
+            bf.Turn.Start();
 
             Spell holySmite = new HolySmite();
-            bf[Pid.P1].Hand.Add(holySmite);
+            bf.Player.Hand.Add(holySmite);
             Assert.AreEqual(2, holySmite.UseEffectTargets(bf).Count()); // mine and his heros
 
             Minion yeti = new ChillwindYeti();
-            bf[Pid.P2].Field.Add(yeti);
+            bf.Enemy.Field.Add(yeti);
             Assert.AreEqual(3, holySmite.UseEffectTargets(bf).Count());
 
             holySmite.UseEffect(bf, yeti);
