@@ -19,9 +19,9 @@ namespace HsLib.Cards.KnownCards.Minions
 
         public override bool ActivateDeathrattle(Battlefield bf)
         {
-            var damageabletargets = bf.TargetChooser.Choose(this, _deathrattleTargets)
+            var damageabletargets = _deathrattleTargets.GetValidTargets(this, bf.Cards)
                 .Select(c => c as IDamageable).ToList();
-            IList<IDamageable> targets = bf.TargetChooser.Choose(this, _deathrattleTargets)
+            IList<IDamageable> targets = _deathrattleTargets.GetValidTargets(this, bf.Cards)
                 .Select(c => c as IDamageable).Where(c => c is not null).Select(c => c!).ToList();
 
             foreach (IDamageable target in targets)

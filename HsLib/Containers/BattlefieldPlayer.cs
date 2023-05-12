@@ -8,9 +8,9 @@ using HsLib.Stats;
 
 namespace HsLib.Containers
 {
-    public class BattlefieldSide : IWithEvent<ContainerEventArgs>
+    public class BattlefieldPlayer : IWithEvent<ContainerEventArgs>
     {
-        public BattlefieldSide(Battlefield bf, Pid pid, StartingDeck startingDeck)
+        public BattlefieldPlayer(Battlefield bf, Pid pid, StartingDeck startingDeck)
         {
             Bf = bf;
             Pid = pid;

@@ -22,8 +22,6 @@ namespace HsLib.Battle
             BattleService = new BattleService(this);
             DeathService = new DeathService(this);
 
-            TargetChooser = new TargetChooser(this);
-
             new EventConnector(this).Connect();
         }
 
@@ -41,8 +39,8 @@ namespace HsLib.Battle
         public Turn Turn { get; }
 
         #region Services
-        public BattleService BattleService { get; }
-        public DeathService DeathService { get; }
+        internal BattleService BattleService { get; }
+        internal DeathService DeathService { get; }
         #endregion
 
         /// <summary>
@@ -50,13 +48,35 @@ namespace HsLib.Battle
         /// </summary>
         public IEnumerable<Card> Cards => this[Pid.P1].Cards.Concat(this[Pid.P2].Cards);
 
-        public TargetChooser TargetChooser { get; }
+        private readonly Dictionary<Pid, BattlefieldPlayer> _bf;
 
-        private readonly Dictionary<Pid, BattlefieldSide> _bf;
-
-        public BattlefieldSide this[Pid pid]
+        public BattlefieldPlayer this[Pid pid]
         {
             get => _bf[pid];
         }
+
+        #region Main methods
+
+        public void WeaponAttack(Card target)
+        {
+
+        }
+
+        public void MinionAttack(Minion from, Card target)
+        {
+
+        }
+
+        public void PlayFromHand(Card card)
+        {
+
+        }
+
+        public void UseAbility()
+        {
+
+        }
+
+        #endregion
     }
 }

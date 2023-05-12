@@ -2,7 +2,7 @@
 
 namespace HsLib.Reactive
 {
-    public static class Do
+    internal static class Do
     {
         public static void Once<TEventArgs>(IWithEvent<TEventArgs> source, Predicate<TEventArgs> predicate, Action action)
             where TEventArgs : EventArgs

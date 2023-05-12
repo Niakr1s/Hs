@@ -1,8 +1,8 @@
 ﻿namespace HsLib.Common.MeleeAttack
 {
-    public interface IWithEvent<TEventArgs>
+    internal interface IWithEvent<TEventArgs>
         where TEventArgs : EventArgs
     {
-        public event EventHandler<TEventArgs>? Event;
+        event EventHandler<TEventArgs>? Event;
     }
 }
