@@ -6,7 +6,7 @@ namespace HsLib.Types.Effects
 {
     public abstract class Effect : IEffect
     {
-        protected Effect(Card owner, bool isSoloTarget = false, Target targets = new Target())
+        protected Effect(Card owner, bool isSoloTarget = false, Targets targets = new Targets())
         {
             Owner = owner;
             EffectIsSoloTarget = isSoloTarget;
@@ -19,7 +19,7 @@ namespace HsLib.Types.Effects
 
         protected abstract void EffectAction(Battlefield bf, Card? card);
 
-        private readonly Target _targets;
+        private readonly Targets _targets;
 
         public virtual IEnumerable<Card> UseEffectTargets(Battlefield bf)
         {

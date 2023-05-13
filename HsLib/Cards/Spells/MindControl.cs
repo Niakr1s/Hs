@@ -21,13 +21,13 @@ namespace HsLib.Cards.Spells
             }
         }
 
-        private readonly Target _target = new Target { Locs = Loc.Field, Sides = PidSide.He };
+        private readonly Targets _targets = new Targets { Locs = Loc.Field, Sides = PidSide.He };
 
         public override bool EffectIsSoloTarget => true;
 
         public override IEnumerable<Card> UseEffectTargets(Battlefield bf)
         {
-            return _target.GetValidTargets(this, bf.Cards);
+            return _targets.GetValidTargets(this, bf.Cards);
         }
     }
 }

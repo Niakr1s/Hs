@@ -9,14 +9,14 @@ namespace HsLib.Cards.Minions
     {
         public Abomintaion() : base(5, 4, 4)
         {
-            _deathrattleTargets = new Target
+            _deathrattleTargets = new Targets
             {
                 Locs = Loc.Field | Loc.Hero,
                 Sides = PidSide.Me | PidSide.He,
             };
         }
 
-        private readonly Target _deathrattleTargets;
+        private readonly Targets _deathrattleTargets;
 
         public override bool ActivateDeathrattle(Battlefield bf)
         {

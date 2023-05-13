@@ -19,7 +19,7 @@ namespace HsLib.Cards.Spells
             }
         }
 
-        private readonly Target _target = new Target
+        private readonly Targets _targets = new Targets
         {
             Locs = Loc.Field | Loc.Hero,
             Sides = PidSide.He | PidSide.Me
@@ -29,7 +29,7 @@ namespace HsLib.Cards.Spells
 
         public override IEnumerable<Card> UseEffectTargets(Battlefield bf)
         {
-            return _target.GetValidTargets(this, bf.Cards);
+            return _targets.GetValidTargets(this, bf.Cards);
         }
     }
 }

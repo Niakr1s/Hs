@@ -2,7 +2,7 @@
 
 namespace HsLib.Types
 {
-    public readonly struct Target
+    public readonly struct Targets
     {
         public Loc? Locs { get; init; }
 
