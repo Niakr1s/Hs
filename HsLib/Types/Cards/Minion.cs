@@ -1,5 +1,6 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Systems;
+using HsLib.Types.Containers;
 using HsLib.Types.Stats;
 using HsLib.Types.Stats.Base;
 
@@ -83,8 +84,30 @@ namespace HsLib.Types.Cards
         {
             if (Place is null) { throw new PlaceException(); }
 
+            MoveFromHandToField(bf, fieldIndex, check: true); // checking first
+
             if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, effectTarget); }
-            bf.MoveService.PlayMinion(Place.Pid, Place.Index, fieldIndex);
+
+            MoveFromHandToField(bf, fieldIndex, check: false); // playing actually
+        }
+
+        private bool MoveFromHandToField(Battlefield bf, int? fieldIndex = null, bool check = false)
+        {
+            if (Place is null) { throw new PlaceException(); }
+
+            Hand hand = bf[Place.Pid].Hand;
+            Field field = bf[Place.Pid].Field;
+
+            int index = fieldIndex ?? field.Count;
+            if (!field.CanBeInsertedAt(index)) { throw new IndexOutOfRangeException(); }
+
+            if (!check)
+            {
+                hand.RemoveAt(Place.Index);
+                field.Insert(index, this);
+            }
+
+            return true;
         }
     }
 }

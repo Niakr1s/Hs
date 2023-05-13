@@ -28,41 +28,6 @@ namespace HsLib.Systems.Services
         }
 
         /// <summary>
-        /// Plays minion at needed position. It's used for player, for simple use inside effects use <see cref="MoveHandToBoard(Pid, int)"/>
-        /// </summary>
-        /// <param name="pid"></param>
-        /// <param name="handIndex"></param>
-        /// <param name="boardIndex"></param>
-        /// <exception cref="MoveException"></exception>
-        public void PlayMinion(Pid pid, int handIndex, int? boardIndex = null)
-        {
-            Hand hand = Bf[pid].Hand;
-            Field field = Bf[pid].Field;
-
-            int index = boardIndex ?? field.Count;
-
-            if (!field.CanBeInsertedAt(index))
-            {
-                throw new MoveException("can't insert in field");
-            }
-
-            Card? card = hand[handIndex];
-            if (card is Minion m)
-            {
-                hand.RemoveAt(handIndex);
-                if (!field.Insert(index, m))
-                {
-                    Bf[pid].Graveyard.Add(m);
-                    throw new MoveException("couldn't insert at field, added to graveyard instead");
-                }
-            }
-            else
-            {
-                throw new MoveException($"{card} is not minion");
-            }
-        }
-
-        /// <summary>
         /// Equips weapon
         /// </summary>
         /// <param name="pid"></param>
