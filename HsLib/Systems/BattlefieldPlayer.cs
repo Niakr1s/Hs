@@ -1,12 +1,12 @@
 ﻿using HsLib.Cards.Weapons;
 using HsLib.Interfaces;
-using HsLib.Systems;
+using HsLib.Types;
 using HsLib.Types.Cards;
+using HsLib.Types.Containers;
 using HsLib.Types.Events;
 using HsLib.Types.Stats;
 
-
-namespace HsLib.Types.Containers
+namespace HsLib.Systems
 {
     public class BattlefieldPlayer : IWithEvent<ContainerEventArgs>
     {
