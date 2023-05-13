@@ -45,5 +45,10 @@ namespace HsLib.Containers.Base
                 return Card;
             }
         }
+
+        public override bool CanBeInsertedAt(int index)
+        {
+            return index == 0;
+        }
     }
 }

@@ -24,5 +24,12 @@ namespace HsLib.Cards
         public abstract void UseEffect(Battlefield bf, Card? target);
 
         public abstract IEnumerable<Card> UseEffectTargets(Battlefield bf);
+
+        public override void PlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
+        {
+            base.PlayFromHand(bf);
+            bf.BattleService.UseEffect(this, effectTarget);
+            bf.MoveService.MoveHandToGraveyard(Pid, Index);
+        }
     }
 }

@@ -108,5 +108,10 @@ namespace HsLib.Containers.Base
             if (index == -1) { return null; }
             return _cards[index + 1];
         }
+
+        public override bool CanBeInsertedAt(int index)
+        {
+            return !IsFull && index > 0 && index <= Count;
+        }
     }
 }

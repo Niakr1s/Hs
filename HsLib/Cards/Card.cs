@@ -50,5 +50,7 @@ namespace HsLib.Cards
         public virtual void OnTurnEnd(Battlefield bf) { }
 
         public virtual void OnTurnStart(Battlefield bf) { }
+
+        public virtual void PlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null) { }
     }
 }

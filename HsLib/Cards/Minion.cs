@@ -75,5 +75,12 @@ namespace HsLib.Cards
         {
             return this;
         }
+
+        public override void PlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
+        {
+            base.PlayFromHand(bf);
+            if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, effectTarget); }
+            bf.MoveService.PlayMinion(Pid, Index, fieldIndex);
+        }
     }
 }

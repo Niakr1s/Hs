@@ -68,5 +68,7 @@ namespace HsLib.Containers.Base
         /// </summary>
         /// <returns>Cleaned cards</returns>
         public abstract IEnumerable<Card> CleanInactiveCards();
+
+        public abstract bool CanBeInsertedAt(int index);
     }
 }

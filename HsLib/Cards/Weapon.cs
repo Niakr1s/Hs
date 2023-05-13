@@ -1,4 +1,5 @@
 ﻿using HsLib.Battle;
+using HsLib.Cards.Effects;
 using HsLib.Common.MeleeAttack;
 using HsLib.Stats;
 using HsLib.Stats.Base;
@@ -20,6 +21,8 @@ namespace HsLib.Cards
         public Hp Hp { get; }
 
         public Windfury Windfury { get; init; } = new Windfury(false);
+
+        public Battlecry? Battlecry { get; protected set; }
 
         public bool Dead => Hp.Value <= 0;
 
@@ -57,6 +60,13 @@ namespace HsLib.Cards
         public override void OnTurnEnd(Battlefield bf)
         {
             AtksThisTurn = 0;
+        }
+
+        public override void PlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
+        {
+            base.PlayFromHand(bf);
+            if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, effectTarget); }
+            bf.MoveService.MoveHandToWeapon(Pid, Index);
         }
     }
 }

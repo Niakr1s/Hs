@@ -21,6 +21,7 @@ namespace HsLib.Battle
             };
             BattleService = new BattleService(this);
             DeathService = new DeathService(this);
+            MoveService = new MoveService(this);
 
             new EventConnector(this).Connect();
         }
@@ -41,6 +42,7 @@ namespace HsLib.Battle
         #region Services
         internal BattleService BattleService { get; }
         internal DeathService DeathService { get; }
+        internal MoveService MoveService { get; }
         #endregion
 
         /// <summary>
@@ -109,9 +111,10 @@ namespace HsLib.Battle
 
         #region PlayFromHand
 
-        public bool PlayFromHand(int index, int? fieldIndex = null)
+        public bool PlayFromHand(int index, int? fieldIndex = null, Card? effectTarget = null)
         {
-            // TODO
+            Card card = Player.GetCard(Loc.Hand, index);
+            card.PlayFromHand(this, fieldIndex, effectTarget);
             return true;
         }
 
