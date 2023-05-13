@@ -3,6 +3,7 @@ using HsLib.Systems;
 using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
+using HsLibTests.Helpers;
 
 namespace HsLibTests.Cards.Minions
 {
@@ -12,7 +13,7 @@ namespace HsLibTests.Cards.Minions
         [TestMethod()]
         public void FlametongTotemTest()
         {
-            Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
+            Battlefield bf = TestBattlefield.New();
 
             Minion totem = new FlametongTotem();
             Minion y1 = new ChillwindYeti();
@@ -55,7 +56,7 @@ namespace HsLibTests.Cards.Minions
         [TestMethod()]
         public void FlametongWorksOnlyAtFieldTest()
         {
-            Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
+            Battlefield bf = TestBattlefield.New();
 
             Minion totem = new FlametongTotem();
             Minion y1 = new ChillwindYeti();

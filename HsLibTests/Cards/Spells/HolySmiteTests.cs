@@ -2,7 +2,7 @@
 using HsLib.Cards.Spells;
 using HsLib.Systems;
 using HsLib.Types.Cards;
-
+using HsLibTests.Helpers;
 
 namespace HsLibTests.Cards.Spells
 {
@@ -12,8 +12,7 @@ namespace HsLibTests.Cards.Spells
         [TestMethod()]
         public void HolySmiteTest()
         {
-            Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.Turn.Start();
+            Battlefield bf = TestBattlefield.New();
 
             Spell holySmite = new HolySmite();
             bf.Player.Hand.Add(holySmite);
