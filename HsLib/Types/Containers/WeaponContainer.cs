@@ -1,13 +1,13 @@
-﻿using HsLib.Systems;
+﻿using HsLib.Cards.Weapons;
+using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers.Base;
-using HsLib.Cards.Weapons;
 
 namespace HsLib.Types.Containers
 {
-    public class WeaponC : SingleContainer<Weapon>
+    public class WeaponContainer : SingleContainer<Weapon>
     {
-        public WeaponC(Battlefield bf, Pid pid, Weapon? card = null) : base(bf, pid, Loc.Weapon, card ?? new NoWeapon())
+        public WeaponContainer(Battlefield bf, Pid pid, Weapon? card = null) : base(bf, pid, Loc.Weapon, card ?? new NoWeapon())
         {
         }
 

@@ -4,9 +4,9 @@ using HsLib.Types.Containers.Base;
 
 namespace HsLib.Types.Containers
 {
-    public class AbilityC : SingleContainer<Ability>
+    public class SecretsContainer : MultiContainer<Card>
     {
-        public AbilityC(Battlefield bf, Pid pid, Ability card) : base(bf, pid, Loc.Ability, card)
+        public SecretsContainer(Battlefield bf, Pid pid, IEnumerable<Card>? cards = null) : base(bf, pid, Loc.Secret, startCards: cards)
         {
         }
 

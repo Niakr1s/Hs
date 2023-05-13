@@ -72,7 +72,7 @@ namespace HsLib.Systems.Services
         public void MoveHandToWeapon(Pid pid, int handIndex)
         {
             Hand hand = Bf[pid].Hand;
-            WeaponC weaponC = Bf[pid].Weapon;
+            WeaponContainer weaponC = Bf[pid].Weapon;
             Graveyard gy = Bf[pid].Graveyard;
 
             Card? card = hand[handIndex];

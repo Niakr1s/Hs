@@ -19,11 +19,11 @@ namespace HsLib.Systems
             Hand = new(bf, pid);
             Field = new(bf, pid);
 
-            Hero = new HeroC(bf, pid, (Hero)startingDeck.HeroId.ToCard());
-            Ability = new AbilityC(bf, pid, Hero.Card.ProduceAbility());
-            Weapon = new WeaponC(bf, pid, new NoWeapon());
+            Hero = new HeroContainer(bf, pid, (Hero)startingDeck.HeroId.ToCard());
+            Ability = new AbilityContainer(bf, pid, Hero.Card.ProduceAbility());
+            Weapon = new WeaponContainer(bf, pid, new NoWeapon());
 
-            Secrets = new SecretC(bf, pid);
+            Secrets = new SecretsContainer(bf, pid);
 
             Graveyard = new(bf, pid);
 
@@ -48,13 +48,13 @@ namespace HsLib.Systems
 
         public Field Field { get; }
 
-        public HeroC Hero { get; }
+        public HeroContainer Hero { get; }
 
-        public AbilityC Ability { get; }
+        public AbilityContainer Ability { get; }
 
-        public WeaponC Weapon { get; }
+        public WeaponContainer Weapon { get; }
 
-        public SecretC Secrets { get; }
+        public SecretsContainer Secrets { get; }
 
         public Graveyard Graveyard { get; }
 
