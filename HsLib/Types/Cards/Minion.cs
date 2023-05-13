@@ -6,7 +6,7 @@ using HsLib.Types.Stats.Base;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Minion : Card, IAttacker, IDamageable, IMortal, IWithDeathrattle
+    public abstract class Minion : Card, IAttacker, IDamageable, IMortal, IWithDeathrattle, IWithBattlecry
     {
         protected Minion(int mp, int atk, int hp) : base(mp)
         {
