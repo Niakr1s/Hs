@@ -30,7 +30,7 @@ namespace HsLib.Types.Cards
             if (Place is null) { return; }
 
             base.PlayFromHand(bf);
-            bf.BattleService.UseEffect(this, effectTarget);
+            bf.BattleService.UseActiveEffect(this, effectTarget);
             bf.MoveService.MoveHandToGraveyard(Place.Pid, Place.Index);
         }
     }

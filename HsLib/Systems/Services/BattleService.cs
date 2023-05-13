@@ -46,7 +46,17 @@ namespace HsLib.Systems.Services
             return true;
         }
 
-        public bool UseEffect(IActiveEffect effect, Card? target = null)
+        public bool UseActiveEffect(IActiveEffect effect, Card? target = null)
+        {
+            if (!effect.CanUseEffect(Bf))
+            {
+                return false;
+            }
+
+            return UseEffect(effect, target);
+        }
+
+        public bool UseEffect(IEffect effect, Card? target = null)
         {
             bool targetIsValid = effect.EffectType switch
             {
@@ -54,7 +64,7 @@ namespace HsLib.Systems.Services
                 Types.Effects.EffectType.Mass => target is null,
                 Types.Effects.EffectType.Solo => target is not null && effect.UseEffectTargets(Bf).Contains(target),
             };
-            if (!targetIsValid || !effect.CanUseEffect(Bf))
+            if (!targetIsValid)
             {
                 return false;
             }
@@ -66,12 +76,12 @@ namespace HsLib.Systems.Services
         public bool UseAbility(Pid pid, Card? target = null)
         {
             Ability ability = Bf[pid].Ability.Card;
-            return UseEffect(ability, target);
+            return UseActiveEffect(ability, target);
         }
 
         public bool CastSpell(Spell spell, Card? target = null)
         {
-            if (!UseEffect(spell, target)) return false;
+            if (!UseActiveEffect(spell, target)) return false;
             if (spell.Place is null) { throw new PlaceException(); }
 
             Pid spellPid = spell.Place.Pid;
