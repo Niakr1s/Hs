@@ -1,18 +1,21 @@
 ﻿namespace HsLib.Types
 {
+    [Flags]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1135:Declare enum member with zero value (when enum has FlagsAttribute).",
+        Justification = "<Pending>")] // never should be none
     public enum Loc
     {
-        Deck,
-        Hand,
-        Field,
+        Deck = 1,
+        Hand = 2,
+        Field = 4,
 
-        Hero,
-        Weapon,
-        Ability,
+        Hero = 8,
+        Weapon = 16,
+        Ability = 32,
 
-        Secret,
+        Secret = 64,
 
-        Graveyard,
+        Graveyard = 128,
     }
 
     public class LocException : ArgumentException

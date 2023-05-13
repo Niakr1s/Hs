@@ -4,9 +4,9 @@ namespace HsLib.Types
 {
     public readonly struct Target
     {
-        public HashSet<Loc> Locs { get; init; }
+        public Loc? Locs { get; init; }
 
-        public HashSet<PidSide> Sides { get; init; }
+        public PidSide? Sides { get; init; }
 
         public bool IsValidTarget(IWithPlace owner, IWithPlace? target)
         {
@@ -14,15 +14,15 @@ namespace HsLib.Types
 
             if (target is null)
             {
-                return Locs.Count == 0;
+                return Locs is null;
             }
             else
             {
                 if (target.Place is null) { return false; }
 
-                bool sideIsCorrect = Sides.Contains(owner.Place.Pid.Side(target.Place.Pid));
-                bool placeIsCorrect = Locs.Contains(target.Place.Loc);
-                return sideIsCorrect && placeIsCorrect;
+                bool sideIsCorrect = Sides?.HasFlag(owner.Place.Pid.Side(target.Place.Pid)) == true;
+                bool locIsCorrect = Locs?.HasFlag(target.Place.Loc) == true;
+                return sideIsCorrect && locIsCorrect;
             }
         }
 

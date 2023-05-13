@@ -1,16 +1,22 @@
 ﻿namespace HsLib.Types
 {
+    [Flags]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1135:Declare enum member with zero value (when enum has FlagsAttribute).",
+        Justification = "<Pending>")] // never should be none
     public enum Pid
     {
-        P1,
-        P2,
+        P1 = 1,
+        P2 = 2,
     }
 
 
+    [Flags]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1135:Declare enum member with zero value (when enum has FlagsAttribute).",
+        Justification = "<Pending>")] // never should be none
     public enum PidSide
     {
-        Me,
-        He,
+        Me = 1,
+        He = 2,
     }
 
     public static class Pids
