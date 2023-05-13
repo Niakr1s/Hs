@@ -1,5 +1,4 @@
-﻿using HsLib.Exceptions;
-using HsLib.Interfaces;
+﻿using HsLib.Interfaces;
 using HsLib.Types.Events;
 
 namespace HsLib.Types
@@ -70,6 +69,21 @@ namespace HsLib.Types
         public bool IsActivePid(Pid pid)
         {
             return pid == Pid;
+        }
+    }
+
+    public class NotStartedException : Exception
+    {
+        public NotStartedException() : base()
+        {
+        }
+
+        public NotStartedException(string? message) : base(message)
+        {
+        }
+
+        public NotStartedException(string? message, Exception? innerException) : base(message, innerException)
+        {
         }
     }
 }

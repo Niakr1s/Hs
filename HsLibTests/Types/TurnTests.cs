@@ -1,5 +1,4 @@
-﻿using HsLib.Exceptions;
-using HsLib.Types;
+﻿using HsLib.Types;
 
 namespace HsLibTests.Types
 {
