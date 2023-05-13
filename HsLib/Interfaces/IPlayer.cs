@@ -9,6 +9,6 @@ namespace HsLib.Interfaces
         /// </summary>
         /// <param name="cards"></param>
         /// <returns>Index of chosen card</returns>
-        int ChooseCard(IEnumerable<Card> cards);
+        CardId ChooseOne(IEnumerable<CardId> cards);
     }
 }

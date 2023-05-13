@@ -3,10 +3,9 @@ using HsLib.Systems;
 using HsLib.Types.Stats;
 using HsLib.Types.Stats.Base;
 
-
 namespace HsLib.Types.Cards
 {
-    public abstract class Minion : Card, IAttacker, IDamageable, IMortal, IWithDeathrattle, IWithBattlecry
+    public abstract class Minion : Card, IAttacker, IDamageable, IMortal, IWithDeathrattle, IWithBattlecry, IWithChoseOne
     {
         protected Minion(int mp, int atk, int hp) : base(mp)
         {
@@ -31,6 +30,8 @@ namespace HsLib.Types.Cards
         public IEffect? Deathrattle { get; protected set; }
 
         public bool Dead => Hp.Value <= 0;
+
+        public IEnumerable<CardId>? ChoseOne { get; }
 
         public int GetDamage(int value)
         {
@@ -82,19 +83,22 @@ namespace HsLib.Types.Cards
         protected override void DoPlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
         {
             if (Place is null) { throw new PlaceException(); }
+            Minion transformTo = this;
 
-            MoveHandToField(bf, fieldIndex, check: true); // checking first
+            MoveHandToField(bf, transformTo: transformTo, fieldIndex: fieldIndex, check: true); // checking first
 
             if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, effectTarget); }
+            if (ChoseOne is not null) { transformTo = (Minion)CardBuilder.FromId(bf[Place.Pid].Player.ChooseOne(ChoseOne)); }
 
-            MoveHandToField(bf, fieldIndex, check: false); // playing actually
+            MoveHandToField(bf, transformTo: transformTo, fieldIndex: fieldIndex, check: false); // playing actually
         }
 
-        private void MoveHandToField(Battlefield bf, int? fieldIndex = null, bool check = false)
+        private void MoveHandToField(Battlefield bf, Minion? transformTo = null, int? fieldIndex = null, bool check = false)
         {
             if (Place is null) { throw new PlaceException(); }
 
-            bf.MoveService.MoveHandToField(Place.Pid, Place.Index, fieldIndex, check: check);
+            bf.MoveService.MoveHandToField(Place.Pid, Place.Index,
+                transformTo: transformTo, fieldIndex: fieldIndex, fieldOrError: true, check: check);
         }
     }
 }

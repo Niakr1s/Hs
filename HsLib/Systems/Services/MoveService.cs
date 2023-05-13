@@ -82,26 +82,35 @@ namespace HsLib.Systems.Services
         /// <summary>
         /// Simply move minion to board at last position, or moves to graveyard if no place at field.
         /// </summary>
-        /// <param name="pid"></param>
-        /// <param name="handIndex"></param>
+        /// <param name="handPid"></param>
+        /// <param name="handIndex">index at hand to move from</param>
+        /// <param name="transformTo">if need minion to be transformed</param>
+        /// <param name="fieldIndex">index at field to move to</param>
+        /// <param name="fieldOrError">forces exception if field is full</param>
+        /// <param name="check">do only check, skip actual movement</param>
         /// <exception cref="MoveException"></exception>
-        public void MoveHandToField(Pid pid, int handIndex, int? fieldIndex = null, bool fieldOrError = false, bool check = false)
+        public void MoveHandToField(Pid handPid, int handIndex,
+            Minion? transformTo = null,
+            int? fieldIndex = null,
+            bool fieldOrError = false,
+            bool check = false)
         {
-            Hand hand = Bf[pid].Hand;
-            Field field = Bf[pid].Field;
+            Hand hand = Bf[handPid].Hand;
+            Field field = Bf[handPid].Field;
 
-            Minion? card = hand[handIndex] as Minion;
-            if (card is null) { throw new MoveException($"{card} is not minion"); }
+            Minion? cardInHand = hand[handIndex] as Minion;
+            if (cardInHand is null) { throw new MoveException($"{cardInHand} is not minion"); }
 
             int index = fieldIndex ?? field.Count;
             if (!field.CanBeInsertedAt(index) && fieldOrError) { throw new MoveException("can't be inserted at field"); }
 
+            Minion cardToField = transformTo ?? cardInHand;
             if (!check)
             {
                 hand.RemoveAt(handIndex);
-                if (!field.Insert(index, card))
+                if (!field.Insert(index, cardToField))
                 {
-                    Bf[pid].Graveyard.Add(card);
+                    Bf[handPid].Graveyard.Add(cardInHand);
                 }
             }
         }

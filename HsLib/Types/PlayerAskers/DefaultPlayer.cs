@@ -5,9 +5,9 @@ namespace HsLib.Types.PlayerAskers
 {
     public class DefaultPlayer : IPlayer
     {
-        int IPlayer.ChooseCard(IEnumerable<Card> cards)
+        CardId IPlayer.ChooseOne(IEnumerable<CardId> cards)
         {
-            return 0;
+            return cards.First();
         }
     }
 }

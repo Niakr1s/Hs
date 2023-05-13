@@ -11,9 +11,9 @@ namespace HsLib.Systems.Services
 
         public Battlefield Bf { get; }
 
-        public int ChooseCard(IEnumerable<Card> cards)
+        public CardId ChooseCard(IEnumerable<CardId> cards)
         {
-            return Bf.Player.Player.ChooseCard(cards);
+            return Bf.Player.Player.ChooseOne(cards);
         }
     }
 }
