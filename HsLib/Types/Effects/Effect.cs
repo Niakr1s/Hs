@@ -6,16 +6,16 @@ namespace HsLib.Types.Effects
 {
     public abstract class Effect : IEffect
     {
-        protected Effect(Card owner, bool isSoloTarget = false, Targets targets = new Targets())
+        protected Effect(Card owner, EffectType type, Targets targets = new Targets())
         {
             Owner = owner;
-            EffectIsSoloTarget = isSoloTarget;
+            EffectType = type;
             _targets = targets;
         }
 
         public Card Owner { get; }
 
-        public bool EffectIsSoloTarget { get; }
+        public EffectType EffectType { get; }
 
         protected abstract void EffectAction(Battlefield bf, Card? card);
 
@@ -28,13 +28,22 @@ namespace HsLib.Types.Effects
 
         public void UseEffect(Battlefield bf, Card? target)
         {
-            if (EffectIsSoloTarget)
+            switch (EffectType)
             {
-                EffectAction(bf, target);
-            }
-            else
-            {
-                EffectAction(bf, null);
+                case EffectType.Self:
+                    EffectAction(bf, null);
+                    break;
+
+                case EffectType.Solo:
+                    EffectAction(bf, target);
+                    break;
+
+                case EffectType.Mass:
+                    foreach (var card in UseEffectTargets(bf))
+                    {
+                        EffectAction(bf, card);
+                    }
+                    break;
             }
         }
     }

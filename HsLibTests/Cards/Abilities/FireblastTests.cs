@@ -17,7 +17,6 @@ namespace HsLibTests.Cards.Abilities
             Battlefield bf = TestBattlefield.New(p1: CardId.JainaProudmoore);
             Ability fireblast = bf.Player.Ability.Card;
             Assert.IsInstanceOfType(fireblast, typeof(Fireblast));
-            Assert.AreEqual(true, fireblast.EffectIsSoloTarget);
             Assert.AreEqual(2, fireblast.UseEffectTargets(bf).Count());
 
             Assert.AreEqual(30, bf.Player.Hero.Card.Hp.Value);

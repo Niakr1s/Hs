@@ -16,7 +16,6 @@ namespace HsLibTests.Cards.Abilities
             Battlefield bf = TestBattlefield.New(p1: CardId.GarroshHellscream);
             Ability armorUp = bf.Player.Ability.Card;
             Assert.IsInstanceOfType(armorUp, typeof(ArmorUp));
-            Assert.AreEqual(false, armorUp.EffectIsSoloTarget);
             Assert.AreEqual(0, armorUp.UseEffectTargets(bf).Count());
 
 

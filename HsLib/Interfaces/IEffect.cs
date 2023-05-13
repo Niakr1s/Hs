@@ -1,14 +1,12 @@
 ﻿using HsLib.Systems;
 using HsLib.Types.Cards;
+using HsLib.Types.Effects;
 
 namespace HsLib.Interfaces
 {
     public interface IEffect
     {
-        /// <summary>
-        /// Shows if effect definetly must have any target chosen.
-        /// </summary>
-        public bool EffectIsSoloTarget { get; }
+        public EffectType EffectType { get; }
 
         /// <summary>
         /// Gets all targets from battlefield, effect can be used on.

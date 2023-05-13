@@ -1,5 +1,6 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Systems;
+using HsLib.Types.Effects;
 
 namespace HsLib.Types.Cards
 {
@@ -13,7 +14,7 @@ namespace HsLib.Types.Cards
 
         public virtual IEnumerable<Card> UseEffectTargets(Battlefield bf) => Effect.UseEffectTargets(bf);
 
-        public bool EffectIsSoloTarget => Effect.EffectIsSoloTarget;
+        public EffectType EffectType => Effect.EffectType;
 
         private bool EffectUsedThisTurn { get; set; }
 

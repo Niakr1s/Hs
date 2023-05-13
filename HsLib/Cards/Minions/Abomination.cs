@@ -14,7 +14,7 @@ namespace HsLib.Cards.Minions
                 Locs = Loc.Field | Loc.Hero,
                 Sides = PidSide.Me | PidSide.He,
             };
-            Deathrattle = new DealDamageEffect(this, false, deathrattleTargets)
+            Deathrattle = new DealDamageEffect(this, EffectType.Mass, deathrattleTargets)
             {
                 Damage = 2,
             };

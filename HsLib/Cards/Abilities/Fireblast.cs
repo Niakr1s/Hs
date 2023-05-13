@@ -10,7 +10,7 @@ namespace HsLib.Cards.Abilities
 
         public Fireblast() : base(2)
         {
-            Effect = new DealDamageEffect(this, true, new Targets { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He })
+            Effect = new DealDamageEffect(this, EffectType.Solo, new Targets { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He })
             {
                 Damage = 1
             };

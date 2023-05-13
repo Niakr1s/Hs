@@ -8,7 +8,7 @@ namespace HsLib.Types.Effects
 {
     public class GiveDamageBuff : Effect
     {
-        public GiveDamageBuff(Card owner, bool isSoloTarget, Targets targets) : base(owner, isSoloTarget, targets)
+        public GiveDamageBuff(Card owner, EffectType type, Targets targets) : base(owner, type, targets)
         {
         }
 

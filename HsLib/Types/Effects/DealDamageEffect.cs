@@ -6,7 +6,7 @@ namespace HsLib.Types.Effects
 {
     public class DealDamageEffect : Effect
     {
-        public DealDamageEffect(Card owner, bool isSoloTarget, Targets targets) : base(owner, isSoloTarget, targets)
+        public DealDamageEffect(Card owner, EffectType type, Targets targets) : base(owner, type, targets)
         {
         }
 

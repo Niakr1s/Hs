@@ -1,6 +1,7 @@
 ﻿using HsLib.Systems;
 using HsLib.Types;
 using HsLib.Types.Cards;
+using HsLib.Types.Effects;
 
 namespace HsLib.Cards.Spells
 {
@@ -23,7 +24,7 @@ namespace HsLib.Cards.Spells
 
         private readonly Targets _targets = new Targets { Locs = Loc.Field, Sides = PidSide.He };
 
-        public override bool EffectIsSoloTarget => true;
+        public override EffectType EffectType => EffectType.Solo;
 
         public override IEnumerable<Card> UseEffectTargets(Battlefield bf)
         {

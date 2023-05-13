@@ -48,7 +48,12 @@ namespace HsLib.Systems.Services
 
         public bool UseEffect(IActiveEffect effect, Card? target = null)
         {
-            bool targetIsValid = effect.EffectIsSoloTarget ^ target is null || !effect.UseEffectTargets(Bf).Contains(target);
+            bool targetIsValid = effect.EffectType switch
+            {
+                Types.Effects.EffectType.Self => target is null,
+                Types.Effects.EffectType.Mass => target is null,
+                Types.Effects.EffectType.Solo => target is not null && effect.UseEffectTargets(Bf).Contains(target),
+            };
             if (!targetIsValid || !effect.CanUseEffect(Bf))
             {
                 return false;

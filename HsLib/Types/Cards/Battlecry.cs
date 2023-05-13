@@ -1,5 +1,6 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Systems;
+using HsLib.Types.Effects;
 
 namespace HsLib.Types.Cards
 {
@@ -12,7 +13,7 @@ namespace HsLib.Types.Cards
 
         public Card Owner { get; }
 
-        public bool EffectIsSoloTarget => Effect.EffectIsSoloTarget;
+        public EffectType EffectType => Effect.EffectType;
 
         public void UseEffect(Battlefield bf, Card? target) => Effect.UseEffect(bf, target);
 
@@ -21,5 +22,6 @@ namespace HsLib.Types.Cards
         public bool CanUseEffect(Battlefield bf) => true;
 
         protected abstract IEffect Effect { get; }
+
     }
 }

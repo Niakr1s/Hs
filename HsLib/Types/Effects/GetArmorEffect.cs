@@ -5,7 +5,7 @@ namespace HsLib.Types.Effects
 {
     public class GetArmorEffect : Effect
     {
-        public GetArmorEffect(Card owner) : base(owner)
+        public GetArmorEffect(Card owner) : base(owner, EffectType.Self)
         {
         }
 
