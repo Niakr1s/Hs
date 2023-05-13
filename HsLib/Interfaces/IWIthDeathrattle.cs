@@ -2,6 +2,6 @@
 {
     public interface IWithDeathrattle
     {
-        IEffect Deathrattle { get; }
+        IEffect? Deathrattle { get; }
     }
 }

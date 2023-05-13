@@ -38,7 +38,7 @@ namespace HsLib.Systems.Services
             {
                 if (m is IWithDeathrattle d)
                 {
-                    d.Deathrattle.UseEffect(Bf, null);
+                    d.Deathrattle?.UseEffect(Bf, null);
                 }
             }
 

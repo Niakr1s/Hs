@@ -6,7 +6,7 @@ using HsLib.Types.Stats.Base;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Minion : Card, IAttacker, IDamageable, IMortal
+    public abstract class Minion : Card, IAttacker, IDamageable, IMortal, IWithDeathrattle
     {
         protected Minion(int mp, int atk, int hp) : base(mp)
         {
@@ -27,6 +27,8 @@ namespace HsLib.Types.Cards
         public BoolStat Stealth { get; init; } = new BoolStat(false);
 
         public IEffect? Battlecry { get; protected set; }
+
+        public IEffect? Deathrattle { get; protected set; }
 
         public bool Dead => Hp.Value <= 0;
 

@@ -1,11 +1,10 @@
-﻿using HsLib.Interfaces;
-using HsLib.Types;
+﻿using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;
 
 namespace HsLib.Cards.Minions
 {
-    public class Abomintaion : Minion, IWithDeathrattle
+    public class Abomintaion : Minion
     {
         public Abomintaion() : base(5, 4, 4)
         {
@@ -19,7 +18,5 @@ namespace HsLib.Cards.Minions
                 Damage = 2,
             };
         }
-
-        public IEffect Deathrattle { get; }
     }
 }
