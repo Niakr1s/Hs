@@ -36,7 +36,10 @@ namespace HsLib.Systems.Services
 
             foreach (IMortal m in dead)
             {
-                m.ActivateDeathrattle(Bf);
+                if (m is IWithDeathrattle d)
+                {
+                    d.Deathrattle.UseEffect(Bf, null);
+                }
             }
 
             return true;
