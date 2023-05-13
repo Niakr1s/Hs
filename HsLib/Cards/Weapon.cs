@@ -43,7 +43,7 @@ namespace HsLib.Cards
             AtksThisTurn = 0;
         }
 
-        public bool CanMeleeAttack(Battlefield bf)
+        public bool CanMeleeAttackThisTurn(Battlefield bf)
         {
             return Windfury.AttacksLeft(AtksThisTurn) > 0;
         }
