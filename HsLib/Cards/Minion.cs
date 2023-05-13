@@ -69,5 +69,10 @@ namespace HsLib.Cards
         {
             return !Stealth.Value && (Taunt.Value || !bf[Pid].Field.HasAnyActiveTaunt());
         }
+
+        public IDamageable GetDefender(Battlefield bf)
+        {
+            return this;
+        }
     }
 }

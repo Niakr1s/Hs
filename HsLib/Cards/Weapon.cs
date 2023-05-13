@@ -48,6 +48,11 @@ namespace HsLib.Cards
             return Windfury.AttacksLeft(AtksThisTurn) > 0;
         }
 
+        public IDamageable GetDefender(Battlefield bf)
+        {
+            return bf[Pid].Hero.Card;
+        }
+
         public override void OnTurnEnd(Battlefield bf)
         {
             AtksThisTurn = 0;

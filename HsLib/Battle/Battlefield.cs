@@ -70,7 +70,7 @@ namespace HsLib.Battle
 
         public bool WeaponAttack(Loc defenderLoc, int defenderIndex)
         {
-            return BattleService.MeleeAttack(Player.Weapon.Card, GetDefender(defenderLoc, defenderIndex), Player.Hero.Card);
+            return BattleService.MeleeAttack(Player.Weapon.Card, GetDefender(defenderLoc, defenderIndex));
         }
 
         public bool WeaponAttack(IDamageable defender)

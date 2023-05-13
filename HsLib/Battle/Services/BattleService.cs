@@ -24,22 +24,19 @@ namespace HsLib.Battle.Services
         /// <param name="defender">Should have valid place.</param>
         /// <param name="attackDefender">Is a defender, who takes counterattack. If no defender provided, attacker will try defend by himself.</param>
         /// <returns>True, if attack was actually made.</returns>
-        public bool MeleeAttack(IAttacker attacker, IDamageable defender,
-            IDamageable? attackDefender = null)
+        public bool MeleeAttack(IAttacker attacker, IDamageable defender)
         {
             if (!attacker.CanMeleeAttack(Bf)) return false;
             if (!defender.CanBeMeleeAttacked(Bf)) return false;
-
-            attackDefender ??= attacker as IDamageable;
 
             Event?.Invoke(this, new BattleMeleePreAttackEventArgs(attacker, defender));
             if (!attacker.CanMeleeAttack(Bf)) return false;
 
             DealDamage(attacker.Atk.Value, defender);
 
-            if (attackDefender is not null && defender is IAttacker counterAttacker)
+            if (defender is IAttacker counterAttacker)
             {
-                DealDamage(counterAttacker.Atk.Value, attackDefender);
+                DealDamage(counterAttacker.Atk.Value, attacker.GetDefender(Bf));
             }
 
             attacker.AfterAttack(Bf);

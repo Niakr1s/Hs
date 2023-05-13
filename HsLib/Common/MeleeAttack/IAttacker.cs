@@ -12,5 +12,12 @@ namespace HsLib.Common.MeleeAttack
         /// </summary>
         /// <param name="bf"></param>
         void AfterAttack(Battlefield bf);
+
+        /// <summary>
+        /// Returns defender, who will receive counterattack.
+        /// </summary>
+        /// <param name="bf"></param>
+        /// <returns></returns>
+        IDamageable GetDefender(Battlefield bf);
     }
 }
