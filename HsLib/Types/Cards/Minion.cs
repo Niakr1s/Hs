@@ -94,7 +94,7 @@ namespace HsLib.Types.Cards
         {
             if (Place is null) { throw new PlaceException(); }
 
-            bf.MoveService.MoveHandToBoard(Place.Pid, Place.Index, fieldIndex, check: check);
+            bf.MoveService.MoveHandToField(Place.Pid, Place.Index, fieldIndex, check: check);
         }
     }
 }

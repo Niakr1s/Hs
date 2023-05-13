@@ -85,7 +85,7 @@ namespace HsLib.Systems.Services
         /// <param name="pid"></param>
         /// <param name="handIndex"></param>
         /// <exception cref="MoveException"></exception>
-        public void MoveHandToBoard(Pid pid, int handIndex, int? fieldIndex = null, bool fieldOrError = false, bool check = false)
+        public void MoveHandToField(Pid pid, int handIndex, int? fieldIndex = null, bool fieldOrError = false, bool check = false)
         {
             Hand hand = Bf[pid].Hand;
             Field field = Bf[pid].Field;
