@@ -34,5 +34,10 @@ namespace HsLib.Types.Cards
             base.OnTurnStart(bf);
             EffectUsedThisTurn = false;
         }
+
+        protected sealed override void DoPlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
+        {
+            throw new InvalidOperationException();
+        }
     }
 }

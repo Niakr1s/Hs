@@ -46,6 +46,12 @@ namespace HsLib.Types.Cards
 
         public virtual void OnTurnStart(Battlefield bf) { }
 
-        public virtual void PlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null) { }
+        public void PlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
+        {
+            // TODO: add mp check
+            DoPlayFromHand(bf, fieldIndex, effectTarget);
+        }
+
+        protected abstract void DoPlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null);
     }
 }

@@ -63,11 +63,10 @@ namespace HsLib.Types.Cards
             AtksThisTurn = 0;
         }
 
-        public override void PlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
+        protected override void DoPlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
         {
             if (Place is null) { throw new PlaceException(); }
 
-            base.PlayFromHand(bf);
             if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, effectTarget); }
             bf.MoveService.MoveHandToWeapon(Place.Pid, Place.Index);
         }
