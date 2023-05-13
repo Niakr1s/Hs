@@ -43,8 +43,9 @@ namespace HsLib.Cards
             AtksThisTurn = 0;
         }
 
-        public bool CanMeleeAttackThisTurn(Battlefield bf)
+        public bool CanMeleeAttack(Battlefield bf)
         {
+            if (Dead) { return false; }
             return Windfury.AttacksLeft(AtksThisTurn) > 0;
         }
 

@@ -59,8 +59,9 @@ namespace HsLib.Cards
 
         public virtual bool ActivateDeathrattle(Battlefield bf) { return false; }
 
-        public bool CanMeleeAttackThisTurn(Battlefield bf)
+        public bool CanMeleeAttack(Battlefield bf)
         {
+            if (Dead) { return false; }
             if (Windfury.AttacksLeft(AtksThisTurn) <= 0) { return false; }
             return !bf.Turn.IsFirstTurn(TurnAdded) || Charge;
         }

@@ -26,11 +26,11 @@ namespace HsLib.Battle.Services
         /// <returns>True, if attack was actually made.</returns>
         public bool MeleeAttack(IAttacker attacker, IDamageable defender)
         {
-            if (!attacker.CanMeleeAttackThisTurn(Bf)) return false;
             if (!defender.CanBeMeleeAttacked(Bf)) return false;
 
+            if (!attacker.CanMeleeAttack(Bf)) return false;
             Event?.Invoke(this, new BattleMeleePreAttackEventArgs(attacker, defender));
-            if (!attacker.CanMeleeAttackThisTurn(Bf)) return false;
+            if (!attacker.CanMeleeAttack(Bf)) return false;
 
             DealDamage(attacker.Atk.Value, defender);
 

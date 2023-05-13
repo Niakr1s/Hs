@@ -6,11 +6,11 @@ namespace HsLib.Common.MeleeAttack
     public interface IAttacker : IWithPlace, IWithAtk
     {
         /// <summary>
-        /// Shows if attacker has some attacks left.
+        /// Shows if attacker has some attacks left and it is valid and alive.
         /// </summary>
         /// <param name="bf"></param>
         /// <returns></returns>
-        bool CanMeleeAttackThisTurn(Battlefield bf);
+        bool CanMeleeAttack(Battlefield bf);
 
         /// <summary>
         /// Will be called after minion successfully attacked.
