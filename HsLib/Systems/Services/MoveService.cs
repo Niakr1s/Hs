@@ -85,23 +85,24 @@ namespace HsLib.Systems.Services
         /// <param name="pid"></param>
         /// <param name="handIndex"></param>
         /// <exception cref="MoveException"></exception>
-        public void MoveHandToBoard(Pid pid, int handIndex)
+        public void MoveHandToBoard(Pid pid, int handIndex, int? fieldIndex = null, bool fieldOrError = false, bool check = false)
         {
             Hand hand = Bf[pid].Hand;
             Field field = Bf[pid].Field;
 
-            Card? card = hand[handIndex];
-            if (card is Minion m)
+            Minion? card = hand[handIndex] as Minion;
+            if (card is null) { throw new MoveException($"{card} is not minion"); }
+
+            int index = fieldIndex ?? field.Count;
+            if (!field.CanBeInsertedAt(index) && fieldOrError) { throw new MoveException("can't be inserted at field"); }
+
+            if (!check)
             {
                 hand.RemoveAt(handIndex);
-                if (!field.Add(m))
+                if (!field.Insert(index, card))
                 {
-                    Bf[pid].Graveyard.Add(m);
+                    Bf[pid].Graveyard.Add(card);
                 }
-            }
-            else
-            {
-                throw new MoveException($"{card} is not minion");
             }
         }
 
