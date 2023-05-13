@@ -4,6 +4,7 @@ using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
 using HsLib.Types.Events;
+using HsLib.Types.PlayerAskers;
 using HsLib.Types.Stats;
 
 namespace HsLib.Systems
@@ -39,6 +40,8 @@ namespace HsLib.Systems
         public Battlefield Bf { get; }
 
         public event EventHandler<ContainerEventArgs>? Event;
+
+        public IPlayer Player { get; set; } = new DefaultPlayer();
 
         public Mp Mp { get; } = new Mp(0);
 
