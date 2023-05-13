@@ -1,5 +1,4 @@
 ﻿using HsLib.Interfaces;
-using HsLib.Systems;
 using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Events;
@@ -29,7 +28,7 @@ namespace HsLib.Systems.Services
         private bool DoStep()
         {
             List<IMortal> dead = Bf.Cards.Select(c => c as IMortal)
-                .Where(c => c?.Dead == true && c.Loc != Loc.Graveyard).Select(c => c!).ToList();
+                .Where(c => c?.Dead == true && c.Place?.Loc != Loc.Graveyard).Select(c => c!).ToList();
 
             if (dead.Count == 0) { return false; }
 

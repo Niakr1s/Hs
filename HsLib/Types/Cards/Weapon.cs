@@ -1,4 +1,5 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Exceptions;
+using HsLib.Interfaces;
 using HsLib.Systems;
 using HsLib.Types.Stats;
 using HsLib.Types.Stats.Base;
@@ -53,7 +54,8 @@ namespace HsLib.Types.Cards
 
         public IDamageable GetDefender(Battlefield bf)
         {
-            return bf[Pid].Hero.Card;
+            if (Place is null) { throw new PlaceException(); }
+            return bf[Place.Pid].Hero.Card;
         }
 
         public override void OnTurnEnd(Battlefield bf)
@@ -63,9 +65,11 @@ namespace HsLib.Types.Cards
 
         public override void PlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
         {
+            if (Place is null) { throw new PlaceException(); }
+
             base.PlayFromHand(bf);
             if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, effectTarget); }
-            bf.MoveService.MoveHandToWeapon(Pid, Index);
+            bf.MoveService.MoveHandToWeapon(Place.Pid, Place.Index);
         }
     }
 }

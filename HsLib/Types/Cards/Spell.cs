@@ -13,9 +13,10 @@ namespace HsLib.Types.Cards
 
         public bool CanUseEffect(Battlefield bf)
         {
-            if (!bf.Turn.IsActivePid(Pid)) { return false; }
-            if (Loc != Loc.Hand) { return false; }
-            if (bf[Pid].Mp.Value < Mp.Value) { return false; }
+            if (Place is null) { return false; }
+            if (!bf.Turn.IsActivePid(Place.Pid)) { return false; }
+            if (Place.Loc != Loc.Hand) { return false; }
+            if (bf[Place.Pid].Mp.Value < Mp.Value) { return false; }
             return true;
         }
 
@@ -25,9 +26,11 @@ namespace HsLib.Types.Cards
 
         public override void PlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
         {
+            if (Place is null) { return; }
+
             base.PlayFromHand(bf);
             bf.BattleService.UseEffect(this, effectTarget);
-            bf.MoveService.MoveHandToGraveyard(Pid, Index);
+            bf.MoveService.MoveHandToGraveyard(Place.Pid, Place.Index);
         }
     }
 }

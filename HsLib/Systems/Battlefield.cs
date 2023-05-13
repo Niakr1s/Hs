@@ -1,4 +1,5 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Exceptions;
+using HsLib.Interfaces;
 using HsLib.Systems.Services;
 using HsLib.Types;
 using HsLib.Types.Cards;
@@ -76,8 +77,9 @@ namespace HsLib.Systems
 
         public bool WeaponAttack(IDamageable defender)
         {
-            if (defender.Pid == Turn.Pid) { throw new PidException(); }
-            return WeaponAttack(defender.Loc, defender.Index);
+            if (defender.Place is null) { throw new PlaceException(); }
+            if (defender.Place.Pid == Turn.Pid) { throw new PidException(); }
+            return WeaponAttack(defender.Place.Loc, defender.Place.Index);
         }
 
         public bool MinionAttack(int attackerIndex, Loc defenderLoc, int defenderIndex)
@@ -89,10 +91,11 @@ namespace HsLib.Systems
 
         public bool MinionAttack(Minion attacker, IDamageable defender)
         {
-            if (attacker.Pid != Player.Pid) { throw new PidException(); }
-            if (attacker.Loc != Loc.Field) { throw new LocException(); }
-            if (defender.Pid != Enemy.Pid) { throw new PidException(); }
-            if (defender.Loc != Loc.Field && defender.Loc != Loc.Hero) { throw new LocException(); }
+            if (attacker.Place is null || defender.Place is null) { return false; }
+            if (attacker.Place.Pid != Player.Pid) { throw new PidException(); }
+            if (attacker.Place.Loc != Loc.Field) { throw new LocException(); }
+            if (defender.Place.Pid != Enemy.Pid) { throw new PidException(); }
+            if (defender.Place.Loc != Loc.Field && defender.Place.Loc != Loc.Hero) { throw new LocException(); }
             return BattleService.MeleeAttack(attacker, defender);
         }
 

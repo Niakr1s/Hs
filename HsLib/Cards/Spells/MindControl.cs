@@ -14,10 +14,10 @@ namespace HsLib.Cards.Spells
         {
             if (target is null) return;
 
-            if (target is Minion m)
+            if (target is Minion m && m.Place is not null && Place is not null)
             {
-                bf[m.Pid].Field.Remove(m);
-                bf[Pid].Field.Add(m);
+                bf[m.Place.Pid].Field.Remove(m);
+                bf[Place.Pid].Field.Add(m);
             }
         }
 

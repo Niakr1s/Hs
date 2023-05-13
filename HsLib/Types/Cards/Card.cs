@@ -21,11 +21,7 @@ namespace HsLib.Types.Cards
 
         public Mp Mp { get; }
 
-        public Loc Loc { get; set; } = Loc.None;
-
-        public Pid Pid { get; set; } = Pid.None;
-
-        public int Index { get; set; } = -1; // TODO: make nullable
+        public Place? Place { get; set; }
 
         /// <summary>
         /// Is set by Container.

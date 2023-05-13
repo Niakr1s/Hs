@@ -1,4 +1,5 @@
 ﻿using HsLib.Systems;
+using HsLib.Types;
 using HsLib.Types.Cards;
 
 namespace HsLib.Cards.Abilities
@@ -14,7 +15,8 @@ namespace HsLib.Cards.Abilities
 
         protected override void DoUseEffect(Battlefield bf, Card? target)
         {
-            bf[Pid].Hero.Card.Armor.Increase(2);
+            if (Place is null) { return; }
+            bf[Place.Pid].Hero.Card.Armor.Increase(2);
         }
     }
 }

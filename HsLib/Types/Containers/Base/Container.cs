@@ -29,9 +29,7 @@ namespace HsLib.Types.Containers.Base
         /// <param name="card"></param>
         protected virtual void AfterInsert(TCard card)
         {
-            card.Pid = Pid;
-            card.Loc = Loc;
-            card.Index = Cards.ToList().IndexOf(card); // TODO: refactor, it's ugly
+            card.Place = new Place(Pid, Loc, Cards.ToList().IndexOf(card)); // TODO: refactor Index, it's ugly
             card.TurnAdded = Bf.Turn.No;
 
             Event?.Invoke(this, new ContainerCardInsertEventArgs(card, Pid, Loc));
@@ -43,9 +41,7 @@ namespace HsLib.Types.Containers.Base
         /// <param name="card"></param>
         protected virtual void AfterRemove(TCard card)
         {
-            card.Pid = Pid.None;
-            card.Loc = Loc.None;
-            card.Index = -1;
+            card.Place = null;
             card.TurnAdded = 0;
 
             Event?.Invoke(this, new ContainerCardRemoveEventArgs(card, Pid, Loc));

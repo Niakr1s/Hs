@@ -31,7 +31,7 @@ namespace HsLibTests.Cards.Spells
             Assert.AreEqual(1, mindControl.UseEffectTargets(bf).Count());
 
             mindControl.UseEffect(bf, yeti);
-            Assert.AreEqual(Pid.P1, yeti.Pid);
+            Assert.AreEqual(Pid.P1, yeti.Place?.Pid);
             Assert.AreEqual(1, bf[Pid.P1].Field.Count);
             Assert.AreEqual(0, bf[Pid.P2].Field.Count);
         }

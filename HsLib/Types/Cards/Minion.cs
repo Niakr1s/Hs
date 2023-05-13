@@ -1,4 +1,5 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Exceptions;
+using HsLib.Interfaces;
 using HsLib.Systems;
 using HsLib.Types.Stats;
 using HsLib.Types.Stats.Base;
@@ -67,7 +68,8 @@ namespace HsLib.Types.Cards
 
         public bool CanBeMeleeAttacked(Battlefield bf)
         {
-            return !Stealth.Value && (Taunt.Value || !bf[Pid].Field.HasAnyActiveTaunt());
+            if (Place is null) { throw new PlaceException(); }
+            return !Stealth.Value && (Taunt.Value || !bf[Place.Pid].Field.HasAnyActiveTaunt());
         }
 
         public IDamageable GetDefender(Battlefield bf)
@@ -77,9 +79,11 @@ namespace HsLib.Types.Cards
 
         public override void PlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
         {
+            if (Place is null) { throw new PlaceException(); }
+
             base.PlayFromHand(bf);
             if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, effectTarget); }
-            bf.MoveService.PlayMinion(Pid, Index, fieldIndex);
+            bf.MoveService.PlayMinion(Place.Pid, Place.Index, fieldIndex);
         }
     }
 }

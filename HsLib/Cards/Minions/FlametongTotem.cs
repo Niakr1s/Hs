@@ -16,7 +16,7 @@ namespace HsLib.Cards.Minions
         public override void AfterContainerInsert(Battlefield bf)
         {
             base.AfterContainerInsert(bf);
-            if (Loc == Loc.Field)
+            if (Place?.Loc == Loc.Field)
             {
                 ReapplyEnchants(bf);
                 bf.Event += Bf_Event;
@@ -50,8 +50,8 @@ namespace HsLib.Cards.Minions
 
         private IEnumerable<Minion> GetEnchantTargets(Battlefield bf)
         {
-            if (Pid == Pid.None) yield break;
-            Field f = bf[Pid].Field;
+            if (Place is null) { yield break; }
+            Field f = bf[Place.Pid].Field;
             Minion? left = f.Left(this);
             Minion? right = f.Right(this);
             if (left is not null) yield return left;

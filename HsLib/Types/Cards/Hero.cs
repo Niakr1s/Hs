@@ -1,4 +1,5 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Exceptions;
+using HsLib.Interfaces;
 using HsLib.Systems;
 using HsLib.Types.Stats;
 
@@ -20,9 +21,10 @@ namespace HsLib.Types.Cards
 
         public bool CanBeMeleeAttacked(Battlefield bf)
         {
-            if (Loc != Loc.Hero) { return false; }
+            if (Place is null) { throw new PlaceException(); }
+            if (Place.Loc != Loc.Hero) { return false; }
             if (Dead) { return false; }
-            return !bf[Pid].Field.HasAnyActiveTaunt();
+            return !bf[Place.Pid].Field.HasAnyActiveTaunt();
         }
 
         public int GetDamage(int value)

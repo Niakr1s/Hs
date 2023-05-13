@@ -1,4 +1,5 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Exceptions;
+using HsLib.Interfaces;
 using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Events;
@@ -66,8 +67,9 @@ namespace HsLib.Systems.Services
         public bool CastSpell(Spell spell, Card? target = null)
         {
             if (!UseEffect(spell, target)) return false;
+            if (spell.Place is null) { throw new PlaceException(); }
 
-            Pid spellPid = spell.Pid;
+            Pid spellPid = spell.Place.Pid;
             Bf[spellPid].Hand.Remove(spell);
             Bf[spellPid].Graveyard.Add(spell);
             return true;
