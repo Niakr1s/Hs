@@ -17,7 +17,7 @@ namespace HsLib.Cards.Minions
     {
         public AbusiveSergeantBattlecry(Card owner) : base(owner)
         {
-            Effect = new GiveDamageBuff(owner, EffectType.Solo, new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He })
+            Effect = new GiveDamageBuffEffect(owner, EffectType.Solo, new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He })
             {
                 TillEndOfTurn = true
             };
