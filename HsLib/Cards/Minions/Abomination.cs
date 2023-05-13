@@ -11,8 +11,8 @@ namespace HsLib.Cards.Minions
         {
             _deathrattleTargets = new Target
             {
-                Locs = new() { Loc.Field, Loc.Hero },
-                Sides = new() { PidSide.Me, PidSide.He },
+                Locs = Loc.Field | Loc.Hero,
+                Sides = PidSide.Me | PidSide.He,
             };
         }
 

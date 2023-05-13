@@ -3,13 +3,13 @@ using HsLib.Systems;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Spell : Card, IEffect
+    public abstract class Spell : Card, IActiveEffect
     {
         protected Spell(int mp) : base(mp)
         {
         }
 
-        public abstract bool EffectMustHaveTarget { get; }
+        public abstract bool EffectIsSoloTarget { get; }
 
         public bool CanUseEffect(Battlefield bf)
         {

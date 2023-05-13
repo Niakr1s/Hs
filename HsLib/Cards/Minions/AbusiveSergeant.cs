@@ -1,10 +1,7 @@
-﻿using HsLib.Functions;
-using HsLib.Systems;
+﻿using HsLib.Interfaces;
 using HsLib.Types;
 using HsLib.Types.Cards;
-using HsLib.Types.Events;
-using HsLib.Types.Stats.Base;
-
+using HsLib.Types.Effects;
 
 namespace HsLib.Cards.Minions
 {
@@ -18,29 +15,14 @@ namespace HsLib.Cards.Minions
 
     file class AbusiveSergeantBattlecry : Battlecry
     {
-        public AbusiveSergeantBattlecry(Minion m) : base(m)
+        public AbusiveSergeantBattlecry(Card owner) : base(owner)
         {
-            EffectTargets = new Target
+            Effect = new GiveDamageBuff(owner, true, new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He })
             {
-                Locs = new() { Loc.Field },
-                Sides = new() { PidSide.Me, PidSide.He }
+                TillEndOfTurn = true
             };
         }
 
-        public override bool EffectMustHaveTarget => true;
-
-        public override bool CanUseEffect(Battlefield bf)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void UseEffect(Battlefield bf, Card? target)
-        {
-            if (target is not null && target is Minion m)
-            {
-                Enchant<int> buff = m.Atk.AddBuff(2);
-                Do.Once(bf, e => e.EventArgs is TurnEndEventArgs, () => buff.Active = false);
-            }
-        }
+        protected override IEffect Effect { get; }
     }
 }

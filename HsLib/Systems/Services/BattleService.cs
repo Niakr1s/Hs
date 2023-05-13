@@ -46,9 +46,9 @@ namespace HsLib.Systems.Services
             return true;
         }
 
-        public bool UseEffect(IEffect effect, Card? target = null)
+        public bool UseEffect(IActiveEffect effect, Card? target = null)
         {
-            bool targetIsValid = effect.EffectMustHaveTarget ^ target is null || !effect.UseEffectTargets(Bf).Contains(target);
+            bool targetIsValid = effect.EffectIsSoloTarget ^ target is null || !effect.UseEffectTargets(Bf).Contains(target);
             if (!targetIsValid || !effect.CanUseEffect(Bf))
             {
                 return false;

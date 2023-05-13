@@ -1,6 +1,6 @@
-﻿using HsLib.Systems;
-using HsLib.Types;
+﻿using HsLib.Interfaces;
 using HsLib.Types.Cards;
+using HsLib.Types.Effects;
 
 namespace HsLib.Cards.Abilities
 {
@@ -8,15 +8,12 @@ namespace HsLib.Cards.Abilities
     {
         public ArmorUp() : base(2)
         {
-            EffectTargets = null;
+            Effect = new GetArmorEffect(this)
+            {
+                Armor = 2
+            };
         }
 
-        public override bool EffectMustHaveTarget => false;
-
-        protected override void DoUseEffect(Battlefield bf, Card? target)
-        {
-            if (Place is null) { return; }
-            bf[Place.Pid].Hero.Card.Armor.Increase(2);
-        }
+        protected override IEffect Effect { get; }
     }
 }

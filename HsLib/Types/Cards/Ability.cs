@@ -3,39 +3,25 @@ using HsLib.Systems;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Ability : Card, IEffect
+    public abstract class Ability : Card, IActiveEffect
     {
         protected Ability(int mp) : base(mp)
         {
-
         }
 
-        protected Target? EffectTargets { get; set; }
+        protected abstract IEffect Effect { get; }
 
-        public virtual IEnumerable<Card> UseEffectTargets(Battlefield bf)
-        {
-            if (EffectTargets is null) { yield break; }
+        public virtual IEnumerable<Card> UseEffectTargets(Battlefield bf) => Effect.UseEffectTargets(bf);
 
-            foreach (Card card in bf.Cards)
-            {
-                if (EffectTargets?.IsValidTarget(this, card) == true)
-                {
-                    yield return card;
-                }
-            }
-        }
-
-        public abstract bool EffectMustHaveTarget { get; }
+        public bool EffectIsSoloTarget => Effect.EffectIsSoloTarget;
 
         private bool EffectUsedThisTurn { get; set; }
 
         public void UseEffect(Battlefield bf, Card? target)
         {
-            DoUseEffect(bf, target);
+            Effect.UseEffect(bf, target);
             EffectUsedThisTurn = true;
         }
-
-        protected abstract void DoUseEffect(Battlefield bf, Card? target);
 
         public bool CanUseEffect(Battlefield bf)
         {

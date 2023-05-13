@@ -2,7 +2,7 @@
 using HsLib.Systems;
 using HsLib.Types;
 using HsLib.Types.Cards;
-
+using HsLibTests.Helpers;
 
 namespace HsLibTests.Cards.Minions
 {
@@ -12,8 +12,7 @@ namespace HsLibTests.Cards.Minions
         [TestMethod()]
         public void AbusiveSergeantTest()
         {
-            Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
-            bf.Turn.Next();
+            Battlefield bf = TestBattlefield.New();
 
             Minion yeti = new ChillwindYeti();
             bf[Pid.P1].Field.Add(yeti);

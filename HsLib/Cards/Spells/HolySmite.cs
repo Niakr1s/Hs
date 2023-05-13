@@ -21,11 +21,11 @@ namespace HsLib.Cards.Spells
 
         private readonly Target _target = new Target
         {
-            Locs = new() { Loc.Field, Loc.Hero },
-            Sides = new() { PidSide.He, PidSide.Me }
+            Locs = Loc.Field | Loc.Hero,
+            Sides = PidSide.He | PidSide.Me
         };
 
-        public override bool EffectMustHaveTarget => true;
+        public override bool EffectIsSoloTarget => true;
 
         public override IEnumerable<Card> UseEffectTargets(Battlefield bf)
         {

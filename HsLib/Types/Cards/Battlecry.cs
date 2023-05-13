@@ -3,32 +3,23 @@ using HsLib.Systems;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Battlecry : IEffect
+    public abstract class Battlecry : IActiveEffect
     {
-        protected Battlecry(Minion minion)
+        protected Battlecry(Card owner)
         {
-            Minion = minion;
+            Owner = owner;
         }
 
-        public Minion Minion { get; }
+        public Card Owner { get; }
 
-        protected Target? EffectTargets { get; set; }
-        public abstract bool EffectMustHaveTarget { get; }
+        public bool EffectIsSoloTarget => Effect.EffectIsSoloTarget;
 
-        public IEnumerable<Card> UseEffectTargets(Battlefield bf)
-        {
-            if (!CanUseEffect(bf)) { yield break; }
+        public void UseEffect(Battlefield bf, Card? target) => Effect.UseEffect(bf, target);
 
-            foreach (Card card in bf.Cards)
-            {
-                if (EffectTargets?.IsValidTarget(Minion, card) == true)
-                {
-                    yield return card;
-                }
-            }
-        }
+        public IEnumerable<Card> UseEffectTargets(Battlefield bf) => Effect.UseEffectTargets(bf);
 
-        public abstract void UseEffect(Battlefield bf, Card? target);
-        public abstract bool CanUseEffect(Battlefield bf);
+        public bool CanUseEffect(Battlefield bf) => true;
+
+        protected abstract IEffect Effect { get; }
     }
 }
