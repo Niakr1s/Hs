@@ -70,7 +70,7 @@ namespace HsLib.Types.Containers
                 Loc.Ability => Ability[index],
                 Loc.Secret => Secrets[index],
                 Loc.Graveyard => Graveyard[index],
-                Loc.None => null,
+                _ => null,
             } ?? throw new ArgumentException("wrong loc");
         }
 

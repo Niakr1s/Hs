@@ -10,7 +10,7 @@ namespace HsLib.Types
 
         public bool IsValidTarget(IWithPlace owner, IWithPlace? target)
         {
-            if (owner.Place is null || target.Place is null) { return false; }
+            if (owner.Place is null) { return false; }
 
             if (target is null)
             {
@@ -18,7 +18,7 @@ namespace HsLib.Types
             }
             else
             {
-                if (target.Place.Pid == Pid.None || target.Place.Loc == Loc.None) return false;
+                if (target.Place is null) { return false; }
 
                 bool sideIsCorrect = Sides.Contains(owner.Place.Pid.Side(target.Place.Pid));
                 bool placeIsCorrect = Locs.Contains(target.Place.Loc);

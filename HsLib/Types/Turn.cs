@@ -1,4 +1,5 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Exceptions;
+using HsLib.Interfaces;
 using HsLib.Types.Events;
 
 namespace HsLib.Types
@@ -21,11 +22,12 @@ namespace HsLib.Types
         /// <summary>
         /// Current Pid.
         /// </summary>
+        /// <exception cref="NotStartedException"/>
         public Pid Pid
         {
             get => No switch
             {
-                <= 0 => Pid.None,
+                <= 0 => throw new NotStartedException(),
                 _ => No % 2 == 1 ? Pid.P1 : Pid.P2,
             };
         }
@@ -45,8 +47,6 @@ namespace HsLib.Types
 
         public void Skip(Pid pid)
         {
-            if (pid == Pid.None) throw new Exception("pid is None");
-
             do
             {
                 Next();

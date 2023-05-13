@@ -2,7 +2,6 @@
 {
     public enum Pid
     {
-        None,
         P1,
         P2,
     }
@@ -10,23 +9,15 @@
 
     public enum PidSide
     {
-        None,
         Me,
         He,
     }
 
     public static class Pids
     {
-        public static Pid[] All(bool withNone = false)
+        public static Pid[] All()
         {
-            if (withNone)
-            {
-                return new Pid[] { Pid.None, Pid.P1, Pid.P2 };
-            }
-            else
-            {
-                return new Pid[] { Pid.P1, Pid.P2 };
-            }
+            return new Pid[] { Pid.P1, Pid.P2 };
         }
     }
 
@@ -36,12 +27,11 @@
         {
             Pid.P1 => Pid.P2,
             Pid.P2 => Pid.P1,
-            _ => throw new Exception("pid is None")
+            _ => throw new InvalidOperationException()
         };
 
         public static PidSide Side(this Pid pid, Pid other)
         {
-            if (pid == Pid.None || other == Pid.None) return PidSide.None;
             return (pid == other) switch
             {
                 true => PidSide.Me,

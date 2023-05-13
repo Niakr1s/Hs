@@ -1,4 +1,5 @@
-﻿using HsLib.Types;
+﻿using HsLib.Exceptions;
+using HsLib.Types;
 
 namespace HsLibTests.Types
 {
@@ -10,7 +11,7 @@ namespace HsLibTests.Types
         {
             Turn t = new Turn();
             Assert.AreEqual(0, t.No);
-            Assert.AreEqual(Pid.None, t.Pid);
+            Assert.ThrowsException<NotStartedException>(() => t.Pid);
 
             t.Next();
             Assert.AreEqual(1, t.No);
@@ -25,8 +26,6 @@ namespace HsLibTests.Types
         public void SkipPidTest()
         {
             Turn t = new Turn();
-
-            Assert.ThrowsException<Exception>(() => t.Skip(Pid.None));
 
             t.Skip(Pid.P1);
             Assert.AreEqual(1, t.No);
