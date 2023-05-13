@@ -75,7 +75,7 @@ namespace HsLib.Containers.Base
             }
         }
 
-        private void RemoveAt(int index)
+        public void RemoveAt(int index)
         {
             TCard card = _cards[index];
             _cards.RemoveAt(index);

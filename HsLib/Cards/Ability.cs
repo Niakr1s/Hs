@@ -40,9 +40,6 @@ namespace HsLib.Cards
 
         public bool CanUseEffect(Battlefield bf)
         {
-            if (!bf.Turn.IsActivePid(Pid)) { return false; }
-            if (Loc != Loc.Hand) { return false; }
-            if (bf[Pid].Mp.Value < Mp.Value) { return false; }
             return !EffectUsedThisTurn;
         }
 

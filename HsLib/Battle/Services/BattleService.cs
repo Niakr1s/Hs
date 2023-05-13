@@ -15,39 +15,31 @@ namespace HsLib.Battle.Services
 
         public Battlefield Bf { get; }
 
-        public bool WithRules { get; set; } = true;
-
         public event EventHandler<BattleEventArgs>? Event;
 
         /// <summary>
         /// Attacker attacks defender.
         /// </summary>
-        /// <param name="attacker"></param>
-        /// <param name="defender"></param>
+        /// <param name="attacker">Should have valid place</param>
+        /// <param name="defender">Should have valid place.</param>
         /// <param name="attackDefender">Is a defender, who takes counterattack. If no defender provided, attacker will try defend by himself.</param>
         /// <returns>True, if attack was actually made.</returns>
         public bool MeleeAttack(IAttacker attacker, IDamageable defender,
-            IDamageable? attackDefender = null,
-            bool isCounterAttack = false)
+            IDamageable? attackDefender = null)
         {
-            if (WithRules && !attacker.CanMeleeAttack(Bf)) return false;
-            if (WithRules && !defender.CanBeMeleeAttacked(Bf)) return false;
+            if (!attacker.CanMeleeAttack(Bf)) return false;
+            if (!defender.CanBeMeleeAttacked(Bf)) return false;
 
             attackDefender ??= attacker as IDamageable;
-            //if (attackDefender?.Dead == true) return false; // seems should always counterattack
-            if (attacker.Atk.Value <= 0) return false;
 
-            if (!isCounterAttack)
-            {
-                Event?.Invoke(this, new BattleMeleePreAttackEventArgs(attacker, defender));
-                if (attackDefender is IMortal m && m.Dead) return false;
-            }
+            Event?.Invoke(this, new BattleMeleePreAttackEventArgs(attacker, defender));
+            if (!attacker.CanMeleeAttack(Bf)) return false;
 
             DealDamage(attacker.Atk.Value, defender);
 
-            if (!isCounterAttack && attackDefender is not null && defender is IAttacker counterAttacker)
+            if (attackDefender is not null && defender is IAttacker counterAttacker)
             {
-                MeleeAttack(counterAttacker, attackDefender, isCounterAttack: true);
+                DealDamage(counterAttacker.Atk.Value, attackDefender);
             }
 
             attacker.AfterAttack(Bf);
@@ -59,9 +51,11 @@ namespace HsLib.Battle.Services
 
         public bool UseEffect(IEffect effect, Card? target = null)
         {
-            if (WithRules && effect.EffectMustHaveTarget && target is null) { return false; }
-            if (WithRules && !effect.UseEffectTargets(Bf).Contains(target)) { return false; }
-            if (WithRules && !effect.CanUseEffect(Bf)) { return false; }
+            bool targetIsValid = (effect.EffectMustHaveTarget ^ target is null) || (!effect.UseEffectTargets(Bf).Contains(target));
+            if (!targetIsValid || !effect.CanUseEffect(Bf))
+            {
+                return false;
+            }
 
             effect.UseEffect(Bf, target);
             return true;

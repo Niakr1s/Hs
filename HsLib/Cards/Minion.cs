@@ -61,19 +61,13 @@ namespace HsLib.Cards
 
         public bool CanMeleeAttack(Battlefield bf)
         {
-            if (Dead) { return false; }
-            if (Atk == 0) { return false; }
-            if (Loc != Common.Place.Loc.Field) { return false; }
-            if (!bf.Turn.IsActivePid(Pid)) { return false; }
             if (Windfury.AttacksLeft(AtksThisTurn) <= 0) { return false; }
             return !bf.Turn.IsFirstTurn(TurnAdded) || Charge;
         }
 
         public bool CanBeMeleeAttacked(Battlefield bf)
         {
-            if (Loc != Common.Place.Loc.Field) { return false; }
-            if (Dead) { return false; }
-            return Stealth.Value && (Taunt.Value || !bf[Pid].Field.HasAnyActiveTaunt());
+            return !Stealth.Value && (Taunt.Value || !bf[Pid].Field.HasAnyActiveTaunt());
         }
     }
 }

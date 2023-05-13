@@ -66,24 +66,74 @@ namespace HsLib.Battle
         /// </summary>
         public BattlefieldPlayer Enemy => this[Turn.Pid.He()];
 
+        #region MeleeAttack
+
+        public bool WeaponAttack(Loc defenderLoc, int defenderIndex)
+        {
+            return BattleService.MeleeAttack(Player.Weapon.Card, GetDefender(defenderLoc, defenderIndex), Player.Hero.Card);
+        }
+
         public bool WeaponAttack(IDamageable defender)
         {
-            return BattleService.MeleeAttack(Player.Weapon.Card, defender, Player.Hero.Card);
+            if (defender.Pid == Turn.Pid) { throw new PidException(); }
+            return WeaponAttack(defender.Loc, defender.Index);
+        }
+
+        public bool MinionAttack(int attackerIndex, Loc defenderLoc, int defenderIndex)
+        {
+            Minion attacker = (Minion)Player.GetCard(Loc.Field, attackerIndex);
+            IDamageable defender = GetDefender(defenderLoc, defenderIndex);
+            return MinionAttack(attacker, defender);
         }
 
         public bool MinionAttack(Minion attacker, IDamageable defender)
         {
+            if (attacker.Pid != Player.Pid) { throw new PidException(); }
+            if (attacker.Loc != Loc.Field) { throw new LocException(); }
+            if (defender.Pid != Enemy.Pid) { throw new PidException(); }
+            if (defender.Loc != Loc.Field && defender.Loc != Loc.Hero) { throw new LocException(); }
             return BattleService.MeleeAttack(attacker, defender);
         }
 
-        public bool PlayFromHand(Card card)
+        private IDamageable GetDefender(Loc loc, int index)
         {
-            return true; // TODO
+            if (loc != Loc.Hero && loc != Loc.Field)
+            {
+                throw new LocException();
+            }
+
+            return Enemy.GetCard(loc, index) as IDamageable ?? throw new ArgumentException("not damageable");
         }
 
-        public bool UseAbility(Card? target = null)
+        #endregion
+
+        #region PlayFromHand
+
+        public bool PlayFromHand(int index, int? fieldIndex = null)
+        {
+            // TODO
+            return true;
+        }
+
+        #endregion
+
+        #region UseAbility
+
+        public bool UseAbility(Pid targetPid, Loc targetLoc, int targetIndex)
+        {
+            return UseAbility(this[targetPid].GetCard(targetLoc, targetIndex));
+        }
+
+        public bool UseAbility(Card target)
         {
             return BattleService.UseAbility(Turn.Pid, target);
         }
+
+        public bool UseAbility()
+        {
+            return BattleService.UseAbility(Turn.Pid);
+        }
+
+        #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using HsLib.Battle;
 using HsLib.Common.Place;
+using HsLibTests;
 
 namespace HsLib.Cards.KnownCards.Minions.Tests
 {
@@ -9,7 +10,7 @@ namespace HsLib.Cards.KnownCards.Minions.Tests
         [TestMethod()]
         public void AbomintaionTest()
         {
-            Battlefield bf = new Battlefield(CardId.JainaProudmoore, CardId.JainaProudmoore);
+            Battlefield bf = TestBattlefield.New();
             Minion abom1 = new Abomintaion();
             Minion abom2 = new Abomintaion();
             Minion yeti1 = new ChillwindYeti();
@@ -20,7 +21,7 @@ namespace HsLib.Cards.KnownCards.Minions.Tests
             bf[Pid.P1].Field.Add(yeti1);
             bf[Pid.P2].Field.Add(yeti2);
 
-            bf.Turn.Start();
+            bf.Turn.Skip(bf.Player.Pid);
             Assert.AreEqual(true, bf.MinionAttack(abom1, abom2));
             Assert.AreEqual(0, abom1.Hp);
             Assert.AreEqual(0, abom1.Hp);

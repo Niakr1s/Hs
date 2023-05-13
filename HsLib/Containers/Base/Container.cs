@@ -32,6 +32,7 @@ namespace HsLib.Containers.Base
         {
             card.Pid = Pid;
             card.Loc = Loc;
+            card.Index = Cards.ToList().IndexOf(card); // TODO: refactor, it's ugly
             card.TurnAdded = Bf.Turn.No;
 
             Event?.Invoke(this, new ContainerCardInsertEventArgs(card, Pid, Loc));
@@ -45,6 +46,7 @@ namespace HsLib.Containers.Base
         {
             card.Pid = Pid.None;
             card.Loc = Loc.None;
+            card.Index = -1;
             card.TurnAdded = 0;
 
             Event?.Invoke(this, new ContainerCardRemoveEventArgs(card, Pid, Loc));

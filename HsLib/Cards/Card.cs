@@ -26,6 +26,8 @@ namespace HsLib.Cards
 
         public Pid Pid { get; set; } = Pid.None;
 
+        public int Index { get; set; } = -1; // TODO: make nullable
+
         /// <summary>
         /// Is set by Container.
         /// </summary>
