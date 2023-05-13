@@ -30,22 +30,12 @@ namespace HsLib.Types.Effects
         {
             if (EffectIsSoloTarget)
             {
-                UseEffectSolo(bf, target);
+                EffectAction(bf, target);
             }
             else
             {
-                UseEffectMass(bf);
+                EffectAction(bf, null);
             }
-        }
-
-        private void UseEffectSolo(Battlefield bf, Card? target)
-        {
-            EffectAction(bf, target);
-        }
-
-        private void UseEffectMass(Battlefield bf)
-        {
-            EffectAction(bf, null);
         }
     }
 }
