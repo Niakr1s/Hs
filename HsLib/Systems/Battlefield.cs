@@ -66,6 +66,8 @@ namespace HsLib.Systems
         /// </summary>
         public BattlefieldPlayer Enemy => this[Turn.Pid.He()];
 
+
+
         #region MeleeAttack
 
         public bool WeaponAttack(Loc defenderLoc, int defenderIndex)
@@ -109,6 +111,10 @@ namespace HsLib.Systems
 
         #endregion
 
+
+
+        #region PlayFromHand
+
         public bool PlayFromHand(int index, int? fieldIndex = null, ICard? effectTarget = null)
         {
             try
@@ -122,6 +128,10 @@ namespace HsLib.Systems
                 return false;
             }
         }
+
+        #endregion
+
+
 
         #region UseAbility
 
