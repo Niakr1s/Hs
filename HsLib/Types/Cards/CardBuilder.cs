@@ -22,6 +22,9 @@ namespace HsLib.Types.Cards
                 CardId.ChillwindYeti => new ChillwindYeti(),
                 CardId.FlametongTotem => new FlametongTotem(),
                 CardId.Abomination => new Abomintaion(),
+                CardId.DruidOfTheClaw => new DruidOfTheClaw(),
+                CardId.DruidOfTheClawCharge => new DruidOfTheClawCharge(),
+                CardId.DruidOfTheClawTaunt => new DruidOfTheClawTaunt(),
 
                 CardId.JainaProudmoore => new JainaProudmoore(),
                 CardId.Fireblast => new Fireblast(),

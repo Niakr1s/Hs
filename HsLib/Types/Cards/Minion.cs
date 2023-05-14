@@ -31,7 +31,7 @@ namespace HsLib.Types.Cards
 
         public bool Dead => Hp.Value <= 0;
 
-        public IEnumerable<CardId>? ChoseOne { get; }
+        public virtual IEnumerable<CardId>? ChoseOne { get; }
 
         public int GetDamage(int value)
         {
