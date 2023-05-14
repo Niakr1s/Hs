@@ -4,7 +4,7 @@ using HsLib.Types.Effects;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Ability : Card, IActiveEffect
+    public abstract class Ability : Card, IEffect
     {
         protected Ability(int mp) : base(mp)
         {
@@ -12,15 +12,15 @@ namespace HsLib.Types.Cards
 
         protected abstract IEffect Effect { get; }
 
-        public virtual IEnumerable<Card> UseEffectTargets(Battlefield bf) => Effect.UseEffectTargets(bf);
+        public virtual IEnumerable<Card> UseEffectTargets(Battlefield bf, Pid pid) => Effect.UseEffectTargets(bf, pid);
 
         public EffectType EffectType => Effect.EffectType;
 
         private bool EffectUsedThisTurn { get; set; }
 
-        public void UseEffect(Battlefield bf, Card? target)
+        public void UseEffect(Battlefield bf, Pid pid, Card? target)
         {
-            Effect.UseEffect(bf, target);
+            Effect.UseEffect(bf, pid, target);
             EffectUsedThisTurn = true;
         }
 

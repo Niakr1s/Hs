@@ -40,7 +40,7 @@ namespace HsLib.Systems.Services
                 if (card is IWithDeathrattle d)
                 {
                     // TODO: Place refactor
-                    d.Deathrattle?.UseEffect(Bf, null);
+                    // d.Deathrattle?.UseEffect(Bf, null);
                 }
             }
 

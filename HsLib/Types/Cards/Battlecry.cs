@@ -15,9 +15,9 @@ namespace HsLib.Types.Cards
 
         public EffectType EffectType => Effect.EffectType;
 
-        public void UseEffect(Battlefield bf, Card? target) => Effect.UseEffect(bf, target);
+        public void UseEffect(Battlefield bf, Pid pid, Card? target) => Effect.UseEffect(bf, pid, target);
 
-        public IEnumerable<Card> UseEffectTargets(Battlefield bf) => Effect.UseEffectTargets(bf);
+        public IEnumerable<Card> UseEffectTargets(Battlefield bf, Pid pid) => Effect.UseEffectTargets(bf, pid);
 
         protected abstract IEffect Effect { get; }
     }

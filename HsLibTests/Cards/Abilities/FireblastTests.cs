@@ -17,7 +17,7 @@ namespace HsLibTests.Cards.Abilities
             Battlefield bf = TestBattlefield.New(p1: CardId.JainaProudmoore);
             Ability fireblast = bf.Player.Ability.Card;
             Assert.IsInstanceOfType(fireblast, typeof(Fireblast));
-            Assert.AreEqual(2, fireblast.UseEffectTargets(bf).Count());
+            Assert.AreEqual(2, fireblast.UseEffectTargets(bf, bf.Player.Pid).Count());
 
             Assert.AreEqual(30, bf.Player.Hero.Card.Hp.Value);
             Assert.AreEqual(true, bf.UseAbility(bf.Player.Hero.Card));
@@ -27,9 +27,9 @@ namespace HsLibTests.Cards.Abilities
             Minion y2 = new ChillwindYeti();
 
             bf[Pid.P1].Field.Add(y1);
-            Assert.AreEqual(3, fireblast.UseEffectTargets(bf).Count());
+            Assert.AreEqual(3, fireblast.UseEffectTargets(bf, bf.Player.Pid).Count());
             bf[Pid.P2].Field.Add(y2);
-            Assert.AreEqual(4, fireblast.UseEffectTargets(bf).Count());
+            Assert.AreEqual(4, fireblast.UseEffectTargets(bf, bf.Player.Pid).Count());
 
             Assert.AreEqual(5, y1.Hp.Value);
             Assert.AreEqual(5, y2.Hp.Value);

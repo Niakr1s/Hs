@@ -4,7 +4,7 @@ using HsLib.Types.Effects;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Spell : Card, IActiveEffect
+    public abstract class Spell : Card, IEffect
     {
         protected Spell(int mp) : base(mp)
         {
@@ -14,22 +14,18 @@ namespace HsLib.Types.Cards
 
         public bool CanUseEffect(Battlefield bf)
         {
-            if (Place is null) { return false; }
-            if (!bf.Turn.IsActivePid(Place.Pid)) { return false; }
-            if (Place.Loc != Loc.Hand) { return false; }
-            if (bf[Place.Pid].Mp.Value < Mp.Value) { return false; }
-            return true;
+            return Place?.Loc == Loc.Hand;
         }
 
-        public abstract void UseEffect(Battlefield bf, Card? target);
+        public abstract void UseEffect(Battlefield bf, Pid pid, Card? target);
 
-        public abstract IEnumerable<Card> UseEffectTargets(Battlefield bf);
+        public abstract IEnumerable<Card> UseEffectTargets(Battlefield bf, Pid pid);
 
         protected override void DoPlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
         {
             if (Place is null) { return; }
 
-            bf.BattleService.UseActiveEffect(this, effectTarget);
+            bf.BattleService.UseEffect(this, Place.Pid, effectTarget);
             bf.MoveService.RemoveCard(Place);
         }
     }

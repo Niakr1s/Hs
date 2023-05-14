@@ -21,12 +21,12 @@ namespace HsLib.Types.Effects
 
         private readonly Targets _targets;
 
-        public virtual IEnumerable<Card> UseEffectTargets(Battlefield bf)
+        public virtual IEnumerable<Card> UseEffectTargets(Battlefield bf, Pid pid)
         {
-            return _targets.GetValidTargets(Owner, bf.Cards);
+            return _targets.GetValidTargets(pid, bf.Cards);
         }
 
-        public void UseEffect(Battlefield bf, Card? target)
+        public void UseEffect(Battlefield bf, Pid pid, Card? target)
         {
             switch (EffectType)
             {
@@ -39,7 +39,7 @@ namespace HsLib.Types.Effects
                     break;
 
                 case EffectType.Mass:
-                    foreach (var card in UseEffectTargets(bf))
+                    foreach (var card in UseEffectTargets(bf, pid))
                     {
                         EffectAction(bf, card);
                     }

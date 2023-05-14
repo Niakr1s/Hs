@@ -11,14 +11,14 @@ namespace HsLib.Cards.Spells
         {
         }
 
-        public override void UseEffect(Battlefield bf, Card? target)
+        public override void UseEffect(Battlefield bf, Pid pid, Card? target)
         {
             if (target is null) return;
 
-            if (target is Minion m && m.Place is not null && Place is not null)
+            if (target is Minion m && m.Place is not null && m.Place.Pid == pid.He())
             {
-                bf[m.Place.Pid].Field.Remove(m);
-                bf[Place.Pid].Field.Add(m);
+                bf[pid.He()].Field.Remove(m);
+                bf[pid].Field.Add(m);
             }
         }
 
@@ -26,9 +26,9 @@ namespace HsLib.Cards.Spells
 
         public override EffectType EffectType => EffectType.Solo;
 
-        public override IEnumerable<Card> UseEffectTargets(Battlefield bf)
+        public override IEnumerable<Card> UseEffectTargets(Battlefield bf, Pid pid)
         {
-            return _targets.GetValidTargets(this, bf.Cards);
+            return _targets.GetValidTargets(pid, bf.Cards);
         }
     }
 }

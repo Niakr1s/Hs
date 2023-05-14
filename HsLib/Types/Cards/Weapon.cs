@@ -67,7 +67,7 @@ namespace HsLib.Types.Cards
         {
             if (Place is null) { throw new PlaceException(); }
 
-            if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, effectTarget); }
+            if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, Place.Pid, effectTarget); }
             bf.MoveService.MoveHandToWeapon(Place.Pid, Place.Index);
         }
     }

@@ -87,7 +87,7 @@ namespace HsLib.Types.Cards
 
             MoveHandToField(bf, transformTo: transformTo, fieldIndex: fieldIndex, check: true); // checking first
 
-            if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, effectTarget); }
+            if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, Place.Pid, effectTarget); }
             if (ChoseOne is not null) { transformTo = (Minion)CardBuilder.FromId(bf[Place.Pid].Player.ChooseOne(ChoseOne)); }
 
             MoveHandToField(bf, transformTo: transformTo, fieldIndex: fieldIndex, check: false); // playing actually

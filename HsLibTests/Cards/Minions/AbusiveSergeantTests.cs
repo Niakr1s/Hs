@@ -22,7 +22,7 @@ namespace HsLibTests.Cards.Minions
             bf[Pid.P1].Hand.Add(abusiveSergeant);
             Assert.AreEqual(4, yeti.Atk.Value);
 
-            abusiveSergeant.Battlecry?.UseEffect(bf, yeti);
+            abusiveSergeant.Battlecry?.UseEffect(bf, bf.Player.Pid, yeti);
             Assert.AreEqual(6, yeti.Atk.Value);
 
             bf.Turn.Next();
