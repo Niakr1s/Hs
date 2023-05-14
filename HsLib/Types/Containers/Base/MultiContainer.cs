@@ -110,7 +110,7 @@ namespace HsLib.Types.Containers.Base
 
         public override bool CanBeInsertedAt(int index)
         {
-            return !IsFull && index > 0 && index <= Count;
+            return !IsFull && index >= 0 && index <= Count;
         }
     }
 }

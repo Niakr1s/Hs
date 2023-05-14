@@ -8,6 +8,8 @@
         FlametongTotem,
         Abomination,
 
+        DruidOfTheClaw, DruidOfTheClawTaunt, DruidOfTheClawCharge,
+
         // heros and abilities
         JainaProudmoore, Fireblast,
         GarroshHellscream, ArmorUp,

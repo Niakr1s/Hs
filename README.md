@@ -264,7 +264,7 @@
 - [ ] Southsea Captain
 - [ ] Totemic Call
 - [ ] Mark of Nature
-- [ ] Druid of the Claw
+- [x] Druid of the Claw
 - [ ] Tundra Rhino
 - [ ] Mogu'shan Warden
 - [ ] Headcrack
@@ -501,8 +501,8 @@
 - [ ] Brewmaster
 - [ ] Transcendence
 - [ ] Crazy Monkey
-- [ ] Druid of the Claw
-- [ ] Druid of the Claw
+- [x] Druid of the Claw
+- [x] Druid of the Claw
 - [ ] Shotgun Blast
 - [ ] Boulderfist Ogre
 - [ ] Core Hound
