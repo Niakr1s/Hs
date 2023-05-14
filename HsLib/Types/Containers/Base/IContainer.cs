@@ -12,6 +12,7 @@ namespace HsLib.Types.Containers.Base
 
         ICard this[int index] { get; }
         IEnumerable<ICard> Cards { get; }
+        int Count { get; }
 
         bool Add(ICard card);
         void Insert(int index, ICard card);
@@ -25,5 +26,6 @@ namespace HsLib.Types.Containers.Base
 
         IEnumerable<RemovedCard> RemoveIf(Predicate<ICard> predicate);
         IEnumerable<RemovedCard> RemoveInactiveCards();
+        Action MoveToContainer(int fromIndex, IContainer toContainer, bool canBurn, int? toIndex = null, ICard? transformTo = null);
     }
 }

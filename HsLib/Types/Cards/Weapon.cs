@@ -54,10 +54,12 @@ namespace HsLib.Types.Cards
 
         public void PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            if (Place is null) { throw new PlaceException(); }
+            Action move = bf[Place!.Pid].Hand.MoveToContainer(Place.Index, bf[Place.Pid].Weapon,
+                canBurn: false, toIndex: 0);
 
             if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, Place.Pid, effectTarget); }
-            bf.MoveService.MoveHandToWeapon(Place.Pid, Place.Index);
+
+            move();
         }
 
         public IDamageable GetDefender(Battlefield bf)

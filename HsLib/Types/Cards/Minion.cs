@@ -83,23 +83,14 @@ namespace HsLib.Types.Cards
 
         public void PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            if (Place is null) { throw new PlaceException(); }
-            Minion transformTo = this;
+            Minion transformTo = ChoseOne is null ? this : (Minion)CardBuilder.FromId(bf[Place!.Pid].Player.ChooseOne(ChoseOne));
 
-            MoveHandToField(bf, transformTo: transformTo, fieldIndex: fieldIndex, check: true); // checking first
+            Action move = bf[Place!.Pid].Hand.MoveToContainer(Place.Index, bf[Place.Pid].Field,
+                canBurn: false, toIndex: fieldIndex, transformTo: transformTo);
 
             if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, Place.Pid, effectTarget); }
-            if (ChoseOne is not null) { transformTo = (Minion)CardBuilder.FromId(bf[Place.Pid].Player.ChooseOne(ChoseOne)); }
 
-            MoveHandToField(bf, transformTo: transformTo, fieldIndex: fieldIndex, check: false); // playing actually
-        }
-
-        private void MoveHandToField(Battlefield bf, Minion? transformTo = null, int? fieldIndex = null, bool check = false)
-        {
-            if (Place is null) { throw new PlaceException(); }
-
-            bf.MoveService.MoveHandToField(Place.Pid, Place.Index,
-                transformTo: transformTo, fieldIndex: fieldIndex, fieldOrError: true, check: check);
+            move();
         }
     }
 }

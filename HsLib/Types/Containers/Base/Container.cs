@@ -156,6 +156,49 @@ namespace HsLib.Types.Containers.Base
             return index >= 0 && index <= Count;
         }
 
+        /// <summary>
+        /// Removes card from container and inserts at another. First call just throws exceptions if move is impossible.
+        /// Calling returned action actually does movement.
+        /// </summary>
+        /// <param name="fromIndex"></param>
+        /// <param name="canBurn">instead of throwing exception on insert failure, just discards</param>
+        /// <param name="toContainer"></param>
+        /// <param name="toIndex">defaults to last</param>
+        /// <param name="transformTo"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <exception cref="IndexOutOfRangeException"></exception>
+        /// <returns>Action, that actually moves to container.</returns>
+        public Action MoveToContainer(
+            int fromIndex,
+            IContainer toContainer,
+            bool canBurn,
+
+            int? toIndex = null,
+            ICard? transformTo = null
+            )
+        {
+            ICard? fromCard = this[fromIndex]; // this can throw IndexOutOfRangeException
+            toIndex ??= toContainer.Count;
+
+            bool canBeInserted = toContainer.CanBeInsertedAt(toIndex.Value);
+            if (!canBeInserted && !canBurn)
+            {
+                throw new InvalidOperationException($"can't be inserted container {toContainer}");
+            }
+            // check section ended
+
+            ICard toCard = transformTo ?? fromCard;
+
+            return () =>
+            {
+                RemoveAt(fromIndex);
+                if (canBeInserted)
+                {
+                    toContainer.Insert(toIndex.Value, toCard);
+                }
+            };
+        }
+
         public IEnumerable<ICard> Cards
         {
             get

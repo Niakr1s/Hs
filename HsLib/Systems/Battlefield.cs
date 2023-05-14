@@ -19,7 +19,6 @@ namespace HsLib.Systems
             };
             BattleService = new BattleService(this);
             DeathService = new DeathService(this);
-            MoveService = new MoveService(this);
             PlayerService = new PlayerService(this);
 
             new EventConnector(this).Connect();
@@ -41,7 +40,6 @@ namespace HsLib.Systems
         #region Services
         internal BattleService BattleService { get; }
         internal DeathService DeathService { get; }
-        internal MoveService MoveService { get; }
         internal PlayerService PlayerService { get; }
         #endregion
 

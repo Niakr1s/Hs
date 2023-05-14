@@ -23,10 +23,8 @@ namespace HsLib.Types.Cards
 
         public void PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            if (Place is null) { return; }
-
-            bf.BattleService.UseEffect(this, Place.Pid, effectTarget);
-            bf.MoveService.RemoveCard(Place);
+            bf.BattleService.UseEffect(this, Place!.Pid, effectTarget);
+            bf[Place.Pid].Hand.Remove(this);
         }
     }
 }
