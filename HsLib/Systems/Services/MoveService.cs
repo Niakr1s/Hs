@@ -83,7 +83,7 @@ namespace HsLib.Systems.Services
             }
         }
 
-        public Card RemoveCard(Place place)
+        public Card RemoveCard(PlaceInContainer place)
         {
             BattlefieldPlayer player = Bf[place.Pid];
             return place.Loc switch

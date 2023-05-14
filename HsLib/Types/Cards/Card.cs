@@ -21,7 +21,7 @@ namespace HsLib.Types.Cards
 
         public Mp Mp { get; }
 
-        public Place? Place { get; set; }
+        public PlaceInContainer? Place { get; set; }
 
         /// <summary>
         /// Is set by Container.

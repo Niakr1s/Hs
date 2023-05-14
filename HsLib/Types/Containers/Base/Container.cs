@@ -29,7 +29,7 @@ namespace HsLib.Types.Containers.Base
         /// <param name="card"></param>
         protected virtual void AfterInsert(TCard card)
         {
-            card.Place = new Place(Pid, Loc, Cards.ToList().IndexOf(card)); // TODO: refactor Index, it's ugly
+            card.Place = new PlaceInContainer(Pid, Loc, Cards.ToList().IndexOf(card)); // TODO: refactor Index, it's ugly
             card.TurnAdded = Bf.Turn.No;
 
             Event?.Invoke(this, new ContainerCardInsertEventArgs(card, Pid, Loc));
