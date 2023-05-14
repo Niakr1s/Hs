@@ -86,7 +86,6 @@ namespace HsLib.Systems.Services
 
             Pid spellPid = spell.Place.Pid;
             Bf[spellPid].Hand.Remove(spell);
-            Bf[spellPid].Graveyard.Add(spell);
             return true;
         }
 

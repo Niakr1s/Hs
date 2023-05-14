@@ -21,10 +21,7 @@ namespace HsLib.Systems.Services
             Card? card = Bf[pid].Deck.Pop();
             if (card is null) { return; }
 
-            if (!Bf[pid].Hand.Add(card))
-            {
-                Bf[pid].Graveyard.Add(card);
-            }
+            Bf[pid].Hand.Add(card);
         }
 
         /// <summary>
@@ -38,7 +35,6 @@ namespace HsLib.Systems.Services
         {
             Hand hand = Bf[pid].Hand;
             WeaponContainer weaponC = Bf[pid].Weapon;
-            Graveyard gy = Bf[pid].Graveyard;
 
             Card? card = hand[handIndex];
             if (card is Weapon w)
@@ -47,35 +43,10 @@ namespace HsLib.Systems.Services
 
                 Weapon prevWeapon = weaponC.Card;
                 weaponC.Card = w;
-                gy.Add(prevWeapon);
             }
             else
             {
                 throw new MoveException($"{card} is not weapon");
-            }
-        }
-
-        /// <summary>
-        /// Equips weapon
-        /// </summary>
-        /// <param name="pid"></param>
-        /// <param name="handIndex"></param>
-        /// <param name="boardIndex"></param>
-        /// <exception cref="MoveException"></exception>
-        public void MoveHandToGraveyard(Pid pid, int handIndex)
-        {
-            Hand hand = Bf[pid].Hand;
-            Graveyard gy = Bf[pid].Graveyard;
-
-            Card? card = hand[handIndex];
-            if (card is not null)
-            {
-                hand.RemoveAt(handIndex);
-                gy.Add(card);
-            }
-            else
-            {
-                throw new MoveException("wrong hand index");
             }
         }
 
@@ -108,28 +79,21 @@ namespace HsLib.Systems.Services
             if (!check)
             {
                 hand.RemoveAt(handIndex);
-                if (!field.Insert(index, cardToField))
-                {
-                    Bf[handPid].Graveyard.Add(cardInHand);
-                }
+                field.Insert(index, cardToField);
             }
         }
 
-        public void MoveFieldToGraveyard(Pid pid, int fieldIndex)
+        public Card RemoveCard(Place place)
         {
-            Card? card = Bf[pid].Hand[fieldIndex];
-            if (card is Minion m)
+            BattlefieldPlayer player = Bf[place.Pid];
+            return place.Loc switch
             {
-                Bf[pid].Hand.RemoveAt(fieldIndex);
-                if (!Bf[pid].Field.Add(m))
-                {
-                    Bf[pid].Graveyard.Add(m);
-                }
-            }
-            else
-            {
-                throw new MoveException($"{card} is not minion");
-            }
+                Loc.Deck => player.Deck.RemoveAt(place.Index),
+                Loc.Hand => player.Hand.RemoveAt(place.Index),
+                Loc.Field => player.Field.RemoveAt(place.Index),
+                Loc.Secret => player.Secrets.RemoveAt(place.Index),
+                _ => throw new NotSupportedException($"can't remove from {place.Loc}"),
+            };
         }
     }
 

@@ -20,7 +20,6 @@ namespace HsLibTests.Cards.Minions
             Assert.IsNotInstanceOfType(bf.Player.Field[0], typeof(DruidOfTheClaw));
 
             Assert.AreEqual(0, bf.Player.Hand.Count);
-            Assert.AreEqual(0, bf.Player.Graveyard.Count);
         }
     }
 }

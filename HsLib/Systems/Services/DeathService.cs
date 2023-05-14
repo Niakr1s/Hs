@@ -28,16 +28,18 @@ namespace HsLib.Systems.Services
         private bool DoStep()
         {
             List<IMortal> dead = Bf.Cards.Select(c => c as IMortal)
-                .Where(c => c?.Dead == true && c.Place?.Loc != Loc.Graveyard).Select(c => c!).ToList();
+                .Where(c => c?.Dead == true).Select(c => c!).ToList();
 
             if (dead.Count == 0) { return false; }
 
-            MoveInactiveCardsToGraveyard();
+            List<Card> cleanedCards = CleanInactiveCards().ToList();
+            if (cleanedCards.Count == 0) { return false; }
 
-            foreach (IMortal m in dead)
+            foreach (Card card in cleanedCards)
             {
-                if (m is IWithDeathrattle d)
+                if (card is IWithDeathrattle d)
                 {
+                    // TODO: Place refactor
                     d.Deathrattle?.UseEffect(Bf, null);
                 }
             }
@@ -45,15 +47,9 @@ namespace HsLib.Systems.Services
             return true;
         }
 
-        private void MoveInactiveCardsToGraveyard()
+        private IEnumerable<Card> CleanInactiveCards()
         {
-            foreach (Pid pid in Pids.All())
-            {
-                foreach (Card card in Bf[pid].CleanInactiveCards())
-                {
-                    Bf[pid].Graveyard.Add(card);
-                }
-            }
+            return Bf[Pid.P1].CleanInactiveCards().Concat(Bf[Pid.P2].CleanInactiveCards());
         }
     }
 }

@@ -74,11 +74,12 @@ namespace HsLib.Types.Containers.Base
             }
         }
 
-        public void RemoveAt(int index)
+        public TCard RemoveAt(int index)
         {
             TCard card = _cards[index];
             _cards.RemoveAt(index);
             AfterRemove(card);
+            return card;
         }
 
         public TCard? Pop()

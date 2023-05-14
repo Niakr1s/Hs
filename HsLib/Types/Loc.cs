@@ -14,8 +14,6 @@
         Ability = 32,
 
         Secret = 64,
-
-        Graveyard = 128,
     }
 
     public class LocException : ArgumentException

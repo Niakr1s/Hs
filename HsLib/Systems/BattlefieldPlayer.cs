@@ -26,11 +26,9 @@ namespace HsLib.Systems
 
             Secrets = new SecretsContainer(bf, pid);
 
-            Graveyard = new(bf, pid);
-
             List<IWithEvent<ContainerEventArgs>> containers = new()
             {
-                Deck, Hand, Field, Hero, Ability, Weapon, Secrets, Graveyard,
+                Deck, Hand, Field, Hero, Ability, Weapon, Secrets,
             };
             containers.ForEach(c => c.Event += (s, e) => Event?.Invoke(s, e));
         }
@@ -59,8 +57,6 @@ namespace HsLib.Systems
 
         public SecretsContainer Secrets { get; }
 
-        public Graveyard Graveyard { get; }
-
         public Card GetCard(Loc loc, int index)
         {
             return loc switch
@@ -72,7 +68,6 @@ namespace HsLib.Systems
                 Loc.Weapon => Weapon[index],
                 Loc.Ability => Ability[index],
                 Loc.Secret => Secrets[index],
-                Loc.Graveyard => Graveyard[index],
                 _ => null,
             } ?? throw new ArgumentException("wrong loc");
         }
@@ -90,8 +85,7 @@ namespace HsLib.Systems
                     .Concat(Hero.Cards)
                     .Concat(Ability.Cards)
                     .Concat(Weapon.Cards)
-                    .Concat(Secrets.Cards)
-                    .Concat(Graveyard.Cards);
+                    .Concat(Secrets.Cards);
             }
         }
 
@@ -107,8 +101,7 @@ namespace HsLib.Systems
                 .Concat(Hero.CleanInactiveCards())
                 .Concat(Ability.CleanInactiveCards())
                 .Concat(Weapon.CleanInactiveCards())
-                .Concat(Secrets.CleanInactiveCards())
-                .Concat(Graveyard.CleanInactiveCards());
+                .Concat(Secrets.CleanInactiveCards());
         }
     }
 }
