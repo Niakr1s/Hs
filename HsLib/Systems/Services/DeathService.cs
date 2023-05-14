@@ -27,11 +27,6 @@ namespace HsLib.Systems.Services
         /// <returns>False, if didn't notice dead minions</returns>
         private bool DoStep()
         {
-            List<IMortal> dead = Bf.Cards.Select(c => c as IMortal)
-                .Where(c => c?.Dead == true).Select(c => c!).ToList();
-
-            if (dead.Count == 0) { return false; }
-
             List<RemovedCard> removedCards = CleanInactiveCards().ToList();
             if (removedCards.Count == 0) { return false; }
 

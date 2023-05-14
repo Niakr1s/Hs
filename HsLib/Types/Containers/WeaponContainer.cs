@@ -12,7 +12,7 @@ namespace HsLib.Types.Containers
 
         protected override bool IsCardActive(ICard card)
         {
-            return card is Weapon w && !w.Dead;
+            return !((Weapon)card).Dead;
         }
     }
 }

@@ -14,5 +14,10 @@ namespace HsLib.Types.Containers
         {
             return CardTs.Any(c => c.Taunt.Value && !c.Stealth.Value);
         }
+
+        protected override bool IsCardActive(ICard card)
+        {
+            return !((Minion)card).Dead;
+        }
     }
 }
