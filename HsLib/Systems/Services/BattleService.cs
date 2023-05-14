@@ -63,23 +63,6 @@ namespace HsLib.Systems.Services
             return true;
         }
 
-        public bool UseAbility(Pid pid, ICard? target = null)
-        {
-            Ability ability = Bf[pid].Ability.Card;
-            return UseEffect(ability, pid, target);
-        }
-
-        public bool CastSpell(Spell spell, Card? target = null)
-        {
-            if (spell.Place is null) { return false; }
-            if (!UseEffect(spell, spell.Place.Pid, target)) return false;
-            if (spell.Place is null) { throw new PlaceException(); }
-
-            Pid spellPid = spell.Place.Pid;
-            Bf[spellPid].Hand.Remove(spell);
-            return true;
-        }
-
         /// <summary>
         /// Deals damage and invokes <see cref="BattleGotDamageEventArgs"/>
         /// </summary>

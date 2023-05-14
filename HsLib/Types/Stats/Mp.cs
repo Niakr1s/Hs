@@ -7,6 +7,22 @@ namespace HsLib.Types.Stats
         public Mp(int value) : base(value)
         {
         }
+
+        public bool IsEnough(Mp mp)
+        {
+            return Value >= mp.Value;
+        }
+
+        /// <summary>
+        /// Uses mana. Throws exception if not sufficient mana.
+        /// </summary>
+        /// <param name="mp"></param>
+        /// <exception cref="MpException"></exception>
+        public void Use(Mp mp)
+        {
+            if (!IsEnough(mp)) { throw new MpException("not enough mp"); }
+            Set(Value - mp.Value);
+        }
     }
 
     public class MpException : Exception

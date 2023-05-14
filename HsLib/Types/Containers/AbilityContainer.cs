@@ -9,5 +9,11 @@ namespace HsLib.Types.Containers
         public AbilityContainer(Battlefield bf, Pid pid, Ability card) : base(bf, new Place(pid, Loc.Ability), card)
         {
         }
+
+        public bool UseAbility(ICard? target = null)
+        {
+            Bf[Place!.Pid].Mp.Use(Card.Mp);
+            return Bf.BattleService.UseEffect(Card, Place.Pid, target);
+        }
     }
 }

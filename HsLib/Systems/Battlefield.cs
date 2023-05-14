@@ -125,19 +125,34 @@ namespace HsLib.Systems
 
         #region UseAbility
 
-        public bool UseAbility(Pid targetPid, Loc targetLoc, int targetIndex)
-        {
-            return UseAbility(this[targetPid].GetCard(targetLoc, targetIndex));
-        }
-
-        public bool UseAbility(ICard target)
-        {
-            return BattleService.UseAbility(Turn.Pid, target);
-        }
-
         public bool UseAbility()
         {
-            return BattleService.UseAbility(Turn.Pid);
+            return UseAbility(null);
+        }
+
+        /// <summary>
+        /// Uses ability.
+        /// </summary>
+        /// <param name="targetPid"></param>
+        /// <param name="targetLoc"></param>
+        /// <param name="targetIndex">defaults to 0, to use on single containers</param>
+        /// <returns></returns>
+        public bool UseAbility(Pid targetPid, Loc targetLoc, int targetIndex = 0)
+        {
+            ICard target = this[targetPid].GetCard(targetLoc, targetIndex);
+            return UseAbility(target);
+        }
+
+        private bool UseAbility(ICard? target)
+        {
+            try
+            {
+                return Player.Ability.UseAbility(target);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         #endregion
