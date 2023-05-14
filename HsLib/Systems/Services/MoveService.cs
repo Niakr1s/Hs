@@ -1,7 +1,6 @@
 ﻿using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
-using HsLib.Types.Containers.Base;
 
 namespace HsLib.Systems.Services
 {
@@ -13,17 +12,6 @@ namespace HsLib.Systems.Services
         }
 
         public Battlefield Bf { get; }
-
-        /// <summary>
-        /// Takes card from dack and adds it to hand if possible, otherwise moves it to graveyard.
-        /// </summary>
-        public void TakeNextCard(Pid pid)
-        {
-            RemovedCard? card = Bf[pid].Deck.Pop();
-            if (card is null) { return; }
-
-            Bf[pid].Hand.Add(card.Card);
-        }
 
         /// <summary>
         /// Equips weapon

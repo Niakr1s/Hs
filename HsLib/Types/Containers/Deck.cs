@@ -10,5 +10,17 @@ namespace HsLib.Types.Containers
         public Deck(Battlefield bf, Pid pid, IEnumerable<Card>? cards = null) : base(bf, new Place(pid, Loc.Deck), startCards: cards)
         {
         }
+
+        /// <summary>
+        /// Takes next card and puts it at hand if possible. Burn otherwise.
+        /// </summary>
+        /// <returns></returns>
+        public void TakeNextCard()
+        {
+            RemovedCard? removedCard = Pop();
+            if (removedCard is null) { return; }
+
+            Bf[Place.Pid].Hand.Add(removedCard.Card);
+        }
     }
 }
