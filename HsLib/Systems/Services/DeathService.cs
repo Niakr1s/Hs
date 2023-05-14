@@ -48,7 +48,7 @@ namespace HsLib.Systems.Services
 
         private IEnumerable<RemovedCard> CleanInactiveCards()
         {
-            return Bf[Pid.P1].CleanInactiveCards().Concat(Bf[Pid.P2].CleanInactiveCards());
+            return Bf[Pid.P1].RemoveInactiveCards().Concat(Bf[Pid.P2].RemoveInactiveCards());
         }
     }
 }

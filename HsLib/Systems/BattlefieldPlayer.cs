@@ -27,11 +27,11 @@ namespace HsLib.Systems
 
             Secrets = new Secrets(bf, pid);
 
-            List<IWithEvent<ContainerEventArgs>> containers = new()
+            _containerList = new ContainerList(new List<IContainer>()
             {
                 Deck, Hand, Field, Hero, Ability, Weapon, Secrets,
-            };
-            containers.ForEach(c => c.Event += (s, e) => Event?.Invoke(s, e));
+            });
+            _containerList.ForEach(c => c.Event += (s, e) => Event?.Invoke(s, e));
         }
 
         public Pid Pid { get; }
@@ -58,51 +58,19 @@ namespace HsLib.Systems
 
         public Secrets Secrets { get; }
 
-        public ICard GetCard(Loc loc, int index)
-        {
-            return loc switch
-            {
-                Loc.Deck => Deck[index],
-                Loc.Hand => Hand[index],
-                Loc.Field => Field[index],
-                Loc.Hero => Hero[index],
-                Loc.Weapon => Weapon[index],
-                Loc.Ability => Ability[index],
-                Loc.Secrets => Secrets[index],
-                _ => null,
-            } ?? throw new ArgumentException("wrong loc");
-        }
+        private readonly ContainerList _containerList;
+
+        public ICard GetCard(Loc loc, int index) => _containerList.GetCard(loc, index);
 
         /// <summary>
         /// Gets all cards in all containers.
         /// </summary>
-        public IEnumerable<ICard> Cards
-        {
-            get
-            {
-                return Deck.Cards
-                    .Concat(Hand.Cards)
-                    .Concat(Field.Cards)
-                    .Concat(Hero.Cards)
-                    .Concat(Ability.Cards)
-                    .Concat(Weapon.Cards)
-                    .Concat(Secrets.Cards);
-            }
-        }
+        public IEnumerable<ICard> Cards => _containerList.Cards;
 
         /// <summary>
         /// Remove inactive cards from all containers and return them.
         /// </summary>
         /// <returns>Cleaned cards</returns>
-        public IEnumerable<RemovedCard> CleanInactiveCards()
-        {
-            return Deck.RemoveInactiveCards()
-                .Concat(Hand.RemoveInactiveCards())
-                .Concat(Field.RemoveInactiveCards())
-                .Concat(Hero.RemoveInactiveCards())
-                .Concat(Ability.RemoveInactiveCards())
-                .Concat(Weapon.RemoveInactiveCards())
-                .Concat(Secrets.RemoveInactiveCards());
-        }
+        public IEnumerable<RemovedCard> RemoveInactiveCards() => _containerList.RemoveInactiveCards();
     }
 }
