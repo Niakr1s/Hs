@@ -5,9 +5,9 @@ using HsLib.Types.Containers.Base;
 namespace HsLib.Types.Containers
 {
     // todo: rename to Secrets, add ISecret interface instead of TCard = Card
-    public class SecretsContainer : MultiContainer<Card>
+    public class Secrets : MultiContainer<Card>
     {
-        public SecretsContainer(Battlefield bf, Pid pid, IEnumerable<Card>? cards = null) : base(bf, new Place(pid, Loc.Secret), startCards: cards)
+        public Secrets(Battlefield bf, Pid pid, IEnumerable<Card>? cards = null) : base(bf, new Place(pid, Loc.Secrets), startCards: cards)
         {
         }
     }

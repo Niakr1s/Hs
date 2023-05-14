@@ -13,7 +13,7 @@
         Weapon = 16,
         Ability = 32,
 
-        Secret = 64,
+        Secrets = 64,
     }
 
     public class LocException : ArgumentException

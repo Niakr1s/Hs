@@ -92,7 +92,7 @@ namespace HsLib.Systems.Services
                 Loc.Deck => player.Deck.RemoveAt(place.Index).Card,
                 Loc.Hand => player.Hand.RemoveAt(place.Index).Card,
                 Loc.Field => player.Field.RemoveAt(place.Index).Card,
-                Loc.Secret => player.Secrets.RemoveAt(place.Index).Card,
+                Loc.Secrets => player.Secrets.RemoveAt(place.Index).Card,
                 _ => throw new NotSupportedException($"can't remove from {place.Loc}"),
             };
         }

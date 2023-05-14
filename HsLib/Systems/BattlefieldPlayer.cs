@@ -25,7 +25,7 @@ namespace HsLib.Systems
             Ability = new AbilityContainer(bf, pid, Hero.Card.ProduceAbility());
             Weapon = new WeaponContainer(bf, pid, new NoWeapon());
 
-            Secrets = new SecretsContainer(bf, pid);
+            Secrets = new Secrets(bf, pid);
 
             List<IWithEvent<ContainerEventArgs>> containers = new()
             {
@@ -56,7 +56,7 @@ namespace HsLib.Systems
 
         public WeaponContainer Weapon { get; }
 
-        public SecretsContainer Secrets { get; }
+        public Secrets Secrets { get; }
 
         public ICard GetCard(Loc loc, int index)
         {
@@ -68,7 +68,7 @@ namespace HsLib.Systems
                 Loc.Hero => Hero[index],
                 Loc.Weapon => Weapon[index],
                 Loc.Ability => Ability[index],
-                Loc.Secret => Secrets[index],
+                Loc.Secrets => Secrets[index],
                 _ => null,
             } ?? throw new ArgumentException("wrong loc");
         }
