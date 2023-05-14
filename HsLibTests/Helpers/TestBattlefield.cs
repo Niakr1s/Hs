@@ -9,6 +9,7 @@ namespace HsLibTests.Helpers
         /// Creates battlefield for tests.<br/>
         /// Features:<br/>
         /// 1. Immediatly starts.<br/>
+        /// 2. Sets Mp to 10<br/>
         /// </summary>
         /// <param name="p1"></param>
         /// <param name="p2"></param>
@@ -17,6 +18,9 @@ namespace HsLibTests.Helpers
         {
             Battlefield bf = new(p1, p2);
             bf.Turn.Start();
+
+            bf.Player.Mp.Set(10);
+            bf.Enemy.Mp.Set(10);
 
             return bf;
         }

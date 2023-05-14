@@ -111,19 +111,19 @@ namespace HsLib.Systems
 
         #endregion
 
-        #region PlayFromHand
-
         public bool PlayFromHand(int index, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            ICard card = Player.GetCard(Loc.Hand, index);
-            if (card is IPlayableFromHand playableCard)
+            try
             {
-                playableCard.PlayFromHand(this, fieldIndex, effectTarget);
-            }
-            return true;
-        }
 
-        #endregion
+                Player.Hand.Play(index, fieldIndex, effectTarget);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         #region UseAbility
 

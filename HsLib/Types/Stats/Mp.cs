@@ -8,4 +8,19 @@ namespace HsLib.Types.Stats
         {
         }
     }
+
+    public class MpException : Exception
+    {
+        public MpException() : base()
+        {
+        }
+
+        public MpException(string? message) : base(message)
+        {
+        }
+
+        public MpException(string? message, Exception? innerException) : base(message, innerException)
+        {
+        }
+    }
 }
