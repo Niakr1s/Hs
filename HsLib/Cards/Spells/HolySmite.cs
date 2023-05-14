@@ -12,7 +12,7 @@ namespace HsLib.Cards.Spells
         {
         }
 
-        public override void UseEffect(Battlefield bf, Pid pid, Card? target)
+        public override void UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
             if (target is IDamageable m)
             {
@@ -28,9 +28,9 @@ namespace HsLib.Cards.Spells
 
         public override EffectType EffectType => EffectType.Solo;
 
-        public override IEnumerable<Card> UseEffectTargets(Battlefield bf, Pid pid)
+        public override IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid)
         {
-            return _targets.GetValidTargets(this.Place.Pid, bf.Cards);
+            return _targets.GetValidTargets(Place!.Pid, bf.Cards);
         }
     }
 }

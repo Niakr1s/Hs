@@ -16,7 +16,7 @@ namespace HsLib.Types.Effects
 
         public bool TillEndOfTurn { get; set; }
 
-        protected override void EffectAction(Battlefield bf, Card? card)
+        protected override void EffectAction(Battlefield bf, ICard? card)
         {
             if (card is Minion m)
             {

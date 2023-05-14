@@ -6,7 +6,7 @@ using HsLib.Types.Stats.Base;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Weapon : Card, IAttacker, IMortal
+    public abstract class Weapon : Card, IAttacker, IMortal, IPlayableFromHand
     {
         protected Weapon(int mp, int atk, int hp) : base(mp)
         {
@@ -52,23 +52,28 @@ namespace HsLib.Types.Cards
             return Windfury.AttacksLeft(AtksThisTurn) > 0;
         }
 
-        public IDamageable GetDefender(Battlefield bf)
-        {
-            if (Place is null) { throw new PlaceException(); }
-            return bf[Place.Pid].Hero.Card;
-        }
-
-        public override void OnTurnEnd(Battlefield bf)
-        {
-            AtksThisTurn = 0;
-        }
-
-        protected override void DoPlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
+        public void PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
             if (Place is null) { throw new PlaceException(); }
 
             if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, Place.Pid, effectTarget); }
             bf.MoveService.MoveHandToWeapon(Place.Pid, Place.Index);
+        }
+
+        public IDamageable GetDefender(Battlefield bf)
+        {
+            return bf[Place!.Pid].Hero.Card;
+        }
+
+        public override void OnTurnEnd(Battlefield bf)
+        {
+            base.OnTurnEnd(bf);
+            AtksThisTurn = 0;
+        }
+
+        public void PlayFromHandUseEffects(Battlefield bf, Card? effectTarget = null)
+        {
+            if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, Place!.Pid, effectTarget); }
         }
     }
 }

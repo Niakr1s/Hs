@@ -1,8 +1,9 @@
 ﻿using HsLib.Systems;
+using HsLib.Types.Cards;
 
 namespace HsLib.Interfaces
 {
-    public interface IAttacker : IWithPlace, IWithAtk
+    public interface IAttacker : ICard, IWithAtk
     {
         /// <summary>
         /// Shows if attacker has some attacks left and it is valid and alive.

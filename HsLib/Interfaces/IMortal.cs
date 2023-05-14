@@ -1,6 +1,6 @@
 ﻿namespace HsLib.Interfaces
 {
-    public interface IMortal : IWithPlace
+    public interface IMortal
     {
         bool Dead { get; }
     }

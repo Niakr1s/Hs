@@ -2,13 +2,13 @@
 {
     public record Place(Pid Pid, Loc Loc)
     {
-        public PlaceInContainer InContainer(int atIndex)
+        public PlaceInContainer InContainer(int atIndex, int addedTurn)
         {
-            return new PlaceInContainer(Pid, Loc, atIndex);
+            return new PlaceInContainer(Pid, Loc, atIndex, addedTurn);
         }
     }
 
-    public record PlaceInContainer(Pid Pid, Loc Loc, int Index)
+    public record PlaceInContainer(Pid Pid, Loc Loc, int Index, int AddedTurnNo)
     {
         public static implicit operator Place(PlaceInContainer placeInContainer)
         {

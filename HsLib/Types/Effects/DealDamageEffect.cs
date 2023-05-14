@@ -12,7 +12,7 @@ namespace HsLib.Types.Effects
 
         public int Damage { get; set; }
 
-        protected override void EffectAction(Battlefield bf, Card? card)
+        protected override void EffectAction(Battlefield bf, ICard? card)
         {
             if (card is IDamageable d)
             {

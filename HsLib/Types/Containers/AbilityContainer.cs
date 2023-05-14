@@ -6,13 +6,8 @@ namespace HsLib.Types.Containers
 {
     public class AbilityContainer : SingleContainer<Ability>
     {
-        public AbilityContainer(Battlefield bf, Pid pid, Ability card) : base(bf, pid, Loc.Ability, card)
+        public AbilityContainer(Battlefield bf, Pid pid, Ability card) : base(bf, new Place(pid, Loc.Ability), card)
         {
-        }
-
-        public override IEnumerable<Card> CleanInactiveCards()
-        {
-            yield break;
         }
     }
 }

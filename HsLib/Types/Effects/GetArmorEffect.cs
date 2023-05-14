@@ -11,7 +11,7 @@ namespace HsLib.Types.Effects
 
         public int Armor { get; set; }
 
-        protected override void EffectAction(Battlefield bf, Card? card)
+        protected override void EffectAction(Battlefield bf, ICard? card)
         {
             if (Owner.Place is null) { return; }
             bf[Owner.Place.Pid].Hero.Card.Armor.Increase(2);

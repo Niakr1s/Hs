@@ -11,7 +11,7 @@ namespace HsLib.Cards.Spells
         {
         }
 
-        public override void UseEffect(Battlefield bf, Pid pid, Card? target)
+        public override void UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
             if (target is null) return;
 
@@ -26,7 +26,7 @@ namespace HsLib.Cards.Spells
 
         public override EffectType EffectType => EffectType.Solo;
 
-        public override IEnumerable<Card> UseEffectTargets(Battlefield bf, Pid pid)
+        public override IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid)
         {
             return _targets.GetValidTargets(pid, bf.Cards);
         }

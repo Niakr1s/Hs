@@ -1,8 +1,9 @@
 ﻿using HsLib.Systems;
+using HsLib.Types.Cards;
 
 namespace HsLib.Interfaces
 {
-    public interface IDamageable : IWithPlace
+    public interface IDamageable : ICard
     {
         bool CanBeMeleeAttacked(Battlefield bf);
 

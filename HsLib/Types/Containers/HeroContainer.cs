@@ -6,12 +6,8 @@ namespace HsLib.Types.Containers
 {
     public class HeroContainer : SingleContainer<Hero>
     {
-        public HeroContainer(Battlefield bf, Pid pid, Hero card) : base(bf, pid, Loc.Hero, card)
+        public HeroContainer(Battlefield bf, Pid pid, Hero card) : base(bf, new Place(pid, Loc.Hero), card)
         {
-        }
-        public override IEnumerable<Card> CleanInactiveCards()
-        {
-            yield break;
         }
     }
 }

@@ -1,18 +1,14 @@
-﻿using HsLib.Systems;
+﻿using HsLib.Interfaces;
+using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers.Base;
 
 namespace HsLib.Types.Containers
 {
-    public class Deck : MultiContainer<Card>
+    public class Deck : MultiContainer<IPlayableFromHand>
     {
-        public Deck(Battlefield bf, Pid pid, IEnumerable<Card>? cards = null) : base(bf, pid, Loc.Deck, startCards: cards)
+        public Deck(Battlefield bf, Pid pid, IEnumerable<Card>? cards = null) : base(bf, new Place(pid, Loc.Deck), startCards: cards)
         {
-        }
-
-        public override IEnumerable<Card> CleanInactiveCards()
-        {
-            yield break;
         }
     }
 }

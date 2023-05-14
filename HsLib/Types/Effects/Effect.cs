@@ -17,16 +17,16 @@ namespace HsLib.Types.Effects
 
         public EffectType EffectType { get; }
 
-        protected abstract void EffectAction(Battlefield bf, Card? card);
+        protected abstract void EffectAction(Battlefield bf, ICard? card);
 
         private readonly Targets _targets;
 
-        public virtual IEnumerable<Card> UseEffectTargets(Battlefield bf, Pid pid)
+        public virtual IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid)
         {
             return _targets.GetValidTargets(pid, bf.Cards);
         }
 
-        public void UseEffect(Battlefield bf, Pid pid, Card? target)
+        public void UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
             switch (EffectType)
             {

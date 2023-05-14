@@ -1,4 +1,4 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Types.Cards;
 
 namespace HsLib.Types
 {
@@ -8,7 +8,7 @@ namespace HsLib.Types
 
         public PidSide? Sides { get; init; }
 
-        public bool IsValidTarget(Pid ownerPid, IWithPlace? target)
+        public bool IsValidTarget(Pid ownerPid, ICard? target)
         {
             if (target is null)
             {
@@ -24,8 +24,7 @@ namespace HsLib.Types
             }
         }
 
-        public IEnumerable<TWithPlace> GetValidTargets<TWithPlace>(Pid ownerPid, IEnumerable<TWithPlace> targets)
-            where TWithPlace : IWithPlace
+        public IEnumerable<ICard> GetValidTargets(Pid ownerPid, IEnumerable<ICard> targets)
         {
             foreach (var t in targets)
             {

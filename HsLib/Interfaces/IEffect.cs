@@ -15,7 +15,7 @@ namespace HsLib.Interfaces
         /// <param name="bf"></param>
         /// <param name="pid">owner's pid</param>
         /// <returns>All targets. If returned null, IEffect can not be applied. If effect can be applied without target, just return</returns>
-        public IEnumerable<Card> UseEffectTargets(Battlefield bf, Pid pid);
+        public IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid);
 
         /// <summary>
         /// Uses effect on target.
@@ -23,6 +23,6 @@ namespace HsLib.Interfaces
         /// <param name="bf"></param>
         /// <param name="pid">owner's pid</param>
         /// <param name="target"></param>
-        public void UseEffect(Battlefield bf, Pid pid, Card? target);
+        public void UseEffect(Battlefield bf, Pid pid, ICard? target);
     }
 }

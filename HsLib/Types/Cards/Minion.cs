@@ -5,7 +5,7 @@ using HsLib.Types.Stats.Base;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Minion : Card, IAttacker, IDamageable, IMortal, IWithDeathrattle, IWithBattlecry, IWithChoseOne
+    public abstract class Minion : Card, IAttacker, IDamageable, IMortal, IWithDeathrattle, IWithBattlecry, IWithChoseOne, IPlayableFromHand
     {
         protected Minion(int mp, int atk, int hp) : base(mp)
         {
@@ -57,6 +57,7 @@ namespace HsLib.Types.Cards
 
         public override void OnTurnEnd(Battlefield bf)
         {
+            base.OnTurnEnd(bf);
             AtksThisTurn = 0;
         }
 
@@ -66,7 +67,7 @@ namespace HsLib.Types.Cards
         {
             if (Dead) { return false; }
             if (Windfury.AttacksLeft(AtksThisTurn) <= 0) { return false; }
-            return !bf.Turn.IsFirstTurn(TurnAdded) || Charge;
+            return !bf.Turn.IsFirstTurn(Place!.AddedTurnNo) || Charge;
         }
 
         public bool CanBeMeleeAttacked(Battlefield bf)
@@ -80,7 +81,7 @@ namespace HsLib.Types.Cards
             return this;
         }
 
-        protected override void DoPlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
+        public void PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
             if (Place is null) { throw new PlaceException(); }
             Minion transformTo = this;

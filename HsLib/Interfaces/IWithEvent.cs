@@ -1,6 +1,6 @@
 ﻿namespace HsLib.Interfaces
 {
-    internal interface IWithEvent<TEventArgs>
+    public interface IWithEvent<TEventArgs>
         where TEventArgs : EventArgs
     {
         event EventHandler<TEventArgs>? Event;

@@ -4,7 +4,7 @@ using HsLib.Types.Effects;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Spell : Card, IEffect
+    public abstract class Spell : Card, IEffect, IPlayableFromHand
     {
         protected Spell(int mp) : base(mp)
         {
@@ -17,11 +17,11 @@ namespace HsLib.Types.Cards
             return Place?.Loc == Loc.Hand;
         }
 
-        public abstract void UseEffect(Battlefield bf, Pid pid, Card? target);
+        public abstract void UseEffect(Battlefield bf, Pid pid, ICard? target);
 
-        public abstract IEnumerable<Card> UseEffectTargets(Battlefield bf, Pid pid);
+        public abstract IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid);
 
-        protected override void DoPlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
+        public void PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
             if (Place is null) { return; }
 

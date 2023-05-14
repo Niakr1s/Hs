@@ -48,7 +48,7 @@ namespace HsLib.Systems
         /// <summary>
         /// Get all cards in all containers (not ordered).
         /// </summary>
-        public IEnumerable<Card> Cards => this[Pid.P1].Cards.Concat(this[Pid.P2].Cards);
+        public IEnumerable<ICard> Cards => this[Pid.P1].Cards.Concat(this[Pid.P2].Cards);
 
         private readonly Dictionary<Pid, BattlefieldPlayer> _bf;
 
@@ -113,10 +113,13 @@ namespace HsLib.Systems
 
         #region PlayFromHand
 
-        public bool PlayFromHand(int index, int? fieldIndex = null, Card? effectTarget = null)
+        public bool PlayFromHand(int index, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            Card card = Player.GetCard(Loc.Hand, index);
-            card.PlayFromHand(this, fieldIndex, effectTarget);
+            ICard card = Player.GetCard(Loc.Hand, index);
+            if (card is IPlayableFromHand playableCard)
+            {
+                playableCard.PlayFromHand(this, fieldIndex, effectTarget);
+            }
             return true;
         }
 
@@ -129,7 +132,7 @@ namespace HsLib.Systems
             return UseAbility(this[targetPid].GetCard(targetLoc, targetIndex));
         }
 
-        public bool UseAbility(Card target)
+        public bool UseAbility(ICard target)
         {
             return BattleService.UseAbility(Turn.Pid, target);
         }

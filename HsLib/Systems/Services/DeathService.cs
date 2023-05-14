@@ -1,6 +1,6 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Types;
-using HsLib.Types.Cards;
+using HsLib.Types.Containers.Base;
 using HsLib.Types.Events;
 
 namespace HsLib.Systems.Services
@@ -32,22 +32,21 @@ namespace HsLib.Systems.Services
 
             if (dead.Count == 0) { return false; }
 
-            List<Card> cleanedCards = CleanInactiveCards().ToList();
-            if (cleanedCards.Count == 0) { return false; }
+            List<RemovedCard> removedCards = CleanInactiveCards().ToList();
+            if (removedCards.Count == 0) { return false; }
 
-            foreach (Card card in cleanedCards)
+            foreach (RemovedCard removed in removedCards)
             {
-                if (card is IWithDeathrattle d)
+                if (removed.Card is IWithDeathrattle d)
                 {
-                    // TODO: Place refactor
-                    // d.Deathrattle?.UseEffect(Bf, null);
+                    d.Deathrattle?.UseEffect(Bf, removed.Place.Pid, null);
                 }
             }
 
             return true;
         }
 
-        private IEnumerable<Card> CleanInactiveCards()
+        private IEnumerable<RemovedCard> CleanInactiveCards()
         {
             return Bf[Pid.P1].CleanInactiveCards().Concat(Bf[Pid.P2].CleanInactiveCards());
         }

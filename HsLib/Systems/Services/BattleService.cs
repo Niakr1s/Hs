@@ -46,7 +46,7 @@ namespace HsLib.Systems.Services
             return true;
         }
 
-        public bool UseEffect(IEffect effect, Pid pid, Card? target = null)
+        public bool UseEffect(IEffect effect, Pid pid, ICard? target = null)
         {
             bool targetIsValid = effect.EffectType switch
             {
@@ -63,7 +63,7 @@ namespace HsLib.Systems.Services
             return true;
         }
 
-        public bool UseAbility(Pid pid, Card? target = null)
+        public bool UseAbility(Pid pid, ICard? target = null)
         {
             Ability ability = Bf[pid].Ability.Card;
             return UseEffect(ability, pid, target);

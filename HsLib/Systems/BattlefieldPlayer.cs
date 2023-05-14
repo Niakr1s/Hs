@@ -3,6 +3,7 @@ using HsLib.Interfaces;
 using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
+using HsLib.Types.Containers.Base;
 using HsLib.Types.Events;
 using HsLib.Types.PlayerAskers;
 using HsLib.Types.Stats;
@@ -57,7 +58,7 @@ namespace HsLib.Systems
 
         public SecretsContainer Secrets { get; }
 
-        public Card GetCard(Loc loc, int index)
+        public ICard GetCard(Loc loc, int index)
         {
             return loc switch
             {
@@ -75,7 +76,7 @@ namespace HsLib.Systems
         /// <summary>
         /// Gets all cards in all containers.
         /// </summary>
-        public IEnumerable<Card> Cards
+        public IEnumerable<ICard> Cards
         {
             get
             {
@@ -93,15 +94,15 @@ namespace HsLib.Systems
         /// Remove inactive cards from all containers and return them.
         /// </summary>
         /// <returns>Cleaned cards</returns>
-        public IEnumerable<Card> CleanInactiveCards()
+        public IEnumerable<RemovedCard> CleanInactiveCards()
         {
-            return Deck.CleanInactiveCards()
-                .Concat(Hand.CleanInactiveCards())
-                .Concat(Field.CleanInactiveCards())
-                .Concat(Hero.CleanInactiveCards())
-                .Concat(Ability.CleanInactiveCards())
-                .Concat(Weapon.CleanInactiveCards())
-                .Concat(Secrets.CleanInactiveCards());
+            return Deck.RemoveInactiveCards()
+                .Concat(Hand.RemoveInactiveCards())
+                .Concat(Field.RemoveInactiveCards())
+                .Concat(Hero.RemoveInactiveCards())
+                .Concat(Ability.RemoveInactiveCards())
+                .Concat(Weapon.RemoveInactiveCards())
+                .Concat(Secrets.RemoveInactiveCards());
         }
     }
 }

@@ -12,13 +12,13 @@ namespace HsLib.Types.Cards
 
         protected abstract IEffect Effect { get; }
 
-        public virtual IEnumerable<Card> UseEffectTargets(Battlefield bf, Pid pid) => Effect.UseEffectTargets(bf, pid);
+        public virtual IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid) => Effect.UseEffectTargets(bf, pid);
 
         public EffectType EffectType => Effect.EffectType;
 
         private bool EffectUsedThisTurn { get; set; }
 
-        public void UseEffect(Battlefield bf, Pid pid, Card? target)
+        public void UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
             Effect.UseEffect(bf, pid, target);
             EffectUsedThisTurn = true;
@@ -33,11 +33,6 @@ namespace HsLib.Types.Cards
         {
             base.OnTurnStart(bf);
             EffectUsedThisTurn = false;
-        }
-
-        protected sealed override void DoPlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
-        {
-            throw new InvalidOperationException();
         }
     }
 }

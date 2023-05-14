@@ -1,5 +1,4 @@
-﻿using HsLib.Interfaces;
-using HsLib.Systems;
+﻿using HsLib.Systems;
 using HsLib.Types.Stats;
 
 namespace HsLib.Types.Cards
@@ -12,21 +11,16 @@ namespace HsLib.Types.Cards
     /// <see cref="OnTurnEnd(Battlefield)"/><br/>
     /// <see cref="OnTurnStart(Battlefield)"/>.<br/><br/>
     /// </summary>
-    public abstract class Card : IWithPlace, IWithTurn
+    public abstract class Card : ICard
     {
         protected Card(int mp)
         {
             Mp = new Mp(mp);
         }
 
-        public Mp Mp { get; }
-
         public PlaceInContainer? Place { get; set; }
 
-        /// <summary>
-        /// Is set by Container.
-        /// </summary>
-        public int TurnAdded { get; set; }
+        public Mp Mp { get; }
 
         /// <summary>
         /// Use this to subscribe to events.
@@ -45,13 +39,5 @@ namespace HsLib.Types.Cards
         public virtual void OnTurnEnd(Battlefield bf) { }
 
         public virtual void OnTurnStart(Battlefield bf) { }
-
-        public void PlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
-        {
-            // TODO: add mp check
-            DoPlayFromHand(bf, fieldIndex, effectTarget);
-        }
-
-        protected abstract void DoPlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null);
     }
 }

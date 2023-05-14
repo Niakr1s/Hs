@@ -1,6 +1,7 @@
 ﻿using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
+using HsLib.Types.Containers.Base;
 
 namespace HsLib.Systems.Services
 {
@@ -18,10 +19,10 @@ namespace HsLib.Systems.Services
         /// </summary>
         public void TakeNextCard(Pid pid)
         {
-            Card? card = Bf[pid].Deck.Pop();
+            RemovedCard? card = Bf[pid].Deck.Pop();
             if (card is null) { return; }
 
-            Bf[pid].Hand.Add(card);
+            Bf[pid].Hand.Add(card.Card);
         }
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace HsLib.Systems.Services
             Hand hand = Bf[pid].Hand;
             WeaponContainer weaponC = Bf[pid].Weapon;
 
-            Card? card = hand[handIndex];
+            ICard? card = hand[handIndex];
             if (card is Weapon w)
             {
                 hand.RemoveAt(handIndex);
@@ -83,15 +84,15 @@ namespace HsLib.Systems.Services
             }
         }
 
-        public Card RemoveCard(PlaceInContainer place)
+        public ICard RemoveCard(PlaceInContainer place)
         {
             BattlefieldPlayer player = Bf[place.Pid];
             return place.Loc switch
             {
-                Loc.Deck => player.Deck.RemoveAt(place.Index),
-                Loc.Hand => player.Hand.RemoveAt(place.Index),
-                Loc.Field => player.Field.RemoveAt(place.Index),
-                Loc.Secret => player.Secrets.RemoveAt(place.Index),
+                Loc.Deck => player.Deck.RemoveAt(place.Index).Card,
+                Loc.Hand => player.Hand.RemoveAt(place.Index).Card,
+                Loc.Field => player.Field.RemoveAt(place.Index).Card,
+                Loc.Secret => player.Secrets.RemoveAt(place.Index).Card,
                 _ => throw new NotSupportedException($"can't remove from {place.Loc}"),
             };
         }

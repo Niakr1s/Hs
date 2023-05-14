@@ -3,51 +3,29 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Containers.Base
 {
-    public abstract class SingleContainer<TCard> : Container<TCard>
-        where TCard : Card
+    public abstract class SingleContainer<TCard> : MultiContainer<TCard>
+        where TCard : ICard
     {
-        public SingleContainer(Battlefield bf, Pid pid, Loc loc, TCard card) : base(bf, pid, loc)
+        protected SingleContainer(Battlefield bf, Place place, TCard card) : base(bf, place, limit: 1)
         {
-            _card = card;
-            AfterInsert(card);
+            Add(card);
         }
 
-        TCard _card;
         public TCard Card
-        {
-            get => _card;
-            set
-            {
-                if (_card == value)
-                {
-                    return;
-                }
-
-                var prev = _card;
-                _card = value;
-
-                AfterRemove(prev);
-                AfterInsert(value);
-            }
-        }
-
-        public override IEnumerable<TCard> Cards
-        {
-            get { yield return Card; }
-        }
-
-        public override TCard this[int index]
         {
             get
             {
-                if (index != 0) { throw new IndexOutOfRangeException(); }
-                return Card;
+                return (TCard)this[0];
+            }
+            set
+            {
+                Set(value);
             }
         }
 
-        public override bool CanBeInsertedAt(int index)
+        public RemovedCard Set(TCard card)
         {
-            return index == 0;
+            return Replace(0, card);
         }
     }
 }

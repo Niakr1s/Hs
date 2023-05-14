@@ -37,10 +37,5 @@ namespace HsLib.Types.Cards
         /// </summary>
         /// <returns>new ability</returns>
         public abstract Ability ProduceAbility();
-
-        protected sealed override void DoPlayFromHand(Battlefield bf, int? fieldIndex = null, Card? effectTarget = null)
-        {
-            throw new InvalidOperationException();
-        }
     }
 }
