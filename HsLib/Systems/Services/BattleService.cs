@@ -17,35 +17,6 @@ namespace HsLib.Systems.Services
 
         public event EventHandler<BattleEventArgs>? Event;
 
-        /// <summary>
-        /// Attacker attacks defender.
-        /// </summary>
-        /// <param name="attacker">Should have valid place</param>
-        /// <param name="defender">Should have valid place.</param>
-        /// <param name="attackDefender">Is a defender, who takes counterattack. If no defender provided, attacker will try defend by himself.</param>
-        /// <returns>True, if attack was actually made.</returns>
-        public bool MeleeAttack(IAttacker attacker, IDamageable defender)
-        {
-            if (!defender.CanBeMeleeAttacked(Bf)) return false;
-
-            if (!attacker.CanMeleeAttack(Bf)) return false;
-            Event?.Invoke(this, new BattleMeleePreAttackEventArgs(attacker, defender));
-            if (!attacker.CanMeleeAttack(Bf)) return false;
-
-            DealDamage(attacker.Atk.Value, defender);
-
-            if (defender is IAttacker counterAttacker)
-            {
-                DealDamage(counterAttacker.Atk.Value, attacker.GetDefender(Bf));
-            }
-
-            attacker.AfterAttack(Bf);
-
-            Bf.DeathService.ProcessDeaths();
-
-            return true;
-        }
-
         public bool UseEffect(IEffect effect, Pid pid, ICard? target = null)
         {
             bool targetIsValid = effect.EffectType switch

@@ -20,6 +20,7 @@ namespace HsLib.Systems
             BattleService = new BattleService(this);
             DeathService = new DeathService(this);
             PlayerService = new PlayerService(this);
+            MeleeService = new MeleeService(this);
 
             new EventConnector(this).Connect();
         }
@@ -41,6 +42,7 @@ namespace HsLib.Systems
         internal BattleService BattleService { get; }
         internal DeathService DeathService { get; }
         internal PlayerService PlayerService { get; }
+        internal MeleeService MeleeService { get; }
         #endregion
 
         /// <summary>
@@ -70,9 +72,9 @@ namespace HsLib.Systems
 
         #region MeleeAttack
 
-        public bool WeaponAttack(Loc defenderLoc, int defenderIndex)
+        public bool WeaponAttack(Loc defenderLoc, int defenderIndex = 0)
         {
-            return BattleService.MeleeAttack(Player.Weapon.Card, GetDefender(defenderLoc, defenderIndex));
+            return MeleeService.MeleeAttack(Player.Weapon.Card, GetDefender(defenderLoc, defenderIndex));
         }
 
         public bool WeaponAttack(IDamageable defender)
@@ -96,7 +98,7 @@ namespace HsLib.Systems
             if (attacker.Place.Loc != Loc.Field) { throw new LocException(); }
             if (defender.Place.Pid != Enemy.Pid) { throw new PidException(); }
             if (defender.Place.Loc != Loc.Field && defender.Place.Loc != Loc.Hero) { throw new LocException(); }
-            return BattleService.MeleeAttack(attacker, defender);
+            return MeleeService.MeleeAttack(attacker, defender);
         }
 
         private IDamageable GetDefender(Loc loc, int index)
