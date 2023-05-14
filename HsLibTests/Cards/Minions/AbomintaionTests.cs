@@ -24,7 +24,7 @@ namespace HsLibTests.Cards.Minions
             bf[Pid.P2].Field.Add(yeti2);
 
             bf.Turn.Skip(bf.Player.Pid);
-            Assert.AreEqual(true, bf.MinionAttack(abom1, abom2));
+            Assert.AreEqual(true, bf.MinionAttack(0, Loc.Field, 0));
             Assert.AreEqual(0, abom1.Hp);
             Assert.AreEqual(0, abom1.Hp);
             Assert.AreEqual(1, yeti1.Hp);

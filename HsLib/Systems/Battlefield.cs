@@ -74,31 +74,30 @@ namespace HsLib.Systems
 
         public bool WeaponAttack(Loc defenderLoc, int defenderIndex = 0)
         {
-            return MeleeService.MeleeAttack(Player.Weapon.Card, GetDefender(defenderLoc, defenderIndex));
-        }
+            try
+            {
 
-        public bool WeaponAttack(IDamageable defender)
-        {
-            if (defender.Place is null) { throw new PlaceException(); }
-            if (defender.Place.Pid == Turn.Pid) { throw new PidException(); }
-            return WeaponAttack(defender.Place.Loc, defender.Place.Index);
+                return MeleeService.WeaponAttack(GetDefender(defenderLoc, defenderIndex));
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool MinionAttack(int attackerIndex, Loc defenderLoc, int defenderIndex)
         {
-            Minion attacker = (Minion)Player.GetCard(Loc.Field, attackerIndex);
-            IDamageable defender = GetDefender(defenderLoc, defenderIndex);
-            return MinionAttack(attacker, defender);
-        }
+            try
+            {
 
-        public bool MinionAttack(Minion attacker, IDamageable defender)
-        {
-            if (attacker.Place is null || defender.Place is null) { return false; }
-            if (attacker.Place.Pid != Player.Pid) { throw new PidException(); }
-            if (attacker.Place.Loc != Loc.Field) { throw new LocException(); }
-            if (defender.Place.Pid != Enemy.Pid) { throw new PidException(); }
-            if (defender.Place.Loc != Loc.Field && defender.Place.Loc != Loc.Hero) { throw new LocException(); }
-            return MeleeService.MeleeAttack(attacker, defender);
+                Minion attacker = (Minion)Player.GetCard(Loc.Field, attackerIndex);
+                IDamageable defender = GetDefender(defenderLoc, defenderIndex);
+                return MeleeService.MinionAttack(attacker, defender);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private IDamageable GetDefender(Loc loc, int index)
