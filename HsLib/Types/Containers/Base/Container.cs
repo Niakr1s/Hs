@@ -167,7 +167,7 @@ namespace HsLib.Types.Containers.Base
             }
         }
 
-        public IEnumerable<TCard> CardTs => Cards.Select(c => (TCard)c);
+        public IEnumerable<TCard> CardTs => Cards.Cast<TCard>();
 
         /// <summary>
         /// Remove inactive cards from container and return them. 
