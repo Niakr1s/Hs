@@ -21,7 +21,7 @@ namespace HsLib.Systems
                 Bf.Turn.Event += Turn_Event;
                 Bf[Pid.P1].Event += Bf.Invoke;
                 Bf[Pid.P2].Event += Bf.Invoke;
-                foreach (Card card in Bf.Cards)
+                foreach (ICard card in Bf.Cards)
                 {
                     card.AfterContainerInsert(Bf);
                     card.OnTurnStart(Bf);
@@ -41,11 +41,11 @@ namespace HsLib.Systems
                 switch (e)
                 {
                     case TurnStartEventArgs:
-                        foreach (Card card in Bf.Cards) card.OnTurnStart(Bf);
+                        foreach (ICard card in Bf.Cards) card.OnTurnStart(Bf);
                         break;
 
                     case TurnEndEventArgs:
-                        foreach (Card card in Bf.Cards) card.OnTurnEnd(Bf);
+                        foreach (ICard card in Bf.Cards) card.OnTurnEnd(Bf);
                         break;
                 }
             }
