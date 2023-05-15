@@ -1,15 +1,15 @@
 ﻿using HsLib.Interfaces;
 
-namespace HsLib.Types.CardChoosers
+namespace HsLib.Types.CardsChoosers
 {
     public class CardsChooser : ICardsChooser
     {
-        public CardsChooser(ChooseCardFunc cardChooserFunc)
+        public CardsChooser(CardsChooserFunc cardChooserFunc)
         {
             _cardChooserFunc = cardChooserFunc;
         }
 
-        private readonly ChooseCardFunc _cardChooserFunc;
+        private readonly CardsChooserFunc _cardChooserFunc;
 
         public IEnumerable<ICard> ChooseCards(Pid ownerPid, IEnumerable<ICard> cards)
         {
