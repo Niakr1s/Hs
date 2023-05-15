@@ -11,6 +11,7 @@ namespace HsLib.Types.Containers.Base
         Place Place { get; }
 
         ICard this[int index] { get; }
+        bool Contains(ICard card);
         IEnumerable<ICard> Cards { get; }
         int Count { get; }
 

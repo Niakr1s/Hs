@@ -13,10 +13,22 @@ namespace HsLib.Types.Cards
 
         public bool EffectUsedThisTurn { get; private set; }
 
-        public void UseEffect(Battlefield bf, Pid pid, ICard? target)
+        /// <summary>
+        /// First call will throw exceptions, if effect can't be used. Second call actually uses effect.
+        /// </summary>
+        /// <param name="bf"></param>
+        /// <param name="pid"></param>
+        /// <param name="target"></param>
+        /// <returns>Action, that actually uses effect.</returns>
+        public Action UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
-            AbilityEffect.UseEffect(bf, pid, target);
-            EffectUsedThisTurn = true;
+            Action useEffectAction = AbilityEffect.UseEffect(bf, pid, target);
+
+            return () =>
+            {
+                useEffectAction();
+                EffectUsedThisTurn = true;
+            };
         }
 
         public override void OnTurnStart(Battlefield bf)

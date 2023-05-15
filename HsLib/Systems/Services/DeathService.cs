@@ -34,7 +34,7 @@ namespace HsLib.Systems.Services
             {
                 if (removed.Card is IWithDeathrattle d)
                 {
-                    d.Deathrattle?.UseEffect(Bf, removed.Place.Pid, null);
+                    d.Deathrattle?.UseEffect(Bf, removed.Place.Pid, null)();
                 }
             }
 

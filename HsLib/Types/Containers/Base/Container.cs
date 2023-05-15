@@ -32,6 +32,8 @@ namespace HsLib.Types.Containers.Base
         /// <returns>card in container</returns>
         public abstract ICard this[int index] { get; }
 
+        public bool Contains(ICard card) => Cards.Contains(card);
+
         /// <summary>
         /// Should return actual container length.
         /// </summary>

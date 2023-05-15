@@ -30,7 +30,7 @@ namespace HsLibTests.Cards.Spells
             bf[Pid.P2].Field.Add(yeti);
             Assert.AreEqual(1, mindControl.SpellEffect.GetPossibleTargets(bf, bf.Player.Pid).Count());
 
-            mindControl.SpellEffect.UseEffect(bf, bf.Player.Pid, yeti);
+            mindControl.SpellEffect.UseEffect(bf, bf.Player.Pid, yeti)();
             Assert.AreEqual(Pid.P1, yeti.Place?.Pid);
             Assert.AreEqual(1, bf[Pid.P1].Field.Count);
             Assert.AreEqual(0, bf[Pid.P2].Field.Count);

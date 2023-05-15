@@ -5,6 +5,6 @@ namespace HsLib.Interfaces
 {
     public interface IEffect
     {
-        void UseEffect(Battlefield bf, ICard target);
+        Action UseEffect(Battlefield bf, ICard target);
     }
 }

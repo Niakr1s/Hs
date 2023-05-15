@@ -1,6 +1,7 @@
 ﻿using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers.Base;
+using HsLib.Types.Stats;
 
 namespace HsLib.Types.Containers
 {
@@ -10,11 +11,17 @@ namespace HsLib.Types.Containers
         {
         }
 
-        public bool UseAbility(ICard? target = null)
+        public Action UseAbility(ICard? target = null)
         {
-            Bf[Place!.Pid].Mp.Use(Card.Mp);
-            Card.UseEffect(Bf, Place.Pid, target);
-            return true; // todo: add CanUseEffect
+            BattlefieldPlayer player = Bf[Place!.Pid];
+            if (!player.Mp.IsEnough(Card.Mp)) { throw new MpException(); }
+            Action effectAction = Card.UseEffect(Bf, Place.Pid, target);
+
+            return () =>
+            {
+                player.Mp.Use(Card.Mp);
+                effectAction();
+            };
         }
     }
 }

@@ -8,11 +8,15 @@ namespace HsLib.Types.Effects
     {
         public int Damage { get; set; }
 
-        public void UseEffect(Battlefield bf, ICard target)
+        public Action UseEffect(Battlefield bf, ICard target)
         {
             if (target is IDamageable d)
             {
-                bf.BattleService.DealDamage(Damage, d);
+                return () => bf.BattleService.DealDamage(Damage, d);
+            }
+            else
+            {
+                throw new ArgumentException("target can't be damaged");
             }
         }
     }

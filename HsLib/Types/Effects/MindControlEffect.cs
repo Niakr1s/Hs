@@ -1,19 +1,26 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Systems;
 using HsLib.Types.Cards;
-using HsLib.Types.Containers.Base;
+using HsLib.Types.Containers;
 
 namespace HsLib.Types.Effects
 {
     public class MindControlEffect : IEffect
     {
-        public void UseEffect(Battlefield bf, ICard target)
+        public Action UseEffect(Battlefield bf, ICard target)
         {
-            if (target is Minion m)
+            Minion m = (Minion)target;
+            Field enemyField = bf[m.Place!.Pid].Field;
+            Field playerField = bf[m.Place!.Pid.He()].Field;
+
+            if (!enemyField.Contains(m)) { throw new ArgumentException("enemy field doesn't contain target"); }
+            if (!playerField.CanBeInsertedAt(playerField.Count)) { throw new ArgumentException("can't insert to player field"); }
+
+            return () =>
             {
-                RemovedCard removedCard = bf[m.Place!.Pid].Field.Remove(m);
-                bf[removedCard.Place.Pid.He()].Field.Add(m);
-            }
+                enemyField.Remove(m);
+                playerField.Add(m);
+            };
         }
     }
 }

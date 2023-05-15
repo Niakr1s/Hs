@@ -8,11 +8,15 @@ namespace HsLib.Types.Effects
     {
         public int Armor { get; set; }
 
-        public void UseEffect(Battlefield bf, ICard? target)
+        public Action UseEffect(Battlefield bf, ICard? target)
         {
             if (target is IWithArmor a)
             {
-                a.Armor.Increase(Armor);
+                return () => a.Armor.Increase(Armor);
+            }
+            else
+            {
+                throw new ArgumentException("target doesn't have armor");
             }
         }
     }

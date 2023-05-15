@@ -24,7 +24,7 @@ namespace HsLibTests.Cards.Abilities
             int startMp = bf.Player.Mp.Value;
 
             Assert.AreEqual(30, bf.Player.Hero.Card.Hp.Value);
-            Assert.AreEqual(true, ability.UseAbility(bf.Player.Hero.Card));
+            ability.UseAbility(bf.Player.Hero.Card)();
             Assert.AreEqual(29, bf.Player.Hero.Card.Hp.Value);
             Assert.AreEqual(startMp - 2, bf.Player.Mp.Value);
 
@@ -40,11 +40,11 @@ namespace HsLibTests.Cards.Abilities
             Assert.AreEqual(5, y2.Hp.Value);
 
             bf.Turn.Skip(bf.Player.Pid);
-            ability.UseAbility(y1);
+            ability.UseAbility(y1)();
             Assert.AreEqual(4, y1.Hp.Value);
 
             bf.Turn.Skip(bf.Player.Pid);
-            ability.UseAbility(y2);
+            ability.UseAbility(y2)();
             Assert.AreEqual(4, y2.Hp.Value);
         }
     }

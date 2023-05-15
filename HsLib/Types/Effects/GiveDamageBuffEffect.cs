@@ -13,16 +13,18 @@ namespace HsLib.Types.Effects
 
         public bool TillEndOfTurn { get; set; }
 
-        public void UseEffect(Battlefield bf, ICard target)
+        public Action UseEffect(Battlefield bf, ICard target)
         {
-            if (target is Minion m)
+            Minion m = (Minion)target;
+
+            return () =>
             {
                 Enchant<int> buff = m.Atk.AddBuff(2);
                 if (TillEndOfTurn)
                 {
                     Do.Once(bf, e => e.EventArgs is TurnEndEventArgs, () => buff.Active = false);
                 }
-            }
+            };
         }
     }
 }

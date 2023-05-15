@@ -11,9 +11,11 @@ namespace HsLib.Types.Effects.Base
         {
         }
 
-        public override void UseEffect(Battlefield bf, Pid pid, ICard? target)
+        public override Action UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
-            if (target is not null) { _effect.UseEffect(bf, target); }
+            Action? useEffectAction = target is null ? null : _effect.UseEffect(bf, target);
+
+            return () => useEffectAction?.Invoke();
         }
     }
 }

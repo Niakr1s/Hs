@@ -13,9 +13,10 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
+            Action spellEffectAction = SpellEffect.UseEffect(bf, Place!.Pid, effectTarget);
             return () =>
             {
-                SpellEffect.UseEffect(bf, Place!.Pid, effectTarget);
+                spellEffectAction();
                 bf[Place.Pid].Hand.Remove(this);
             };
         }

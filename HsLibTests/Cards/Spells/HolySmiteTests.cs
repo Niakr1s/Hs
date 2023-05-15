@@ -22,7 +22,7 @@ namespace HsLibTests.Cards.Spells
             bf.Enemy.Field.Add(yeti);
             Assert.AreEqual(3, holySmite.SpellEffect.GetPossibleTargets(bf, bf.Player.Pid).Count());
 
-            holySmite.SpellEffect.UseEffect(bf, bf.Player.Pid, yeti);
+            holySmite.SpellEffect.UseEffect(bf, bf.Player.Pid, yeti)();
             Assert.AreEqual(3, yeti.Hp.Value);
         }
     }

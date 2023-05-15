@@ -22,6 +22,7 @@ namespace HsLib.Systems.Services
         /// <returns>Amount of damage received</returns>
         public int DealDamage(int value, IDamageable defender)
         {
+            // todo: return action
             int dmg = defender.GetDamage(value);
             Event?.Invoke(this, new BattleGotDamageEventArgs(defender, dmg));
             return dmg;

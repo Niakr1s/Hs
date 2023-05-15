@@ -17,6 +17,6 @@ namespace HsLib.Types.Effects.Base
 
         public IEnumerable<ICard> GetPossibleTargets(Battlefield bf, Pid pid) => _possibleTargetsChooser.ChooseCards(pid, bf.Cards);
 
-        public abstract void UseEffect(Battlefield bf, Pid pid, ICard? target);
+        public abstract Action UseEffect(Battlefield bf, Pid pid, ICard? target);
     }
 }

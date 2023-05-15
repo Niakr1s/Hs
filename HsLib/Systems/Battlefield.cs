@@ -175,14 +175,19 @@ namespace HsLib.Systems
 
         private bool UseAbility(ICard? target)
         {
+            Action abilityAction;
+
             try
             {
-                return Player.Ability.UseAbility(target);
+                abilityAction = Player.Ability.UseAbility(target);
             }
             catch
             {
                 return false;
             }
+
+            abilityAction();
+            return true;
         }
 
         #endregion

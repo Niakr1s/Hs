@@ -24,12 +24,14 @@ namespace HsLib.Types.Effects.Base
         /// <param name="bf"></param>
         /// <param name="pid"></param>
         /// <param name="target">должен быть null</param>
-        public override void UseEffect(Battlefield bf, Pid pid, ICard? target)
+        public override Action UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
             if (target is not null) { throw new ArgumentException("target should be null"); }
 
             ICard? targetCard = _targetChooser.ChooseCard(bf, pid);
-            if (targetCard is not null) { _effect.UseEffect(bf, targetCard); }
+            Action? effectAction = targetCard is null ? null : _effect.UseEffect(bf, targetCard);
+
+            return () => effectAction?.Invoke();
         }
     }
 }

@@ -13,6 +13,14 @@ namespace HsLib.Interfaces
         /// <param name="pid">owner's pid</param>
         IEnumerable<ICard> GetPossibleTargets(Battlefield bf, Pid pid);
 
-        void UseEffect(Battlefield bf, Pid pid, ICard? target);
+        /// <summary>
+        /// Uses effect. 
+        /// </summary>
+        /// <param name="bf"></param>
+        /// <param name="pid"></param>
+        /// <param name="target"></param>
+        /// <exception cref="Exception">Any exception, that prevents for using effect</exception>
+        /// <returns>Action, that actually uses effect</returns>
+        Action UseEffect(Battlefield bf, Pid pid, ICard? target);
     }
 }

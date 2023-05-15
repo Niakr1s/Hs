@@ -11,12 +11,10 @@ namespace HsLib.Types.Effects.Base
         {
         }
 
-        public override void UseEffect(Battlefield bf, Pid pid, ICard? target)
+        public override Action UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
-            foreach (ICard card in GetPossibleTargets(bf, pid))
-            {
-                _effect.UseEffect(bf, card);
-            }
+            List<Action> actions = GetPossibleTargets(bf, pid).Select(card => _effect.UseEffect(bf, card)).ToList();
+            return () => actions.ForEach(a => a());
         }
     }
 }
