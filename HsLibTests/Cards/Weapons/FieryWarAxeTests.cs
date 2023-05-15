@@ -15,7 +15,7 @@ namespace HsLibTests.Cards.Weapons
 
             Weapon weapon = new FieryWarAxe();
             bf.Player.Hand.Add(weapon);
-            bf.Player.Hand.Play(0);
+            bf.Player.Hand.Play(0)();
 
             Assert.AreEqual(weapon, bf.Player.Weapon.Card);
         }

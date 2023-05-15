@@ -116,18 +116,30 @@ namespace HsLib.Systems
 
         #region PlayFromHand
 
+        /// <summary>
+        /// Plays a card from hand. If something unexpected occured, throws exception.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="fieldIndex"></param>
+        /// <param name="effectTarget"></param>
+        /// <returns>True, if actually was played, false - if can't play from hand.</returns>
         public bool PlayFromHand(int index, int? fieldIndex = null, ICard? effectTarget = null)
         {
+            Action playFromHandAction;
+
+            // do checks
             try
             {
-
-                Player.Hand.Play(index, fieldIndex, effectTarget);
-                return true;
+                playFromHandAction = Player.Hand.Play(index, fieldIndex, effectTarget);
             }
             catch
             {
                 return false;
             }
+
+            // do actual play
+            playFromHandAction();
+            return true;
         }
 
         #endregion

@@ -20,14 +20,20 @@ namespace HsLib.Types.Containers
         /// <param name="effectTarget"></param>
         /// <exception cref="IndexOutOfRangeException"></exception>
         /// <exception cref="MpException"></exception>
-        public void Play(int index, int? fieldIndex = null, ICard? effectTarget = null)
+        /// <returns>Action, that does actual play</returns>
+        public Action Play(int index, int? fieldIndex = null, ICard? effectTarget = null)
         {
             IPlayableFromHand card = (IPlayableFromHand)this[index];
             Mp mp = Bf[Place.Pid].Mp;
             if (mp < card.Mp.Value) { throw new MpException(); }
 
-            card.PlayFromHand(Bf, fieldIndex, effectTarget);
-            mp.Set(mp.Value - card.Mp.Value);
+            Action playFromHandAction = card.PlayFromHand(Bf, fieldIndex, effectTarget);
+
+            return () =>
+            {
+                playFromHandAction();
+                mp.Set(mp.Value - card.Mp.Value);
+            };
         }
     }
 }

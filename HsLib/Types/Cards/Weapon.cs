@@ -53,14 +53,16 @@ namespace HsLib.Types.Cards
             return Windfury.AttacksLeft(AtksThisTurn) > 0;
         }
 
-        public void PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
+        public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
             Action move = bf[Place!.Pid].Hand.MoveToContainer(Place.Index, bf[Place.Pid].Weapon,
                 canBurn: false, toIndex: 0);
 
-            Battlecry?.UseEffect(bf, Place.Pid, effectTarget);
-
-            move();
+            return () =>
+            {
+                Battlecry?.UseEffect(bf, Place.Pid, effectTarget);
+                move();
+            };
         }
 
         public IDamageable GetDefender(Battlefield bf)

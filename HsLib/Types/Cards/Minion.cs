@@ -81,17 +81,18 @@ namespace HsLib.Types.Cards
             return this;
         }
 
-        public void PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
+        public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
             Minion transformTo = ChoseOne is null ? this : (Minion)CardBuilder.FromId(bf[Place!.Pid].Player.ChooseOne(ChoseOne));
 
             Action move = bf[Place!.Pid].Hand.MoveToContainer(Place.Index, bf[Place.Pid].Field,
                 canBurn: false, toIndex: fieldIndex, transformTo: transformTo);
 
-            Battlecry?.UseEffect(bf, Place.Pid, effectTarget);
-
-            move();
+            return () =>
+            {
+                Battlecry?.UseEffect(bf, Place.Pid, effectTarget);
+                move();
+            };
         }
-
     }
 }
