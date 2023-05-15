@@ -7,7 +7,7 @@ using HsLib.Types.Stats.Base;
 
 namespace HsLib.Types.Effects
 {
-    public class GiveDamageBuffEffect : IEffect
+    public class GiveAtkBuffEffect : IEffect
     {
         public int DamageBuff { get; set; }
 
