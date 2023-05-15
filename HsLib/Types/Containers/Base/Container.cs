@@ -28,7 +28,7 @@ namespace HsLib.Types.Containers.Base
         /// Should return card at index
         /// </summary>
         /// <param name="index"></param>
-        /// <exception cref="IndexOutOfRangeException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <returns>card in container</returns>
         public abstract ICard this[int index] { get; }
 
