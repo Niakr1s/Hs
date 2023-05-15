@@ -1,6 +1,8 @@
 ﻿using HsLib.Cards.Minions;
+using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;
+using HsLibTests.Helpers;
 
 namespace HsLibTests.Types.Effects
 {
@@ -10,12 +12,14 @@ namespace HsLibTests.Types.Effects
         [TestMethod()]
         public void UseEffectTest()
         {
-            DealDamageEffect effect = new() { Damage = 2 };
-            Minion minion = new ChillwindYeti();
+            Battlefield bf = TestBattlefield.New();
 
-            minion.Hp.Set(10);
-            // todo
-            //effect.UseEffect()
+            DealDamageEffect effect = new() { Damage = 2 };
+
+            Minion minion = new ChillwindYeti();
+            int startHp = minion.Hp.Value;
+            effect.UseEffect(bf, minion)();
+            Assert.AreEqual(startHp - effect.Damage, minion.Hp.Value);
         }
     }
 }
