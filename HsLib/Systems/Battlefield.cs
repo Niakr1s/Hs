@@ -74,30 +74,37 @@ namespace HsLib.Systems
 
         public bool WeaponAttack(Loc defenderLoc, int defenderIndex = 0)
         {
+            Action attackAction;
             try
             {
-
-                return MeleeService.WeaponAttack(GetDefender(defenderLoc, defenderIndex));
+                attackAction = MeleeService.WeaponAttack(GetDefender(defenderLoc, defenderIndex));
             }
             catch
             {
                 return false;
             }
+
+            attackAction();
+            return true;
         }
 
         public bool MinionAttack(int attackerIndex, Loc defenderLoc, int defenderIndex)
         {
+            Action attackAction;
             try
             {
 
                 Minion attacker = (Minion)Player.GetCard(Loc.Field, attackerIndex);
                 IDamageable defender = GetDefender(defenderLoc, defenderIndex);
-                return MeleeService.MinionAttack(attacker, defender);
+                attackAction = MeleeService.MinionAttack(attacker, defender);
             }
             catch
             {
                 return false;
             }
+
+            attackAction();
+            return true;
         }
 
         private IDamageable GetDefender(Loc loc, int index)
