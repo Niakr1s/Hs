@@ -1,9 +1,6 @@
-﻿using HsLib.Interfaces;
-using HsLib.Systems;
-using HsLib.Types.Cards;
+﻿using HsLib.Types.Cards;
 
 namespace HsLib.Types.CardChoosers
 {
-
-    public delegate ICard? ChooseCardFunc(Battlefield bf, Pid pid);
+    public delegate IEnumerable<ICard> ChooseCardFunc(Pid ownerPid, IEnumerable<ICard> cards);
 }

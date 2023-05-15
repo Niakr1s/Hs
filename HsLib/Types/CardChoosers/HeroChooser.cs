@@ -1,9 +1,11 @@
-﻿namespace HsLib.Types.CardChoosers
+﻿using HsLib.Types.Cards;
+
+namespace HsLib.Types.CardChoosers
 {
-    public class HeroChooser : CardChooser
+    public class HeroChooser : CardsChooser
     {
         public HeroChooser() :
-            base((bf, pid) => bf[pid].Hero.Card)
+            base((pid, cards) => cards.Where(c => c is Hero && c.Place!.Pid == pid))
         {
         }
     }
