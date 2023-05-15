@@ -144,7 +144,7 @@ namespace HsLib.Systems
             // do checks
             try
             {
-                playFromHandAction = Player.Hand.Play(index, fieldIndex, effectTarget);
+                playFromHandAction = Player.Hand.PlayFromHand(index, fieldIndex, effectTarget);
             }
             catch
             {

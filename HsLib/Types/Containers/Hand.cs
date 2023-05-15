@@ -21,7 +21,7 @@ namespace HsLib.Types.Containers
         /// <param name="effectTarget"></param>
         /// <exception cref="ValidationException"></exception>
         /// <returns>Action, that does actual play</returns>
-        public Action Play(int index, int? fieldIndex = null, ICard? effectTarget = null)
+        public Action PlayFromHand(int index, int? fieldIndex = null, ICard? effectTarget = null)
         {
             IPlayableFromHand card = (IPlayableFromHand)this[index];
 

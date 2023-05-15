@@ -31,7 +31,7 @@ namespace HsLib.Systems.Services
         /// <returns>Action, that does actual play</returns>
         public Action PlayFromHand(Pid pid, int index, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            return Bf[pid].Hand.Play(index, fieldIndex, effectTarget);
+            return Bf[pid].Hand.PlayFromHand(index, fieldIndex, effectTarget);
         }
     }
 }
