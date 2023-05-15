@@ -11,7 +11,7 @@ namespace HsLib.Cards.Abilities
         public ArmorUp() : base(2)
         {
             GetArmorEffect effect = new() { Armor = 2 };
-            AbilityEffect = new ActiveEffect(effect, new HeroChooser());
+            AbilityEffect = new ActiveEffect(effect, targetsChooser: new HeroChooser());
         }
 
         public override IActiveEffect AbilityEffect { get; }

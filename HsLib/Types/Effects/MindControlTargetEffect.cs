@@ -2,10 +2,10 @@
 
 namespace HsLib.Types.Effects
 {
-    public class MindControlTargetEffect : ActiveSingleEffect
+    public class MindControlTargetEffect : ActiveEffect
     {
         public MindControlTargetEffect() :
-            base(new MindControlEffect(), new Targets { Locs = Loc.Field, Sides = PidSide.He })
+            base(new MindControlEffect(), possibleTargetsChooser: new Targets { Locs = Loc.Field, Sides = PidSide.He })
         {
         }
     }

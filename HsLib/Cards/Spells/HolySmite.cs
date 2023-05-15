@@ -12,7 +12,7 @@ namespace HsLib.Cards.Spells
         {
             IEffect effect = new DealDamageEffect() { Damage = 2 };
             Targets possibleTargets = new Targets { Locs = Loc.Field | Loc.Hero, Sides = PidSide.He | PidSide.Me };
-            SpellEffect = new ActiveSingleEffect(effect, possibleTargets);
+            SpellEffect = new ActiveEffect(effect, possibleTargetsChooser: possibleTargets);
         }
         public override IActiveEffect SpellEffect { get; }
     }

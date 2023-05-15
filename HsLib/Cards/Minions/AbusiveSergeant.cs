@@ -10,8 +10,8 @@ namespace HsLib.Cards.Minions
         public AbusiveSergeant() : base(2, 2, 1)
         {
             GiveDamageBuffEffect effect = new() { DamageBuff = 2, TillEndOfTurn = true };
-            Targets targets = new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He };
-            Battlecry = new ActiveSingleEffect(effect, targets);
+            Targets possibleTargets = new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He };
+            Battlecry = new ActiveEffect(effect, possibleTargetsChooser: possibleTargets);
         }
     }
 }

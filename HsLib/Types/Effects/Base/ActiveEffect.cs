@@ -6,7 +6,14 @@ namespace HsLib.Types.Effects.Base
 {
     public class ActiveEffect : IActiveEffect
     {
-        public ActiveEffect(IEffect effect, ICardsChooser? targetsChooser = null, ICardsChooser? possibleTargetsChooser = null)
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="effect"></param>
+        /// <param name="possibleTargetsChooser">Chooses possible targets for effect.</param>
+        /// <param name="targetsChooser">Chooses targets for effect.
+        /// If provided, will ignore target in <see cref="UseEffect(Battlefield, Pid, ICard?)"/> and use it instead.</param>
+        public ActiveEffect(IEffect effect, ICardsChooser? possibleTargetsChooser = null, ICardsChooser? targetsChooser = null)
         {
             _effect = effect;
             _targetsChooser = targetsChooser;

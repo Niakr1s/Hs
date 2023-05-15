@@ -11,7 +11,7 @@ namespace HsLib.Cards.Minions
         {
             DealDamageEffect effect = new() { Damage = 2 };
             Targets possibleTargets = new Targets { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He, };
-            Deathrattle = new ActiveMultiEffect(effect, possibleTargets);
+            Deathrattle = new ActiveEffect(effect, possibleTargetsChooser: possibleTargets);
         }
     }
 }

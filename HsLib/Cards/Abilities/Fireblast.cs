@@ -13,7 +13,7 @@ namespace HsLib.Cards.Abilities
         {
             DealDamageEffect effect = new() { Damage = 1 };
             Targets possibleTargets = new() { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He };
-            AbilityEffect = new ActiveSingleEffect(effect, possibleTargets);
+            AbilityEffect = new ActiveEffect(effect, possibleTargetsChooser: possibleTargets);
         }
 
         public override IActiveEffect AbilityEffect { get; }
