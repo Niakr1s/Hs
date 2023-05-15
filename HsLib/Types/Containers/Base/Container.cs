@@ -60,12 +60,8 @@ namespace HsLib.Types.Containers.Base
         /// <returns></returns>
         public RemovedCard Remove(ICard card)
         {
-            DoRemove(card);
-            card.Place = null;
-
-            UpdateCardsPlaces();
-            Event?.Invoke(this, new ContainerCardRemoveEventArgs(card, Place));
-            return new RemovedCard(card, Place);
+            int index = Cards.ToList().IndexOf(card);
+            return RemoveAt(index);
         }
 
         public RemovedCard Replace(int index, ICard card)
@@ -77,7 +73,12 @@ namespace HsLib.Types.Containers.Base
 
         public RemovedCard RemoveAt(int index)
         {
-            return Remove(this[index]);
+            ICard card = DoRemoveAt(index);
+            card.Place = null;
+
+            UpdateCardsPlaces();
+            Event?.Invoke(this, new ContainerCardRemoveEventArgs(card, Place));
+            return new RemovedCard(card, Place);
         }
 
 
@@ -262,10 +263,9 @@ namespace HsLib.Types.Containers.Base
         /// <summary>
         /// Removes card from container.
         /// </summary>
-        /// <param name="card"></param>
         /// <exception cref="ArgumentException"></exception>
         /// <returns>removed card</returns>
-        protected abstract void DoRemove(ICard card);
+        protected abstract ICard DoRemoveAt(int index);
 
         /// <summary>
         /// Should check if card in container at index is invalid and should be removed.

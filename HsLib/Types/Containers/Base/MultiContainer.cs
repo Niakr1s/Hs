@@ -38,9 +38,11 @@ namespace HsLib.Types.Containers.Base
             _cards.Insert(index, card);
         }
 
-        protected override void DoRemove(ICard card)
+        protected override ICard DoRemoveAt(int index)
         {
-            _cards.Remove(card);
+            ICard card = _cards[index];
+            _cards.RemoveAt(index);
+            return card;
         }
 
 
