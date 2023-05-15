@@ -10,7 +10,7 @@ namespace HsLib.Types.Cards
         {
         }
 
-        public abstract ITargetEffect SpellEffect { get; }
+        public abstract IActiveEffect SpellEffect { get; }
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {

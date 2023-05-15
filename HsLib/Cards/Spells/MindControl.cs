@@ -11,6 +11,6 @@ namespace HsLib.Cards.Spells
             SpellEffect = new MindControlTargetEffect();
         }
 
-        public override ITargetEffect SpellEffect { get; }
+        public override IActiveEffect SpellEffect { get; }
     }
 }

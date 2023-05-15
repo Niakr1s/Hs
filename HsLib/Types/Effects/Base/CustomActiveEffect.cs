@@ -8,9 +8,9 @@ namespace HsLib.Types.Effects.Base
     /// В этом классе target из метода <see cref="UseEffect(Battlefield, Pid, ICard?)"/> будет игнорироваться,
     /// а вместо него будет использоваться кастомный targetChooser.
     /// </summary>
-    public class CustomTargetEffect : TargetEffect
+    public class CustomActiveEffect : ActiveEffect
     {
-        public CustomTargetEffect(IEffect effect, ICardChooser targetChooser, ICardsChooser? possibleTargetsChooser = null) :
+        public CustomActiveEffect(IEffect effect, ICardChooser targetChooser, ICardsChooser? possibleTargetsChooser = null) :
             base(effect, possibleTargetsChooser ?? new Targets())
         {
             _targetChooser = targetChooser;

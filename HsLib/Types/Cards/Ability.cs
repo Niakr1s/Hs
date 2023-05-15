@@ -9,7 +9,7 @@ namespace HsLib.Types.Cards
         {
         }
 
-        public abstract ITargetEffect AbilityEffect { get; }
+        public abstract IActiveEffect AbilityEffect { get; }
 
         public bool EffectUsedThisTurn { get; private set; }
 

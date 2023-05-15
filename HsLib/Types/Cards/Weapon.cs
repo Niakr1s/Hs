@@ -23,7 +23,7 @@ namespace HsLib.Types.Cards
 
         public Windfury Windfury { get; init; } = new Windfury(false);
 
-        public TargetEffect? Battlecry { get; protected set; }
+        public ActiveEffect? Battlecry { get; protected set; }
 
         public bool Dead => Hp.Value <= 0;
 

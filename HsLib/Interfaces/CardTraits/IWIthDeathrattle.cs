@@ -2,6 +2,6 @@
 {
     public interface IWithDeathrattle
     {
-        ITargetEffect? Deathrattle { get; }
+        IActiveEffect? Deathrattle { get; }
     }
 }

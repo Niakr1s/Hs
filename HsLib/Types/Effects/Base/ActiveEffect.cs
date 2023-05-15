@@ -4,9 +4,9 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Effects.Base
 {
-    public abstract class TargetEffect : ITargetEffect
+    public abstract class ActiveEffect : IActiveEffect
     {
-        protected TargetEffect(IEffect effect, ICardsChooser possibleTargetsChooser)
+        protected ActiveEffect(IEffect effect, ICardsChooser possibleTargetsChooser)
         {
             _effect = effect;
             _possibleTargetsChooser = possibleTargetsChooser;
