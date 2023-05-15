@@ -1,7 +1,7 @@
-## Card list
+## My implementation of Blizzard's Hearthstone Classic.
 
 <details>
-  <summary>Click me</summary>
+  <summary>Implemented cards</summary>
 
 - [x] Garrosh Hellscream
 - [x] Mind Control
