@@ -1,4 +1,4 @@
-﻿using HsLib.Types.Cards;
+﻿using HsLib.Interfaces;
 using System.Data;
 
 namespace HsLib.Types.Containers.Base

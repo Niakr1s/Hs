@@ -1,7 +1,8 @@
 ﻿using HsLib.Systems;
+using HsLib.Types;
 using HsLib.Types.Stats;
 
-namespace HsLib.Types.Cards
+namespace HsLib.Interfaces
 {
     public interface ICard
     {

@@ -1,4 +1,5 @@
-﻿using HsLib.Systems;
+﻿using HsLib.Interfaces;
+using HsLib.Systems;
 using HsLib.Types.Stats;
 
 namespace HsLib.Types.Cards

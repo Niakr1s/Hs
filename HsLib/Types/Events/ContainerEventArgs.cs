@@ -1,4 +1,4 @@
-﻿using HsLib.Types.Cards;
+﻿using HsLib.Interfaces;
 
 namespace HsLib.Types.Events
 {

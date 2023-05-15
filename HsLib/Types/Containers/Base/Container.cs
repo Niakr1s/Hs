@@ -1,6 +1,6 @@
 ﻿using HsLib.Extensions;
+using HsLib.Interfaces;
 using HsLib.Systems;
-using HsLib.Types.Cards;
 using HsLib.Types.Events;
 
 namespace HsLib.Types.Containers.Base
