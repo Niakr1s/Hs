@@ -3,16 +3,18 @@ using HsLib.Cards.Heroes;
 using HsLib.Cards.Minions;
 using HsLib.Cards.Weapons;
 using HsLib.Interfaces;
+using HsLib.Types;
+using HsLib.Types.CardsChoosers;
 
-namespace HsLib.Types.CardsChoosers
+namespace HsLibTests.Types.CardsChoosers
 {
     [TestClass()]
-    public class CardsChoosersTests
+    public class HeroChooserTests
     {
         [TestMethod()]
         public void HeroChooserTest()
         {
-            ICardsChooser chooser = CardsChoosers.HeroChooser();
+            ICardsChooser chooser = new HeroChooser();
 
             List<ICard> Cards = new() {
                 // hero with wrong Pid at first place
