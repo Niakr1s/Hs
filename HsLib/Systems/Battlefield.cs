@@ -18,6 +18,9 @@ namespace HsLib.Systems
                 [Pid.P1] = new(this, Pid.P1, p1),
                 [Pid.P2] = new(this, Pid.P2, p2),
             };
+
+            _cards = this[Pid.P1].Cards.Concat(this[Pid.P2].Cards).ToList();
+
             BattleService = new BattleService(this);
             DeathService = new DeathService(this);
             PlayerService = new PlayerService(this);
@@ -47,9 +50,10 @@ namespace HsLib.Systems
         #endregion
 
         /// <summary>
-        /// Get all cards in all containers (not ordered).
+        /// Get all cards in all containers in chronological order.
         /// </summary>
-        public IEnumerable<ICard> Cards => this[Pid.P1].Cards.Concat(this[Pid.P2].Cards);
+        private readonly List<ICard> _cards;
+        public IEnumerable<ICard> Cards => _cards.AsEnumerable();
 
         private readonly Dictionary<Pid, BattlefieldPlayer> _bf;
 

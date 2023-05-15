@@ -55,10 +55,12 @@ namespace HsLib.Systems
                 switch (e.EventArgs)
                 {
                     case ContainerCardInsertEventArgs evt:
+                        Bf._cards.Add(evt.Card);
                         evt.Card.AfterContainerInsert(Bf);
                         break;
 
                     case ContainerCardRemoveEventArgs evt:
+                        Bf._cards.Remove(evt.Card);
                         evt.Card.AfterContainerRemove(Bf);
                         break;
                 }

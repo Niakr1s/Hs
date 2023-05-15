@@ -62,7 +62,7 @@ namespace HsLib.Systems
         public ICard GetCard(Loc loc, int index) => _containerList.GetCard(loc, index);
 
         /// <summary>
-        /// Gets all cards in all containers.
+        /// Gets all cards in all containers in non-chronological order.
         /// </summary>
         public IEnumerable<ICard> Cards => _containerList.Cards;
 
