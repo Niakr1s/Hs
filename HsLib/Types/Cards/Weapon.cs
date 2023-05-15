@@ -58,7 +58,7 @@ namespace HsLib.Types.Cards
             Action move = bf[Place!.Pid].Hand.MoveToContainer(Place.Index, bf[Place.Pid].Weapon,
                 canBurn: false, toIndex: 0);
 
-            if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, Place.Pid, effectTarget); }
+            Battlecry?.UseEffect(bf, Place.Pid, effectTarget);
 
             move();
         }
@@ -72,11 +72,6 @@ namespace HsLib.Types.Cards
         {
             base.OnTurnEnd(bf);
             AtksThisTurn = 0;
-        }
-
-        public void PlayFromHandUseEffects(Battlefield bf, Card? effectTarget = null)
-        {
-            if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, Place!.Pid, effectTarget); }
         }
     }
 }

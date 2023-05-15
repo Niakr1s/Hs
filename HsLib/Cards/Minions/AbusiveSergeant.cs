@@ -11,7 +11,7 @@ namespace HsLib.Cards.Minions
         {
             GiveDamageBuffEffect effect = new() { DamageBuff = 2, TillEndOfTurn = true };
             Targets targets = new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He };
-            Battlecry = new TargetEffect(this, effect, EffectType.Solo, targets);
+            Battlecry = new SingleTargetEffect(effect, targets);
         }
     }
 }

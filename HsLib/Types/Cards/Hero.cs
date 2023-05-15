@@ -5,7 +5,7 @@ using HsLib.Types.Stats;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Hero : Card, IDamageable
+    public abstract class Hero : Card, IDamageable, IWithArmor
     {
         protected Hero(int mp = 0, int hp = 30, int armor = 0) : base(mp)
         {

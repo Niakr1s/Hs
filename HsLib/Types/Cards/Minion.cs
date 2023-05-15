@@ -88,9 +88,10 @@ namespace HsLib.Types.Cards
             Action move = bf[Place!.Pid].Hand.MoveToContainer(Place.Index, bf[Place.Pid].Field,
                 canBurn: false, toIndex: fieldIndex, transformTo: transformTo);
 
-            if (Battlecry is not null) { bf.BattleService.UseEffect(Battlecry, Place.Pid, effectTarget); }
+            Battlecry?.UseEffect(bf, Place.Pid, effectTarget);
 
             move();
         }
+
     }
 }

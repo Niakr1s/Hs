@@ -13,7 +13,8 @@ namespace HsLib.Types.Containers
         public bool UseAbility(ICard? target = null)
         {
             Bf[Place!.Pid].Mp.Use(Card.Mp);
-            return Bf.BattleService.UseEffect(Card, Place.Pid, target);
+            Card.UseEffect(Bf, Place.Pid, target);
+            return true; // todo: add CanUseEffect
         }
     }
 }

@@ -4,47 +4,19 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Effects.Base
 {
-    public class TargetEffect : ITargetEffect
+    public abstract class TargetEffect : ITargetEffect
     {
-        public TargetEffect(Card owner, IEffect effect, EffectType type = EffectType.Self, Targets targets = new Targets())
+        protected TargetEffect(IEffect effect, ICardsChooser possibleTargetsChooser)
         {
-            Owner = owner;
-            EffectType = type;
             _effect = effect;
-            _targets = targets;
+            _possibleTargetsChooser = possibleTargetsChooser;
         }
 
-        public Card Owner { get; }
+        protected readonly IEffect _effect;
+        private readonly ICardsChooser _possibleTargetsChooser;
 
-        public EffectType EffectType { get; }
+        public IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid) => _possibleTargetsChooser.ChooseCards(pid, bf.Cards);
 
-        private readonly Targets _targets;
-        private readonly IEffect _effect;
-
-        public virtual IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid)
-        {
-            return _targets.GetValidTargets(pid, bf.Cards);
-        }
-
-        public void UseEffect(Battlefield bf, Pid pid, ICard? target)
-        {
-            switch (EffectType)
-            {
-                case EffectType.Self:
-                    _effect.UseEffect(bf, pid, null);
-                    break;
-
-                case EffectType.Solo:
-                    _effect.UseEffect(bf, pid, target);
-                    break;
-
-                case EffectType.Mass:
-                    foreach (var card in UseEffectTargets(bf, pid))
-                    {
-                        _effect.UseEffect(bf, pid, card);
-                    }
-                    break;
-            }
-        }
+        public abstract void UseEffect(Battlefield bf, Pid pid, ICard? target);
     }
 }

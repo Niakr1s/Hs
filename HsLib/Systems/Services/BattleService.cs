@@ -1,7 +1,4 @@
 ﻿using HsLib.Interfaces;
-using HsLib.Types;
-using HsLib.Types.Cards;
-using HsLib.Types.Effects.Base;
 using HsLib.Types.Events;
 
 namespace HsLib.Systems.Services
@@ -16,23 +13,6 @@ namespace HsLib.Systems.Services
         public Battlefield Bf { get; }
 
         public event EventHandler<BattleEventArgs>? Event;
-
-        public bool UseEffect(ITargetEffect effect, Pid pid, ICard? target = null)
-        {
-            bool targetIsValid = effect.EffectType switch
-            {
-                EffectType.Self => target is null,
-                EffectType.Mass => target is null,
-                EffectType.Solo => target is not null && effect.UseEffectTargets(Bf, pid).Contains(target),
-            };
-            if (!targetIsValid)
-            {
-                return false;
-            }
-
-            effect.UseEffect(Bf, pid, target);
-            return true;
-        }
 
         /// <summary>
         /// Deals damage and invokes <see cref="BattleGotDamageEventArgs"/>

@@ -16,7 +16,7 @@ namespace HsLibTests.Cards.Abilities
             Battlefield bf = TestBattlefield.New(p1: CardId.GarroshHellscream);
             Ability armorUp = bf.Player.Ability.Card;
             Assert.IsInstanceOfType(armorUp, typeof(ArmorUp));
-            Assert.AreEqual(0, armorUp.UseEffectTargets(bf, bf.Player.Pid).Count());
+            Assert.AreEqual(0, armorUp.AbilityEffect.UseEffectTargets(bf, bf.Player.Pid).Count());
 
 
             Assert.AreEqual(0, bf.Player.Hero.Card.Armor.Value);
@@ -25,7 +25,7 @@ namespace HsLibTests.Cards.Abilities
 
             Minion y1 = new ChillwindYeti();
             bf[Pid.P1].Field.Add(y1);
-            Assert.AreEqual(0, armorUp.UseEffectTargets(bf, bf.Player.Pid).Count());
+            Assert.AreEqual(0, armorUp.AbilityEffect.UseEffectTargets(bf, bf.Player.Pid).Count());
         }
     }
 }

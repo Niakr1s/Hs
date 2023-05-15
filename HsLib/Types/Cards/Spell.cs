@@ -1,29 +1,19 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Systems;
-using HsLib.Types.Effects.Base;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Spell : Card, ITargetEffect, IPlayableFromHand
+    public abstract class Spell : Card, IPlayableFromHand
     {
         protected Spell(int mp) : base(mp)
         {
         }
 
-        public abstract EffectType EffectType { get; }
-
-        public bool CanUseEffect(Battlefield bf)
-        {
-            return Place?.Loc == Loc.Hand;
-        }
-
-        public abstract void UseEffect(Battlefield bf, Pid pid, ICard? target);
-
-        public abstract IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid);
+        public abstract ITargetEffect SpellEffect { get; }
 
         public void PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            bf.BattleService.UseEffect(this, Place!.Pid, effectTarget);
+            SpellEffect.UseEffect(bf, Place!.Pid, effectTarget);
             bf[Place.Pid].Hand.Remove(this);
         }
     }

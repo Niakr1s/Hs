@@ -8,9 +8,12 @@ namespace HsLib.Types.Effects
     {
         public int Armor { get; set; }
 
-        public void UseEffect(Battlefield bf, Pid pid, ICard? target)
+        public void UseEffect(Battlefield bf, ICard? target)
         {
-            bf[pid].Hero.Card.Armor.Increase(2);
+            if (target is IWithArmor a)
+            {
+                a.Armor.Increase(Armor);
+            }
         }
     }
 }

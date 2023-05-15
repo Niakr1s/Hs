@@ -1,14 +1,15 @@
-﻿using HsLib.Types.Cards;
+﻿using HsLib.Interfaces;
+using HsLib.Types.Cards;
 
 namespace HsLib.Types
 {
-    public readonly struct Targets
+    public readonly struct Targets : ICardsChooser
     {
         public Loc? Locs { get; init; }
 
         public PidSide? Sides { get; init; }
 
-        public bool IsValidTarget(Pid ownerPid, ICard? target)
+        private bool IsValidTarget(Pid ownerPid, ICard? target)
         {
             if (target is null)
             {
@@ -24,7 +25,7 @@ namespace HsLib.Types
             }
         }
 
-        public IEnumerable<ICard> GetValidTargets(Pid ownerPid, IEnumerable<ICard> targets)
+        public IEnumerable<ICard> ChooseCards(Pid ownerPid, IEnumerable<ICard> targets)
         {
             foreach (var t in targets)
             {

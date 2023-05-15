@@ -1,32 +1,22 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Systems;
-using HsLib.Types.Effects.Base;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Ability : Card, ITargetEffect
+    public abstract class Ability : Card
     {
         protected Ability(int mp) : base(mp)
         {
         }
 
-        protected abstract ITargetEffect Effect { get; }
+        public abstract ITargetEffect AbilityEffect { get; }
 
-        public virtual IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid) => Effect.UseEffectTargets(bf, pid);
-
-        public EffectType EffectType => Effect.EffectType;
-
-        private bool EffectUsedThisTurn { get; set; }
+        public bool EffectUsedThisTurn { get; private set; }
 
         public void UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
-            Effect.UseEffect(bf, pid, target);
+            AbilityEffect.UseEffect(bf, pid, target);
             EffectUsedThisTurn = true;
-        }
-
-        public bool CanUseEffect(Battlefield bf)
-        {
-            return !EffectUsedThisTurn;
         }
 
         public override void OnTurnStart(Battlefield bf)
