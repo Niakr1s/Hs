@@ -1,4 +1,5 @@
 ﻿using HsLib.Cards.Minions;
+using HsLib.Exceptions;
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;
@@ -28,7 +29,7 @@ namespace HsLibTests.Types.Effects
             GetArmorEffect effect = new() { Armor = 2 };
 
             Minion minion = new ChillwindYeti();
-            Assert.ThrowsException<ArgumentException>(() => effect.UseEffect(bf, minion));
+            Assert.ThrowsException<ValidationException>(() => effect.UseEffect(bf, minion));
         }
     }
 }

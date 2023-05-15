@@ -1,4 +1,5 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Exceptions;
+using HsLib.Interfaces;
 using HsLib.Systems;
 
 namespace HsLib.Types.Effects.Base
@@ -47,7 +48,7 @@ namespace HsLib.Types.Effects.Base
             }
             else
             {
-                if (target is not null) { throw new ArgumentException("target should be null"); }
+                if (target is not null) { throw new ValidationException("target should be null"); }
 
                 IEnumerable<Action>? toAdd = _targetsChooser?.ChooseCards(pid, bf.Cards).Select(target => _effect.UseEffect(bf, target));
                 if (toAdd is not null) effectActions.AddRange(toAdd);

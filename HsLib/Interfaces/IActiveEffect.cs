@@ -1,4 +1,5 @@
-﻿using HsLib.Systems;
+﻿using HsLib.Exceptions;
+using HsLib.Systems;
 using HsLib.Types;
 
 namespace HsLib.Interfaces
@@ -18,7 +19,7 @@ namespace HsLib.Interfaces
         /// <param name="bf"></param>
         /// <param name="pid"></param>
         /// <param name="target"></param>
-        /// <exception cref="Exception">Any exception, that prevents for using effect</exception>
+        /// <exception cref="ValidationException">Any exception, that prevents for using effect</exception>
         /// <returns>Action, that actually uses effect</returns>
         Action UseEffect(Battlefield bf, Pid pid, ICard? target);
     }

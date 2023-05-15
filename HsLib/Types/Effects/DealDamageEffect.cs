@@ -1,4 +1,5 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Exceptions;
+using HsLib.Interfaces;
 using HsLib.Interfaces.CardTraits;
 using HsLib.Systems;
 
@@ -16,7 +17,7 @@ namespace HsLib.Types.Effects
             }
             else
             {
-                throw new ArgumentException("target can't be damaged");
+                throw new ValidationException("target can't be damaged");
             }
         }
     }

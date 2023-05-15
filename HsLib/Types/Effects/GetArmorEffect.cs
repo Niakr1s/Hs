@@ -1,4 +1,5 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Exceptions;
+using HsLib.Interfaces;
 using HsLib.Interfaces.CardTraits;
 using HsLib.Systems;
 
@@ -16,7 +17,7 @@ namespace HsLib.Types.Effects
             }
             else
             {
-                throw new ArgumentException("target doesn't have armor");
+                throw new ValidationException("target doesn't have armor");
             }
         }
     }
