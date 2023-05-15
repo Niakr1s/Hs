@@ -1,11 +1,11 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Types.Cards;
 
-namespace HsLib.Types.PlayerAskers
+namespace HsLib.Types
 {
     public class DefaultPlayer : IPlayer
     {
-        CardId IPlayer.ChooseOne(IEnumerable<CardId> cards)
+        public CardId ChooseOne(IEnumerable<CardId> cards)
         {
             return cards.First();
         }
