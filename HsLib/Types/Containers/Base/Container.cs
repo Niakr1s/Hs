@@ -14,36 +14,50 @@ namespace HsLib.Types.Containers.Base
             Place = place;
         }
 
-
-
-        #region public
-
         public Battlefield Bf { get; }
 
-        public Place Place { get; }
+        public IEnumerable<TCard> CardTs => Cards.Cast<TCard>();
+
+
+
+        #region IContainer implementation
 
         public event EventHandler<ContainerEventArgs>? Event;
 
-        /// <summary>
-        /// Should return card at index
-        /// </summary>
-        /// <param name="index"></param>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <returns>card in container</returns>
+
+
+        public Place Place { get; }
+
+        public IEnumerable<ICard> Cards
+        {
+            get
+            {
+                for (int i = 0; i < Count; i++)
+                {
+                    yield return this[i];
+                }
+            }
+        }
+
         public abstract ICard this[int index] { get; }
 
-        public bool Contains(ICard card) => Cards.Contains(card);
-
-        /// <summary>
-        /// Should return actual container length.
-        /// </summary>
         public abstract int Count { get; }
 
-        /// <summary>
-        /// Main method, all other should use this.
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="card"></param>
+
+
+        public bool Add(ICard card)
+        {
+            try
+            {
+                Insert(Count, card);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public void Insert(int index, ICard card)
         {
             DoInsertAt(index, card);
@@ -53,22 +67,23 @@ namespace HsLib.Types.Containers.Base
             Event?.Invoke(this, new ContainerCardInsertEventArgs(card));
         }
 
-        /// <summary>
-        /// Main method, all other should use this
-        /// </summary>
-        /// <param name="card"></param>
-        /// <returns></returns>
-        public RemovedCard Remove(ICard card)
-        {
-            int index = Cards.ToList().IndexOf(card);
-            return RemoveAt(index);
-        }
+        public bool CanBeInsertedAt(int index) => index >= 0 && index <= Count;
+
+        public bool Contains(ICard card) => Cards.Contains(card);
+
+
 
         public RemovedCard Replace(int index, ICard card)
         {
             RemovedCard removedCard = RemoveAt(index);
             Insert(index, card);
             return removedCard;
+        }
+
+        public RemovedCard Remove(ICard card)
+        {
+            int index = Cards.ToList().IndexOf(card);
+            return RemoveAt(index);
         }
 
         public RemovedCard RemoveAt(int index)
@@ -81,6 +96,17 @@ namespace HsLib.Types.Containers.Base
             return new RemovedCard(card, Place);
         }
 
+        public RemovedCard? Pop()
+        {
+            try
+            {
+                return RemoveAt(Count - 1);
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public IEnumerable<RemovedCard> RemoveIf(Predicate<ICard> predicate)
         {
@@ -104,30 +130,9 @@ namespace HsLib.Types.Containers.Base
             return cleanedCards.AsEnumerable();
         }
 
-        public bool Add(ICard card)
-        {
-            try
-            {
-                Insert(Count, card);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+        public IEnumerable<RemovedCard> RemoveInactiveCards() => RemoveIf(c => !IsCardActive(c));
 
-        public RemovedCard? Pop()
-        {
-            try
-            {
-                return RemoveAt(Count - 1);
-            }
-            catch
-            {
-                return null;
-            }
-        }
+
 
         public ICard? Left(int index)
         {
@@ -141,7 +146,6 @@ namespace HsLib.Types.Containers.Base
             }
         }
 
-
         public ICard? Right(int index)
         {
             try
@@ -154,31 +158,9 @@ namespace HsLib.Types.Containers.Base
             }
         }
 
-        public bool CanBeInsertedAt(int index)
-        {
-            return index >= 0 && index <= Count;
-        }
 
-        /// <summary>
-        /// Removes card from container and inserts at another. First call just throws exceptions if move is impossible.
-        /// Calling returned action actually does movement.
-        /// </summary>
-        /// <param name="fromIndex"></param>
-        /// <param name="canBurn">instead of throwing exception on insert failure, just discards</param>
-        /// <param name="toContainer"></param>
-        /// <param name="toIndex">defaults to last</param>
-        /// <param name="transformTo"></param>
-        /// <exception cref="InvalidOperationException"></exception>
-        /// <exception cref="IndexOutOfRangeException"></exception>
-        /// <returns>Action, that actually moves to container.</returns>
-        public Action MoveToContainer(
-            int fromIndex,
-            IContainer toContainer,
-            bool canBurn,
 
-            int? toIndex = null,
-            ICard? transformTo = null
-            )
+        public Action MoveToContainer(int fromIndex, IContainer toContainer, bool canBurn, int? toIndex = null, ICard? transformTo = null)
         {
             ICard? fromCard = this[fromIndex]; // this can throw IndexOutOfRangeException
             toIndex ??= toContainer.Count;
@@ -202,34 +184,11 @@ namespace HsLib.Types.Containers.Base
             };
         }
 
-        public IEnumerable<ICard> Cards
-        {
-            get
-            {
-                for (int i = 0; i < Count; i++)
-                {
-                    yield return this[i];
-                }
-            }
-        }
-
-        public IEnumerable<TCard> CardTs => Cards.Cast<TCard>();
-
-        /// <summary>
-        /// Remove inactive cards from container and return them. 
-        /// Each container should decide if card is inactive by itself.
-        /// </summary>
-        /// <returns>Cleaned cards</returns>
-        public IEnumerable<RemovedCard> RemoveInactiveCards()
-        {
-            return RemoveIf(c => !IsCardActive(c));
-        }
-
         #endregion
 
 
 
-        #region private
+        #region private helpers
 
         /// <summary>
         /// Should update cards places.
@@ -247,8 +206,6 @@ namespace HsLib.Types.Containers.Base
 
 
         #region protected
-
-
 
         /// <summary>
         /// Inserts card at index.
