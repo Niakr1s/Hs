@@ -12,8 +12,6 @@ namespace HsLib.Systems.Services
 
         public Battlefield Bf { get; }
 
-        public event EventHandler<BattleEventArgs>? Event;
-
         /// <summary>
         /// Deals damage and invokes <see cref="BattleGotDamageEventArgs"/>
         /// </summary>
@@ -24,7 +22,7 @@ namespace HsLib.Systems.Services
         {
             // todo: return action
             int dmg = defender.GetDamage(value);
-            Event?.Invoke(this, new BattleGotDamageEventArgs(defender, dmg));
+            Bf.Invoke(this, new BattleGotDamageEventArgs(defender, dmg));
             return dmg;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using HsLib.Systems;
+using HsLib.Types.Events;
 
 namespace HsLib.Interfaces
 {
@@ -8,5 +9,8 @@ namespace HsLib.Interfaces
         void AfterContainerRemove(Battlefield bf);
         void OnTurnEnd(Battlefield bf);
         void OnTurnStart(Battlefield bf);
+
+        void OnGotDamage(Battlefield bf, BattleGotDamageEventArgs e);
+        void OnPreAttack(Battlefield bf, BattleMeleePreAttackEventArgs e);
     }
 }

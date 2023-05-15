@@ -35,7 +35,7 @@ namespace HsLib.Systems
 
         public event EventHandler<BattlefieldEventArgs>? Event;
 
-        private void Invoke(object? sender, EventArgs e)
+        internal void Invoke(object? sender, EventArgs e)
         {
             Event?.Invoke(sender, new BattlefieldEventArgs(this, e));
         }

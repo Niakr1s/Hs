@@ -1,5 +1,6 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Systems;
+using HsLib.Types.Events;
 using HsLib.Types.Stats;
 
 namespace HsLib.Types.Cards
@@ -23,22 +24,15 @@ namespace HsLib.Types.Cards
 
         public Mp Mp { get; }
 
-        /// <summary>
-        /// Use this to subscribe to events.
-        /// </summary>
-        public virtual void AfterContainerInsert(Battlefield bf)
-        {
-        }
-
-        /// <summary>
-        /// Use this to unsubscribe from events.
-        /// </summary>
-        public virtual void AfterContainerRemove(Battlefield bf)
-        {
-        }
+        public virtual void AfterContainerInsert(Battlefield bf) { }
+        public virtual void AfterContainerRemove(Battlefield bf) { }
 
         public virtual void OnTurnEnd(Battlefield bf) { }
 
         public virtual void OnTurnStart(Battlefield bf) { }
+
+        public virtual void OnGotDamage(Battlefield bf, BattleGotDamageEventArgs e) { }
+
+        public virtual void OnPreAttack(Battlefield bf, BattleMeleePreAttackEventArgs e) { }
     }
 }
