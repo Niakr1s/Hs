@@ -16,19 +16,19 @@ namespace HsLibTests.Cards.Spells
             Battlefield bf = TestBattlefield.New();
 
             Spell mindControl = new MindControl();
-            Assert.AreEqual(0, mindControl.SpellEffect.UseEffectTargets(bf, bf.Player.Pid).Count());
+            Assert.AreEqual(0, mindControl.SpellEffect.GetPossibleTargets(bf, bf.Player.Pid).Count());
 
             Minion yeti = new ChillwindYeti();
 
             bf[Pid.P1].Hand.Add(mindControl);
-            Assert.AreEqual(0, mindControl.SpellEffect.UseEffectTargets(bf, bf.Player.Pid).Count());
+            Assert.AreEqual(0, mindControl.SpellEffect.GetPossibleTargets(bf, bf.Player.Pid).Count());
 
             bf[Pid.P1].Field.Add(yeti);
-            Assert.AreEqual(0, mindControl.SpellEffect.UseEffectTargets(bf, bf.Player.Pid).Count());
+            Assert.AreEqual(0, mindControl.SpellEffect.GetPossibleTargets(bf, bf.Player.Pid).Count());
 
             bf[Pid.P1].Field.Remove(yeti);
             bf[Pid.P2].Field.Add(yeti);
-            Assert.AreEqual(1, mindControl.SpellEffect.UseEffectTargets(bf, bf.Player.Pid).Count());
+            Assert.AreEqual(1, mindControl.SpellEffect.GetPossibleTargets(bf, bf.Player.Pid).Count());
 
             mindControl.SpellEffect.UseEffect(bf, bf.Player.Pid, yeti);
             Assert.AreEqual(Pid.P1, yeti.Place?.Pid);

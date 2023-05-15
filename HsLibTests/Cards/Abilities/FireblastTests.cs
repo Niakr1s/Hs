@@ -19,7 +19,7 @@ namespace HsLibTests.Cards.Abilities
             AbilityContainer ability = bf.Player.Ability;
             Ability fireblast = ability.Card;
             Assert.IsInstanceOfType(fireblast, typeof(Fireblast));
-            Assert.AreEqual(2, fireblast.AbilityEffect.UseEffectTargets(bf, bf.Player.Pid).Count());
+            Assert.AreEqual(2, fireblast.AbilityEffect.GetPossibleTargets(bf, bf.Player.Pid).Count());
 
             int startMp = bf.Player.Mp.Value;
 
@@ -32,9 +32,9 @@ namespace HsLibTests.Cards.Abilities
             Minion y2 = new ChillwindYeti();
 
             bf[Pid.P1].Field.Add(y1);
-            Assert.AreEqual(3, fireblast.AbilityEffect.UseEffectTargets(bf, bf.Player.Pid).Count());
+            Assert.AreEqual(3, fireblast.AbilityEffect.GetPossibleTargets(bf, bf.Player.Pid).Count());
             bf[Pid.P2].Field.Add(y2);
-            Assert.AreEqual(4, fireblast.AbilityEffect.UseEffectTargets(bf, bf.Player.Pid).Count());
+            Assert.AreEqual(4, fireblast.AbilityEffect.GetPossibleTargets(bf, bf.Player.Pid).Count());
 
             Assert.AreEqual(5, y1.Hp.Value);
             Assert.AreEqual(5, y2.Hp.Value);

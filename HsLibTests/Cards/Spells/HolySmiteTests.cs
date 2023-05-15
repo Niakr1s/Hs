@@ -16,11 +16,11 @@ namespace HsLibTests.Cards.Spells
 
             Spell holySmite = new HolySmite();
             bf.Player.Hand.Add(holySmite);
-            Assert.AreEqual(2, holySmite.SpellEffect.UseEffectTargets(bf, bf.Player.Pid).Count()); // mine and his heros
+            Assert.AreEqual(2, holySmite.SpellEffect.GetPossibleTargets(bf, bf.Player.Pid).Count()); // mine and his heros
 
             Minion yeti = new ChillwindYeti();
             bf.Enemy.Field.Add(yeti);
-            Assert.AreEqual(3, holySmite.SpellEffect.UseEffectTargets(bf, bf.Player.Pid).Count());
+            Assert.AreEqual(3, holySmite.SpellEffect.GetPossibleTargets(bf, bf.Player.Pid).Count());
 
             holySmite.SpellEffect.UseEffect(bf, bf.Player.Pid, yeti);
             Assert.AreEqual(3, yeti.Hp.Value);

@@ -13,7 +13,7 @@ namespace HsLib.Types.Effects.Base
 
         public override void UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
-            foreach (var card in UseEffectTargets(bf, pid))
+            foreach (ICard card in GetPossibleTargets(bf, pid))
             {
                 _effect.UseEffect(bf, card);
             }
