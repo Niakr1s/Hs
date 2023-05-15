@@ -1,4 +1,5 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Exceptions;
+using HsLib.Interfaces;
 using HsLib.Interfaces.CardTraits;
 using HsLib.Systems;
 using HsLib.Types.Containers.Base;
@@ -18,15 +19,14 @@ namespace HsLib.Types.Containers
         /// <param name="index"></param>
         /// <param name="fieldIndex"></param>
         /// <param name="effectTarget"></param>
-        /// <exception cref="IndexOutOfRangeException"></exception>
-        /// <exception cref="MpException"></exception>
+        /// <exception cref="ValidationException"></exception>
         /// <returns>Action, that does actual play</returns>
         public Action Play(int index, int? fieldIndex = null, ICard? effectTarget = null)
         {
             IPlayableFromHand card = (IPlayableFromHand)this[index];
 
             Mp mp = Bf[Place.Pid].Mp;
-            if (!mp.IsEnough(card.Mp)) { throw new MpException(); }
+            if (!mp.IsEnough(card.Mp)) { throw new ValidationException("mp is not enough"); }
 
             Action playFromHandAction = card.PlayFromHand(Bf, fieldIndex, effectTarget);
 
