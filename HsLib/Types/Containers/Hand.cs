@@ -24,8 +24,9 @@ namespace HsLib.Types.Containers
         public Action Play(int index, int? fieldIndex = null, ICard? effectTarget = null)
         {
             IPlayableFromHand card = (IPlayableFromHand)this[index];
+
             Mp mp = Bf[Place.Pid].Mp;
-            if (mp < card.Mp.Value) { throw new MpException(); }
+            if (!mp.IsEnough(card.Mp)) { throw new MpException(); }
 
             Action playFromHandAction = card.PlayFromHand(Bf, fieldIndex, effectTarget);
 
