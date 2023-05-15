@@ -1,7 +1,7 @@
 ﻿using HsLib.Systems;
 using HsLib.Types.Cards;
 
-namespace HsLib.Interfaces
+namespace HsLib.Interfaces.CardTraits
 {
     public interface IDamageable : ICard
     {

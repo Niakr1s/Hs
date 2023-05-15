@@ -1,6 +1,6 @@
 ﻿using HsLib.Types.Stats;
 
-namespace HsLib.Interfaces
+namespace HsLib.Interfaces.CardTraits
 {
     public interface IWithArmor
     {

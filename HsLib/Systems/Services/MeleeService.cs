@@ -1,4 +1,4 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Interfaces.CardTraits;
 using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Events;

@@ -1,4 +1,5 @@
 ﻿using HsLib.Interfaces;
+using HsLib.Interfaces.CardTraits;
 using HsLib.Systems.Services;
 using HsLib.Types;
 using HsLib.Types.Cards;

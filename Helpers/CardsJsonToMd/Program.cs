@@ -1,4 +1,4 @@
-﻿using App;
+﻿using CardsJsonToMd;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -27,7 +27,7 @@ using (StreamWriter sw = new StreamWriter(file))
 }
 Console.WriteLine("Success!");
 
-namespace App
+namespace CardsJsonToMd
 {
     public static class MdBuilder
     {

@@ -1,6 +1,6 @@
 ﻿using HsLib.Types.Cards;
 
-namespace HsLib.Interfaces
+namespace HsLib.Interfaces.CardTraits
 {
     public interface IWithChoseOne
     {

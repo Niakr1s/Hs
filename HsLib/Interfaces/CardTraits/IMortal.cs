@@ -1,4 +1,4 @@
-﻿namespace HsLib.Interfaces
+﻿namespace HsLib.Interfaces.CardTraits
 {
     public interface IMortal
     {

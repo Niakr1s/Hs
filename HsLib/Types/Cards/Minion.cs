@@ -1,4 +1,5 @@
 ﻿using HsLib.Interfaces;
+using HsLib.Interfaces.CardTraits;
 using HsLib.Systems;
 using HsLib.Types.Stats;
 using HsLib.Types.Stats.Base;
