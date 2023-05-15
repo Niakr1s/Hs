@@ -4,13 +4,13 @@ using HsLib.Types.Effects;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Ability : Card, IEffect
+    public abstract class Ability : Card, ITargetEffect
     {
         protected Ability(int mp) : base(mp)
         {
         }
 
-        protected abstract IEffect Effect { get; }
+        protected abstract ITargetEffect Effect { get; }
 
         public virtual IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid) => Effect.UseEffectTargets(bf, pid);
 

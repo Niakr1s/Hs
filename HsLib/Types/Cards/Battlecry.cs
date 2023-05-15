@@ -4,7 +4,7 @@ using HsLib.Types.Effects;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Battlecry : IEffect
+    public abstract class Battlecry : ITargetEffect
     {
         protected Battlecry(Card owner)
         {
@@ -19,6 +19,6 @@ namespace HsLib.Types.Cards
 
         public IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid) => Effect.UseEffectTargets(bf, pid);
 
-        protected abstract IEffect Effect { get; }
+        protected abstract ITargetEffect Effect { get; }
     }
 }

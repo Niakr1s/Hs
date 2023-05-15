@@ -3,7 +3,7 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Effects
 {
-    public class GetArmorEffect : Effect
+    public class GetArmorEffect : TargetEffect
     {
         public GetArmorEffect(Card owner) : base(owner, EffectType.Self)
         {

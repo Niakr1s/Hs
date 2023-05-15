@@ -2,6 +2,6 @@
 {
     public interface IWithBattlecry
     {
-        IEffect? Battlecry { get; }
+        ITargetEffect? Battlecry { get; }
     }
 }

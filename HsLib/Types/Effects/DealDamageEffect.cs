@@ -4,7 +4,7 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Effects
 {
-    public class DealDamageEffect : Effect
+    public class DealDamageEffect : TargetEffect
     {
         public DealDamageEffect(Card owner, EffectType type, Targets targets) : base(owner, type, targets)
         {

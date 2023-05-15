@@ -25,9 +25,9 @@ namespace HsLib.Types.Cards
         public BoolStat DivineShield { get; init; } = new BoolStat(false);
         public BoolStat Stealth { get; init; } = new BoolStat(false);
 
-        public IEffect? Battlecry { get; protected set; }
+        public ITargetEffect? Battlecry { get; protected set; }
 
-        public IEffect? Deathrattle { get; protected set; }
+        public ITargetEffect? Deathrattle { get; protected set; }
 
         public bool Dead => Hp.Value <= 0;
 

@@ -17,7 +17,7 @@ namespace HsLib.Systems.Services
 
         public event EventHandler<BattleEventArgs>? Event;
 
-        public bool UseEffect(IEffect effect, Pid pid, ICard? target = null)
+        public bool UseEffect(ITargetEffect effect, Pid pid, ICard? target = null)
         {
             bool targetIsValid = effect.EffectType switch
             {

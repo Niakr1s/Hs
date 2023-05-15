@@ -4,9 +4,9 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Effects
 {
-    public abstract class Effect : IEffect
+    public abstract class TargetEffect : ITargetEffect
     {
-        protected Effect(Card owner, EffectType type, Targets targets = new Targets())
+        protected TargetEffect(Card owner, EffectType type, Targets targets = new Targets())
         {
             Owner = owner;
             EffectType = type;

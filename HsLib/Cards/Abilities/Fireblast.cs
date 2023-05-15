@@ -16,6 +16,6 @@ namespace HsLib.Cards.Abilities
             };
         }
 
-        protected override IEffect Effect { get; }
+        protected override ITargetEffect Effect { get; }
     }
 }

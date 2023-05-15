@@ -6,7 +6,7 @@ using HsLib.Types.Stats.Base;
 
 namespace HsLib.Types.Effects
 {
-    public class GiveDamageBuffEffect : Effect
+    public class GiveDamageBuffEffect : TargetEffect
     {
         public GiveDamageBuffEffect(Card owner, EffectType type, Targets targets) : base(owner, type, targets)
         {

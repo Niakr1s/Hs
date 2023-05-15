@@ -4,7 +4,7 @@ using HsLib.Types.Effects;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Spell : Card, IEffect, IPlayableFromHand
+    public abstract class Spell : Card, ITargetEffect, IPlayableFromHand
     {
         protected Spell(int mp) : base(mp)
         {
