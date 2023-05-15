@@ -1,12 +1,10 @@
 ﻿using HsLib.Interfaces;
-using HsLib.Systems;
 using HsLib.Types.Events;
 
 namespace HsLib.Types.Containers.Base
 {
     public interface IContainer : IWithEvent<ContainerEventArgs>
     {
-        Battlefield Bf { get; }
         Place Place { get; }
 
         ICard this[int index] { get; }
