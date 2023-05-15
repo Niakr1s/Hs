@@ -2,9 +2,10 @@
 using HsLib.Exceptions;
 using HsLib.Systems;
 using HsLib.Types.Cards;
+using HsLib.Types.Effects;
 using HsLibTests.Helpers;
 
-namespace HsLib.Types.Effects
+namespace HsLibTests.Types.Effects
 {
     [TestClass()]
     public class MindControlEffectTests
