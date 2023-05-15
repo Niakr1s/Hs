@@ -1,5 +1,6 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Systems;
+using HsLib.Types.Effects.Base;
 using HsLib.Types.Stats;
 using HsLib.Types.Stats.Base;
 
@@ -22,7 +23,7 @@ namespace HsLib.Types.Cards
 
         public Windfury Windfury { get; init; } = new Windfury(false);
 
-        public Battlecry? Battlecry { get; protected set; }
+        public TargetEffect? Battlecry { get; protected set; }
 
         public bool Dead => Hp.Value <= 0;
 
