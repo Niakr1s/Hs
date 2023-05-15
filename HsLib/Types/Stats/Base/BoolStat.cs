@@ -22,5 +22,7 @@
         {
             return value;
         }
+
+        public static implicit operator bool(BoolStat stat) => stat.Value;
     }
 }

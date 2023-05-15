@@ -22,35 +22,35 @@ namespace HsLibTests.Cards.Minions
             Field f = bf[Pid.P1].Field;
 
             f.Add(y1);
-            Assert.AreEqual(0, totem.Atk.Value);
-            Assert.AreEqual(4, y1.Atk.Value);
-            Assert.AreEqual(4, y2.Atk.Value);
+            Assert.AreEqual(0, totem.Atk);
+            Assert.AreEqual(4, y1.Atk);
+            Assert.AreEqual(4, y2.Atk);
 
             f.Add(totem);
-            Assert.AreEqual(6, y1.Atk.Value);
-            Assert.AreEqual(0, totem.Atk.Value);
+            Assert.AreEqual(6, y1.Atk);
+            Assert.AreEqual(0, totem.Atk);
 
             f.Add(y2);
-            Assert.AreEqual(6, y1.Atk.Value);
-            Assert.AreEqual(0, totem.Atk.Value);
-            Assert.AreEqual(6, y2.Atk.Value);
+            Assert.AreEqual(6, y1.Atk);
+            Assert.AreEqual(0, totem.Atk);
+            Assert.AreEqual(6, y2.Atk);
 
             Minion y12 = new ChillwindYeti();
             f.Insert(1, y12); // placing after y1, and before of totem
-            Assert.AreEqual(4, y1.Atk.Value);
-            Assert.AreEqual(6, y12.Atk.Value);
-            Assert.AreEqual(0, totem.Atk.Value);
-            Assert.AreEqual(6, y2.Atk.Value);
+            Assert.AreEqual(4, y1.Atk);
+            Assert.AreEqual(6, y12.Atk);
+            Assert.AreEqual(0, totem.Atk);
+            Assert.AreEqual(6, y2.Atk);
 
             f.Remove(y12);
-            Assert.AreEqual(6, y1.Atk.Value);
-            Assert.AreEqual(0, totem.Atk.Value);
-            Assert.AreEqual(6, y2.Atk.Value);
+            Assert.AreEqual(6, y1.Atk);
+            Assert.AreEqual(0, totem.Atk);
+            Assert.AreEqual(6, y2.Atk);
 
             f.Remove(totem);
-            Assert.AreEqual(4, y1.Atk.Value);
-            Assert.AreEqual(4, y2.Atk.Value);
-            Assert.AreEqual(4, y12.Atk.Value);
+            Assert.AreEqual(4, y1.Atk);
+            Assert.AreEqual(4, y2.Atk);
+            Assert.AreEqual(4, y12.Atk);
         }
 
         [TestMethod()]
@@ -65,8 +65,8 @@ namespace HsLibTests.Cards.Minions
             h.Add(y1);
 
             bf[Pid.P1].Hand.Add(totem);
-            Assert.AreEqual(4, y1.Atk.Value);
-            Assert.AreEqual(0, totem.Atk.Value);
+            Assert.AreEqual(4, y1.Atk);
+            Assert.AreEqual(0, totem.Atk);
         }
     }
 }

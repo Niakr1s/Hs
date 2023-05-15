@@ -13,7 +13,7 @@ namespace HsLib.Types.Containers
 
         public bool HasAnyActiveTaunt()
         {
-            return CardTs.Any(c => c.Taunt.Value && !c.Stealth.Value);
+            return CardTs.Any(c => c.Taunt && !c.Stealth);
         }
 
         protected override bool IsCardActive(ICard card)

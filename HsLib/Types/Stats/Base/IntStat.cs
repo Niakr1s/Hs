@@ -25,5 +25,7 @@
         {
             _value += value;
         }
+
+        public static implicit operator int(IntStat stat) => stat.Value;
     }
 }

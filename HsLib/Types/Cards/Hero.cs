@@ -17,7 +17,7 @@ namespace HsLib.Types.Cards
 
         public Armor Armor { get; }
 
-        public bool Dead => Hp.Value <= 0;
+        public bool Dead => Hp <= 0;
 
         public bool CanBeMeleeAttacked(Battlefield bf)
         {

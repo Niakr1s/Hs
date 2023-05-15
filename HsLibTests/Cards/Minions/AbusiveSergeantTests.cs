@@ -16,17 +16,17 @@ namespace HsLibTests.Cards.Minions
 
             Minion yeti = new ChillwindYeti();
             bf[Pid.P1].Field.Add(yeti);
-            Assert.AreEqual(4, yeti.Atk.Value);
+            Assert.AreEqual(4, yeti.Atk);
 
             Minion abusiveSergeant = new AbusiveSergeant();
             bf[Pid.P1].Hand.Add(abusiveSergeant);
-            Assert.AreEqual(4, yeti.Atk.Value);
+            Assert.AreEqual(4, yeti.Atk);
 
             abusiveSergeant.Battlecry?.UseEffect(bf, bf.Player.Pid, yeti)();
-            Assert.AreEqual(6, yeti.Atk.Value);
+            Assert.AreEqual(6, yeti.Atk);
 
             bf.Turn.Next();
-            Assert.AreEqual(4, yeti.Atk.Value);
+            Assert.AreEqual(4, yeti.Atk);
         }
     }
 }

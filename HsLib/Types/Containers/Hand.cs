@@ -33,7 +33,7 @@ namespace HsLib.Types.Containers
             return () =>
             {
                 playFromHandAction();
-                mp.Set(mp.Value - card.Mp.Value);
+                mp.Set(mp - card.Mp);
             };
         }
     }

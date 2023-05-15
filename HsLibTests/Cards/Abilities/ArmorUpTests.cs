@@ -19,9 +19,9 @@ namespace HsLibTests.Cards.Abilities
             Assert.AreEqual(0, armorUp.AbilityEffect.GetPossibleTargets(bf, bf.Player.Pid).Count());
 
 
-            Assert.AreEqual(0, bf.Player.Hero.Card.Armor.Value);
+            Assert.AreEqual(0, bf.Player.Hero.Card.Armor);
             Assert.AreEqual(true, bf.UseAbility());
-            Assert.AreEqual(2, bf.Player.Hero.Card.Armor.Value);
+            Assert.AreEqual(2, bf.Player.Hero.Card.Armor);
 
             Minion y1 = new ChillwindYeti();
             bf[Pid.P1].Field.Add(y1);

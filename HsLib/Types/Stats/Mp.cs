@@ -10,7 +10,7 @@ namespace HsLib.Types.Stats
 
         public bool IsEnough(Mp mp)
         {
-            return Value >= mp.Value;
+            return Value >= mp;
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace HsLib.Types.Stats
         public void Use(Mp mp)
         {
             if (!IsEnough(mp)) { throw new MpException("not enough mp"); }
-            Set(Value - mp.Value);
+            Set(Value - mp);
         }
     }
 

@@ -30,7 +30,7 @@ namespace HsLib.Types.Cards
 
         public IActiveEffect? Deathrattle { get; protected set; }
 
-        public bool Dead => Hp.Value <= 0;
+        public bool Dead => Hp <= 0;
 
         public virtual IEnumerable<CardId>? ChoseOne { get; }
 
@@ -74,7 +74,7 @@ namespace HsLib.Types.Cards
         public bool CanBeMeleeAttacked(Battlefield bf)
         {
             if (Place is null) { throw new PlaceException(); }
-            return !Stealth.Value && (Taunt.Value || !bf[Place.Pid].Field.HasAnyActiveTaunt());
+            return !Stealth && (Taunt || !bf[Place.Pid].Field.HasAnyActiveTaunt());
         }
 
         public IDamageable GetDefender(Battlefield bf)
