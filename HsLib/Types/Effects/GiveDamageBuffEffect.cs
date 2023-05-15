@@ -1,4 +1,5 @@
 ﻿using HsLib.Functions;
+using HsLib.Interfaces;
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Events;
@@ -6,19 +7,15 @@ using HsLib.Types.Stats.Base;
 
 namespace HsLib.Types.Effects
 {
-    public class GiveDamageBuffEffect : TargetEffect
+    public class GiveDamageBuffEffect : IEffect
     {
-        public GiveDamageBuffEffect(Card owner, EffectType type, Targets targets) : base(owner, type, targets)
-        {
-        }
-
         public int DamageBuff { get; set; }
 
         public bool TillEndOfTurn { get; set; }
 
-        protected override void EffectAction(Battlefield bf, ICard? card)
+        public void UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
-            if (card is Minion m)
+            if (target is Minion m)
             {
                 Enchant<int> buff = m.Atk.AddBuff(2);
                 if (TillEndOfTurn)

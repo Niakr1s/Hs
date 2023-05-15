@@ -2,6 +2,7 @@
 using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;
+using HsLib.Types.Effects.Base;
 
 namespace HsLib.Cards.Abilities
 {
@@ -10,10 +11,9 @@ namespace HsLib.Cards.Abilities
 
         public Fireblast() : base(2)
         {
-            Effect = new DealDamageEffect(this, EffectType.Solo, new Targets { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He })
-            {
-                Damage = 1
-            };
+            DealDamageEffect effect = new() { Damage = 1 };
+            Targets targets = new() { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He };
+            Effect = new TargetEffect(this, effect, EffectType.Solo, targets);
         }
 
         protected override ITargetEffect Effect { get; }

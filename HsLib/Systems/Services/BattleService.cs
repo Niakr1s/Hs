@@ -1,7 +1,7 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Types;
 using HsLib.Types.Cards;
-
+using HsLib.Types.Effects.Base;
 using HsLib.Types.Events;
 
 namespace HsLib.Systems.Services
@@ -21,9 +21,9 @@ namespace HsLib.Systems.Services
         {
             bool targetIsValid = effect.EffectType switch
             {
-                Types.Effects.EffectType.Self => target is null,
-                Types.Effects.EffectType.Mass => target is null,
-                Types.Effects.EffectType.Solo => target is not null && effect.UseEffectTargets(Bf, pid).Contains(target),
+                EffectType.Self => target is null,
+                EffectType.Mass => target is null,
+                EffectType.Solo => target is not null && effect.UseEffectTargets(Bf, pid).Contains(target),
             };
             if (!targetIsValid)
             {

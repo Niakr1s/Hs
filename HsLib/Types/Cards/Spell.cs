@@ -1,6 +1,6 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Systems;
-using HsLib.Types.Effects;
+using HsLib.Types.Effects.Base;
 
 namespace HsLib.Types.Cards
 {

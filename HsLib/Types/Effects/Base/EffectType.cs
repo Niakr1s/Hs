@@ -1,4 +1,4 @@
-﻿namespace HsLib.Types.Effects
+﻿namespace HsLib.Types.Effects.Base
 {
     public enum EffectType
     {

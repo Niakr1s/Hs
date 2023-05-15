@@ -1,6 +1,7 @@
 ﻿using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;
+using HsLib.Types.Effects.Base;
 
 namespace HsLib.Cards.Minions
 {
@@ -8,10 +9,9 @@ namespace HsLib.Cards.Minions
     {
         public AbusiveSergeant() : base(2, 2, 1)
         {
-            Battlecry = new GiveDamageBuffEffect(this, EffectType.Solo, new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He })
-            {
-                TillEndOfTurn = true
-            };
+            GiveDamageBuffEffect effect = new() { DamageBuff = 2, TillEndOfTurn = true };
+            Targets targets = new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He };
+            Battlecry = new TargetEffect(this, effect, EffectType.Solo, targets);
         }
     }
 }

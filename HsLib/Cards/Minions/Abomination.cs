@@ -1,6 +1,7 @@
 ﻿using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;
+using HsLib.Types.Effects.Base;
 
 namespace HsLib.Cards.Minions
 {
@@ -8,15 +9,9 @@ namespace HsLib.Cards.Minions
     {
         public Abomintaion() : base(5, 4, 4)
         {
-            Targets deathrattleTargets = new Targets
-            {
-                Locs = Loc.Field | Loc.Hero,
-                Sides = PidSide.Me | PidSide.He,
-            };
-            Deathrattle = new DealDamageEffect(this, EffectType.Mass, deathrattleTargets)
-            {
-                Damage = 2,
-            };
+            DealDamageEffect effect = new() { Damage = 2 };
+            Targets targets = new Targets { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He, };
+            Deathrattle = new TargetEffect(this, effect, EffectType.Mass, targets);
         }
     }
 }

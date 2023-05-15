@@ -2,14 +2,15 @@
 using HsLib.Systems;
 using HsLib.Types.Cards;
 
-namespace HsLib.Types.Effects
+namespace HsLib.Types.Effects.Base
 {
-    public abstract class TargetEffect : ITargetEffect
+    public class TargetEffect : ITargetEffect
     {
-        protected TargetEffect(Card owner, EffectType type, Targets targets = new Targets())
+        public TargetEffect(Card owner, IEffect effect, EffectType type = EffectType.Self, Targets targets = new Targets())
         {
             Owner = owner;
             EffectType = type;
+            _effect = effect;
             _targets = targets;
         }
 
@@ -17,9 +18,8 @@ namespace HsLib.Types.Effects
 
         public EffectType EffectType { get; }
 
-        protected abstract void EffectAction(Battlefield bf, ICard? card);
-
         private readonly Targets _targets;
+        private readonly IEffect _effect;
 
         public virtual IEnumerable<ICard> UseEffectTargets(Battlefield bf, Pid pid)
         {
@@ -31,17 +31,17 @@ namespace HsLib.Types.Effects
             switch (EffectType)
             {
                 case EffectType.Self:
-                    EffectAction(bf, null);
+                    _effect.UseEffect(bf, pid, null);
                     break;
 
                 case EffectType.Solo:
-                    EffectAction(bf, target);
+                    _effect.UseEffect(bf, pid, target);
                     break;
 
                 case EffectType.Mass:
                     foreach (var card in UseEffectTargets(bf, pid))
                     {
-                        EffectAction(bf, card);
+                        _effect.UseEffect(bf, pid, card);
                     }
                     break;
             }

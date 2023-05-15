@@ -2,7 +2,7 @@
 using HsLib.Systems;
 using HsLib.Types;
 using HsLib.Types.Cards;
-using HsLib.Types.Effects;
+using HsLib.Types.Effects.Base;
 
 namespace HsLib.Cards.Spells
 {

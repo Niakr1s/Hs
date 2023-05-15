@@ -4,17 +4,13 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Effects
 {
-    public class DealDamageEffect : TargetEffect
+    public class DealDamageEffect : IEffect
     {
-        public DealDamageEffect(Card owner, EffectType type, Targets targets) : base(owner, type, targets)
-        {
-        }
-
         public int Damage { get; set; }
 
-        protected override void EffectAction(Battlefield bf, ICard? card)
+        public void UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
-            if (card is IDamageable d)
+            if (target is IDamageable d)
             {
                 bf.BattleService.DealDamage(Damage, d);
             }
