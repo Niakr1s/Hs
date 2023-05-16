@@ -27,11 +27,11 @@ namespace HsLib.Types.Effects.Base
         public IEnumerable<ICard> GetPossibleTargets(Battlefield bf, Pid pid) => _possibleTargetsChooser.ChooseCards(pid, bf.Cards);
 
         /// <summary>
-        /// Вместо параметра target будет вызываться кастомный targetChooser.
+        /// Uses effect. Param target can be ignored if custom targets chooser is provided.
         /// </summary>
         /// <param name="bf"></param>
         /// <param name="pid"></param>
-        /// <param name="target"></param>
+        /// <param name="target">Will be ignored, if <see cref="_targetsChooser"/>is set, and will uses effects on every target, choosed by it.</param>
         public Action UseEffect(Battlefield bf, Pid pid, ICard? target)
         {
             List<Action> effectActions = new();
