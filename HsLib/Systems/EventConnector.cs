@@ -18,14 +18,12 @@ namespace HsLib.Systems
 
             public void Connect()
             {
-                // manually connecting each card in battlefield
-                foreach (ICard card in Bf.Cards) { card.AfterContainerInsert(Bf); }
-
                 Bf.Turn.Event += Bf.Invoke;
                 Bf[Pid.P1].CollectionChanged += Collection_Event;
                 Bf[Pid.P2].CollectionChanged += Collection_Event;
 
                 Bf.Event += Bf_Event;
+                Bf.CollectionChanged += Bf_Collection_Event;
             }
 
             private void Bf_Event(object? sender, BattlefieldEventArgs e)
@@ -73,7 +71,13 @@ namespace HsLib.Systems
                 }
             }
 
+
             private void Collection_Event(object? sender, NotifyCollectionChangedEventArgs e)
+            {
+                Bf.CollectionChanged?.Invoke(sender, e);
+            }
+
+            private void Bf_Collection_Event(object? sender, NotifyCollectionChangedEventArgs e)
             {
                 if (e.NewItems is not null)
                 {
@@ -81,7 +85,6 @@ namespace HsLib.Systems
                     {
                         ICard card = (ICard)item;
                         Bf._cards.Add(card);
-                        card.AfterContainerInsert(Bf);
                     }
                 }
                 if (e.OldItems is not null)
@@ -90,7 +93,6 @@ namespace HsLib.Systems
                     {
                         ICard card = (ICard)item;
                         Bf._cards.Remove(card);
-                        card.AfterContainerRemove(Bf);
                     }
                 }
             }

@@ -4,10 +4,11 @@ using HsLib.Systems.Services;
 using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Events;
+using System.Collections.Specialized;
 
 namespace HsLib.Systems
 {
-    public partial class Battlefield : IWithEvent<BattlefieldEventArgs>
+    public partial class Battlefield : IWithEvent<BattlefieldEventArgs>, INotifyCollectionChanged
     {
         public Battlefield(StartingDeck p1, StartingDeck p2)
         {
@@ -34,6 +35,8 @@ namespace HsLib.Systems
         }
 
         public event EventHandler<BattlefieldEventArgs>? Event;
+
+        public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
         internal void Invoke(object? sender, EventArgs e)
         {

@@ -2,8 +2,9 @@
 using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
-using HsLib.Types.Events;
+using HsLib.Types.Containers.Base;
 using HsLib.Types.Stats.Base;
+using System.Collections.Specialized;
 
 namespace HsLib.Cards.Minions
 {
@@ -19,20 +20,20 @@ namespace HsLib.Cards.Minions
             if (Place?.Loc == Loc.Field)
             {
                 ReapplyEnchants(bf);
-                bf.Event += Bf_Event;
+                bf.CollectionChanged += Bf_CollectionChanged;
             }
         }
-
         public override void AfterContainerRemove(Battlefield bf)
         {
             base.AfterContainerRemove(bf);
-            bf.Event -= Bf_Event;
+            bf.CollectionChanged -= Bf_CollectionChanged;
             ReapplyEnchants(bf);
         }
 
-        private void Bf_Event(object? sender, BattlefieldEventArgs e)
+        private void Bf_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            ReapplyEnchants(e.Bf);
+            IContainer c = (IContainer)sender!;
+            ReapplyEnchants(c.Bf);
         }
 
         private readonly List<IEnchantHandler> _appliedEnchants = new();

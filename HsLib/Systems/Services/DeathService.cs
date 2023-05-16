@@ -1,6 +1,8 @@
-﻿using HsLib.Interfaces.CardTraits;
+﻿using HsLib.Interfaces;
+using HsLib.Interfaces.CardTraits;
 using HsLib.Types;
 using HsLib.Types.Containers.Base;
+using System.Collections.Specialized;
 
 namespace HsLib.Systems.Services
 {
@@ -24,9 +26,27 @@ namespace HsLib.Systems.Services
         /// <returns>False, if didn't notice dead minions</returns>
         private bool DoStep()
         {
+            CollectionChangedRecorder recorder = new(Bf);
+            recorder.Start();
             RemoveInactiveCards();
+            recorder.Stop();
 
-            List<RemovedCard> removedCards = new(); // todo fix
+            List<RemovedCard> removedCards = new();
+            foreach ((object? sender, NotifyCollectionChangedEventArgs e) in recorder.Recorded)
+            {
+                if (e.OldItems is not null)
+                {
+                    foreach (object? card in e.OldItems)
+                    {
+                        if (card is ICard c && sender is IWithPlace withPlace)
+                        {
+                            RemovedCard removedCard = new RemovedCard(c, withPlace.Place);
+                            removedCards.Add(removedCard);
+                        }
+                    }
+                }
+            }
+
             if (removedCards.Count == 0) { return false; }
 
             foreach (RemovedCard removed in removedCards)

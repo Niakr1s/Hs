@@ -1,4 +1,5 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Extensions;
+using HsLib.Interfaces;
 using HsLib.Systems;
 using System.Collections.ObjectModel;
 
@@ -14,7 +15,7 @@ namespace HsLib.Types.Containers.Base
             Bf = bf;
             Place = place;
             Limit = limit;
-            CollectionChanged += UpdatePlaces;
+            CollectionChanged += OnCollectionChanged;
 
             if (startCards is not null)
             {
@@ -24,16 +25,26 @@ namespace HsLib.Types.Containers.Base
 
         #endregion
 
-        private void UpdatePlaces(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void OnCollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            UpdateCardsPlaces();
+
             if (e.NewItems is not null)
             {
-                foreach (TCard item in e.NewItems) { item.Place = Place.InContainer(Bf.Turn.No, IndexOf(item)); }
+                foreach (TCard item in e.NewItems)
+                {
+                    item.Place = Place.InContainer(Bf.Turn.No, IndexOf(item));
+                    item.AfterContainerInsert(Bf);
+                }
             }
 
             if (e.OldItems is not null)
             {
-                foreach (TCard item in e.OldItems) { item.Place = default; }
+                foreach (TCard item in e.OldItems)
+                {
+                    item.Place = default;
+                    item.AfterContainerRemove(Bf);
+                }
             }
         }
 
@@ -60,7 +71,6 @@ namespace HsLib.Types.Containers.Base
         {
             CollectionIsFullCheck();
             base.Add(item);
-
         }
 
         /// <summary>
@@ -98,9 +108,9 @@ namespace HsLib.Types.Containers.Base
 
         public void RemoveIf(Predicate<TCard> predicate)
         {
-            foreach (TCard card in this)
+            foreach (TCard card in this.Where(c => predicate(c)).ToList())
             {
-                if (predicate(card)) { Remove(card); }
+                { Remove(card); }
             }
         }
 
@@ -160,6 +170,17 @@ namespace HsLib.Types.Containers.Base
         private void CollectionIsFullCheck()
         {
             if (IsFull) { throw new InvalidOperationException("collection is full"); }
+        }
+
+        private void UpdateCardsPlaces()
+        {
+            foreach (var (card, index) in this.WithIndex())
+            {
+                if (card.Place is not null)
+                {
+                    card.Place = card.Place with { Index = index };
+                }
+            }
         }
 
         #endregion
