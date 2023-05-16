@@ -44,7 +44,7 @@ namespace HsLibTests.Systems
         [TestMethod()]
         public void CardsTest_ShouldBeInChronologicalOrder()
         {
-            List<ICard> cards = new();
+            List<Minion> cards = new();
             for (int i = 0; i < 6; i++) { cards.Add(new ChillwindYeti()); }
 
             Pid[] pids = Pids.All();
@@ -55,7 +55,7 @@ namespace HsLibTests.Systems
             List<ICard> bfCards = _bf.Cards.TakeLast(6).ToList();
             for (int i = 0; i < 6; i++) { Assert.AreEqual(cards[i], bfCards[i]); }
 
-            ICard newCard = new ChillwindYeti();
+            Minion newCard = new ChillwindYeti();
             _bf[Pid.P2].Hand.Add(newCard);
 
             bfCards = _bf.Cards.TakeLast(7).ToList();

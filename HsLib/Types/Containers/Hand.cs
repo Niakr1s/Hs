@@ -7,7 +7,7 @@ using HsLib.Types.Stats;
 
 namespace HsLib.Types.Containers
 {
-    public class Hand : MultiContainer<IPlayableFromHand>
+    public class Hand : Container<IPlayableFromHand>
     {
         public Hand(Battlefield bf, Pid pid) : base(bf, new Place(pid, Loc.Hand), limit: 10)
         {

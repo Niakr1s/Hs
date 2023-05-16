@@ -1,6 +1,7 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Types;
 using HsLib.Types.Events;
+using System.Collections.Specialized;
 
 namespace HsLib.Systems
 {
@@ -21,8 +22,8 @@ namespace HsLib.Systems
                 foreach (ICard card in Bf.Cards) { card.AfterContainerInsert(Bf); }
 
                 Bf.Turn.Event += Bf.Invoke;
-                Bf[Pid.P1].Event += Bf.Invoke;
-                Bf[Pid.P2].Event += Bf.Invoke;
+                Bf[Pid.P1].CollectionChanged += Collection_Event;
+                Bf[Pid.P2].CollectionChanged += Collection_Event;
 
                 Bf.Event += Bf_Event;
             }
@@ -37,10 +38,6 @@ namespace HsLib.Systems
 
                     case (TurnEventArgs turnEventArgs):
                         Turn_Event(sender, turnEventArgs);
-                        break;
-
-                    case (ContainerEventArgs containerEventArgs):
-                        Container_Event(sender, containerEventArgs);
                         break;
                 }
             }
@@ -76,19 +73,25 @@ namespace HsLib.Systems
                 }
             }
 
-            private void Container_Event(object? sender, ContainerEventArgs e)
+            private void Collection_Event(object? sender, NotifyCollectionChangedEventArgs e)
             {
-                switch (e)
+                if (e.NewItems is not null)
                 {
-                    case ContainerCardInsertEventArgs evt:
-                        Bf._cards.Add(evt.Card);
-                        evt.Card.AfterContainerInsert(Bf);
-                        break;
-
-                    case ContainerCardRemoveEventArgs evt:
-                        Bf._cards.Remove(evt.Card);
-                        evt.Card.AfterContainerRemove(Bf);
-                        break;
+                    foreach (object item in e.NewItems)
+                    {
+                        ICard card = (ICard)item;
+                        Bf._cards.Add(card);
+                        card.AfterContainerInsert(Bf);
+                    }
+                }
+                if (e.OldItems is not null)
+                {
+                    foreach (object item in e.OldItems)
+                    {
+                        ICard card = (ICard)item;
+                        Bf._cards.Remove(card);
+                        card.AfterContainerRemove(Bf);
+                    }
                 }
             }
         }

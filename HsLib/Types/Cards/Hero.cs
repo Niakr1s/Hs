@@ -21,8 +21,7 @@ namespace HsLib.Types.Cards
 
         public bool CanBeMeleeAttacked(Battlefield bf)
         {
-            if (Place is null) { throw new PlaceException(); }
-            if (Place.Loc != Loc.Hero) { return false; }
+            if (Place!.Loc != Loc.Hero) { return false; }
             if (Dead) { return false; }
             return !bf[Place.Pid].Field.HasAnyActiveTaunt();
         }

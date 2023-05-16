@@ -15,7 +15,7 @@ namespace HsLib.Types.Effects
             Field playerField = bf[m.Place!.Pid.He()].Field;
 
             if (!enemyField.Contains(m)) { throw new ValidationException("enemy field doesn't contain target"); }
-            if (!playerField.CanBeInsertedAt(playerField.Count)) { throw new ValidationException("can't insert to player field"); }
+            if (playerField.IsFull) { throw new ValidationException("can't insert to full field"); }
 
             return () =>
             {

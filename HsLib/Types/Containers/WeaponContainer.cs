@@ -1,5 +1,4 @@
-﻿using HsLib.Interfaces;
-using HsLib.Systems;
+﻿using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers.Base;
 
@@ -11,9 +10,9 @@ namespace HsLib.Types.Containers
         {
         }
 
-        protected override bool IsCardActive(ICard card)
+        protected override bool IsCardActive(Weapon card)
         {
-            return !((Weapon)card).Dead;
+            return !card.Dead;
         }
     }
 }

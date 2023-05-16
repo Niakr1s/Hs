@@ -1,11 +1,10 @@
-﻿using HsLib.Interfaces;
-using HsLib.Systems;
+﻿using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers.Base;
 
 namespace HsLib.Types.Containers
 {
-    public class Field : MultiContainer<Minion>
+    public class Field : Container<Minion>
     {
         public Field(Battlefield bf, Pid pid) : base(bf, new Place(pid, Loc.Field), limit: 7)
         {
@@ -13,12 +12,12 @@ namespace HsLib.Types.Containers
 
         public bool HasAnyActiveTaunt()
         {
-            return CardTs.Any(c => c.Taunt && !c.Stealth);
+            return this.Any(c => c.Taunt && !c.Stealth);
         }
 
-        protected override bool IsCardActive(ICard card)
+        protected override bool IsCardActive(Minion card)
         {
-            return !((Minion)card).Dead;
+            return !card.Dead;
         }
     }
 }

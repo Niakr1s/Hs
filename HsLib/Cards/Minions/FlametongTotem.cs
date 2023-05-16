@@ -52,8 +52,8 @@ namespace HsLib.Cards.Minions
         {
             if (Place is null) { yield break; }
             Field f = bf[Place.Pid].Field;
-            Minion? left = f.Left(Place.Index) as Minion;
-            Minion? right = f.Right(Place.Index) as Minion;
+            Minion? left = f.Left(Place.Index);
+            Minion? right = f.Right(Place.Index);
             if (left is not null) yield return left;
             if (right is not null) yield return right;
         }

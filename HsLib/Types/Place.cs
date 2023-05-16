@@ -2,32 +2,9 @@
 {
     public record Place(Pid Pid, Loc Loc)
     {
-        public PlaceInContainer InContainer(int atIndex, int addedTurn)
+        public PlaceInContainer InContainer(int addedTurn, int atIndex)
         {
-            return new PlaceInContainer(Pid, Loc, atIndex, addedTurn);
-        }
-    }
-
-    public record PlaceInContainer(Pid Pid, Loc Loc, int Index, int AddedTurnNo)
-    {
-        public static implicit operator Place(PlaceInContainer placeInContainer)
-        {
-            return new Place(placeInContainer.Pid, placeInContainer.Loc);
-        }
-    }
-
-    internal class PlaceException : Exception
-    {
-        public PlaceException() : base()
-        {
-        }
-
-        public PlaceException(string? message) : base(message)
-        {
-        }
-
-        public PlaceException(string? message, Exception? innerException) : base(message, innerException)
-        {
+            return new PlaceInContainer(Pid, Loc, addedTurn, atIndex);
         }
     }
 }

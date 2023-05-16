@@ -1,19 +1,22 @@
-﻿namespace HsLib.Types.Cards
+﻿using HsLib.Interfaces.CardTraits;
+
+namespace HsLib.Types.Cards
 {
     public class StartingDeck
     {
-        public StartingDeck(CardId heroId) : this(heroId, new List<Card>())
+        public StartingDeck(CardId heroId) : this(heroId, new List<IPlayableFromHand>())
         {
 
         }
 
-        public StartingDeck(CardId heroId, IEnumerable<Card> cards)
+        public StartingDeck(CardId heroId, IEnumerable<IPlayableFromHand> cards)
         {
             HeroId = heroId;
             Cards = cards.ToList();
         }
 
         public CardId HeroId { get; }
-        public List<Card> Cards { get; }
+
+        public IEnumerable<IPlayableFromHand> Cards { get; }
     }
 }

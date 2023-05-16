@@ -1,140 +1,110 @@
-﻿using HsLib.Extensions;
-using HsLib.Interfaces;
+﻿using HsLib.Interfaces;
 using HsLib.Systems;
-using HsLib.Types.Events;
+using System.Collections.ObjectModel;
 
 namespace HsLib.Types.Containers.Base
 {
-    public abstract class Container<TCard> : IContainer
+    public class Container<TCard> : ObservableCollection<TCard>, IContainer
         where TCard : ICard
     {
-        protected Container(Battlefield bf, Place place)
+        #region ctors
+
+        public Container(Battlefield bf, Place place, int? limit = null, IEnumerable<TCard>? startCards = null)
         {
             Bf = bf;
             Place = place;
+            Limit = limit;
+            CollectionChanged += UpdatePlaces;
+
+            if (startCards is not null)
+            {
+                foreach (var card in startCards) { Add(card); }
+            }
+        }
+
+        #endregion
+
+        private void UpdatePlaces(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems is not null)
+            {
+                foreach (TCard item in e.NewItems) { item.Place = Place.InContainer(Bf.Turn.No, IndexOf(item)); }
+            }
+
+            if (e.OldItems is not null)
+            {
+                foreach (TCard item in e.OldItems) { item.Place = default; }
+            }
         }
 
         public Battlefield Bf { get; }
 
-        public IEnumerable<TCard> CardTs => Cards.Cast<TCard>();
-
-
-
-        #region IContainer implementation
-
-        public event EventHandler<ContainerEventArgs>? Event;
-
-
-
         public Place Place { get; }
 
-        public IEnumerable<ICard> Cards
+        public int? Limit { get; }
+
+        public bool IsFull => Limit != null && Count == Limit;
+
+        public virtual bool CanBeInserted => !IsFull;
+
+
+
+        #region ObservableCollection overrides
+
+        /// <summary>
+        /// Adds an object to the end of collection.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public new void Add(TCard item)
         {
-            get
-            {
-                for (int i = 0; i < Count; i++)
-                {
-                    yield return this[i];
-                }
-            }
+            CollectionIsFullCheck();
+            base.Add(item);
+
         }
 
-        public abstract ICard this[int index] { get; }
-
-        public abstract int Count { get; }
-
-
-
-        public bool Add(ICard card)
+        /// <summary>
+        /// Inserts an element at specific index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="item"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public new virtual void Insert(int index, TCard item)
         {
-            try
-            {
-                Insert(Count, card);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            CollectionIsFullCheck();
+            base.Insert(index, item);
         }
 
-        public void Insert(int index, ICard card)
+        #endregion
+
+
+
+        #region public
+
+        public TCard? Pop()
         {
-            DoInsertAt(index, card);
-            card.Place = Place.InContainer(index, Bf.Turn.No);
+            int lastIndex = Count - 1;
+            if (lastIndex < 0) { return default; }
 
-            UpdateCardsPlaces();
-            Event?.Invoke(this, new ContainerCardInsertEventArgs(card));
-        }
-
-        public bool CanBeInsertedAt(int index) => index >= 0 && index <= Count;
-
-        public bool Contains(ICard card) => Cards.Contains(card);
-
-
-
-        public RemovedCard Replace(int index, ICard card)
-        {
-            RemovedCard removedCard = RemoveAt(index);
-            Insert(index, card);
+            TCard removedCard = this[lastIndex];
+            RemoveAt(lastIndex);
             return removedCard;
         }
 
-        public RemovedCard Remove(ICard card)
-        {
-            int index = Cards.ToList().IndexOf(card);
-            return RemoveAt(index);
-        }
+        public void CleanInactiveCards() => RemoveIf(c => !IsCardActive(c));
 
-        public RemovedCard RemoveAt(int index)
-        {
-            ICard card = DoRemoveAt(index);
-            card.Place = null;
+        protected virtual bool IsCardActive(TCard card) => true;
 
-            UpdateCardsPlaces();
-            Event?.Invoke(this, new ContainerCardRemoveEventArgs(card, Place));
-            return new RemovedCard(card, Place);
-        }
-
-        public RemovedCard? Pop()
+        public void RemoveIf(Predicate<TCard> predicate)
         {
-            try
+            foreach (TCard card in this)
             {
-                return RemoveAt(Count - 1);
-            }
-            catch
-            {
-                return null;
+                if (predicate(card)) { Remove(card); }
             }
         }
 
-        public IEnumerable<RemovedCard> RemoveIf(Predicate<ICard> predicate)
-        {
-            List<ICard> cardsToRemove = new();
-            foreach (ICard card in Cards)
-            {
-                if (predicate(card))
-                {
-                    cardsToRemove.Add(card);
-                }
-            }
-
-            List<RemovedCard> cleanedCards = new();
-            foreach (ICard card in cardsToRemove)
-            {
-                Remove(card);
-                RemovedCard cleanedCard = new(card, Place);
-                cleanedCards.Add(cleanedCard);
-            }
-
-            return cleanedCards.AsEnumerable();
-        }
-
-        public IEnumerable<RemovedCard> RemoveInactiveCards() => RemoveIf(c => !IsCardActive(c));
-
-
-
-        public ICard? Left(int index)
+        public TCard? Left(int index)
         {
             try
             {
@@ -142,11 +112,11 @@ namespace HsLib.Types.Containers.Base
             }
             catch
             {
-                return null;
+                return default;
             }
         }
 
-        public ICard? Right(int index)
+        public TCard? Right(int index)
         {
             try
             {
@@ -154,25 +124,23 @@ namespace HsLib.Types.Containers.Base
             }
             catch
             {
-                return null;
+                return default;
             }
         }
 
-
-
-        public Action MoveToContainer(int fromIndex, IContainer toContainer, bool canBurn, int? toIndex = null, ICard? transformTo = null)
+        public Action MoveToContainer(int fromIndex, IContainer toContainer, bool canBurn, int? toIndex = 0, object? transformTo = default)
         {
-            ICard? fromCard = this[fromIndex]; // this can throw IndexOutOfRangeException
+            TCard? fromCard = this[fromIndex]; // this can throw IndexOutOfRangeException
             toIndex ??= toContainer.Count;
 
-            bool canBeInserted = toContainer.CanBeInsertedAt(toIndex.Value);
+            bool canBeInserted = toContainer.CanBeInserted;
             if (!canBeInserted && !canBurn)
             {
                 throw new InvalidOperationException($"can't be inserted container {toContainer}");
             }
             // check section ended
 
-            ICard toCard = transformTo ?? fromCard;
+            object? toCard = transformTo ?? fromCard;
 
             return () =>
             {
@@ -187,65 +155,13 @@ namespace HsLib.Types.Containers.Base
         #endregion
 
 
+        #region helpers 
 
-        #region private helpers
-
-        /// <summary>
-        /// Should update cards places.
-        /// </summary>
-        private void UpdateCardsPlaces()
+        private void CollectionIsFullCheck()
         {
-            foreach (var (card, index) in Cards.WithIndex())
-            {
-                card.Place = card.Place! with { Index = index };
-            }
+            if (IsFull) { throw new InvalidOperationException("collection is full"); }
         }
 
         #endregion
-
-
-
-        #region protected
-
-        /// <summary>
-        /// Inserts card at index.
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="card"></param>
-        /// <exception cref="IndexOutOfRangeException"></exception>
-        /// <exception cref="ContainerInsertException"></exception>
-        /// <returns>inserted card</returns>
-        protected abstract void DoInsertAt(int index, ICard card);
-
-        /// <summary>
-        /// Removes card from container.
-        /// </summary>
-        /// <exception cref="ArgumentException"></exception>
-        /// <returns>removed card</returns>
-        protected abstract ICard DoRemoveAt(int index);
-
-        /// <summary>
-        /// Should check if card in container at index is invalid and should be removed.
-        /// </summary>
-        protected virtual bool IsCardActive(ICard card) { return true; }
-
-        #endregion
-    }
-
-    public record RemovedCard(ICard Card, Place Place);
-
-    public class ContainerInsertException : Exception
-    {
-        public ContainerInsertException() : base()
-        {
-        }
-
-        public ContainerInsertException(string? message) : base(message)
-        {
-        }
-
-        public ContainerInsertException(string? message, Exception? innerException) : base(message, innerException)
-        {
-        }
     }
 }

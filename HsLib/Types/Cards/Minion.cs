@@ -73,8 +73,7 @@ namespace HsLib.Types.Cards
 
         public bool CanBeMeleeAttacked(Battlefield bf)
         {
-            if (Place is null) { throw new PlaceException(); }
-            return !Stealth && (Taunt || !bf[Place.Pid].Field.HasAnyActiveTaunt());
+            return !Stealth && (Taunt || !bf[Place!.Pid].Field.HasAnyActiveTaunt());
         }
 
         public IDamageable GetDefender(Battlefield bf)

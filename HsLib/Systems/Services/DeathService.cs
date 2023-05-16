@@ -1,7 +1,6 @@
 ﻿using HsLib.Interfaces.CardTraits;
 using HsLib.Types;
 using HsLib.Types.Containers.Base;
-using HsLib.Types.Events;
 
 namespace HsLib.Systems.Services
 {
@@ -14,8 +13,6 @@ namespace HsLib.Systems.Services
 
         public Battlefield Bf { get; }
 
-        public event EventHandler<BattleEventArgs>? Event;
-
         public void ProcessDeaths()
         {
             while (DoStep()) { }
@@ -27,7 +24,9 @@ namespace HsLib.Systems.Services
         /// <returns>False, if didn't notice dead minions</returns>
         private bool DoStep()
         {
-            List<RemovedCard> removedCards = CleanInactiveCards().ToList();
+            RemoveInactiveCards();
+
+            List<RemovedCard> removedCards = new(); // todo fix
             if (removedCards.Count == 0) { return false; }
 
             foreach (RemovedCard removed in removedCards)
@@ -41,9 +40,10 @@ namespace HsLib.Systems.Services
             return true;
         }
 
-        private IEnumerable<RemovedCard> CleanInactiveCards()
+        private void RemoveInactiveCards()
         {
-            return Bf[Pid.P1].RemoveInactiveCards().Concat(Bf[Pid.P2].RemoveInactiveCards());
+            Bf[Pid.P1].RemoveInactiveCards();
+            Bf[Pid.P2].RemoveInactiveCards();
         }
     }
 }

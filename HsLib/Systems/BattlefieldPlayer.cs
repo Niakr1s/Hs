@@ -4,19 +4,19 @@ using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
 using HsLib.Types.Containers.Base;
-using HsLib.Types.Events;
 using HsLib.Types.Stats;
+using System.Collections.Specialized;
 
 namespace HsLib.Systems
 {
-    public class BattlefieldPlayer : IWithEvent<ContainerEventArgs>
+    public class BattlefieldPlayer : INotifyCollectionChanged
     {
         public BattlefieldPlayer(Battlefield bf, Pid pid, StartingDeck startingDeck)
         {
             Bf = bf;
             Pid = pid;
 
-            Deck = new(bf, pid, cards: startingDeck.Cards);
+            Deck = new(bf, pid, startCards: startingDeck.Cards);
             Hand = new(bf, pid);
             Field = new(bf, pid);
 
@@ -30,14 +30,17 @@ namespace HsLib.Systems
             {
                 Deck, Hand, Field, Hero, Ability, Weapon, Secrets,
             });
-            _containerList.ForEach(c => c.Event += (s, e) => Event?.Invoke(s, e));
         }
 
         public Pid Pid { get; }
 
         public Battlefield Bf { get; }
 
-        public event EventHandler<ContainerEventArgs>? Event;
+        public event NotifyCollectionChangedEventHandler? CollectionChanged
+        {
+            add { _containerList.CollectionChanged += value; }
+            remove { _containerList.CollectionChanged -= value; }
+        }
 
         public IPlayer Player { get; set; } = new DefaultPlayer();
 
@@ -70,6 +73,6 @@ namespace HsLib.Systems
         /// Remove inactive cards from all containers and return them.
         /// </summary>
         /// <returns>Cleaned cards</returns>
-        public IEnumerable<RemovedCard> RemoveInactiveCards() => _containerList.RemoveInactiveCards();
+        public void RemoveInactiveCards() => _containerList.CleanInactiveCards();
     }
 }

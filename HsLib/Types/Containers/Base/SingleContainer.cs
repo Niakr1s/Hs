@@ -3,7 +3,7 @@ using HsLib.Systems;
 
 namespace HsLib.Types.Containers.Base
 {
-    public abstract class SingleContainer<TCard> : MultiContainer<TCard>
+    public abstract class SingleContainer<TCard> : Container<TCard>
         where TCard : ICard
     {
         protected SingleContainer(Battlefield bf, Place place, TCard card) : base(bf, place, limit: 1)
@@ -13,19 +13,30 @@ namespace HsLib.Types.Containers.Base
 
         public TCard Card
         {
-            get
-            {
-                return (TCard)this[0];
-            }
-            set
-            {
-                Set(value);
-            }
+            get => this[0];
+            set => Set(value);
         }
 
         public RemovedCard Set(TCard card)
         {
-            return Replace(0, card);
+            TCard oldCard = this[0];
+            this[0] = card;
+            return new RemovedCard(oldCard, Place);
+        }
+
+        public override bool CanBeInserted => true;
+
+        /// <summary>
+        /// Inserts an element at specific index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="item"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public override void Insert(int index, TCard item)
+        {
+            if (index != 0) { base.Insert(index, item); }
+            this[index] = item;
         }
     }
 }

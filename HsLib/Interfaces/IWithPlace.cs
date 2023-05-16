@@ -2,8 +2,9 @@
 
 namespace HsLib.Interfaces
 {
+
     public interface IWithPlace
     {
-        PlaceInContainer? Place { get; }
+        Place Place { get; }
     }
 }
