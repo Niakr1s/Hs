@@ -60,5 +60,16 @@ namespace HsLib.Types.Containers.Base
         {
             _emitter.CollectionChanged -= OnCollectionChanged;
         }
+
+        /// <summary>
+        /// Starts, runs action and then stops.
+        /// </summary>
+        /// <param name="action"></param>
+        public void Record(Action action)
+        {
+            Start();
+            action();
+            Stop();
+        }
     }
 }
