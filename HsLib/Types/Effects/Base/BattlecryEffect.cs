@@ -12,7 +12,6 @@ namespace HsLib.Types.Effects.Base
 
         public override void ValidatePlayFromHandEffectTarget(Battlefield bf, Pid pid, ICard? effectTarget)
         {
-            // todo: make tests
             if (ActiveEffect is not null)
             {
                 if (effectTarget is null)
