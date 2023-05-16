@@ -15,11 +15,16 @@ namespace HsLib.Validators
         /// <param name="effectTarget"></param>
         /// <param name="playFromHandEffect"></param>
         /// <exception cref="ValidationException"></exception>
-        public static void ValidateEffectTarget(Battlefield bf, Pid pid, ICard? effectTarget, IActiveEffect? playFromHandEffect)
+        public static void ValidateEffectTarget(Battlefield bf, Pid pid, ICard? effectTarget, IActiveEffect? playFromHandEffect, bool isSpell = false)
         {
             // todo: make tests
             if (playFromHandEffect is not null)
             {
+                if (isSpell && !playFromHandEffect.GetPossibleTargets(bf, pid).Any() && effectTarget is null)
+                {
+                    throw new ValidationException("spell must have any effect target even though it have none possible targets");
+                }
+
                 if (effectTarget is null)
                 {
                     if (playFromHandEffect.GetPossibleTargets(bf, pid).Any())
