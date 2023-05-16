@@ -105,9 +105,7 @@ namespace HsLibTests.Types.Containers.Base
         {
             CollectionChangedRecorder recorder = new(_container);
 
-            recorder.Start();
-            _container.CleanInactiveCards();
-            recorder.Stop();
+            recorder.Record(_container.CleanInactiveCards);
             Assert.AreEqual(0, recorder.OldItems.Count());
 
             foreach (Minion m in _container)
@@ -115,10 +113,7 @@ namespace HsLibTests.Types.Containers.Base
                 m.Hp.Set(0);
             }
 
-            recorder.Start();
-            Assert.AreEqual(0, recorder.OldItems.Count());
-            _container.CleanInactiveCards();
-            recorder.Stop();
+            recorder.Record(_container.CleanInactiveCards);
 
             Assert.AreEqual(_initCards.Count, recorder.Recorded.Count);
             Assert.AreEqual(_initCards.Count, recorder.OldItems.Count());
@@ -129,9 +124,7 @@ namespace HsLibTests.Types.Containers.Base
         {
             CollectionChangedRecorder recorder = new(_container);
 
-            recorder.Start();
-            _container.RemoveIf(_initCards.Contains);
-            recorder.Stop();
+            recorder.Record(() => _container.RemoveIf(_initCards.Contains));
 
             Assert.AreEqual(_initCards.Count, recorder.OldItems.Count());
             Assert.AreEqual(0, _container.Count);
@@ -145,9 +138,7 @@ namespace HsLibTests.Types.Containers.Base
                 Assert.AreEqual(_initCards[i], card);
             }
 
-            recorder.Start();
-            _container.RemoveIf(_initCards.Contains);
-            recorder.Stop();
+            recorder.Record(() => _container.RemoveIf(_initCards.Contains));
             Assert.AreEqual(0, recorder.OldItems.Count());
         }
 
