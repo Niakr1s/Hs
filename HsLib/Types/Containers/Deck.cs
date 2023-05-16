@@ -19,7 +19,11 @@ namespace HsLib.Types.Containers
             var removedCard = Pop();
             if (removedCard is null) { return; }
 
-            Bf[Place.Pid].Hand.Add(removedCard);
+            Hand hand = Bf[Place.Pid].Hand;
+            if (!hand.IsFull)
+            {
+                Bf[Place.Pid].Hand.Add(removedCard);
+            }
         }
     }
 }
