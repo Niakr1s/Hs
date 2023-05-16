@@ -10,8 +10,8 @@ namespace HsLib.Cards.Minions
         public Abomintaion() : base(5, 4, 4)
         {
             DealDamageEffect effect = new() { Damage = 2 };
-            Targets possibleTargets = new Targets { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He, };
-            Deathrattle = new ActiveEffect(effect, possibleTargetsChooser: possibleTargets);
+            Targets targetsChooser = new Targets { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He, };
+            Deathrattle = new ActiveEffect(effect, targetsChooser: targetsChooser);
         }
     }
 }

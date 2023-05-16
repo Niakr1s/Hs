@@ -37,11 +37,7 @@ namespace HsLib.Types.Effects.Base
             List<Action> effectActions = new();
             if (_targetsChooser is null)
             {
-                if (target is null)
-                {
-                    effectActions.AddRange(_possibleTargetsChooser.ChooseCards(pid, bf.Cards).Select(target => _effect.UseEffect(bf, target)));
-                }
-                else
+                if (target is not null)
                 {
                     effectActions.Add(_effect.UseEffect(bf, target));
                 }
