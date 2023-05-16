@@ -35,6 +35,32 @@ namespace HsLibTests.Types.Containers.Base
         }
 
         [TestMethod()]
+        public void Constructor_StartCardsTest()
+        {
+            Container<Minion> container = new(_bf, new HsLib.Types.Place(HsLib.Types.Pid.P1, HsLib.Types.Loc.Field), startCards: _initCards);
+            Assert.AreEqual(_initCards.Count, container.Count);
+            AssertCardsHaveValidPlaces(container);
+        }
+
+        [TestMethod()]
+        public void Constructor_LimitTest()
+        {
+            const int limit = 2;
+            Container<Minion> container = new(_bf, new HsLib.Types.Place(HsLib.Types.Pid.P1, HsLib.Types.Loc.Field), limit: limit);
+
+            for (int i = 0; i < limit; i++)
+            {
+                container.Add(new ChillwindYeti());
+                AssertCardsHaveValidPlaces(container);
+            }
+            Assert.AreEqual(limit, container.Count);
+
+            Assert.ThrowsException<InvalidOperationException>(() => container.Add(new ChillwindYeti()));
+            AssertCardsHaveValidPlaces(container);
+            Assert.AreEqual(limit, container.Count);
+        }
+
+        [TestMethod()]
         public void AddTest()
         {
             int startCount = _container.Count;
