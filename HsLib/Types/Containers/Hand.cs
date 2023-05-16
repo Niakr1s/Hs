@@ -20,10 +20,11 @@ namespace HsLib.Types.Containers
         /// <param name="fieldIndex"></param>
         /// <param name="effectTarget"></param>
         /// <exception cref="ValidationException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <returns>Action, that does actual play</returns>
         public Action PlayFromHand(int index, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            IPlayableFromHand card = (IPlayableFromHand)this[index];
+            IPlayableFromHand card = this[index];
 
             Mp mp = Bf[Place.Pid].Mp;
             if (!mp.IsEnough(card.Mp)) { throw new ValidationException("mp is not enough"); }

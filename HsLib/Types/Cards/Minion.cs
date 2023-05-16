@@ -1,4 +1,5 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Exceptions;
+using HsLib.Interfaces;
 using HsLib.Interfaces.CardTraits;
 using HsLib.Systems;
 using HsLib.Types.Stats;
@@ -83,6 +84,8 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
+            ValidateEffectTarget(bf, Place!.Pid, Battlecry, effectTarget, isSpell: false);
+
             Minion transformTo = ChoseOne is null ? this : (Minion)CardBuilder.FromId(bf[Place!.Pid].Player.ChooseOne(ChoseOne));
 
             Action move = bf[Place!.Pid].Hand.MoveToContainer(Place.Index, bf[Place.Pid].Field,
@@ -95,6 +98,46 @@ namespace HsLib.Types.Cards
                 battlectyAction?.Invoke();
                 move();
             };
+        }
+
+        // todo: make separate class and make tests
+        private static void ValidateEffectTarget(Battlefield bf, Pid pid, IActiveEffect? playFromHandEffect, ICard? effectTarget,
+            bool isSpell)
+        {
+            if (playFromHandEffect is not null)
+            {
+                if (!playFromHandEffect.GetPossibleTargets(bf, pid).Any())
+                {
+                    if (isSpell && effectTarget is null)
+                    {
+                        throw new ValidationException("effect target is null even though it never must be not");
+                    }
+                }
+
+                if (effectTarget is null)
+                {
+                    if (playFromHandEffect.GetPossibleTargets(bf, pid).Any())
+                    {
+                        throw new ValidationException("effect target is null even though possible targets are present");
+                    }
+                }
+                else
+                {
+                    if (!playFromHandEffect.GetPossibleTargets(bf, pid).Contains(effectTarget))
+                    {
+                        throw new ValidationException(
+                        "effect target is not null even though no possible targets are present");
+                    }
+                }
+            }
+            else
+            {
+                if (effectTarget is not null)
+                {
+                    throw new ValidationException(
+                    "effect target is not null even though battlecry is null");
+                }
+            }
         }
     }
 }
