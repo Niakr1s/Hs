@@ -27,9 +27,7 @@ namespace HsLib.Systems.Services
         private bool DoStep()
         {
             CollectionChangedRecorder recorder = new(Bf);
-            recorder.Start();
-            RemoveInactiveCards();
-            recorder.Stop();
+            recorder.Record(RemoveInactiveCards);
 
             List<RemovedCard> removedCards = new();
             foreach ((object? sender, NotifyCollectionChangedEventArgs e) in recorder.Recorded)
