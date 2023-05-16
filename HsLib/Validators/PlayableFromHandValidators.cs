@@ -17,6 +17,7 @@ namespace HsLib.Validators
         /// <exception cref="ValidationException"></exception>
         public static void ValidateEffectTarget(Battlefield bf, Pid pid, ICard? effectTarget, IActiveEffect? playFromHandEffect)
         {
+            // todo: make tests
             if (playFromHandEffect is not null)
             {
                 if (effectTarget is null)
