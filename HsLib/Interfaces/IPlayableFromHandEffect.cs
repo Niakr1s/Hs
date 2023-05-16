@@ -3,7 +3,7 @@ using HsLib.Types;
 
 namespace HsLib.Interfaces
 {
-    public interface IPlayableFromHandActiveEffect : IActiveEffect
+    public interface IPlayableFromHandEffect : IActiveEffect
     {
         /// <summary>
         /// Validates of validity or effect target while playing from hand.

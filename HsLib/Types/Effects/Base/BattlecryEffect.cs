@@ -4,7 +4,7 @@ using HsLib.Systems;
 
 namespace HsLib.Types.Effects.Base
 {
-    public class BattlecryEffect : PlayableFromHandActiveEffect
+    public class BattlecryEffect : PlayableFromHandEffect
     {
         public BattlecryEffect(IActiveEffect? activeEffect = null) : base(activeEffect)
         {

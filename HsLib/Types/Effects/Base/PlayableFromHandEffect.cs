@@ -3,9 +3,9 @@ using HsLib.Systems;
 
 namespace HsLib.Types.Effects.Base
 {
-    public abstract class PlayableFromHandActiveEffect : IPlayableFromHandActiveEffect
+    public abstract class PlayableFromHandEffect : IPlayableFromHandEffect
     {
-        protected PlayableFromHandActiveEffect(IActiveEffect? activeEffect = null)
+        protected PlayableFromHandEffect(IActiveEffect? activeEffect = null)
         {
             ActiveEffect = activeEffect;
         }
