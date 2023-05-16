@@ -4,7 +4,7 @@ using HsLib.Systems;
 using HsLib.Types.Effects.Base;
 using HsLib.Types.Stats;
 using HsLib.Types.Stats.Base;
-
+using HsLib.Validators;
 
 namespace HsLib.Types.Cards
 {
@@ -56,6 +56,8 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
+            PlayableFromHandValidators.ValidateEffectTarget(bf, Place!.Pid, effectTarget, Battlecry);
+
             Action move = bf[Place!.Pid].Hand.MoveToContainer(Place.Index, bf[Place.Pid].Weapon,
                 canBurn: false, toIndex: 0);
 
