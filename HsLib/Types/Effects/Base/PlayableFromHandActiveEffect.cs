@@ -3,9 +3,9 @@ using HsLib.Systems;
 
 namespace HsLib.Types.Effects.Base
 {
-    public abstract class ActiveEffectWithValidation : IActiveEffectWithValidation
+    public abstract class PlayableFromHandActiveEffect : IPlayableFromHandActiveEffect
     {
-        protected ActiveEffectWithValidation(IActiveEffect? activeEffect = null)
+        protected PlayableFromHandActiveEffect(IActiveEffect? activeEffect = null)
         {
             ActiveEffect = activeEffect;
         }
@@ -24,6 +24,6 @@ namespace HsLib.Types.Effects.Base
             return ActiveEffect.UseEffect(bf, pid, target);
         }
 
-        public abstract void ValidateEffectTarget(Battlefield bf, Pid pid, ICard? effectTarget);
+        public abstract void ValidatePlayFromHandEffectTarget(Battlefield bf, Pid pid, ICard? effectTarget);
     }
 }

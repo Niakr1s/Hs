@@ -4,13 +4,13 @@ using HsLib.Systems;
 
 namespace HsLib.Types.Effects.Base
 {
-    public class BattlecryEffect : ActiveEffectWithValidation
+    public class BattlecryEffect : PlayableFromHandActiveEffect
     {
         public BattlecryEffect(IActiveEffect? activeEffect = null) : base(activeEffect)
         {
         }
 
-        public override void ValidateEffectTarget(Battlefield bf, Pid pid, ICard? effectTarget)
+        public override void ValidatePlayFromHandEffectTarget(Battlefield bf, Pid pid, ICard? effectTarget)
         {
             // todo: make tests
             if (ActiveEffect is not null)

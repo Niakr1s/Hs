@@ -55,7 +55,7 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            Battlecry.ValidateEffectTarget(bf, Place!.Pid, effectTarget);
+            Battlecry.ValidatePlayFromHandEffectTarget(bf, Place!.Pid, effectTarget);
 
             Action move = bf[Place!.Pid].Hand.MoveToContainer(Place.Index, bf[Place.Pid].Weapon,
                 canBurn: false, toIndex: 0);

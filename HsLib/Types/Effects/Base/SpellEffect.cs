@@ -11,9 +11,9 @@ namespace HsLib.Types.Effects.Base
         {
         }
 
-        public override void ValidateEffectTarget(Battlefield bf, Pid pid, ICard? effectTarget)
+        public override void ValidatePlayFromHandEffectTarget(Battlefield bf, Pid pid, ICard? effectTarget)
         {
-            base.ValidateEffectTarget(bf, pid, effectTarget);
+            base.ValidatePlayFromHandEffectTarget(bf, pid, effectTarget);
             if (ActiveEffect?.GetPossibleTargets(bf, pid).Any() == true && effectTarget is null)
             {
                 throw new ValidationException("spell must have any effect target even though it have none possible targets");

@@ -2,6 +2,6 @@
 {
     public interface IWithBattlecry
     {
-        IActiveEffectWithValidation Battlecry { get; }
+        IPlayableFromHandActiveEffect Battlecry { get; }
     }
 }

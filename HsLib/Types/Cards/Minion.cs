@@ -84,7 +84,7 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            Battlecry.ValidateEffectTarget(bf, Place!.Pid, effectTarget);
+            Battlecry.ValidatePlayFromHandEffectTarget(bf, Place!.Pid, effectTarget);
 
             Minion transformTo = ChoseOne is null ? this : (Minion)CardBuilder.FromId(bf[Place!.Pid].Player.ChooseOne(ChoseOne));
 

@@ -15,7 +15,7 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            SpellEffect.ValidateEffectTarget(bf, Place!.Pid, effectTarget);
+            SpellEffect.ValidatePlayFromHandEffectTarget(bf, Place!.Pid, effectTarget);
 
             Action spellEffectAction = SpellEffect.UseEffect(bf, Place!.Pid, effectTarget);
             return () =>
