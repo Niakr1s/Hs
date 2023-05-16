@@ -29,7 +29,7 @@ namespace HsLibTests.Types.Containers.Base
             Ability ability = new Fireblast();
             _container.Card = ability;
 
-            AssertContainerTestHelpers.AssertCardIsSet(_container, ability);
+            ContainerTestHelpers.AssertCardIsSet(_container, ability);
             Assert.AreEqual(ability, _container.Card);
         }
 
@@ -39,7 +39,7 @@ namespace HsLibTests.Types.Containers.Base
             Ability ability = new Fireblast();
             RemovedCard removedAbility = _container.Set(ability);
 
-            AssertContainerTestHelpers.AssertCardIsSet(_container, ability);
+            ContainerTestHelpers.AssertCardIsSet(_container, ability);
 
             Assert.IsNotNull(removedAbility.Card);
             Assert.IsNotNull(removedAbility.Place);
@@ -56,7 +56,7 @@ namespace HsLibTests.Types.Containers.Base
                 {
                     _container.Insert(i, ability);
 
-                    AssertContainerTestHelpers.AssertCardIsSet(_container, ability);
+                    ContainerTestHelpers.AssertCardIsSet(_container, ability);
                 }
                 else
                 {

@@ -3,7 +3,7 @@ using HsLib.Types.Containers.Base;
 
 namespace HsLibTests.Types.Containers.Base
 {
-    internal static class AssertContainerTestHelpers
+    internal static class ContainerTestHelpers
     {
         internal static void AssertCardsHaveValidPlaces(IContainer container)
         {
