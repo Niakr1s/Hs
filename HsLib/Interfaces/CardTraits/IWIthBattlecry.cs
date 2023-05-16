@@ -2,6 +2,6 @@
 {
     public interface IWithBattlecry
     {
-        IActiveEffect? Battlecry { get; }
+        IActiveEffectWithValidation Battlecry { get; }
     }
 }

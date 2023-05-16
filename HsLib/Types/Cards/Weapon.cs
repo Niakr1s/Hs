@@ -4,7 +4,6 @@ using HsLib.Systems;
 using HsLib.Types.Effects.Base;
 using HsLib.Types.Stats;
 using HsLib.Types.Stats.Base;
-using HsLib.Validators;
 
 namespace HsLib.Types.Cards
 {
@@ -24,7 +23,7 @@ namespace HsLib.Types.Cards
 
         public Windfury Windfury { get; init; } = new Windfury(false);
 
-        public ActiveEffect? Battlecry { get; protected set; }
+        public BattlecryEffect Battlecry { get; } = new BattlecryEffect();
 
         public bool Dead => Hp <= 0;
 
@@ -56,7 +55,7 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            PlayableFromHandValidators.ValidateEffectTarget(bf, Place!.Pid, effectTarget, Battlecry);
+            Battlecry.ValidateEffectTarget(bf, Place!.Pid, effectTarget);
 
             Action move = bf[Place!.Pid].Hand.MoveToContainer(Place.Index, bf[Place.Pid].Weapon,
                 canBurn: false, toIndex: 0);

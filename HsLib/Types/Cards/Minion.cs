@@ -1,13 +1,13 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Interfaces.CardTraits;
 using HsLib.Systems;
+using HsLib.Types.Effects.Base;
 using HsLib.Types.Stats;
 using HsLib.Types.Stats.Base;
-using HsLib.Validators;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Minion : Card, IAttacker, IDamageable, IMortal, IWithDeathrattle, IWithBattlecry, IWithChoseOne, IPlayableFromHand
+    public abstract class Minion : Card, IAttacker, IDamageable, IMortal, IWithDeathrattle, IPlayableFromHand
     {
         protected Minion(int mp, int atk, int hp) : base(mp)
         {
@@ -27,7 +27,7 @@ namespace HsLib.Types.Cards
         public BoolStat DivineShield { get; init; } = new BoolStat(false);
         public BoolStat Stealth { get; init; } = new BoolStat(false);
 
-        public IActiveEffect? Battlecry { get; protected set; }
+        public BattlecryEffect Battlecry { get; } = new BattlecryEffect();
 
         public IActiveEffect? Deathrattle { get; protected set; }
 
@@ -84,7 +84,7 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            PlayableFromHandValidators.ValidateEffectTarget(bf, Place!.Pid, effectTarget, Battlecry);
+            Battlecry.ValidateEffectTarget(bf, Place!.Pid, effectTarget);
 
             Minion transformTo = ChoseOne is null ? this : (Minion)CardBuilder.FromId(bf[Place!.Pid].Player.ChooseOne(ChoseOne));
 

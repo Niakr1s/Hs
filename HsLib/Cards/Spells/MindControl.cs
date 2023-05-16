@@ -1,5 +1,4 @@
-﻿using HsLib.Interfaces;
-using HsLib.Types.Cards;
+﻿using HsLib.Types.Cards;
 using HsLib.Types.Effects;
 
 namespace HsLib.Cards.Spells
@@ -8,9 +7,7 @@ namespace HsLib.Cards.Spells
     {
         public MindControl() : base(10)
         {
-            SpellEffect = new MindControlActiveEffect();
+            SpellEffect.ActiveEffect = new MindControlActiveEffect();
         }
-
-        public override IActiveEffect SpellEffect { get; }
     }
 }
