@@ -39,7 +39,7 @@ namespace HsLibTests.Types.Containers.Base
         {
             int startCount = _container.Count;
             _container.Add(new ChillwindYeti());
-            CardsHaveValidPlaces();
+            AssertCardsHaveValidPlaces();
             Assert.AreEqual(startCount + 1, _container.Count);
         }
 
@@ -51,7 +51,7 @@ namespace HsLibTests.Types.Containers.Base
             {
                 Minion m = new ChillwindYeti();
                 _container.Insert(i, m);
-                CardsHaveValidPlaces();
+                AssertCardsHaveValidPlaces();
 
                 Assert.AreEqual(_container.Place, m.Place!);
                 Assert.AreEqual(++startCount, _container.Count);
@@ -66,7 +66,7 @@ namespace HsLibTests.Types.Containers.Base
             for (int i = _initCards.Count - 1; i >= 0; i--)
             {
                 Minion? removedCard = _container.Pop();
-                CardsHaveValidPlaces();
+                AssertCardsHaveValidPlaces();
                 Assert.IsNotNull(removedCard);
                 Assert.IsNull(removedCard.Place);
             }
@@ -191,8 +191,8 @@ namespace HsLibTests.Types.Containers.Base
 
 
                 Assert.AreEqual(expectedCard, _containerTo[i]);
-                CardsHaveValidPlaces(_container);
-                CardsHaveValidPlaces(_containerTo);
+                AssertCardsHaveValidPlaces(_container);
+                AssertCardsHaveValidPlaces(_containerTo);
             }
             Assert.AreEqual(0, _container.Count);
             Assert.AreEqual(_initCards.Count, _containerTo.Count);
@@ -200,12 +200,12 @@ namespace HsLibTests.Types.Containers.Base
 
         #region helpers
 
-        private void CardsHaveValidPlaces()
+        private void AssertCardsHaveValidPlaces()
         {
-            CardsHaveValidPlaces(_container);
+            AssertCardsHaveValidPlaces(_container);
         }
 
-        private void CardsHaveValidPlaces(IContainer container)
+        private static void AssertCardsHaveValidPlaces(IContainer container)
         {
             Assert.IsNotNull(container.Place);
             for (int i = 0; i < container.Count; i++)
