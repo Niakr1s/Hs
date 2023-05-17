@@ -8,7 +8,7 @@ namespace HsLib.Types.Auras.Base
 {
     public class MinionAura : Aura
     {
-        public MinionAura(Minion owner, IAuraEffect auraEffect, ICardsChooser cardsChooser)
+        public MinionAura(Minion owner, IAuraEffect auraEffect, ICardsChooser<PlaceInContainer> cardsChooser)
         {
             Owner = owner;
             _auraEffect = auraEffect;
@@ -20,7 +20,7 @@ namespace HsLib.Types.Auras.Base
         private Battlefield? _bf;
 
         private readonly IAuraEffect _auraEffect;
-        private readonly ICardsChooser _cardsChooser;
+        private readonly ICardsChooser<PlaceInContainer> _cardsChooser;
 
         private readonly List<IEnchantHandler> _appliedAuras = new();
 
@@ -53,9 +53,11 @@ namespace HsLib.Types.Auras.Base
 
             // applying
             if (_bf is null) { throw new InvalidOperationException("bf is null"); }
-            foreach (ICard card in _cardsChooser.ChooseCards(Owner.Place!.Pid, _bf.Cards))
+            if (Owner.PlaceInContainer is null) { throw new InvalidOperationException("owner doesn't in container"); }
+
+            foreach (ICard card in _cardsChooser.ChooseCards(Owner.PlaceInContainer, _bf.Cards))
             {
-                _auraEffect.GiveAura(_bf, card);
+                _auraEffect.GiveAura(_bf, Owner, card);
             }
         }
     }

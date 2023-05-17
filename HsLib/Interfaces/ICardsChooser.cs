@@ -1,10 +1,7 @@
-﻿using HsLib.Types;
-
-namespace HsLib.Interfaces
+﻿namespace HsLib.Interfaces
 {
-    public interface ICardsChooser
+    public interface ICardsChooser<TOwner>
     {
-        // todo ICard instead of ownerPid
-        IEnumerable<ICard> ChooseCards(Pid ownerPid, IEnumerable<ICard> cards);
+        IEnumerable<ICard> ChooseCards(TOwner owner, IEnumerable<ICard> cards);
     }
 }

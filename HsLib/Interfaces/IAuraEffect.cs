@@ -5,6 +5,6 @@ namespace HsLib.Interfaces
 {
     public interface IAuraEffect
     {
-        IEnchantHandler GiveAura(Battlefield bf, ICard target);
+        IEnchantHandler GiveAura(Battlefield bf, ICard owner, ICard target);
     }
 }

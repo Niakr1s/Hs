@@ -11,9 +11,9 @@ namespace HsLibTests.Types.Containers.Base
             for (int i = 0; i < container.Count; i++)
             {
                 ICard card = (ICard)container[i]!;
-                Assert.IsNotNull(card.Place);
-                Assert.AreEqual(container.Place, card.Place);
-                Assert.AreEqual(i, card.Place.Index);
+                Assert.IsNotNull(card.PlaceInContainer);
+                Assert.AreEqual(container.Place, card.PlaceInContainer);
+                Assert.AreEqual(i, card.PlaceInContainer.Index);
             }
         }
 
@@ -24,8 +24,8 @@ namespace HsLibTests.Types.Containers.Base
 
             Assert.AreEqual(card, container.Card);
 
-            Assert.IsNotNull(card.Place);
-            Assert.AreEqual(container.Place, card.Place);
+            Assert.IsNotNull(card.PlaceInContainer);
+            Assert.AreEqual(container.Place, card.PlaceInContainer);
         }
     }
 }

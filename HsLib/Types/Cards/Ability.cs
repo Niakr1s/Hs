@@ -9,7 +9,7 @@ namespace HsLib.Types.Cards
         {
         }
 
-        public abstract IActiveEffect AbilityEffect { get; }
+        public abstract IActiveEffect<Pid> AbilityEffect { get; }
 
         public bool EffectUsedThisTurn { get; private set; }
 
@@ -17,12 +17,12 @@ namespace HsLib.Types.Cards
         /// First call will throw exceptions, if effect can't be used. Second call actually uses effect.
         /// </summary>
         /// <param name="bf"></param>
-        /// <param name="pid"></param>
         /// <param name="target"></param>
+        /// 
         /// <returns>Action, that actually uses effect.</returns>
-        public Action UseEffect(Battlefield bf, Pid pid, ICard? target)
+        public Action UseAbility(Battlefield bf, ICard? target)
         {
-            Action useEffectAction = AbilityEffect.UseEffect(bf, pid, target);
+            Action useEffectAction = AbilityEffect.UseEffect(bf, PlaceInContainer!.Pid, target);
 
             return () =>
             {

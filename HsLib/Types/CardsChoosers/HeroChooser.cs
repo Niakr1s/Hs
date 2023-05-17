@@ -2,9 +2,11 @@
 
 namespace HsLib.Types.CardsChoosers
 {
-    public class HeroChooser : CardsChooser
+    public class HeroChooser : CardsChooser<Pid>
     {
-        private static readonly CardsChooserFunc _f = (pid, cards) => cards.Where(c => c is Hero && c.Place!.Pid == pid && c.Place!.Loc == Loc.Hero);
+        private static readonly CardsChooserFunc<Pid> _f =
+            (owner, cards) => cards
+            .Where(c => c is Hero && c.PlaceInContainer!.Pid == owner && c.PlaceInContainer!.Loc == Loc.Hero);
 
         public HeroChooser() : base(_f)
         {

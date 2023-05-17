@@ -36,9 +36,9 @@ namespace HsLibTests.Types.Effects.Base
 
             Targets validTargets = new Targets() { Sides = PidSide.He, Locs = Loc.Field };
             // valid effect to target minion
-            ActiveEffect havePossibleTargetsEffect = new ActiveEffect(new DealDamageEffect(), validTargets);
+            ActiveEffect<Pid> havePossibleTargetsEffect = new(new DealDamageEffect(), validTargets);
             // invalid effect to target minion
-            ActiveEffect noPossibleTargetsEffect = new ActiveEffect(new DealDamageEffect());
+            ActiveEffect<Pid> noPossibleTargetsEffect = new(new DealDamageEffect());
 
             List<(SpellEffect, ICard?, bool)> testCases = new()
             {

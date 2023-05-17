@@ -13,14 +13,14 @@ namespace HsLib.Types.Cards
     /// <see cref="OnTurnEnd(Battlefield)"/><br/>
     /// <see cref="OnTurnStart(Battlefield)"/>.<br/><br/>
     /// </summary>
-    public abstract class Card : ICard
+    public abstract class Card : ICard, IWithPlaceInContainer
     {
         protected Card(int mp)
         {
             Mp = new Mp(mp);
         }
 
-        public PlaceInContainer? Place { get; set; }
+        public PlaceInContainer? PlaceInContainer { get; set; }
 
         public Mp Mp { get; }
 

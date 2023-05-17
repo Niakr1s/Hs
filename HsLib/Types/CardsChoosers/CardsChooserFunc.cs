@@ -2,13 +2,13 @@
 
 namespace HsLib.Types.CardsChoosers
 {
-    public delegate IEnumerable<ICard> CardsChooserFunc(Pid ownerPid, IEnumerable<ICard> cards);
+    public delegate IEnumerable<ICard> CardsChooserFunc<TOwner>(TOwner owner, IEnumerable<ICard> cards);
 
     public static class CardsChooserFuncExtensions
     {
-        public static ICardsChooser ToCardsChooser(this CardsChooserFunc f)
+        public static ICardsChooser<TOwner> ToCardsChooser<TOwner>(this CardsChooserFunc<TOwner> f)
         {
-            return new CardsChooser(f);
+            return new CardsChooser<TOwner>(f);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace HsLib.Types.Cards
 
         public IAura? FieldAura { get; protected set; }
 
-        public IActiveEffect? Deathrattle { get; protected set; }
+        public IActiveEffect<Pid>? Deathrattle { get; protected set; }
 
         public bool Dead => Hp <= 0;
 
@@ -52,7 +52,7 @@ namespace HsLib.Types.Cards
             base.AfterContainerInsert(bf);
             AtksThisTurn = 0;
 
-            if (Place!.Loc == Loc.Field) { FieldAura?.Activate(bf); }
+            if (PlaceInContainer!.Loc == Loc.Field) { FieldAura?.Activate(bf); }
         }
 
         // todo: add previous place param
@@ -75,12 +75,12 @@ namespace HsLib.Types.Cards
         {
             if (Dead) { return false; }
             if (Windfury.AttacksLeft(AtksThisTurn) <= 0) { return false; }
-            return !bf.Turn.IsFirstTurn(Place!.AddedTurnNo) || Charge;
+            return !bf.Turn.IsFirstTurn(PlaceInContainer!.AddedTurnNo) || Charge;
         }
 
         public bool CanBeMeleeAttacked(Battlefield bf)
         {
-            return !Stealth && (Taunt || !bf[Place!.Pid].Field.HasAnyActiveTaunt());
+            return !Stealth && (Taunt || !bf[PlaceInContainer!.Pid].Field.HasAnyActiveTaunt());
         }
 
         public IDamageable GetDefender(Battlefield bf)
@@ -90,14 +90,14 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            Battlecry.ValidatePlayFromHandEffectTarget(bf, Place!.Pid, effectTarget);
+            Battlecry.ValidatePlayFromHandEffectTarget(bf, PlaceInContainer!.Pid, effectTarget);
 
-            Minion transformTo = ChoseOne is null ? this : (Minion)CardBuilder.FromId(bf[Place!.Pid].Player.ChooseOne(ChoseOne));
+            Minion transformTo = ChoseOne is null ? this : (Minion)CardBuilder.FromId(bf[PlaceInContainer!.Pid].Player.ChooseOne(ChoseOne));
 
-            Action move = bf[Place!.Pid].Hand.MoveToContainer(Place.Index, bf[Place.Pid].Field,
+            Action move = bf[PlaceInContainer!.Pid].Hand.MoveToContainer(PlaceInContainer.Index, bf[PlaceInContainer.Pid].Field,
                 canBurn: false, toIndex: fieldIndex, transformTo: transformTo);
 
-            Action? battlectyAction = Battlecry?.UseEffect(bf, Place.Pid, effectTarget);
+            Action? battlectyAction = Battlecry?.UseEffect(bf, PlaceInContainer!.Pid, effectTarget);
 
             return () =>
             {

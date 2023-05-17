@@ -5,7 +5,7 @@ namespace HsLib.Interfaces
 {
     public interface ICard : IBattlefieldSubscriber
     {
-        PlaceInContainer? Place { get; set; }
+        PlaceInContainer? PlaceInContainer { get; set; }
 
         Mp Mp { get; }
     }

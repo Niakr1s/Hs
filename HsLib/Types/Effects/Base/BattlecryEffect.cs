@@ -6,24 +6,24 @@ namespace HsLib.Types.Effects.Base
 {
     public class BattlecryEffect : PlayableFromHandEffect
     {
-        public BattlecryEffect(IActiveEffect? activeEffect = null) : base(activeEffect)
+        public BattlecryEffect(IActiveEffect<Pid>? pidEffect = null) : base(pidEffect)
         {
         }
 
-        public override void ValidatePlayFromHandEffectTarget(Battlefield bf, Pid pid, ICard? effectTarget)
+        public override void ValidatePlayFromHandEffectTarget(Battlefield bf, Pid ownerPid, ICard? effectTarget)
         {
-            if (ActiveEffect is not null)
+            if (Effect is not null)
             {
                 if (effectTarget is null)
                 {
-                    if (ActiveEffect.GetPossibleTargets(bf, pid).Any())
+                    if (Effect.GetPossibleTargets(bf, ownerPid).Any())
                     {
                         throw new ValidationException("effect target is null even though some possible targets are present");
                     }
                 }
                 else
                 {
-                    if (!ActiveEffect.GetPossibleTargets(bf, pid).Contains(effectTarget))
+                    if (!Effect.GetPossibleTargets(bf, ownerPid).Contains(effectTarget))
                     {
                         throw new ValidationException(
                         "effect target is not null even though no possible targets are present");

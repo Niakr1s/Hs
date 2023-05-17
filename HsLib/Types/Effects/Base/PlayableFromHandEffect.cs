@@ -5,25 +5,25 @@ namespace HsLib.Types.Effects.Base
 {
     public abstract class PlayableFromHandEffect : IPlayableFromHandEffect
     {
-        protected PlayableFromHandEffect(IActiveEffect? activeEffect = null)
+        protected PlayableFromHandEffect(IActiveEffect<Pid>? pidEffect = null)
         {
-            ActiveEffect = activeEffect;
+            Effect = pidEffect;
         }
 
-        public IActiveEffect? ActiveEffect { get; set; }
+        public IActiveEffect<Pid>? Effect { get; set; }
 
-        public IEnumerable<ICard> GetPossibleTargets(Battlefield bf, Pid pid)
+        public IEnumerable<ICard> GetPossibleTargets(Battlefield bf, Pid ownerPid)
         {
-            if (ActiveEffect is null) yield break;
-            foreach (var i in ActiveEffect.GetPossibleTargets(bf, pid)) { yield return i; }
+            if (Effect is null) yield break;
+            foreach (var i in Effect.GetPossibleTargets(bf, ownerPid)) { yield return i; }
         }
 
-        public Action UseEffect(Battlefield bf, Pid pid, ICard? target)
+        public Action UseEffect(Battlefield bf, Pid ownerPid, ICard? target)
         {
-            if (ActiveEffect is null) { return () => { }; }
-            return ActiveEffect.UseEffect(bf, pid, target);
+            if (Effect is null) { return () => { }; }
+            return Effect.UseEffect(bf, ownerPid, target);
         }
 
-        public abstract void ValidatePlayFromHandEffectTarget(Battlefield bf, Pid pid, ICard? effectTarget);
+        public abstract void ValidatePlayFromHandEffectTarget(Battlefield bf, Pid ownerPid, ICard? effectTarget);
     }
 }

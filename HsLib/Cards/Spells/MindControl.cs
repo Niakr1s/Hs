@@ -7,7 +7,7 @@ namespace HsLib.Cards.Spells
     {
         public MindControl() : base(10)
         {
-            SpellEffect.ActiveEffect = new MindControlActiveEffect();
+            SpellEffect.Effect = new MindControlActiveEffect();
         }
     }
 }

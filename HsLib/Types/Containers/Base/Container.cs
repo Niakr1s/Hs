@@ -33,7 +33,7 @@ namespace HsLib.Types.Containers.Base
             {
                 foreach (TCard item in e.NewItems)
                 {
-                    item.Place = Place.InContainer(Bf.Turn.No, IndexOf(item));
+                    item.PlaceInContainer = Place.InContainer(Bf.Turn.No, IndexOf(item));
                     item.AfterContainerInsert(Bf);
                 }
             }
@@ -42,7 +42,7 @@ namespace HsLib.Types.Containers.Base
             {
                 foreach (TCard item in e.OldItems)
                 {
-                    item.Place = default;
+                    item.PlaceInContainer = default;
                     item.AfterContainerRemove(Bf);
                 }
             }
@@ -176,9 +176,9 @@ namespace HsLib.Types.Containers.Base
         {
             foreach (var (card, index) in this.WithIndex())
             {
-                if (card.Place is not null)
+                if (card.PlaceInContainer is not null)
                 {
-                    card.Place = card.Place with { Index = index };
+                    card.PlaceInContainer = card.PlaceInContainer with { Index = index };
                 }
             }
         }

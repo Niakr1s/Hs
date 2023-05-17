@@ -9,7 +9,7 @@ namespace HsLib.Types.Auras
     {
         public int AtkValue { get; init; } = 0;
 
-        public IEnchantHandler GiveAura(Battlefield bf, ICard target)
+        public IEnchantHandler GiveAura(Battlefield bf, ICard owner, ICard target)
         {
             IWithAtk a = (IWithAtk)target;
             return a.Atk.AddAura(AtkValue);

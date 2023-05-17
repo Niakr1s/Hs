@@ -2,18 +2,18 @@
 
 namespace HsLib.Types.CardsChoosers
 {
-    public class CardsChooser : ICardsChooser
+    public class CardsChooser<TOwner> : ICardsChooser<TOwner>
     {
-        public CardsChooser(CardsChooserFunc cardChooserFunc)
+        public CardsChooser(CardsChooserFunc<TOwner> cardChooserFunc)
         {
             _cardChooserFunc = cardChooserFunc;
         }
 
-        private readonly CardsChooserFunc _cardChooserFunc;
+        private readonly CardsChooserFunc<TOwner> _cardChooserFunc;
 
-        public IEnumerable<ICard> ChooseCards(Pid ownerPid, IEnumerable<ICard> cards)
+        public IEnumerable<ICard> ChooseCards(TOwner owner, IEnumerable<ICard> cards)
         {
-            return _cardChooserFunc.Invoke(ownerPid, cards);
+            return _cardChooserFunc.Invoke(owner, cards);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace HsLib.Types
 {
-    public readonly struct Targets : ICardsChooser
+    public readonly struct Targets : ICardsChooser<PlaceInContainer>, ICardsChooser<Pid>
     {
         public Loc? Locs { get; init; }
 
@@ -16,19 +16,27 @@ namespace HsLib.Types
             }
             else
             {
-                if (target.Place is null) { return false; }
+                if (target.PlaceInContainer is null) { return false; }
 
-                bool sideIsCorrect = Sides?.HasFlag(ownerPid.Side(target.Place.Pid)) == true;
-                bool locIsCorrect = Locs?.HasFlag(target.Place.Loc) == true;
+                bool sideIsCorrect = Sides?.HasFlag(ownerPid.Side(target.PlaceInContainer.Pid)) == true;
+                bool locIsCorrect = Locs?.HasFlag(target.PlaceInContainer.Loc) == true;
                 return sideIsCorrect && locIsCorrect;
             }
         }
 
-        public IEnumerable<ICard> ChooseCards(Pid ownerPid, IEnumerable<ICard> targets)
+        public IEnumerable<ICard> ChooseCards(PlaceInContainer ownerPlaceInContainer, IEnumerable<ICard> cards)
         {
-            foreach (var t in targets)
+            foreach (var t in ChooseCards(ownerPlaceInContainer.Pid, cards))
             {
-                if (IsValidTarget(ownerPid, t))
+                yield return t;
+            }
+        }
+
+        public IEnumerable<ICard> ChooseCards(Pid owner, IEnumerable<ICard> cards)
+        {
+            foreach (var t in cards)
+            {
+                if (IsValidTarget(owner, t))
                 {
                     yield return t;
                 }

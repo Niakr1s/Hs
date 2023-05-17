@@ -16,7 +16,7 @@ namespace HsLib.Types.Containers
         {
             BattlefieldPlayer player = Bf[Place!.Pid];
             if (!player.Mp.IsEnough(Card.Mp)) { throw new MpException(); }
-            Action effectAction = Card.UseEffect(Bf, Place.Pid, target);
+            Action effectAction = Card.UseAbility(Bf, target);
 
             return () =>
             {
