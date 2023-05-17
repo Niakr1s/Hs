@@ -9,7 +9,8 @@ namespace HsLib.Cards.Minions
     {
         public FlametongTotem() : base(2, 0, 3)
         {
-            FieldAura = new MinionAura(this, new GiveAtkAuraEffect() { AtkValue = 2 }, new FieldAdjacentMinionsChooser());
+            FieldAuraSource = new MinionAuraSource(this,
+                new GiveAtkAuraEffect() { AtkValue = 2 }, new FieldAdjacentMinionsChooser());
         }
     }
 }

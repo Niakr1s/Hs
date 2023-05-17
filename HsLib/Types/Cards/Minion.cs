@@ -29,7 +29,7 @@ namespace HsLib.Types.Cards
 
         public BattlecryEffect Battlecry { get; } = new BattlecryEffect();
 
-        public IAura? FieldAura { get; protected set; }
+        public IAuraSource? FieldAuraSource { get; protected set; }
 
         public IActiveEffect<Pid>? Deathrattle { get; protected set; }
 
@@ -52,7 +52,7 @@ namespace HsLib.Types.Cards
             base.AfterContainerInsert(bf);
             AtksThisTurn = 0;
 
-            if (PlaceInContainer!.Loc == Loc.Field) { FieldAura?.Activate(bf); }
+            if (PlaceInContainer!.Loc == Loc.Field) { FieldAuraSource?.Activate(bf); }
         }
 
         // todo: add previous place param
@@ -60,7 +60,7 @@ namespace HsLib.Types.Cards
         {
             base.AfterContainerRemove(bf);
             AtksThisTurn = 0;
-            FieldAura?.Deactivate(bf);
+            FieldAuraSource?.Deactivate(bf);
         }
 
         public override void OnTurnEnd(Battlefield bf)

@@ -6,9 +6,9 @@ using System.Collections.Specialized;
 
 namespace HsLib.Types.Auras.Base
 {
-    public class MinionAura : Aura
+    public class MinionAuraSource : AuraSource
     {
-        public MinionAura(Minion owner, IAuraEffect auraEffect, ICardsChooser<PlaceInContainer> cardsChooser)
+        public MinionAuraSource(Minion owner, IAuraEffect auraEffect, ICardsChooser<PlaceInContainer> cardsChooser)
         {
             Owner = owner;
             _auraEffect = auraEffect;

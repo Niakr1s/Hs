@@ -3,7 +3,7 @@ using HsLib.Systems;
 
 namespace HsLib.Types.Auras.Base
 {
-    public abstract class Aura : IAura
+    public abstract class AuraSource : IAuraSource
     {
         public bool IsActive { get; private set; }
 

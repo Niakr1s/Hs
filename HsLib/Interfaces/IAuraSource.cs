@@ -2,7 +2,7 @@
 
 namespace HsLib.Interfaces
 {
-    public interface IAura
+    public interface IAuraSource
     {
         bool IsActive { get; }
 
