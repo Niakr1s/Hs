@@ -13,5 +13,25 @@ namespace HsLib.Types
         {
             return new Place(placeInContainer.Pid, placeInContainer.Loc);
         }
+
+        public bool SameSide(PlaceInContainer other)
+        {
+            return Pid == other.Pid;
+        }
+
+        public bool SameLoc(PlaceInContainer other)
+        {
+            return Loc == other.Loc;
+        }
+
+        public bool IsLeftOf(PlaceInContainer other)
+        {
+            return SameSide(other) && SameLoc(other) && other.Index - Index == 1;
+        }
+
+        public bool IsRightOf(PlaceInContainer other)
+        {
+            return SameSide(other) && SameLoc(other) && other.Index - Index == -1;
+        }
     }
 }
