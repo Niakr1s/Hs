@@ -7,9 +7,17 @@ using HsLib.Types.Stats.Base;
 
 namespace HsLib.Types.Effects
 {
-    public class GiveAtkBuffEffect : IEffect
+    public class GiveStatBuffEffect<T> : IEffect
+        where T : struct
     {
-        public int AtkValue { get; set; }
+        public GiveStatBuffEffect(Func<ICard, Stat<T>> statChooser)
+        {
+            _statChooser = statChooser;
+        }
+
+        private readonly Func<ICard, Stat<T>> _statChooser;
+
+        public T Value { get; set; }
 
         public bool TillEndOfTurn { get; set; }
 
@@ -19,7 +27,7 @@ namespace HsLib.Types.Effects
 
             return () =>
             {
-                Enchant<int> buff = m.Atk.AddBuff(2);
+                Enchant<T> buff = _statChooser(target).AddBuff(Value);
                 if (TillEndOfTurn)
                 {
                     Do.Once(bf, e => e.EventArgs is TurnEndEventArgs, () => buff.Active = false);

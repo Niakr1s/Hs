@@ -1,4 +1,5 @@
 ﻿using HsLib.Cards.Minions;
+using HsLib.Interfaces.CardTraits;
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;
@@ -7,7 +8,7 @@ using HsLibTests.Helpers;
 namespace HsLibTests.Types.Effects
 {
     [TestClass()]
-    public class GiveAtkBuffEffectTests
+    public class GiveStatBuffEffectTests
     {
         [TestMethod()]
         public void UseEffectTest()
@@ -20,13 +21,13 @@ namespace HsLibTests.Types.Effects
         {
             Battlefield bf = TestBattlefield.New();
 
-            GiveAtkBuffEffect effect = new() { AtkValue = 2, TillEndOfTurn = tillEndOfTurn };
+            GiveStatBuffEffect<int> effect = new(c => ((IWithAtk)c).Atk) { Value = 2, TillEndOfTurn = tillEndOfTurn };
 
             Minion minion = new ChillwindYeti();
             int startAtk = minion.Atk;
             effect.UseEffect(bf, minion)();
 
-            int expectedAtk = startAtk + effect.AtkValue;
+            int expectedAtk = startAtk + effect.Value;
             Assert.AreEqual(expectedAtk, minion.Atk);
 
             bf.Turn.Next();
