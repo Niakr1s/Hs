@@ -20,13 +20,13 @@ namespace HsLibTests.Types.Effects
         {
             Battlefield bf = TestBattlefield.New();
 
-            GiveAtkBuffEffect effect = new() { DamageBuff = 2, TillEndOfTurn = tillEndOfTurn };
+            GiveAtkBuffEffect effect = new() { AtkValue = 2, TillEndOfTurn = tillEndOfTurn };
 
             Minion minion = new ChillwindYeti();
             int startAtk = minion.Atk;
             effect.UseEffect(bf, minion)();
 
-            int expectedAtk = startAtk + effect.DamageBuff;
+            int expectedAtk = startAtk + effect.AtkValue;
             Assert.AreEqual(expectedAtk, minion.Atk);
 
             bf.Turn.Next();

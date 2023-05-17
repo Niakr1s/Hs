@@ -9,7 +9,7 @@ namespace HsLib.Cards.Minions
     {
         public AbusiveSergeant() : base(2, 2, 1)
         {
-            GiveAtkBuffEffect effect = new() { DamageBuff = 2, TillEndOfTurn = true };
+            GiveAtkBuffEffect effect = new() { AtkValue = 2, TillEndOfTurn = true };
             Targets possibleTargets = new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He };
             Battlecry.Effect = new ActiveEffect<Pid>(effect, possibleTargetsChooser: possibleTargets);
         }

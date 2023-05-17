@@ -9,8 +9,7 @@ namespace HsLib.Types.Effects
 {
     public class GiveAtkBuffEffect : IEffect
     {
-        // todo rename to DamageValue
-        public int DamageBuff { get; set; }
+        public int AtkValue { get; set; }
 
         public bool TillEndOfTurn { get; set; }
 
