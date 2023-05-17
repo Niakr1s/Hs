@@ -29,6 +29,8 @@ namespace HsLib.Types.Cards
 
         public BattlecryEffect Battlecry { get; } = new BattlecryEffect();
 
+        public IAura? FieldAura { get; protected set; }
+
         public IActiveEffect? Deathrattle { get; protected set; }
 
         public bool Dead => Hp <= 0;
@@ -49,12 +51,16 @@ namespace HsLib.Types.Cards
         {
             base.AfterContainerInsert(bf);
             AtksThisTurn = 0;
+
+            if (Place!.Loc == Loc.Field) { FieldAura?.Activate(bf); }
         }
 
+        // todo: add previous place param
         public override void AfterContainerRemove(Battlefield bf)
         {
             base.AfterContainerRemove(bf);
             AtksThisTurn = 0;
+            FieldAura?.Deactivate(bf);
         }
 
         public override void OnTurnEnd(Battlefield bf)
