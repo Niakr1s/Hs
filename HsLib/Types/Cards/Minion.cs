@@ -1,6 +1,7 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Interfaces.CardTraits;
 using HsLib.Systems;
+using HsLib.Types.Auras.Base;
 using HsLib.Types.Effects.Base;
 using HsLib.Types.Stats;
 using HsLib.Types.Stats.Base;
@@ -29,7 +30,7 @@ namespace HsLib.Types.Cards
 
         public BattlecryEffect Battlecry { get; } = new BattlecryEffect();
 
-        public IAuraSource? FieldAuraSource { get; protected set; }
+        public AuraSource? AuraSource { get; protected set; }
 
         public IActiveEffect<Pid>? Deathrattle { get; protected set; }
 
@@ -52,7 +53,7 @@ namespace HsLib.Types.Cards
             base.AfterContainerInsert(bf);
             AtksThisTurn = 0;
 
-            if (PlaceInContainer!.Loc == Loc.Field) { FieldAuraSource?.Activate(bf); }
+            if (PlaceInContainer!.Loc == Loc.Field) { AuraSource?.Activate(bf); }
         }
 
         // todo: add previous place param
@@ -60,7 +61,7 @@ namespace HsLib.Types.Cards
         {
             base.AfterContainerRemove(bf);
             AtksThisTurn = 0;
-            FieldAuraSource?.Deactivate(bf);
+            AuraSource?.Deactivate(bf);
         }
 
         public override void OnTurnEnd(Battlefield bf)
