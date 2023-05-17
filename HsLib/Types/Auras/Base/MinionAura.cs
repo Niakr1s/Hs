@@ -27,18 +27,27 @@ namespace HsLib.Types.Auras.Base
         protected override void Start(Battlefield bf)
         {
             bf.CollectionChanged += Bf_CollectionChanged;
+            CleanAuras();
             _bf = bf;
         }
 
         protected override void Stop(Battlefield bf)
         {
             bf.CollectionChanged -= Bf_CollectionChanged;
+            CleanAuras();
             _bf = null;
         }
 
         private void Bf_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
+            CleanAuras();
             ReapplyAuras();
+        }
+
+        private void CleanAuras()
+        {
+            _appliedAuras.ForEach(e => e.Active = false);
+            _appliedAuras.Clear();
         }
 
         /// <summary>
@@ -47,17 +56,12 @@ namespace HsLib.Types.Auras.Base
         /// <exception cref="InvalidOperationException"></exception>
         private void ReapplyAuras()
         {
-            // cleaning
-            _appliedAuras.ForEach(e => e.Active = false);
-            _appliedAuras.Clear();
-
-            // applying
             if (_bf is null) { throw new InvalidOperationException("bf is null"); }
             if (Owner.PlaceInContainer is null) { throw new InvalidOperationException("owner doesn't in container"); }
 
             foreach (ICard card in _cardsChooser.ChooseCards(Owner.PlaceInContainer, _bf.Cards))
             {
-                _auraEffect.GiveAura(_bf, Owner, card);
+                _appliedAuras.Add(_auraEffect.GiveAura(_bf, Owner, card));
             }
         }
     }
