@@ -3,7 +3,6 @@ using HsLib.Interfaces.CardTraits;
 using HsLib.Systems;
 using HsLib.Types.Effects.Base;
 using HsLib.Types.Stats;
-using HsLib.Types.Stats.Base;
 
 namespace HsLib.Types.Cards
 {
