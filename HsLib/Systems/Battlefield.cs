@@ -3,6 +3,7 @@ using HsLib.Interfaces.CardTraits;
 using HsLib.Systems.Services;
 using HsLib.Types;
 using HsLib.Types.Cards;
+using HsLib.Types.Containers.Base;
 using HsLib.Types.Events;
 using System.Collections.Specialized;
 
@@ -26,6 +27,7 @@ namespace HsLib.Systems
             DeathService = new DeathService(this);
             PlayerService = new PlayerService(this);
             MeleeService = new MeleeService(this);
+            CleanService = new CleanService(this);
 
             new EventConnector(this).Connect();
         }
@@ -50,6 +52,7 @@ namespace HsLib.Systems
         internal DeathService DeathService { get; }
         internal PlayerService PlayerService { get; }
         internal MeleeService MeleeService { get; }
+        internal CleanService CleanService { get; }
         #endregion
 
         /// <summary>
@@ -75,6 +78,8 @@ namespace HsLib.Systems
         /// Current enemy.
         /// </summary>
         public BattlefieldPlayer Enemy => this[Turn.Pid.He()];
+
+        public IContainer this[Place place] => this[place.Pid][place.Loc];
 
 
 

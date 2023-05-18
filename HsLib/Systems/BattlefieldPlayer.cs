@@ -69,10 +69,16 @@ namespace HsLib.Systems
         /// </summary>
         public IEnumerable<ICard> Cards => _containerList.Cards;
 
-        /// <summary>
-        /// Remove inactive cards from all containers and return them.
-        /// </summary>
-        /// <returns>Cleaned cards</returns>
-        public void RemoveInactiveCards() => _containerList.CleanInactiveCards();
+        public IContainer this[Loc loc] => loc switch
+        {
+            Loc.Deck => Deck,
+            Loc.Hand => Hand,
+            Loc.Field => Field,
+            Loc.Hero => Hero,
+            Loc.Weapon => Weapon,
+            Loc.Ability => Ability,
+            Loc.Secrets => Secrets,
+            _ => throw new ArgumentException($"wrong {loc}"),
+        };
     }
 }

@@ -56,13 +56,5 @@ namespace HsLib.Types.Containers.Base
 
             throw new ArgumentException("wrong loc");
         }
-
-        public void CleanInactiveCards()
-        {
-            foreach (IContainer container in Containers)
-            {
-                container.CleanInactiveCards();
-            }
-        }
     }
 }
