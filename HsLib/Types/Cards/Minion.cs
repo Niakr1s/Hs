@@ -61,6 +61,8 @@ namespace HsLib.Types.Cards
             base.AfterContainerRemove(bf, previousPlace);
             AtksThisTurn = 0;
             AuraSource?.Deactivate(bf);
+
+            if (Dead) { Deathrattle?.UseEffect(bf, previousPlace.Pid, null)(); }
         }
 
         public override void OnTurnEnd(Battlefield bf)
