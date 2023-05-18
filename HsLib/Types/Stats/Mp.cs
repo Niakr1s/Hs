@@ -15,26 +15,11 @@
         /// Uses mana. Throws exception if not sufficient mana.
         /// </summary>
         /// <param name="mp"></param>
-        /// <exception cref="MpException"></exception>
+        /// <exception cref="ValidationException"></exception>
         public void Use(Mp mp)
         {
-            if (!IsEnough(mp)) { throw new MpException("not enough mp"); }
+            if (!IsEnough(mp)) { throw new ValidationException("not enough mp"); }
             Set(Value - mp);
-        }
-    }
-
-    public class MpException : Exception
-    {
-        public MpException() : base()
-        {
-        }
-
-        public MpException(string? message) : base(message)
-        {
-        }
-
-        public MpException(string? message, Exception? innerException) : base(message, innerException)
-        {
         }
     }
 }

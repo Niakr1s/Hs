@@ -45,19 +45,4 @@
             };
         }
     }
-
-    public class PidException : ArgumentException
-    {
-        public PidException() : base()
-        {
-        }
-
-        public PidException(string? message) : base(message)
-        {
-        }
-
-        public PidException(string? message, Exception? innerException) : base(message, innerException)
-        {
-        }
-    }
 }

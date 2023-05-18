@@ -122,7 +122,7 @@ namespace HsLib.Systems
         {
             if (loc != Loc.Hero && loc != Loc.Field)
             {
-                throw new LocException();
+                throw new ValidationException("wrong loc");
             }
 
             return Enemy.GetCard(loc, index) as IDamageable ?? throw new ArgumentException("not damageable");

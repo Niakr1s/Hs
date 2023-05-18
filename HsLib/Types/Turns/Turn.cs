@@ -21,12 +21,12 @@ namespace HsLib.Types.Turns
         /// <summary>
         /// Current Pid.
         /// </summary>
-        /// <exception cref="NotStartedException"/>
+        /// <exception cref="TurnNotStartedException"/>
         public Pid Pid
         {
             get => No switch
             {
-                <= 0 => throw new NotStartedException(),
+                <= 0 => throw new TurnNotStartedException(),
                 _ => No % 2 == 1 ? Pid.P1 : Pid.P2,
             };
         }
@@ -69,21 +69,6 @@ namespace HsLib.Types.Turns
         public bool IsActivePid(Pid pid)
         {
             return pid == Pid;
-        }
-    }
-
-    public class NotStartedException : Exception
-    {
-        public NotStartedException() : base()
-        {
-        }
-
-        public NotStartedException(string? message) : base(message)
-        {
-        }
-
-        public NotStartedException(string? message, Exception? innerException) : base(message, innerException)
-        {
         }
     }
 }

@@ -15,19 +15,4 @@
 
         Secrets = 64,
     }
-
-    public class LocException : ArgumentException
-    {
-        public LocException() : base()
-        {
-        }
-
-        public LocException(string? message) : base(message)
-        {
-        }
-
-        public LocException(string? message, Exception? innerException) : base(message, innerException)
-        {
-        }
-    }
 }

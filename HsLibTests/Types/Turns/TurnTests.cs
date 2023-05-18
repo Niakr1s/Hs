@@ -11,7 +11,7 @@ namespace HsLibTests.Types.Turns
         {
             Turn t = new Turn();
             Assert.AreEqual(0, t.No);
-            Assert.ThrowsException<NotStartedException>(() => t.Pid);
+            Assert.ThrowsException<TurnNotStartedException>(() => t.Pid);
 
             t.Next();
             Assert.AreEqual(1, t.No);
