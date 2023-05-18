@@ -11,7 +11,7 @@ namespace HsLib.Types.Cards
         {
         }
 
-        public SpellEffect SpellEffect { get; protected set; } = new SpellEffect();
+        public abstract SpellEffect SpellEffect { get; }
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {

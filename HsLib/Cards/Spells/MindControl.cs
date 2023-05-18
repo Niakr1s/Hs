@@ -14,5 +14,7 @@ namespace HsLib.Cards.Spells
                 possibleTargetsChooser: new Targets { Locs = Loc.Field, Sides = PidSide.He }
                 ));
         }
+
+        public override SpellEffect SpellEffect { get; }
     }
 }

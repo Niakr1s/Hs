@@ -42,10 +42,6 @@ namespace HsLibTests.Types.Effects.Base
 
             List<(SpellEffect, ICard?, bool)> testCases = new()
             {
-                (new (), nullMinion, true),
-                (new (), validMinion, false),
-                (new (), invalidMinion, false),
-
                 // now validMinion is in possible targets
                 (new (havePossibleTargetsEffect), nullMinion, false),
                 (new (havePossibleTargetsEffect), validMinion, true),

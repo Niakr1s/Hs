@@ -7,7 +7,7 @@ namespace HsLib.Types.Effects.Base
 {
     public class SpellEffect : BattlecryEffect
     {
-        public SpellEffect(IActiveEffect<Pid>? activeEffect = null) : base(activeEffect)
+        public SpellEffect(IActiveEffect<Pid> activeEffect) : base(activeEffect)
         {
         }
 
