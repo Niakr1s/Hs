@@ -10,15 +10,18 @@ namespace HsLib.Types.Containers
         public ContainerList(IEnumerable<IContainer> containers)
         {
             _containers = containers.ToList();
-
-            ForEach(c => c.CollectionChanged += ConnectEvents);
         }
 
-        public event NotifyCollectionChangedEventHandler? CollectionChanged;
-
-        private void ConnectEvents(object? sender, NotifyCollectionChangedEventArgs e)
+        public event NotifyCollectionChangedEventHandler? CollectionChanged
         {
-            CollectionChanged?.Invoke(sender, e);
+            add
+            {
+                _containers.ForEach(c => c.CollectionChanged += value);
+            }
+            remove
+            {
+                _containers.ForEach(c => c.CollectionChanged -= value);
+            }
         }
 
         private readonly List<IContainer> _containers;

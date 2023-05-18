@@ -22,7 +22,7 @@ namespace HsLib.Systems
         {
             // todo: return action
             int dmg = defender.GetDamage(value);
-            Bf.Invoke(this, new BattleGotDamageEventArgs(defender, dmg));
+            //Bf.Invoke(this, new BattleGotDamageEventArgs(defender, dmg));
             return dmg;
         }
     }

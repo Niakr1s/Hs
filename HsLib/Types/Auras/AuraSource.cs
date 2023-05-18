@@ -30,13 +30,15 @@ namespace HsLib.Types.Auras
         protected void Start(Battlefield bf)
         {
             bf.CollectionChanged += Bf_CollectionChanged;
-            CleanAuras();
+
             _bf = bf;
+            ReapplyAuras();
         }
 
         protected void Stop(Battlefield bf)
         {
             bf.CollectionChanged -= Bf_CollectionChanged;
+
             CleanAuras();
             _bf = null;
         }
@@ -59,7 +61,7 @@ namespace HsLib.Types.Auras
         /// <exception cref="InvalidOperationException"></exception>
         private void ReapplyAuras()
         {
-            if (_bf is null) { throw new InvalidOperationException("bf is null"); }
+            if (_bf is null) { return; }
             if (Owner.PlaceInContainer is null) { throw new InvalidOperationException("owner doesn't in container"); }
 
             foreach (ICard card in _cardsChooser.ChooseCards(Owner.PlaceInContainer, _bf.Cards))

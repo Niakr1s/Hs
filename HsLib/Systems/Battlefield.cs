@@ -27,21 +27,32 @@ namespace HsLib.Systems
             MeleeService = new MeleeService(this);
             CleanService = new CleanService(this);
 
-            new EventConnector(this).Connect();
+            ConnectEvents();
         }
 
         public Battlefield(CardId p1, CardId p2) : this(new StartingDeck(p1), new StartingDeck(p2))
         {
         }
 
-        public event EventHandler<BattlefieldEventArgs>? Event;
-
-        public event NotifyCollectionChangedEventHandler? CollectionChanged;
-
-        internal void Invoke(object? sender, EventArgs e)
+        public event EventHandler<TurnEventArgs>? TurnEvent
         {
-            Event?.Invoke(sender, new BattlefieldEventArgs(this, e));
+            add { Turn.Event += value; }
+            remove { Turn.Event -= value; }
         }
+
+        public event NotifyCollectionChangedEventHandler? CollectionChanged
+        {
+            add
+            {
+                Array.ForEach(Enum.GetValues<Pid>(), p => this[p].CollectionChanged += value);
+            }
+            remove
+            {
+                Array.ForEach(Enum.GetValues<Pid>(), p => this[p].CollectionChanged -= value);
+            }
+        }
+
+        public event EventHandler<BattleEventArgs>? BattleEvent;
 
         public Turn Turn { get; }
 
