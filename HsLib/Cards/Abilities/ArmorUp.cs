@@ -1,5 +1,4 @@
-﻿using HsLib.Interfaces;
-using HsLib.Types;
+﻿using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.CardsChoosers;
 using HsLib.Types.Effects;
@@ -12,9 +11,9 @@ namespace HsLib.Cards.Abilities
         public ArmorUp() : base(2)
         {
             GetArmorEffect effect = new() { Armor = 2 };
-            AbilityEffect = new ActiveEffect<Pid>(effect, targetsChooser: new HeroChooser());
+            AbilityEffect = new(new ActiveEffect<Pid>(effect, targetsChooser: new HeroChooser()));
         }
 
-        public override IActiveEffect<Pid> AbilityEffect { get; }
+        public override AbilityEffect AbilityEffect { get; }
     }
 }

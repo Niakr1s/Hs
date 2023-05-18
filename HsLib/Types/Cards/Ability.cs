@@ -1,5 +1,6 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Systems;
+using HsLib.Types.Effects.Base;
 
 namespace HsLib.Types.Cards
 {
@@ -9,7 +10,7 @@ namespace HsLib.Types.Cards
         {
         }
 
-        public abstract IActiveEffect<Pid> AbilityEffect { get; }
+        public abstract AbilityEffect AbilityEffect { get; }
 
         public bool EffectUsedThisTurn { get; private set; }
 

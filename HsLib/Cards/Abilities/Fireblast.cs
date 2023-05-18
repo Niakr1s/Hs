@@ -1,5 +1,4 @@
-﻿using HsLib.Interfaces;
-using HsLib.Types;
+﻿using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;
 using HsLib.Types.Effects.Base;
@@ -13,9 +12,9 @@ namespace HsLib.Cards.Abilities
         {
             DealDamageEffect effect = new() { Damage = 1 };
             Targets possibleTargets = new() { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He };
-            AbilityEffect = new ActiveEffect<Pid>(effect, possibleTargetsChooser: possibleTargets);
+            AbilityEffect = new(new ActiveEffect<Pid>(effect, possibleTargetsChooser: possibleTargets));
         }
 
-        public override IActiveEffect<Pid> AbilityEffect { get; }
+        public override AbilityEffect AbilityEffect { get; }
     }
 }
