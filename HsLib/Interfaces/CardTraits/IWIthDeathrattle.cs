@@ -1,9 +1,9 @@
-﻿using HsLib.Types;
+﻿using HsLib.Types.Effects.Base;
 
 namespace HsLib.Interfaces.CardTraits
 {
     public interface IWithDeathrattle
     {
-        IActiveEffect<Pid>? Deathrattle { get; }
+        DeathrattleEffect? Deathrattle { get; }
     }
 }

@@ -12,7 +12,7 @@ namespace HsLib.Cards.Minions
         {
             GiveStatBuffEffect<int> effect = new(c => ((IWithAtk)c).Atk) { Value = 2, TillEndOfTurn = true };
             Targets possibleTargets = new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He };
-            Battlecry.Effect = new ActiveEffect<Pid>(effect, possibleTargetsChooser: possibleTargets);
+            Battlecry = new(new ActiveEffect<Pid>(effect, possibleTargetsChooser: possibleTargets));
         }
     }
 }

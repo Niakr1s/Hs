@@ -10,7 +10,7 @@ namespace HsLib.Types.Effects.Base
             Effect = pidEffect;
         }
 
-        public IActiveEffect<Pid>? Effect { get; set; }
+        public IActiveEffect<Pid>? Effect { get; protected set; }
 
         public IEnumerable<ICard> GetPossibleTargets(Battlefield bf, Pid ownerPid)
         {
