@@ -1,5 +1,7 @@
-﻿using HsLib.Types.Cards;
+﻿using HsLib.Types;
+using HsLib.Types.Cards;
 using HsLib.Types.Effects;
+using HsLib.Types.Effects.Base;
 
 namespace HsLib.Cards.Spells
 {
@@ -7,7 +9,10 @@ namespace HsLib.Cards.Spells
     {
         public MindControl() : base(10)
         {
-            SpellEffect.Effect = new MindControlActiveEffect();
+            SpellEffect.Effect = new ActiveEffect<Pid>(
+                new MindControlEffect(),
+                possibleTargetsChooser: new Targets { Locs = Loc.Field, Sides = PidSide.He }
+                );
         }
     }
 }
