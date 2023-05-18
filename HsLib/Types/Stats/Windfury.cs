@@ -1,6 +1,4 @@
-﻿using HsLib.Types.Stats.Base;
-
-namespace HsLib.Types.Stats
+﻿namespace HsLib.Types.Stats
 {
     public class Windfury : BoolStat
     {

@@ -1,6 +1,6 @@
-﻿using HsLib.Cards.Abilities;
-using HsLib.Cards.Heroes;
-using HsLib.Cards.Minions;
+﻿using HsLib.KnownCards.Abilities;
+using HsLib.KnownCards.Heroes;
+using HsLib.KnownCards.Minions;
 
 
 namespace HsLib.Types.Cards

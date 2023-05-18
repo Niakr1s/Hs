@@ -1,5 +1,5 @@
-﻿using HsLib.Interfaces.CardTraits;
-using HsLib.Systems;
+﻿using HsLib.Systems;
+using HsLib.Types.Places;
 using HsLib.Types.Stats;
 
 

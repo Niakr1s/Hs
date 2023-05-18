@@ -1,6 +1,6 @@
-﻿using HsLib.Interfaces;
-using HsLib.Systems;
-using HsLib.Types.Stats.Base;
+﻿using HsLib.Systems;
+using HsLib.Types.Cards;
+using HsLib.Types.Stats;
 
 namespace HsLib.Types.Auras
 {

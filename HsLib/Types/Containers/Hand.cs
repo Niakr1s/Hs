@@ -1,8 +1,6 @@
-﻿
-using HsLib.Interfaces;
-using HsLib.Interfaces.CardTraits;
-using HsLib.Systems;
-using HsLib.Types.Containers.Base;
+﻿using HsLib.Systems;
+using HsLib.Types.Cards;
+using HsLib.Types.Places;
 using HsLib.Types.Stats;
 
 namespace HsLib.Types.Containers

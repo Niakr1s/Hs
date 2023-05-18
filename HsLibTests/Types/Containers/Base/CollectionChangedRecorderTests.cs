@@ -1,4 +1,4 @@
-﻿using HsLib.Types.Containers.Base;
+﻿using HsLib.Types.Containers;
 using System.Collections.ObjectModel;
 
 namespace HsLibTests.Types.Containers.Base

@@ -1,4 +1,4 @@
-﻿using HsLib.Interfaces;
+﻿using HsLib.Types.Cards;
 
 namespace HsLib.Types.CardsChoosers
 {

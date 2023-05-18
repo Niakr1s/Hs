@@ -1,6 +1,6 @@
-﻿using HsLib.Interfaces;
-using HsLib.Types;
+﻿using HsLib.Types.Cards;
 using HsLib.Types.Events;
+using HsLib.Types.Places;
 using System.Collections.Specialized;
 
 namespace HsLib.Systems

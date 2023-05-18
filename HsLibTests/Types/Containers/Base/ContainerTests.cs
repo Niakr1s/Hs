@@ -1,8 +1,8 @@
-﻿using HsLib.Cards.Minions;
-using HsLib.Interfaces;
+﻿using HsLib.KnownCards.Minions;
 using HsLib.Systems;
 using HsLib.Types.Cards;
-using HsLib.Types.Containers.Base;
+using HsLib.Types.Containers;
+using HsLib.Types.Places;
 using HsLibTests.Helpers;
 
 namespace HsLibTests.Types.Containers.Base
@@ -37,7 +37,7 @@ namespace HsLibTests.Types.Containers.Base
         [TestMethod()]
         public void Constructor_StartCardsTest()
         {
-            Container<Minion> container = new(_bf, new HsLib.Types.Place(HsLib.Types.Pid.P1, HsLib.Types.Loc.Field), startCards: _initCards);
+            Container<Minion> container = new(_bf, new Place(Pid.P1, Loc.Field), startCards: _initCards);
             Assert.AreEqual(_initCards.Count, container.Count);
             ContainerTestHelpers.AssertCardsHaveValidPlaces(container);
         }
@@ -46,7 +46,7 @@ namespace HsLibTests.Types.Containers.Base
         public void Constructor_LimitTest()
         {
             const int limit = 2;
-            Container<Minion> container = new(_bf, new HsLib.Types.Place(HsLib.Types.Pid.P1, HsLib.Types.Loc.Field), limit: limit);
+            Container<Minion> container = new(_bf, new Place(Pid.P1, Loc.Field), limit: limit);
 
             for (int i = 0; i < limit; i++)
             {

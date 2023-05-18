@@ -1,7 +1,7 @@
-﻿using HsLib.Cards.Abilities;
+﻿using HsLib.KnownCards.Abilities;
 using HsLib.Systems;
 using HsLib.Types.Cards;
-using HsLib.Types.Containers.Base;
+using HsLib.Types.Containers;
 using HsLibTests.Helpers;
 
 namespace HsLibTests.Types.Containers.Base

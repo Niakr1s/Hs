@@ -1,10 +1,9 @@
-﻿using HsLib.Cards.Minions;
-using HsLib.Cards.Weapons;
-using HsLib.Interfaces;
+﻿using HsLib.KnownCards.Minions;
+using HsLib.KnownCards.Weapons;
 using HsLib.Systems;
-using HsLib.Types;
 using HsLib.Types.Cards;
-using HsLib.Types.Containers.Base;
+using HsLib.Types.Containers;
+using HsLib.Types.Places;
 using HsLibTests.Helpers;
 
 namespace HsLibTests.Systems

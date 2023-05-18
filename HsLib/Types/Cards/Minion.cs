@@ -1,10 +1,8 @@
-﻿using HsLib.Interfaces;
-using HsLib.Interfaces.CardTraits;
-using HsLib.Systems;
-using HsLib.Types.Auras.Base;
-using HsLib.Types.Effects.Base;
+﻿using HsLib.Systems;
+using HsLib.Types.Auras;
+using HsLib.Types.Effects;
+using HsLib.Types.Places;
 using HsLib.Types.Stats;
-using HsLib.Types.Stats.Base;
 
 namespace HsLib.Types.Cards
 {

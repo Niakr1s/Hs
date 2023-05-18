@@ -1,6 +1,4 @@
-﻿using HsLib.Interfaces.CardTraits;
-
-namespace HsLib.Types.Cards
+﻿namespace HsLib.Types.Cards
 {
     public class StartingDeck
     {

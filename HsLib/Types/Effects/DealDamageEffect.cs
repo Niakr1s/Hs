@@ -1,7 +1,5 @@
-﻿
-using HsLib.Interfaces;
-using HsLib.Interfaces.CardTraits;
-using HsLib.Systems;
+﻿using HsLib.Systems;
+using HsLib.Types.Cards;
 
 namespace HsLib.Types.Effects
 {

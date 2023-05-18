@@ -1,10 +1,11 @@
-﻿using HsLib.Cards.Abilities;
-using HsLib.Cards.Heroes;
-using HsLib.Cards.Minions;
-using HsLib.Cards.Weapons;
-using HsLib.Interfaces;
+﻿using HsLib.KnownCards.Abilities;
+using HsLib.KnownCards.Heroes;
+using HsLib.KnownCards.Minions;
+using HsLib.KnownCards.Weapons;
 using HsLib.Types;
+using HsLib.Types.Cards;
 using HsLib.Types.CardsChoosers;
+using HsLib.Types.Places;
 
 namespace HsLibTests.Types.CardsChoosers
 {

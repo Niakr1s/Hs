@@ -1,5 +1,5 @@
-﻿using HsLib.Interfaces;
-using HsLib.Types.Containers.Base;
+﻿using HsLib.Types.Cards;
+using HsLib.Types.Containers;
 
 namespace HsLibTests.Types.Containers.Base
 {

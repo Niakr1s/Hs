@@ -1,6 +1,4 @@
-﻿using HsLib.Interfaces;
-
-namespace HsLib.Functions
+﻿namespace HsLib.Functions
 {
     internal static class Do
     {

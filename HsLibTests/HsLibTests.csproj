@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <Using Include="HsLib.Exceptions" />
+    <Using Include="HsLibTests.Helpers" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 

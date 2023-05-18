@@ -1,9 +1,8 @@
-﻿using HsLib.Cards.Weapons;
-using HsLib.Interfaces;
-using HsLib.Types;
+﻿using HsLib.KnownCards.Weapons;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
-using HsLib.Types.Containers.Base;
+using HsLib.Types.Places;
+using HsLib.Types.Player;
 using HsLib.Types.Stats;
 using System.Collections.Specialized;
 

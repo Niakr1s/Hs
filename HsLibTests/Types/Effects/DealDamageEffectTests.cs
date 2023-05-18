@@ -1,4 +1,4 @@
-﻿using HsLib.Cards.Minions;
+﻿using HsLib.KnownCards.Minions;
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;

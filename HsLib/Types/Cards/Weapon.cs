@@ -1,7 +1,6 @@
-﻿using HsLib.Interfaces;
-using HsLib.Interfaces.CardTraits;
-using HsLib.Systems;
-using HsLib.Types.Effects.Base;
+﻿using HsLib.Systems;
+using HsLib.Types.Effects;
+using HsLib.Types.Places;
 using HsLib.Types.Stats;
 
 namespace HsLib.Types.Cards

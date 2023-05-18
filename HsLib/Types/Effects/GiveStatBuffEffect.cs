@@ -1,9 +1,8 @@
 ﻿using HsLib.Functions;
-using HsLib.Interfaces;
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Events;
-using HsLib.Types.Stats.Base;
+using HsLib.Types.Stats;
 
 namespace HsLib.Types.Effects
 {
