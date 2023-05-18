@@ -1,6 +1,6 @@
 ﻿using HsLib.Types.Auras;
 using HsLib.Types.Cards;
-using HsLib.Types.CardsChoosers;
+using HsLib.Types.Choosers;
 
 namespace HsLib.KnownCards.Minions
 {

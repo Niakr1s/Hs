@@ -1,5 +1,5 @@
 ﻿using HsLib.Types.Cards;
-using HsLib.Types.CardsChoosers;
+using HsLib.Types.Choosers;
 using HsLib.Types.Effects;
 using HsLib.Types.Places;
 

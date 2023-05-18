@@ -1,7 +1,7 @@
 ﻿using HsLib.Interfaces;
 using HsLib.Systems;
 using HsLib.Types.Cards;
-using HsLib.Types.CardsChoosers;
+using HsLib.Types.Choosers;
 using HsLib.Types.Places;
 
 namespace HsLib.Types.Effects
@@ -16,8 +16,8 @@ namespace HsLib.Types.Effects
         /// <param name="targetsChooser">Chooses targets for effect.
         /// If provided, will ignore target in <see cref="UseEffect(Battlefield, PlaceInContainer, ICard?)"/> and use it instead.</param>
         public ActiveEffect(IEffect effect,
-            ICardsChooser<TOwner>? possibleTargetsChooser = null,
-            ICardsChooser<TOwner>? targetsChooser = null)
+            IChooser<TOwner>? possibleTargetsChooser = null,
+            IChooser<TOwner>? targetsChooser = null)
         {
             _effect = effect;
             _targetsChooser = targetsChooser;
@@ -25,8 +25,8 @@ namespace HsLib.Types.Effects
         }
 
         protected readonly IEffect _effect;
-        private readonly ICardsChooser<TOwner>? _targetsChooser;
-        private readonly ICardsChooser<TOwner>? _possibleTargetsChooser;
+        private readonly IChooser<TOwner>? _targetsChooser;
+        private readonly IChooser<TOwner>? _possibleTargetsChooser;
 
         public IEnumerable<ICard> GetPossibleTargets(Battlefield bf, TOwner owner)
         {

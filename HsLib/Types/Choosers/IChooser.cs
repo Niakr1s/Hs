@@ -1,8 +1,8 @@
 ﻿using HsLib.Types.Cards;
 
-namespace HsLib.Types.CardsChoosers
+namespace HsLib.Types.Choosers
 {
-    public interface ICardsChooser<TOwner>
+    public interface IChooser<TOwner>
     {
         IEnumerable<ICard> ChooseCards(TOwner owner, IEnumerable<ICard> cards);
     }

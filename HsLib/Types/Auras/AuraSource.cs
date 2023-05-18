@@ -1,6 +1,6 @@
 ﻿using HsLib.Systems;
 using HsLib.Types.Cards;
-using HsLib.Types.CardsChoosers;
+using HsLib.Types.Choosers;
 using HsLib.Types.Places;
 using HsLib.Types.Stats;
 using System.Collections.Specialized;
@@ -9,7 +9,7 @@ namespace HsLib.Types.Auras
 {
     public class AuraSource : IAuraSource
     {
-        public AuraSource(ICard owner, IAuraEffect auraEffect, ICardsChooser<PlaceInContainer> cardsChooser)
+        public AuraSource(ICard owner, IAuraEffect auraEffect, IChooser<PlaceInContainer> cardsChooser)
         {
             Owner = owner;
             _auraEffect = auraEffect;
@@ -23,7 +23,7 @@ namespace HsLib.Types.Auras
         private Battlefield? _bf;
 
         private readonly IAuraEffect _auraEffect;
-        private readonly ICardsChooser<PlaceInContainer> _cardsChooser;
+        private readonly IChooser<PlaceInContainer> _cardsChooser;
 
         private readonly List<IEnchantHandler> _appliedAuras = new();
 

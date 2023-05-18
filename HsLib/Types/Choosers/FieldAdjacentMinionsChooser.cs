@@ -1,9 +1,9 @@
 ﻿using HsLib.Types.Cards;
 using HsLib.Types.Places;
 
-namespace HsLib.Types.CardsChoosers
+namespace HsLib.Types.Choosers
 {
-    public class FieldAdjacentMinionsChooser : ICardsChooser<PlaceInContainer>
+    public class FieldAdjacentMinionsChooser : IChooser<PlaceInContainer>
     {
         public bool ExcludeLeft { get; init; }
 

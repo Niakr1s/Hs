@@ -1,15 +1,15 @@
 ﻿using HsLib.Types.Cards;
 
-namespace HsLib.Types.CardsChoosers
+namespace HsLib.Types.Choosers
 {
-    public class CardsChooser<TOwner> : ICardsChooser<TOwner>
+    public class Chooser<TOwner> : IChooser<TOwner>
     {
-        public CardsChooser(CardsChooserFunc<TOwner> cardChooserFunc)
+        public Chooser(ChooserFunc<TOwner> cardChooserFunc)
         {
             _cardChooserFunc = cardChooserFunc;
         }
 
-        private readonly CardsChooserFunc<TOwner> _cardChooserFunc;
+        private readonly ChooserFunc<TOwner> _cardChooserFunc;
 
         public IEnumerable<ICard> ChooseCards(TOwner owner, IEnumerable<ICard> cards)
         {

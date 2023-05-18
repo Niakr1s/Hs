@@ -1,0 +1,14 @@
+﻿using HsLib.Types.Cards;
+
+namespace HsLib.Types.Choosers
+{
+    public delegate IEnumerable<ICard> ChooserFunc<TOwner>(TOwner owner, IEnumerable<ICard> cards);
+
+    public static class CardsChooserFuncExtensions
+    {
+        public static IChooser<TOwner> ToCardsChooser<TOwner>(this ChooserFunc<TOwner> f)
+        {
+            return new Chooser<TOwner>(f);
+        }
+    }
+}

@@ -1,11 +1,11 @@
 ﻿using HsLib.Types.Cards;
 using HsLib.Types.Places;
 
-namespace HsLib.Types.CardsChoosers
+namespace HsLib.Types.Choosers
 {
-    public class HeroChooser : CardsChooser<Pid>
+    public class HeroChooser : Chooser<Pid>
     {
-        private static readonly CardsChooserFunc<Pid> _f =
+        private static readonly ChooserFunc<Pid> _f =
             (owner, cards) => cards
             .Where(c => c is Hero && c.PlaceInContainer!.Pid == owner && c.PlaceInContainer!.Loc == Loc.Hero);
 

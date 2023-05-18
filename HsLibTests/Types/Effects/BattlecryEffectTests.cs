@@ -1,7 +1,7 @@
 ﻿using HsLib.KnownCards.Minions;
 using HsLib.Systems;
 using HsLib.Types.Cards;
-using HsLib.Types.CardsChoosers;
+using HsLib.Types.Choosers;
 using HsLib.Types.Effects;
 using HsLib.Types.Places;
 using HsLibTests.Helpers;

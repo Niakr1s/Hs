@@ -1,9 +1,9 @@
 ﻿using HsLib.Types.Cards;
 using HsLib.Types.Places;
 
-namespace HsLib.Types.CardsChoosers
+namespace HsLib.Types.Choosers
 {
-    public readonly struct Targets : ICardsChooser<PlaceInContainer>, ICardsChooser<Pid>
+    public readonly struct Targets : IChooser<PlaceInContainer>, IChooser<Pid>
     {
         public Loc? Locs { get; init; }
 

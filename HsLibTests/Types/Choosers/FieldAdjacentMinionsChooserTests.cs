@@ -1,11 +1,10 @@
 ﻿using HsLib.KnownCards.Minions;
 using HsLib.Systems;
 using HsLib.Types.Cards;
-using HsLib.Types.CardsChoosers;
+using HsLib.Types.Choosers;
 using HsLib.Types.Places;
-using HsLibTests.Helpers;
 
-namespace HsLibTests.Types.CardsChoosers
+namespace HsLibTests.Types.Choosers
 {
     [TestClass()]
     public class FieldAdjacentMinionsChooserTests

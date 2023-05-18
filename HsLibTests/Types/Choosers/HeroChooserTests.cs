@@ -4,10 +4,10 @@ using HsLib.KnownCards.Minions;
 using HsLib.KnownCards.Weapons;
 using HsLib.Types;
 using HsLib.Types.Cards;
-using HsLib.Types.CardsChoosers;
+using HsLib.Types.Choosers;
 using HsLib.Types.Places;
 
-namespace HsLibTests.Types.CardsChoosers
+namespace HsLibTests.Types.Choosers
 {
     [TestClass()]
     public class HeroChooserTests
