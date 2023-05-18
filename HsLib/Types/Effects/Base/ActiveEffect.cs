@@ -4,7 +4,7 @@ using HsLib.Systems;
 
 namespace HsLib.Types.Effects.Base
 {
-    public class ActiveEffect<TOwner> : IActiveEffect<TOwner>
+    public abstract class ActiveEffect<TOwner> : IActiveEffect<TOwner>
     {
         /// <summary>
         /// Default constructor.
@@ -64,5 +64,7 @@ namespace HsLib.Types.Effects.Base
             }
             return () => effectActions?.ForEach(a => a());
         }
+
+        public abstract void ValidateEffectTarget(Battlefield bf, TOwner owner, ICard? effectTarget);
     }
 }

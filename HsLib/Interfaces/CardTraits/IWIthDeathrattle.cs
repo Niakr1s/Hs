@@ -4,6 +4,6 @@ namespace HsLib.Interfaces.CardTraits
 {
     public interface IWithDeathrattle
     {
-        DeathrattleEffect? Deathrattle { get; }
+        DeathrattleEffect? DeathrattleEffect { get; }
     }
 }

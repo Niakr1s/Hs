@@ -8,7 +8,7 @@ using HsLib.Types.Stats.Base;
 
 namespace HsLib.Types.Cards
 {
-    public abstract class Minion : Card, IAttacker, IDamageable, IMortal, IWithDeathrattle, IPlayableFromHand
+    public abstract class Minion : Card, IAttacker, IDamageable, IMortal, IWithDeathrattle, IPlayableFromHand, IWithBattlecry
     {
         protected Minion(int mp, int atk, int hp) : base(mp)
         {
@@ -28,11 +28,11 @@ namespace HsLib.Types.Cards
         public BoolStat DivineShield { get; init; } = new BoolStat(false);
         public BoolStat Stealth { get; init; } = new BoolStat(false);
 
-        public BattlecryEffect? Battlecry { get; protected set; }
+        public BattlecryEffect? BattlecryEffect { get; protected set; }
 
         public AuraSource? AuraSource { get; protected set; }
 
-        public DeathrattleEffect? Deathrattle { get; protected set; }
+        public DeathrattleEffect? DeathrattleEffect { get; protected set; }
 
         public bool Dead => Hp <= 0;
 
@@ -62,7 +62,7 @@ namespace HsLib.Types.Cards
             AtksThisTurn = 0;
             AuraSource?.Deactivate(bf);
 
-            if (Dead) { Deathrattle?.ActivateDeathrattle(bf, previousPlace.Pid)(); }
+            if (Dead) { DeathrattleEffect?.ActivateDeathrattle(bf, previousPlace.Pid)(); }
         }
 
         public override void OnTurnEnd(Battlefield bf)
@@ -97,30 +97,14 @@ namespace HsLib.Types.Cards
             Action move = bf[PlaceInContainer!.Pid].Hand.MoveToContainer(PlaceInContainer.Index, bf[PlaceInContainer.Pid].Field,
                 canBurn: false, toIndex: fieldIndex, transformTo: transformTo);
 
-            PlayFromHandValidateBattlecry(bf, effectTarget);
-            Action? battlectyAction = Battlecry?.UseEffect(bf, PlaceInContainer!.Pid, effectTarget);
+            ActiveEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, PlaceInContainer!.Pid, effectTarget);
+            Action? battlectyAction = BattlecryEffect?.UseEffect(bf, PlaceInContainer!.Pid, effectTarget);
 
             return () =>
             {
                 battlectyAction?.Invoke();
                 move();
             };
-        }
-
-        /// <summary>
-        /// Validates battlecry.
-        /// </summary>
-        /// <param name="bf"></param>
-        /// <param name="effectTarget"></param>
-        /// <exception cref="ValidationException"></exception>
-        private void PlayFromHandValidateBattlecry(Battlefield bf, ICard? effectTarget)
-        {
-            Battlecry?.ValidatePlayFromHandEffectTarget(bf, PlaceInContainer!.Pid, effectTarget);
-
-            if (Battlecry is null && effectTarget is not null)
-            {
-                throw new ValidationException("minion has no battlecry, but target is provided");
-            }
         }
 
         public override bool ShouldBeRemovedFromCurrentContainer()

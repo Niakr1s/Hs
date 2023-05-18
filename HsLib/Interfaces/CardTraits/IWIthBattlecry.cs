@@ -1,7 +1,9 @@
-﻿namespace HsLib.Interfaces.CardTraits
+﻿using HsLib.Types.Effects.Base;
+
+namespace HsLib.Interfaces.CardTraits
 {
     public interface IWithBattlecry
     {
-        IPlayableFromHandEffect Battlecry { get; }
+        BattlecryEffect? BattlecryEffect { get; }
     }
 }

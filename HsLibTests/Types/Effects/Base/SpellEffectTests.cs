@@ -24,7 +24,7 @@ namespace HsLibTests.Types.Effects.Base
         }
 
         [TestMethod()]
-        public void ValidatePlayFromHandEffectTargetTest()
+        public void ValidateEffectTargetTest()
         {
             Minion? nullMinion = null;
 
@@ -36,28 +36,32 @@ namespace HsLibTests.Types.Effects.Base
 
             Targets validTargets = new Targets() { Sides = PidSide.He, Locs = Loc.Field };
             // valid effect to target minion
-            ActiveEffect<Pid> havePossibleTargetsEffect = new(new DealDamageEffect(), validTargets);
+            SpellEffect havePossibleTargetsEffect = new(new DealDamageEffect(), validTargets);
             // invalid effect to target minion
-            ActiveEffect<Pid> noPossibleTargetsEffect = new(new DealDamageEffect());
+            SpellEffect noPossibleTargetsEffect = new(new DealDamageEffect());
 
-            List<(SpellEffect, ICard?, bool)> testCases = new()
+            List<(SpellEffect?, ICard?, bool)> testCases = new()
             {
+                (null, nullMinion, true),
+                (null, validMinion, false),
+                (null, invalidMinion, false),
+
                 // now validMinion is in possible targets
-                (new (havePossibleTargetsEffect), nullMinion, false),
-                (new (havePossibleTargetsEffect), validMinion, true),
-                (new (havePossibleTargetsEffect), invalidMinion, false),
+                (havePossibleTargetsEffect, nullMinion, false),
+                (havePossibleTargetsEffect, validMinion, true),
+                (havePossibleTargetsEffect, invalidMinion, false),
 
                 // now validMinion is in not possible targets
-                (new (noPossibleTargetsEffect), nullMinion, true),
-                (new (noPossibleTargetsEffect), validMinion, false),
-                (new (noPossibleTargetsEffect), invalidMinion, false),
+                (noPossibleTargetsEffect, nullMinion, true),
+                (noPossibleTargetsEffect, validMinion, false),
+                (noPossibleTargetsEffect, invalidMinion, false),
             };
 
             for (int i = 0; i < testCases.Count; i++)
             {
-                (SpellEffect effect, ICard? target, bool shouldPass) = testCases[i];
+                (SpellEffect? effect, ICard? target, bool shouldPass) = testCases[i];
 
-                void doTest() => effect.ValidatePlayFromHandEffectTarget(_bf, Pid.P1, target);
+                void doTest() => ActiveEffectValidator.ValidateEffectTarget(effect, _bf, Pid.P1, target);
 
                 if (shouldPass)
                 {

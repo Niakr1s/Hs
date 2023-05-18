@@ -2,7 +2,6 @@
 using HsLib.Types;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;
-using HsLib.Types.Effects.Base;
 
 namespace HsLib.Cards.Minions
 {
@@ -12,7 +11,7 @@ namespace HsLib.Cards.Minions
         {
             GiveStatBuffEffect<int> effect = new(c => ((IWithAtk)c).Atk) { Value = 2, TillEndOfTurn = true };
             Targets possibleTargets = new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He };
-            Battlecry = new(new ActiveEffect<Pid>(effect, possibleTargetsChooser: possibleTargets));
+            BattlecryEffect = new(effect, possibleTargetsChooser: possibleTargets);
         }
     }
 }

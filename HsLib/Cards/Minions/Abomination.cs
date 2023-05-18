@@ -10,7 +10,7 @@ namespace HsLib.Cards.Minions
         {
             DealDamageEffect effect = new() { Damage = 2 };
             Targets targetsChooser = new Targets { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He, };
-            Deathrattle = new(effect, targetsChooser);
+            DeathrattleEffect = new(effect, targetsChooser);
         }
     }
 }

@@ -5,16 +5,18 @@ using HsLib.Systems;
 
 namespace HsLib.Types.Effects.Base
 {
-    public class SpellEffect : BattlecryEffect
+    public class SpellEffect : PlayerEffect
     {
-        public SpellEffect(IActiveEffect<Pid> activeEffect) : base(activeEffect)
+        public SpellEffect(IEffect effect,
+            ICardsChooser<Pid>? possibleTargetsChooser = null, ICardsChooser<Pid>? targetsChooser = null)
+            : base(effect, possibleTargetsChooser, targetsChooser)
         {
         }
 
-        public override void ValidatePlayFromHandEffectTarget(Battlefield bf, Pid ownerPid, ICard? effectTarget)
+        public override void ValidateEffectTarget(Battlefield bf, Pid ownerPid, ICard? effectTarget)
         {
-            base.ValidatePlayFromHandEffectTarget(bf, ownerPid, effectTarget);
-            if (Effect?.GetPossibleTargets(bf, ownerPid).Any() == true && effectTarget is null)
+            base.ValidateEffectTarget(bf, ownerPid, effectTarget);
+            if (GetPossibleTargets(bf, ownerPid).Any() && effectTarget is null)
             {
                 throw new ValidationException("spell must have any effect target even though it have none possible targets");
             }
