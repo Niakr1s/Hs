@@ -1,5 +1,4 @@
-﻿using HsLib.Functions;
-using HsLib.Types.Cards;
+﻿using HsLib.Types.Cards;
 using HsLib.Types.Containers;
 using HsLib.Types.Events;
 using HsLib.Types.Places;
@@ -8,7 +7,7 @@ using System.Collections.Specialized;
 
 namespace HsLib.Systems
 {
-    public partial class Battlefield : IWithEvent<BattlefieldEventArgs>, INotifyCollectionChanged
+    public partial class Battlefield : INotifyCollectionChanged
     {
         public Battlefield(StartingDeck p1, StartingDeck p2)
         {

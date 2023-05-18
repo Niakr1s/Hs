@@ -1,10 +1,9 @@
-﻿using HsLib.Functions;
-using HsLib.Types.Events;
+﻿using HsLib.Types.Events;
 using HsLib.Types.Places;
 
 namespace HsLib.Types.Turns
 {
-    public class Turn : IWithEvent<TurnEventArgs>
+    public class Turn
     {
         /// <summary>
         /// Starts with 1.

@@ -2,18 +2,27 @@
 {
     internal static class Do
     {
-        public static void Once<TEventArgs>(IWithEvent<TEventArgs> source, Predicate<TEventArgs> predicate, Action action)
+        /// <summary>
+        /// Does action once, till when predicate pass.
+        /// </summary>
+        /// <typeparam name="TEventArgs"></typeparam>
+        /// <param name="sub">example: h => bf.Turn.Event += h</param>
+        /// <param name="unsub">example: h => bf.Turn.Event -= h</param>
+        /// <param name="predicate"></param>
+        /// <param name="action"></param>
+        public static void Once<TEventArgs>(Action<EventHandler<TEventArgs>> sub, Action<EventHandler<TEventArgs>> unsub,
+            Predicate<TEventArgs> predicate, Action action)
             where TEventArgs : EventArgs
         {
-            void Sub(object? sender, TEventArgs e)
+            void Subscription(object? sender, TEventArgs e)
             {
                 if (predicate(e))
                 {
                     action();
-                    source.Event -= Sub;
+                    unsub(Subscription);
                 }
             }
-            source.Event += Sub;
+            sub(Subscription);
         }
     }
 }

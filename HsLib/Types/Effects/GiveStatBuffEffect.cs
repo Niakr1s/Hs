@@ -29,7 +29,8 @@ namespace HsLib.Types.Effects
                 Enchant<T> buff = _statChooser(target).AddBuff(Value);
                 if (TillEndOfTurn)
                 {
-                    Do.Once(bf, e => e.EventArgs is TurnEndEventArgs, () => buff.Active = false);
+                    Do.Once<TurnEventArgs>(h => bf.Turn.Event += h, h => bf.Turn.Event -= h,
+                        e => e is TurnEndEventArgs, () => buff.Active = false);
                 }
             };
         }
