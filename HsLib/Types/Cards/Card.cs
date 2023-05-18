@@ -24,6 +24,8 @@ namespace HsLib.Types.Cards
 
         public Mp Mp { get; }
 
+        public virtual bool ShouldBeRemovedFromCurrentContainer() { return false; }
+
         public virtual void AfterContainerInsert(Battlefield bf) { }
         public virtual void AfterContainerRemove(Battlefield bf, Place previousPlace) { }
 

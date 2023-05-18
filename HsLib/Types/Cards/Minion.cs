@@ -105,5 +105,10 @@ namespace HsLib.Types.Cards
                 move();
             };
         }
+
+        public override bool ShouldBeRemovedFromCurrentContainer()
+        {
+            return PlaceInContainer!.Loc == Loc.Field && Dead;
+        }
     }
 }

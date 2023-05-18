@@ -79,5 +79,10 @@ namespace HsLib.Types.Cards
             base.OnTurnEnd(bf);
             AtksThisTurn = 0;
         }
+
+        public override bool ShouldBeRemovedFromCurrentContainer()
+        {
+            return PlaceInContainer!.Loc == Loc.Field && Dead;
+        }
     }
 }

@@ -8,5 +8,7 @@ namespace HsLib.Interfaces
         PlaceInContainer? PlaceInContainer { get; set; }
 
         Mp Mp { get; }
+
+        bool ShouldBeRemovedFromCurrentContainer();
     }
 }
