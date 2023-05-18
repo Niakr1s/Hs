@@ -9,7 +9,7 @@ namespace HsLib.Types.Cards
     /// Parent for all cards.<br/><br/>
     /// Card reacts on 4 Battlefield events:<br/>
     /// <see cref="AfterContainerInsert(Battlefield)"/><br/>
-    /// <see cref="AfterContainerRemove(Battlefield)"/><br/>
+    /// <see cref="AfterContainerRemove(Battlefield, Place)"/><br/>
     /// <see cref="OnTurnEnd(Battlefield)"/><br/>
     /// <see cref="OnTurnStart(Battlefield)"/>.<br/><br/>
     /// </summary>
@@ -25,7 +25,7 @@ namespace HsLib.Types.Cards
         public Mp Mp { get; }
 
         public virtual void AfterContainerInsert(Battlefield bf) { }
-        public virtual void AfterContainerRemove(Battlefield bf) { }
+        public virtual void AfterContainerRemove(Battlefield bf, Place previousPlace) { }
 
         public virtual void OnTurnEnd(Battlefield bf) { }
 

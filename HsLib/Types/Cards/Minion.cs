@@ -56,10 +56,9 @@ namespace HsLib.Types.Cards
             if (PlaceInContainer!.Loc == Loc.Field) { AuraSource?.Activate(bf); }
         }
 
-        // todo: add previous place param
-        public override void AfterContainerRemove(Battlefield bf)
+        public override void AfterContainerRemove(Battlefield bf, Place previousPlace)
         {
-            base.AfterContainerRemove(bf);
+            base.AfterContainerRemove(bf, previousPlace);
             AtksThisTurn = 0;
             AuraSource?.Deactivate(bf);
         }

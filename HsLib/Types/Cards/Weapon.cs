@@ -41,9 +41,9 @@ namespace HsLib.Types.Cards
             AtksThisTurn = 0;
         }
 
-        public override void AfterContainerRemove(Battlefield bf)
+        public override void AfterContainerRemove(Battlefield bf, Place previousPlace)
         {
-            base.AfterContainerRemove(bf);
+            base.AfterContainerRemove(bf, previousPlace);
             AtksThisTurn = 0;
         }
 

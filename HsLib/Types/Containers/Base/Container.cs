@@ -43,7 +43,7 @@ namespace HsLib.Types.Containers.Base
                 foreach (TCard item in e.OldItems)
                 {
                     item.PlaceInContainer = default;
-                    item.AfterContainerRemove(Bf);
+                    item.AfterContainerRemove(Bf, Place);
                 }
             }
         }
