@@ -18,7 +18,7 @@ namespace HsLib.Types.Containers
 
             return () =>
             {
-                player.Mp.Use(Card.Mp);
+                player.Mp.Decrease(Card.Mp);
                 effectAction();
             };
         }

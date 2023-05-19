@@ -6,20 +6,20 @@
         {
         }
 
-        public bool IsEnough(Mp mp)
+        public bool IsEnough(int value)
         {
-            return Value >= mp;
+            return Value >= value;
         }
 
         /// <summary>
         /// Uses mana. Throws exception if not sufficient mana.
         /// </summary>
-        /// <param name="mp"></param>
-        /// <exception cref="ValidationException"></exception>
-        public void Use(Mp mp)
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentException"></exception>
+        public override void Decrease(int value)
         {
-            if (!IsEnough(mp)) { throw new ValidationException("not enough mp"); }
-            Set(Value - mp);
+            if (!IsEnough(value)) { throw new ArgumentException("not enough mp"); }
+            base.Decrease(value);
         }
     }
 }
