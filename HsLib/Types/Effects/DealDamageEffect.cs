@@ -11,7 +11,7 @@ namespace HsLib.Types.Effects
         {
             if (target is IDamageable d)
             {
-                return () => d.Hp.GetDamage(Damage);
+                return () => d.Hp.Decrease(Damage);
             }
             else
             {

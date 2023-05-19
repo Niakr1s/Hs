@@ -3,31 +3,31 @@
 namespace HsLibTests.Types.Stats
 {
     [TestClass()]
-    public class HpTests
+    public class IntStatTests
     {
         [TestMethod()]
-        public void GetDamageTest()
+        public void DecreaseTest()
         {
             Hp hp = new(30);
 
-            HpGotDamageEventArgs? eventArgs = null;
-            hp.GotDamage += (s, e) => eventArgs = e;
+            StatDecreasedEventArgs? eventArgs = null;
+            hp.Decreased += (s, e) => eventArgs = e;
 
-            hp.GetDamage(5);
+            hp.Decrease(5);
             Assert.AreEqual(25, hp);
             Assert.IsNotNull(eventArgs);
             Assert.AreEqual(5, eventArgs.Amount);
         }
 
         [TestMethod()]
-        public void GetHealTest()
+        public void IncreaseTest()
         {
             Hp hp = new(30);
 
-            HpGotHealEventArgs? eventArgs = null;
-            hp.GotHeal += (s, e) => eventArgs = e;
+            StatIncreasedEventArgs? eventArgs = null;
+            hp.Increased += (s, e) => eventArgs = e;
 
-            hp.GetHeal(5);
+            hp.Increase(5);
             Assert.AreEqual(35, hp);
             Assert.IsNotNull(eventArgs);
             Assert.AreEqual(5, eventArgs.Amount);

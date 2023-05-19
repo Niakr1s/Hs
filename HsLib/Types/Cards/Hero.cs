@@ -26,11 +26,6 @@ namespace HsLib.Types.Cards
             return !bf[PlaceInContainer.Pid].Field.HasAnyActiveTaunt();
         }
 
-        public int GetDamage(int value)
-        {
-            return Hp.GetDamage(value);
-        }
-
         /// <summary>
         /// Produces ability to set in ability container by.
         /// </summary>

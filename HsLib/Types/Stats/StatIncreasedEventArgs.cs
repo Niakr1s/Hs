@@ -1,8 +1,8 @@
 ﻿namespace HsLib.Types.Stats
 {
-    public class HpGotDamageEventArgs : EventArgs
+    public class StatIncreasedEventArgs : EventArgs
     {
-        public HpGotDamageEventArgs(int amount)
+        public StatIncreasedEventArgs(int amount)
         {
             Amount = amount;
         }

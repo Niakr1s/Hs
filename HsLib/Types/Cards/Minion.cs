@@ -36,11 +36,6 @@ namespace HsLib.Types.Cards
 
         public virtual IEnumerable<CardId>? ChoseOne { get; }
 
-        public int GetDamage(int value)
-        {
-            return Hp.GetDamage(value);
-        }
-
         public virtual void AfterAttack(Battlefield bf)
         {
             AtksThisTurn++;

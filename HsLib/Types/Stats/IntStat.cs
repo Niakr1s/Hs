@@ -6,6 +6,10 @@
         {
         }
 
+        public event EventHandler<StatDecreasedEventArgs>? Decreased;
+
+        public event EventHandler<StatIncreasedEventArgs>? Increased;
+
         protected sealed override int Sum(int a1, int a2)
         {
             return a1 + a2;
@@ -18,11 +22,13 @@
 
         public void Decrease(int value = 1)
         {
+            Decreased?.Invoke(this, new(value));
             _value -= value;
         }
 
         public void Increase(int value = 1)
         {
+            Increased?.Invoke(this, new(value));
             _value += value;
         }
 
