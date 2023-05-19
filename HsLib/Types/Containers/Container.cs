@@ -35,7 +35,7 @@ namespace HsLib.Types.Containers
                 foreach (TCard item in e.NewItems)
                 {
                     item.PlaceInContainer = Place.InContainer(Bf.Turn.No, IndexOf(item));
-                    item.AfterContainerInsert(Bf);
+                    item.Subscribe(Bf);
                 }
             }
 
@@ -44,7 +44,7 @@ namespace HsLib.Types.Containers
                 foreach (TCard item in e.OldItems)
                 {
                     item.PlaceInContainer = default;
-                    item.AfterContainerRemove(Bf, Place);
+                    item.Unsubscribe(Bf, Place);
                 }
             }
         }

@@ -1,6 +1,5 @@
 ﻿using HsLib.Types.Cards;
 using HsLib.Types.Containers;
-using HsLib.Types.Events;
 using HsLib.Types.Places;
 using HsLib.Types.Turns;
 using System.Collections.Specialized;
@@ -50,8 +49,6 @@ namespace HsLib.Systems
                 Array.ForEach(Enum.GetValues<Pid>(), p => this[p].CollectionChanged -= value);
             }
         }
-
-        public event EventHandler<BattleEventArgs>? BattleEvent;
 
         public Turn Turn { get; }
 

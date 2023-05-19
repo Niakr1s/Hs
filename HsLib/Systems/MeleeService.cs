@@ -1,5 +1,4 @@
 ﻿using HsLib.Types.Cards;
-using HsLib.Types.Events;
 using HsLib.Types.Places;
 
 namespace HsLib.Systems
@@ -12,8 +11,6 @@ namespace HsLib.Systems
         }
 
         public Battlefield Bf { get; }
-
-        public event EventHandler<BattleEventArgs>? Event;
 
         /// <summary>
         /// Attacker attacks defender.
@@ -30,7 +27,9 @@ namespace HsLib.Systems
 
             return () =>
             {
-                Event?.Invoke(this, new BattleMeleePreAttackEventArgs(attacker, defender));
+                foreach (ICard card in Bf.Cards) { card.OnPreAttack(Bf, attacker, defender); }
+
+                // checking again, because attacker can be dead
                 bool canAttack = attacker.CanMeleeAttack(Bf);
 
                 if (attacker.CanMeleeAttack(Bf))

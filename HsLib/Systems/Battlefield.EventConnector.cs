@@ -1,5 +1,4 @@
 ﻿using HsLib.Types.Cards;
-using HsLib.Types.Events;
 using HsLib.Types.Turns;
 using System.Collections.Specialized;
 
@@ -11,7 +10,6 @@ namespace HsLib.Systems
         {
             TurnEvent += Turn_Event;
             CollectionChanged += Collection_Event;
-            BattleEvent += Battle_Event;
         }
 
         private void Turn_Event(object? sender, TurnEventArgs e)
@@ -44,23 +42,6 @@ namespace HsLib.Systems
                 {
                     ICard card = (ICard)item;
                     _cards.Remove(card);
-                }
-            }
-        }
-
-        private void Battle_Event(object? sender, BattleEventArgs e)
-        {
-            foreach (ICard card in Cards)
-            {
-                switch (e)
-                {
-                    case (BattleGotDamageEventArgs gotDamageEventArgs):
-                        card.OnGotDamage(this, gotDamageEventArgs);
-                        break;
-
-                    case (BattleMeleePreAttackEventArgs meleePreAttackEventArgs):
-                        card.OnPreAttack(this, meleePreAttackEventArgs);
-                        break;
                 }
             }
         }

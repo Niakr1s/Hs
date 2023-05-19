@@ -33,15 +33,15 @@ namespace HsLib.Types.Cards
             Hp.Decrease();
         }
 
-        public override void AfterContainerInsert(Battlefield bf)
+        public override void Subscribe(Battlefield bf)
         {
-            base.AfterContainerInsert(bf);
+            base.Subscribe(bf);
             AtksThisTurn = 0;
         }
 
-        public override void AfterContainerRemove(Battlefield bf, Place previousPlace)
+        public override void Unsubscribe(Battlefield bf, Place previousPlace)
         {
-            base.AfterContainerRemove(bf, previousPlace);
+            base.Unsubscribe(bf, previousPlace);
             AtksThisTurn = 0;
         }
 

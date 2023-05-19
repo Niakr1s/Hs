@@ -1,5 +1,4 @@
 ﻿using HsLib.Systems;
-using HsLib.Types.Events;
 using HsLib.Types.Places;
 using HsLib.Types.Stats;
 
@@ -8,8 +7,8 @@ namespace HsLib.Types.Cards
     /// <summary>
     /// Parent for all cards.<br/><br/>
     /// Card reacts on 4 Battlefield events:<br/>
-    /// <see cref="AfterContainerInsert(Battlefield)"/><br/>
-    /// <see cref="AfterContainerRemove(Battlefield, Place)"/><br/>
+    /// <see cref="Subscribe(Battlefield)"/><br/>
+    /// <see cref="Unsubscribe(Battlefield, Place)"/><br/>
     /// <see cref="OnTurnEnd(Battlefield)"/><br/>
     /// <see cref="OnTurnStart(Battlefield)"/>.<br/><br/>
     /// </summary>
@@ -26,15 +25,23 @@ namespace HsLib.Types.Cards
 
         public virtual bool ShouldBeRemovedFromCurrentContainer() { return false; }
 
-        public virtual void AfterContainerInsert(Battlefield bf) { }
-        public virtual void AfterContainerRemove(Battlefield bf, Place previousPlace) { }
+
+        #region reactive
+
+        public virtual void Subscribe(Battlefield bf) { }
+
+        public virtual void Unsubscribe(Battlefield bf, Place previousPlace) { }
+
+
 
         public virtual void OnTurnEnd(Battlefield bf) { }
 
         public virtual void OnTurnStart(Battlefield bf) { }
 
-        public virtual void OnGotDamage(Battlefield bf, BattleGotDamageEventArgs e) { }
 
-        public virtual void OnPreAttack(Battlefield bf, BattleMeleePreAttackEventArgs e) { }
+
+        public virtual void OnPreAttack(Battlefield bf, IAttacker attacker, IDamageable defender) { }
+
+        #endregion
     }
 }
