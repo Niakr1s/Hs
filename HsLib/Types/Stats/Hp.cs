@@ -6,13 +6,7 @@
         {
         }
 
-        public void Silence()
-        {
-            int hpWithEnchants = Value;
-            Auras.Clear();
-            Buffs.Clear();
-            _value = hpWithEnchants > _initialValue ? _initialValue : hpWithEnchants;
-        }
+        public event EventHandler<HpGotDamageEventArgs>? GotDamage;
 
         /// <summary>
         /// Gets amount of damage.
@@ -21,7 +15,8 @@
         /// <returns>Amount of damage received</returns>
         public int GetDamage(int value)
         {
-            _value -= value;
+            Decrease(value);
+            GotDamage?.Invoke(this, new HpGotDamageEventArgs(value));
             return value;
         }
     }
