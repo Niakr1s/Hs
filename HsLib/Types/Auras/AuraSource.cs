@@ -51,7 +51,7 @@ namespace HsLib.Types.Auras
 
         private void CleanAuras()
         {
-            _appliedAuras.ForEach(e => e.Active = false);
+            _appliedAuras.ForEach(e => e.Deactivate());
             _appliedAuras.Clear();
         }
 

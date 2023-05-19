@@ -2,6 +2,8 @@
 {
     public interface IEnchantHandler
     {
-        public bool Active { get; set; }
+        public bool Active { get; }
+
+        public bool Deactivate();
     }
 }

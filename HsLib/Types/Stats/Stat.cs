@@ -7,7 +7,40 @@
         {
             _initialValue = value;
             _value = value;
+
+            Buffs = new();
+            Auras = new();
+
+            Buffs.EnchantAdded += OnBuffAdded;
+            Buffs.EnchantRemoved += OnBuffRemoved;
+
+            Auras.EnchantAdded += OnAuraAdded;
+            Auras.EnchantRemoved += OnAuraRemoved;
         }
+
+
+
+        private void OnBuffAdded(object? sender, EventArgs e)
+        {
+            EmitStatChanged(StatChangedEventType.BuffAdded);
+        }
+
+        private void OnBuffRemoved(object? sender, EventArgs e)
+        {
+            EmitStatChanged(StatChangedEventType.BuffRemoved);
+        }
+
+        private void OnAuraAdded(object? sender, EventArgs e)
+        {
+            EmitStatChanged(StatChangedEventType.AuraAdded);
+        }
+
+        private void OnAuraRemoved(object? sender, EventArgs e)
+        {
+            EmitStatChanged(StatChangedEventType.AuraRemoved);
+        }
+
+
 
         protected readonly T _initialValue;
 
@@ -17,9 +50,6 @@
             get
             {
                 T resultValue = _value;
-
-                Auras.ClearInactiveEnchants();
-                Buffs.ClearInactiveEnchants();
 
                 foreach (Enchant<T> buff in Buffs.Enchants)
                 {
@@ -38,28 +68,30 @@
 
         public static implicit operator T(Stat<T> stat) => stat.Value;
 
+        public event EventHandler<StatChangedEventArgs>? StatChanged;
+
         /// <summary>
         /// Buffs can be silenced.
         /// </summary>
-        protected EnchantList<T> Buffs { get; } = new();
+        protected EnchantList<T> Buffs { get; }
 
         /// <summary>
         /// Auras cannot be silenced.
         /// </summary>
-        protected EnchantList<T> Auras { get; } = new();
+        protected EnchantList<T> Auras { get; }
 
         public Enchant<T> AddBuff(T value)
         {
-            Enchant<T> enchant = new Enchant<T>(value);
-            Buffs.Add(enchant);
-            return enchant;
+            Enchant<T> buff = new Enchant<T>(value);
+            Buffs.Add(buff);
+            return buff;
         }
 
         public Enchant<T> AddAura(T value)
         {
-            Enchant<T> enchant = new Enchant<T>(value);
-            Auras.Add(enchant);
-            return enchant;
+            Enchant<T> aura = new Enchant<T>(value);
+            Auras.Add(aura);
+            return aura;
         }
 
         /// <summary>
@@ -69,7 +101,9 @@
         public void Set(T value)
         {
             Buffs.Clear();
+
             _value = value;
+            EmitStatChanged(StatChangedEventType.ValueSet);
         }
 
         /// <summary>
@@ -79,12 +113,14 @@
         {
             Buffs.Clear();
             Auras.Clear();
+
             _value = _initialValue;
+            EmitStatChanged(StatChangedEventType.Reset);
         }
 
-        public void CopyBuffs(Stat<T> from)
+        private void EmitStatChanged(StatChangedEventType type)
         {
-            Buffs.AddRange(from.Buffs);
+            StatChanged?.Invoke(this, new StatChangedEventArgs(type));
         }
 
         protected abstract T Sum(T a1, T a2);

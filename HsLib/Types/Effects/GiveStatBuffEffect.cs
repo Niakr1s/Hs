@@ -30,7 +30,7 @@ namespace HsLib.Types.Effects
                 if (TillEndOfTurn)
                 {
                     Do.Once<TurnEventArgs>(h => bf.Turn.Event += h, h => bf.Turn.Event -= h,
-                        e => e is TurnEndEventArgs, () => buff.Active = false);
+                        e => e is TurnEndEventArgs, () => buff.Deactivate());
                 }
             };
         }

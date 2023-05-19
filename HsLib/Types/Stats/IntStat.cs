@@ -2,7 +2,7 @@
 {
     public class IntStat : Stat<int>
     {
-        protected IntStat(int value) : base(value)
+        public IntStat(int value) : base(value)
         {
         }
 
