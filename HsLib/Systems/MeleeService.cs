@@ -35,11 +35,11 @@ namespace HsLib.Systems
 
                 if (attacker.CanMeleeAttack(Bf))
                 {
-                    Bf.BattleService.DealDamage(attacker.Atk, defender);
+                    defender.Hp.GetDamage(attacker.Atk);
 
                     if (defender is IAttacker counterAttacker)
                     {
-                        Bf.BattleService.DealDamage(counterAttacker.Atk, attacker.GetDefender(Bf));
+                        attacker.GetDefender(Bf).Hp.GetDamage(counterAttacker.Atk);
                     }
 
                     attacker.AfterAttack(Bf);

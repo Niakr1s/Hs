@@ -11,7 +11,7 @@ namespace HsLib.Types.Effects
         {
             if (target is IDamageable d)
             {
-                return () => bf.BattleService.DealDamage(Damage, d);
+                return () => d.Hp.GetDamage(Damage);
             }
             else
             {

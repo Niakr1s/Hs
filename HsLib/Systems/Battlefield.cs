@@ -21,7 +21,6 @@ namespace HsLib.Systems
 
             _cards = this[Pid.P1].Cards.Concat(this[Pid.P2].Cards).ToList();
 
-            BattleService = new BattleService(this);
             DeathService = new DeathService(this);
             PlayerService = new PlayerService(this);
             MeleeService = new MeleeService(this);
@@ -57,7 +56,6 @@ namespace HsLib.Systems
         public Turn Turn { get; }
 
         #region Services
-        internal BattleService BattleService { get; }
         internal DeathService DeathService { get; }
         internal PlayerService PlayerService { get; }
         internal MeleeService MeleeService { get; }

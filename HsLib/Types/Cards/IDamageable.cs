@@ -1,4 +1,5 @@
 ﻿using HsLib.Systems;
+using HsLib.Types.Stats;
 
 namespace HsLib.Types.Cards
 {
@@ -6,11 +7,6 @@ namespace HsLib.Types.Cards
     {
         bool CanBeMeleeAttacked(Battlefield bf);
 
-        /// <summary>
-        /// Gets some damage.
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns>Amount of damage got</returns>
-        int GetDamage(int value);
+        Hp Hp { get; }
     }
 }
