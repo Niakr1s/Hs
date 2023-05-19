@@ -20,6 +20,13 @@ namespace HsLibTests.Types.Stats
         }
 
         [TestMethod()]
+        public void DecreaseTest_NegativeValue()
+        {
+            Hp hp = new(30);
+            Assert.ThrowsException<ArgumentException>(() => hp.Decrease(-1));
+        }
+
+        [TestMethod()]
         public void IncreaseTest()
         {
             Hp hp = new(30);
@@ -31,6 +38,13 @@ namespace HsLibTests.Types.Stats
             Assert.AreEqual(35, hp);
             Assert.IsNotNull(eventArgs);
             Assert.AreEqual(5, eventArgs.Amount);
+        }
+
+        [TestMethod()]
+        public void IncreaseTest_NegativeValue()
+        {
+            Hp hp = new(30);
+            Assert.ThrowsException<ArgumentException>(() => hp.Increase(-1));
         }
     }
 }
