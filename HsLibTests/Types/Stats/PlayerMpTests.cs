@@ -3,14 +3,14 @@
 namespace HsLibTests.Types.Stats
 {
     [TestClass()]
-    public class MpTests
+    public class PlayerMpTests
     {
 
         [TestMethod()]
         public void IsEnoughTest()
         {
             const int mpInitValue = 5;
-            Mp mp = new(mpInitValue);
+            PlayerMp mp = new(mpInitValue);
 
             for (int i = -10; i < mpInitValue + 10; i++)
             {
@@ -25,7 +25,7 @@ namespace HsLibTests.Types.Stats
 
             for (int i = -10; i < mpInitValue + 10; i++)
             {
-                Mp mp = new(mpInitValue);
+                PlayerMp mp = new(mpInitValue);
                 void mpDecrease() => mp.Decrease(i);
 
                 if (i < 0 || i > mpInitValue)

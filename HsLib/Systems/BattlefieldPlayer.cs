@@ -43,7 +43,7 @@ namespace HsLib.Systems
 
         public IPlayer Player { get; set; } = new DefaultPlayer();
 
-        public Mp Mp { get; } = new Mp(0);
+        public PlayerMp Mp { get; } = new(0);
 
         public Deck Deck { get; }
 

@@ -4,7 +4,6 @@ using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
 using HsLib.Types.Stats;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.Types.Containers
 {
@@ -189,7 +188,7 @@ namespace HsLibTests.Types.Containers
             Minion cardToPlay = (Minion)_hand[0];
             Assert.AreNotEqual(0, cardToPlay.Mp);
 
-            Mp playerMp = _bf[_hand.Place.Pid].Mp;
+            PlayerMp playerMp = _bf[_hand.Place.Pid].Mp;
             int initialMp = playerMp;
 
             _hand.PlayFromHand(0, fieldIndex: 0)();
@@ -202,7 +201,7 @@ namespace HsLibTests.Types.Containers
             Minion cardToPlay = (Minion)_hand[0];
             Assert.AreNotEqual(0, cardToPlay.Mp);
 
-            Mp playerMp = _bf[_hand.Place.Pid].Mp;
+            PlayerMp playerMp = _bf[_hand.Place.Pid].Mp;
             playerMp.Set(cardToPlay.Mp - 1);
             int initialMp = playerMp;
 

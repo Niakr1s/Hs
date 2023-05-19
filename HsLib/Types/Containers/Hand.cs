@@ -24,7 +24,7 @@ namespace HsLib.Types.Containers
         {
             IPlayableFromHand card = this[index];
 
-            Mp mp = Bf[Place.Pid].Mp;
+            PlayerMp mp = Bf[Place.Pid].Mp;
             if (!mp.IsEnough(card.Mp)) { throw new ValidationException("mp is not enough"); }
 
             Action playFromHandAction = card.PlayFromHand(Bf, fieldIndex, effectTarget);
