@@ -1,5 +1,4 @@
-﻿using HsLib.Types.Events;
-using HsLib.Types.Places;
+﻿using HsLib.Types.Places;
 
 namespace HsLib.Types.Turns
 {
@@ -39,9 +38,9 @@ namespace HsLib.Types.Turns
 
         public void Next()
         {
-            Event?.Invoke(this, new TurnEndEventArgs());
+            Event?.Invoke(this, new(TurnEventType.End));
             No++;
-            Event?.Invoke(this, new TurnStartEventArgs());
+            Event?.Invoke(this, new(TurnEventType.Start));
         }
 
         public void Skip(Pid pid)

@@ -1,5 +1,6 @@
 ﻿using HsLib.Types.Cards;
 using HsLib.Types.Events;
+using HsLib.Types.Turns;
 using System.Collections.Specialized;
 
 namespace HsLib.Systems
@@ -15,13 +16,13 @@ namespace HsLib.Systems
 
         private void Turn_Event(object? sender, TurnEventArgs e)
         {
-            switch (e)
+            switch (e.Type)
             {
-                case TurnStartEventArgs:
+                case TurnEventType.Start:
                     foreach (ICard card in Cards) card.OnTurnStart(this);
                     break;
 
-                case TurnEndEventArgs:
+                case TurnEventType.End:
                     foreach (ICard card in Cards) card.OnTurnEnd(this);
                     break;
             }

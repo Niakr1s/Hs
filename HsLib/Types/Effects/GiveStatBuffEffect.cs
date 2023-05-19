@@ -1,8 +1,8 @@
 ﻿using HsLib.Functions;
 using HsLib.Systems;
 using HsLib.Types.Cards;
-using HsLib.Types.Events;
 using HsLib.Types.Stats;
+using HsLib.Types.Turns;
 
 namespace HsLib.Types.Effects
 {
@@ -30,7 +30,7 @@ namespace HsLib.Types.Effects
                 if (TillEndOfTurn)
                 {
                     Do.Once<TurnEventArgs>(h => bf.Turn.Event += h, h => bf.Turn.Event -= h,
-                        e => e is TurnEndEventArgs, () => buff.Deactivate());
+                        e => e.Type == TurnEventType.End, () => buff.Deactivate());
                 }
             };
         }
