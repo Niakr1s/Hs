@@ -18,5 +18,19 @@ namespace HsLibTests.Types.Stats
             Assert.IsNotNull(eventArgs);
             Assert.AreEqual(5, eventArgs.Amount);
         }
+
+        [TestMethod()]
+        public void GetHealTest()
+        {
+            Hp hp = new(30);
+
+            HpGotHealEventArgs? eventArgs = null;
+            hp.GotHeal += (s, e) => eventArgs = e;
+
+            hp.GetHeal(5);
+            Assert.AreEqual(35, hp);
+            Assert.IsNotNull(eventArgs);
+            Assert.AreEqual(5, eventArgs.Amount);
+        }
     }
 }

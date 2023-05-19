@@ -8,6 +8,8 @@
 
         public event EventHandler<HpGotDamageEventArgs>? GotDamage;
 
+        public event EventHandler<HpGotHealEventArgs>? GotHeal;
+
         /// <summary>
         /// Gets amount of damage.
         /// </summary>
@@ -17,6 +19,13 @@
         {
             Decrease(value);
             GotDamage?.Invoke(this, new HpGotDamageEventArgs(value));
+            return value;
+        }
+
+        public int GetHeal(int value)
+        {
+            Increase(value);
+            GotHeal?.Invoke(this, new HpGotHealEventArgs(value));
             return value;
         }
     }
