@@ -1,6 +1,6 @@
 ﻿namespace HsLib.Types.Stats
 {
-    public abstract class Stat<T>
+    public abstract class Stat<T> : IStat
         where T : struct
     {
         protected Stat(T value)
