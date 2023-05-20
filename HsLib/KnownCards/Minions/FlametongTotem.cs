@@ -8,9 +8,11 @@ namespace HsLib.KnownCards.Minions
     {
         public FlametongTotem() : base(2, 0, 3)
         {
-            AuraSource = new AuraSource(this,
+            AuraSource auraSource = new AuraSource(this,
                 new GiveStatAuraEffect<int>(c => ((IWithAtk)c).Atk) { Value = 2 },
                 new FieldAdjacentMinionsChooser());
+
+            FieldEffectSources.Add(auraSource);
         }
     }
 }

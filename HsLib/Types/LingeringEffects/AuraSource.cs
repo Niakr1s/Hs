@@ -18,16 +18,12 @@ namespace HsLib.Types.LingeringEffects
 
         private Battlefield? _bf;
 
-        private readonly static Loc _activeInLoc = Loc.Field;
-
         private readonly IAuraEffect _auraEffect;
         private readonly IChooser<PlaceInContainer> _cardsChooser;
         private readonly List<IEnchantHandler> _appliedAuras = new();
 
         protected override bool DoSubscribe(Battlefield bf)
         {
-            if (!LocIsValid(Owner.PlaceInContainer!)) { return false; }
-
             bf.CollectionChanged += Bf_CollectionChanged;
 
             _bf = bf;
@@ -38,19 +34,12 @@ namespace HsLib.Types.LingeringEffects
 
         protected override bool DoUnsubscribe(Battlefield bf, Place previousPlace)
         {
-            if (!LocIsValid(previousPlace)) { return false; }
-
             bf.CollectionChanged -= Bf_CollectionChanged;
 
             CleanAuras();
             _bf = null;
 
             return true;
-        }
-
-        private bool LocIsValid(Place place)
-        {
-            return _activeInLoc == place.Loc;
         }
 
         private void Bf_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
