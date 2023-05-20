@@ -228,7 +228,7 @@
 - [ ] Frost Nova
 - [ ] Succubus
 - [ ] Lay on Hands
-- [ ] Armorsmith
+- [x] Armorsmith
 - [ ] Treant
 - [ ] Keeper of the Grove
 - [ ] Fen Creeper

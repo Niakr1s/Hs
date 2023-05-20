@@ -7,6 +7,7 @@
         ChillwindYeti,
         FlametongTotem,
         Abomination,
+        Armorsmith,
 
         DruidOfTheClaw, DruidOfTheClawTaunt, DruidOfTheClawCharge,
 
