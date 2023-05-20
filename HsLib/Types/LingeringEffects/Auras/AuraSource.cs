@@ -5,7 +5,7 @@ using HsLib.Types.Places;
 using HsLib.Types.Stats;
 using System.Collections.Specialized;
 
-namespace HsLib.Types.LingeringEffects
+namespace HsLib.Types.LingeringEffects.Auras
 {
     public class AuraSource : LingeringEffectSource<Minion>
     {

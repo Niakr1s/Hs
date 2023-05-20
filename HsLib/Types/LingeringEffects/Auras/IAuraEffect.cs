@@ -2,7 +2,7 @@
 using HsLib.Types.Cards;
 using HsLib.Types.Stats;
 
-namespace HsLib.Types.LingeringEffects
+namespace HsLib.Types.LingeringEffects.Auras
 {
     public interface IAuraEffect
     {
