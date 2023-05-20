@@ -59,6 +59,7 @@ namespace HsLib.Types.LingeringEffects
         private void DoSubscribe(Battlefield bf)
         {
             bf.CollectionChanged += Bf_CollectionChanged;
+            bf.TurnEvent += Bf_TurnEvent;
 
             foreach (TSubscribedCard card in bf.Cards.OfType<TSubscribedCard>()) { SubscribeCard(card); }
             OnCollectionChanged();
@@ -67,6 +68,7 @@ namespace HsLib.Types.LingeringEffects
         private void DoUnsubscribe(Battlefield bf, Place previousPlace)
         {
             bf.CollectionChanged -= Bf_CollectionChanged;
+            bf.TurnEvent -= Bf_TurnEvent;
             Clear();
         }
 
@@ -90,6 +92,20 @@ namespace HsLib.Types.LingeringEffects
 
             OnCollectionChanged();
         }
+
+        private void Bf_TurnEvent(object? sender, Turns.TurnEventArgs e)
+        {
+            switch (e.Type)
+            {
+                case Turns.TurnEventType.Start:
+                    OnTurnStart();
+                    break;
+                case Turns.TurnEventType.End:
+                    OnTurnEnd();
+                    break;
+            }
+        }
+
 
         private void SubscribeCard(TSubscribedCard card)
         {
@@ -142,5 +158,10 @@ namespace HsLib.Types.LingeringEffects
         /// Will be fired when any other card insert or removed from collection.
         /// </summary>
         protected virtual void OnCollectionChanged() { }
+
+
+
+        protected virtual void OnTurnEnd() { }
+        protected virtual void OnTurnStart() { }
     }
 }

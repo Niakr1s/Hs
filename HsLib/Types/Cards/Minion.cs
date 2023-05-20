@@ -31,7 +31,17 @@ namespace HsLib.Types.Cards
 
         public DeathrattleEffect? DeathrattleEffect { get; protected set; }
 
-        public bool Dead => Hp <= 0;
+        public bool Dead
+        {
+            get
+            {
+                return Hp.Dead;
+            }
+            set
+            {
+                Hp.Dead = value;
+            }
+        }
 
         public virtual IEnumerable<CardId>? ChoseOne { get; }
 

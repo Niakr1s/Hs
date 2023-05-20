@@ -2,6 +2,6 @@
 {
     public interface IMortal
     {
-        bool Dead { get; }
+        bool Dead { get; set; }
     }
 }

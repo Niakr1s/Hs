@@ -45,7 +45,7 @@
 - [ ] Voodoo Doctor
 - [ ] Ravenholdt Assassin
 - [ ] Wrath
-- [ ] Doomsayer
+- [x] Doomsayer
 - [ ] Redemption
 - [ ] Hunter's Mark
 - [ ] Mindgames

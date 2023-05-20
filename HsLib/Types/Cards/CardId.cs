@@ -8,6 +8,7 @@
         FlametongTotem,
         Abomination,
         Armorsmith,
+        Doomsayer,
 
         DruidOfTheClaw, DruidOfTheClawTaunt, DruidOfTheClawCharge,
 

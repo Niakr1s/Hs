@@ -23,7 +23,17 @@ namespace HsLib.Types.Cards
 
         public BattlecryEffect? BattlecryEffect { get; }
 
-        public bool Dead => Hp <= 0;
+        public bool Dead
+        {
+            get
+            {
+                return Hp.Dead;
+            }
+            set
+            {
+                Hp.Dead = value;
+            }
+        }
 
         public virtual bool ActivateDeathrattle(Battlefield bf) { return false; }
 
