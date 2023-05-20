@@ -23,7 +23,7 @@ namespace HsLib.Types.LingeringEffects
         public void Subscribe(Battlefield bf)
         {
             if (IsActive) { return; }
-            if (!DoSubscribe(bf)) { return; }
+            DoSubscribe(bf);
             IsActive = true;
         }
 
@@ -36,12 +36,12 @@ namespace HsLib.Types.LingeringEffects
         public void Unsubscribe(Battlefield bf, Place previousPlace)
         {
             if (!IsActive) { return; }
-            if (!DoUnsubscribe(bf, previousPlace)) { return; }
+            DoUnsubscribe(bf, previousPlace);
             IsActive = false;
         }
 
 
-        protected abstract bool DoSubscribe(Battlefield bf);
-        protected abstract bool DoUnsubscribe(Battlefield bf, Place previousPlace);
+        protected abstract void DoSubscribe(Battlefield bf);
+        protected abstract void DoUnsubscribe(Battlefield bf, Place previousPlace);
     }
 }

@@ -22,24 +22,20 @@ namespace HsLib.Types.LingeringEffects.Auras
         private readonly IChooser<PlaceInContainer> _cardsChooser;
         private readonly List<IEnchantHandler> _appliedAuras = new();
 
-        protected override bool DoSubscribe(Battlefield bf)
+        protected override void DoSubscribe(Battlefield bf)
         {
             bf.CollectionChanged += Bf_CollectionChanged;
 
             _bf = bf;
             ReapplyAuras();
-
-            return true;
         }
 
-        protected override bool DoUnsubscribe(Battlefield bf, Place previousPlace)
+        protected override void DoUnsubscribe(Battlefield bf, Place previousPlace)
         {
             bf.CollectionChanged -= Bf_CollectionChanged;
 
             CleanAuras();
             _bf = null;
-
-            return true;
         }
 
         private void Bf_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
