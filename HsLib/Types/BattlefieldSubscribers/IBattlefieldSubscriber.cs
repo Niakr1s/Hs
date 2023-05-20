@@ -1,6 +1,7 @@
-﻿using HsLib.Types.Places;
+﻿using HsLib.Systems;
+using HsLib.Types.Places;
 
-namespace HsLib.Systems
+namespace HsLib.Types.BattlefieldSubscribers
 {
     public interface IBattlefieldSubscriber
     {

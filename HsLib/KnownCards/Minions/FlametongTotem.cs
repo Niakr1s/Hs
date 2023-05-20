@@ -1,6 +1,6 @@
-﻿using HsLib.Types.Cards;
+﻿using HsLib.Types.Auras;
+using HsLib.Types.Cards;
 using HsLib.Types.Choosers;
-using HsLib.Types.LingeringEffects.Auras;
 
 namespace HsLib.KnownCards.Minions
 {

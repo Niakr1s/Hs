@@ -1,11 +1,12 @@
-﻿using HsLib.Types.Cards;
+﻿using HsLib.Types.BattlefieldSubscribers;
+using HsLib.Types.Cards;
 using HsLib.Types.Choosers;
 using HsLib.Types.Places;
 using HsLib.Types.Stats;
 
-namespace HsLib.Types.LingeringEffects.Auras
+namespace HsLib.Types.Auras
 {
-    public class AuraSource : LingeringEffectSource<Minion, ICard>
+    public class AuraSource : BattlefieldSubscriber<Minion, ICard>
     {
         public AuraSource(Minion owner, IAuraEffect auraEffect, IChooser<PlaceInContainer> cardsChooser)
             : base(owner)

@@ -3,7 +3,7 @@ using HsLib.Types.Cards;
 using HsLib.Types.Places;
 using System.Collections.Specialized;
 
-namespace HsLib.Types.LingeringEffects
+namespace HsLib.Types.BattlefieldSubscribers
 {
     /// <summary>
     /// Is used to be source for lingering effects.
@@ -13,11 +13,11 @@ namespace HsLib.Types.LingeringEffects
     /// Type of card, you want to subscribe to. Other types will be filtered out.
     /// If you don't want to sub to each individual card, just use ICard.
     /// </typeparam>
-    public abstract class LingeringEffectSource<TOwner, TSubscribedCard> : IBattlefieldSubscriber
+    public abstract class BattlefieldSubscriber<TOwner, TSubscribedCard> : IBattlefieldSubscriber
         where TOwner : ICard
         where TSubscribedCard : ICard
     {
-        protected LingeringEffectSource(TOwner owner)
+        protected BattlefieldSubscriber(TOwner owner)
         {
             Owner = owner;
         }

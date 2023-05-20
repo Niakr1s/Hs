@@ -1,5 +1,5 @@
 ﻿using HsLib.Types.Cards;
-using HsLib.Types.LingeringEffects;
+using HsLib.Types.BattlefieldSubscribers;
 
 namespace HsLib.KnownCards.Minions
 {
@@ -12,7 +12,7 @@ namespace HsLib.KnownCards.Minions
         }
     }
 
-    public class ArmorsmithEffectSource : LingeringEffectSource<Minion, Minion>
+    public class ArmorsmithEffectSource : BattlefieldSubscriber<Minion, Minion>
     {
         public ArmorsmithEffectSource(Minion owner) : base(owner)
         {

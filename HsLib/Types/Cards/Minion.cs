@@ -1,4 +1,5 @@
 ﻿using HsLib.Systems;
+using HsLib.Types.BattlefieldSubscribers;
 using HsLib.Types.Effects;
 using HsLib.Types.Places;
 using HsLib.Types.Stats;
