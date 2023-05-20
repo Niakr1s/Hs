@@ -16,8 +16,6 @@ namespace HsLib.Types.LingeringEffects.Auras
             _cardsChooser = cardsChooser;
         }
 
-        private Battlefield? _bf;
-
         private readonly IAuraEffect _auraEffect;
         private readonly IChooser<PlaceInContainer> _cardsChooser;
         private readonly List<IEnchantHandler> _appliedAuras = new();
@@ -25,17 +23,13 @@ namespace HsLib.Types.LingeringEffects.Auras
         protected override void DoSubscribe(Battlefield bf)
         {
             bf.CollectionChanged += Bf_CollectionChanged;
-
-            _bf = bf;
             ReapplyAuras();
         }
 
         protected override void DoUnsubscribe(Battlefield bf, Place previousPlace)
         {
             bf.CollectionChanged -= Bf_CollectionChanged;
-
             CleanAuras();
-            _bf = null;
         }
 
         private void Bf_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -56,12 +50,12 @@ namespace HsLib.Types.LingeringEffects.Auras
         /// <exception cref="InvalidOperationException"></exception>
         private void ReapplyAuras()
         {
-            if (_bf is null) { return; }
+            if (Bf is null) { return; }
             if (Owner.PlaceInContainer is null) { throw new InvalidOperationException("owner doesn't in container"); }
 
-            foreach (ICard card in _cardsChooser.ChooseCards(Owner.PlaceInContainer, _bf.Cards))
+            foreach (ICard card in _cardsChooser.ChooseCards(Owner.PlaceInContainer, Bf.Cards))
             {
-                _appliedAuras.Add(_auraEffect.GiveAura(_bf, Owner, card));
+                _appliedAuras.Add(_auraEffect.GiveAura(Bf, Owner, card));
             }
         }
     }

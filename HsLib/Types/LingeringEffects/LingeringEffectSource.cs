@@ -16,6 +16,8 @@ namespace HsLib.Types.LingeringEffects
 
         public TCard Owner { get; }
 
+        protected Battlefield? Bf { get; private set; }
+
         /// <summary>
         /// Called on every container.
         /// </summary>
@@ -23,6 +25,7 @@ namespace HsLib.Types.LingeringEffects
         public void Subscribe(Battlefield bf)
         {
             if (IsActive) { return; }
+            Bf = bf;
             DoSubscribe(bf);
             IsActive = true;
         }
@@ -36,6 +39,7 @@ namespace HsLib.Types.LingeringEffects
         public void Unsubscribe(Battlefield bf, Place previousPlace)
         {
             if (!IsActive) { return; }
+            Bf = null;
             DoUnsubscribe(bf, previousPlace);
             IsActive = false;
         }
