@@ -5,7 +5,7 @@ using HsLib.Types.Places;
 
 namespace HsLib.Types.Effects
 {
-    public abstract class PlayerEffect : ActiveEffect<Pid>
+    public abstract class PlayerEffect : TargetableEffect<Pid>
     {
         protected PlayerEffect(IEffect effect,
             IChooser<Pid>? possibleTargetsChooser = null, IChooser<Pid>? targetsChooser = null)

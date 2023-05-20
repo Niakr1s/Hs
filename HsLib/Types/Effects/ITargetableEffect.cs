@@ -4,7 +4,7 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Interfaces
 {
-    public interface IActiveEffect<TOwner>
+    public interface ITargetableEffect<TOwner>
     {
         /// <summary>
         /// Gets all targets from battlefield, effect can be used on.

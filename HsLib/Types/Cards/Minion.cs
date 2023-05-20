@@ -90,7 +90,7 @@ namespace HsLib.Types.Cards
             Action move = bf[PlaceInContainer!.Pid].Hand.MoveToContainer(PlaceInContainer.Index, bf[PlaceInContainer.Pid].Field,
                 canBurn: false, toIndex: fieldIndex, transformTo: transformTo);
 
-            ActiveEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, PlaceInContainer!.Pid, effectTarget);
+            TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, PlaceInContainer!.Pid, effectTarget);
             Action? battlectyAction = BattlecryEffect?.UseEffect(bf, PlaceInContainer!.Pid, effectTarget);
 
             return () =>

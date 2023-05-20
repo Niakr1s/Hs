@@ -22,7 +22,7 @@ namespace HsLib.Types.Cards
         /// <returns>Action, that actually uses effect.</returns>
         public Action UseAbility(Battlefield bf, ICard? target)
         {
-            ActiveEffectValidator.ValidateEffectTarget(AbilityEffect, bf, PlaceInContainer!.Pid, target);
+            TargetableEffectValidator.ValidateEffectTarget(AbilityEffect, bf, PlaceInContainer!.Pid, target);
             Action useEffectAction = AbilityEffect.UseEffect(bf, PlaceInContainer!.Pid, target);
 
             return () =>

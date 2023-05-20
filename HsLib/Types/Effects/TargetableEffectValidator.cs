@@ -4,7 +4,7 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Effects
 {
-    public static class ActiveEffectValidator
+    public static class TargetableEffectValidator
     {
         /// <summary>
         /// Validates nullable active effect.
@@ -15,7 +15,7 @@ namespace HsLib.Types.Effects
         /// <param name="owner"></param>
         /// <param name="effectTarget"></param>
         /// <exception cref="ValidationException"></exception>
-        public static void ValidateEffectTarget<TOwner>(IActiveEffect<TOwner>? activeEffect,
+        public static void ValidateEffectTarget<TOwner>(ITargetableEffect<TOwner>? activeEffect,
             Battlefield bf, TOwner owner, ICard? effectTarget)
         {
             if (activeEffect is null)

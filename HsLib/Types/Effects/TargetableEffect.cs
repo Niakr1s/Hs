@@ -6,7 +6,7 @@ using HsLib.Types.Places;
 
 namespace HsLib.Types.Effects
 {
-    public abstract class ActiveEffect<TOwner> : IActiveEffect<TOwner>
+    public abstract class TargetableEffect<TOwner> : ITargetableEffect<TOwner>
     {
         /// <summary>
         /// Default constructor.
@@ -15,7 +15,7 @@ namespace HsLib.Types.Effects
         /// <param name="possibleTargetsChooser">Chooses possible targets for effect.</param>
         /// <param name="targetsChooser">Chooses targets for effect.
         /// If provided, will ignore target in <see cref="UseEffect(Battlefield, PlaceInContainer, ICard?)"/> and use it instead.</param>
-        public ActiveEffect(IEffect effect,
+        public TargetableEffect(IEffect effect,
             IChooser<TOwner>? possibleTargetsChooser = null,
             IChooser<TOwner>? targetsChooser = null)
         {

@@ -53,7 +53,7 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            ActiveEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, PlaceInContainer!.Pid, effectTarget);
+            TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, PlaceInContainer!.Pid, effectTarget);
 
             Action move = bf[PlaceInContainer!.Pid].Hand.MoveToContainer(PlaceInContainer.Index, bf[PlaceInContainer.Pid].Weapon,
                 canBurn: false, toIndex: 0);
