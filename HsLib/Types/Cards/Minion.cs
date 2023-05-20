@@ -1,6 +1,6 @@
 ﻿using HsLib.Systems;
-using HsLib.Types.Auras;
 using HsLib.Types.Effects;
+using HsLib.Types.LingeringEffects;
 using HsLib.Types.Places;
 using HsLib.Types.Stats;
 
@@ -46,14 +46,14 @@ namespace HsLib.Types.Cards
             base.Subscribe(bf);
             AtksThisTurn = 0;
 
-            if (PlaceInContainer!.Loc == Loc.Field) { AuraSource?.Activate(bf); }
+            if (PlaceInContainer!.Loc == Loc.Field) { AuraSource?.Subscribe(bf); }
         }
 
         public override void Unsubscribe(Battlefield bf, Place previousPlace)
         {
             base.Unsubscribe(bf, previousPlace);
             AtksThisTurn = 0;
-            AuraSource?.Deactivate(bf);
+            AuraSource?.Unsubscribe(bf, previousPlace);
 
             if (Dead) { DeathrattleEffect?.ActivateDeathrattle(bf, previousPlace.Pid)(); }
         }

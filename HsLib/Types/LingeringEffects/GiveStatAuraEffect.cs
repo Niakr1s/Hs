@@ -2,7 +2,7 @@
 using HsLib.Types.Cards;
 using HsLib.Types.Stats;
 
-namespace HsLib.Types.Auras
+namespace HsLib.Types.LingeringEffects
 {
     public class GiveStatAuraEffect<T> : IAuraEffect
         where T : struct

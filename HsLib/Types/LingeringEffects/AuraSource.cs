@@ -5,42 +5,52 @@ using HsLib.Types.Places;
 using HsLib.Types.Stats;
 using System.Collections.Specialized;
 
-namespace HsLib.Types.Auras
+namespace HsLib.Types.LingeringEffects
 {
-    public class AuraSource : IAuraSource
+    public class AuraSource : LingeringEffectSource<Minion>
     {
-        public AuraSource(ICard owner, IAuraEffect auraEffect, IChooser<PlaceInContainer> cardsChooser)
+        public AuraSource(Minion owner, IAuraEffect auraEffect, IChooser<PlaceInContainer> cardsChooser)
+            : base(owner)
         {
-            Owner = owner;
             _auraEffect = auraEffect;
             _cardsChooser = cardsChooser;
         }
 
-        public bool IsActive { get; private set; }
-
-        public ICard Owner { get; }
-
         private Battlefield? _bf;
+
+        private readonly static Loc _activeInLoc = Loc.Field;
 
         private readonly IAuraEffect _auraEffect;
         private readonly IChooser<PlaceInContainer> _cardsChooser;
-
         private readonly List<IEnchantHandler> _appliedAuras = new();
 
-        protected void Start(Battlefield bf)
+        protected override bool DoSubscribe(Battlefield bf)
         {
+            if (!LocIsValid(Owner.PlaceInContainer!)) { return false; }
+
             bf.CollectionChanged += Bf_CollectionChanged;
 
             _bf = bf;
             ReapplyAuras();
+
+            return true;
         }
 
-        protected void Stop(Battlefield bf)
+        protected override bool DoUnsubscribe(Battlefield bf, Place previousPlace)
         {
+            if (!LocIsValid(previousPlace)) { return false; }
+
             bf.CollectionChanged -= Bf_CollectionChanged;
 
             CleanAuras();
             _bf = null;
+
+            return true;
+        }
+
+        private bool LocIsValid(Place place)
+        {
+            return _activeInLoc == place.Loc;
         }
 
         private void Bf_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -67,50 +77,6 @@ namespace HsLib.Types.Auras
             foreach (ICard card in _cardsChooser.ChooseCards(Owner.PlaceInContainer, _bf.Cards))
             {
                 _appliedAuras.Add(_auraEffect.GiveAura(_bf, Owner, card));
-            }
-        }
-
-        /// <summary>
-        /// Activates aura.
-        /// </summary>
-        /// <param name="bf"></param>
-        /// <exception cref="Exception">Throws, if anything unexpected occurs.</exception>
-        /// <returns>True, if was success activated.</returns>
-        public bool Activate(Battlefield bf)
-        {
-            if (IsActive) { return false; }
-
-            try
-            {
-                Start(bf);
-                IsActive = true;
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Deactivates aura.
-        /// </summary>
-        /// <param name="bf"></param>
-        /// <exception cref="Exception">Throws, if anything unexpected occurs.</exception>
-        /// <returns>True, if was success deactivated.</returns>
-        public bool Deactivate(Battlefield bf)
-        {
-            if (!IsActive) { return false; }
-
-            try
-            {
-                Stop(bf);
-                IsActive = false;
-                return true;
-            }
-            catch
-            {
-                return false;
             }
         }
     }
