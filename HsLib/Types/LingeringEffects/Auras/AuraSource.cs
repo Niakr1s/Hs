@@ -1,13 +1,11 @@
-﻿using HsLib.Systems;
-using HsLib.Types.Cards;
+﻿using HsLib.Types.Cards;
 using HsLib.Types.Choosers;
 using HsLib.Types.Places;
 using HsLib.Types.Stats;
-using System.Collections.Specialized;
 
 namespace HsLib.Types.LingeringEffects.Auras
 {
-    public class AuraSource : LingeringEffectSource<Minion>
+    public class AuraSource : LingeringEffectSource<Minion, ICard>
     {
         public AuraSource(Minion owner, IAuraEffect auraEffect, IChooser<PlaceInContainer> cardsChooser)
             : base(owner)
@@ -20,19 +18,7 @@ namespace HsLib.Types.LingeringEffects.Auras
         private readonly IChooser<PlaceInContainer> _cardsChooser;
         private readonly List<IEnchantHandler> _appliedAuras = new();
 
-        protected override void DoSubscribe(Battlefield bf)
-        {
-            bf.CollectionChanged += Bf_CollectionChanged;
-            ReapplyAuras();
-        }
-
-        protected override void DoUnsubscribe(Battlefield bf, Place previousPlace)
-        {
-            bf.CollectionChanged -= Bf_CollectionChanged;
-            CleanAuras();
-        }
-
-        private void Bf_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        protected override void OnCollectionChanged()
         {
             CleanAuras();
             ReapplyAuras();
