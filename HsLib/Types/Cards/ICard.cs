@@ -6,10 +6,14 @@ namespace HsLib.Types.Cards
 {
     public interface ICard : IBattlefieldSubscriber
     {
-        PlaceInContainer? PlaceInContainer { get; set; }
-
         Mp Mp { get; }
 
+        PlaceInContainer? PlaceInContainer { get; set; }
         bool ShouldBeRemovedFromCurrentContainer();
+
+        void OnTurnEnd(Battlefield bf);
+        void OnTurnStart(Battlefield bf);
+
+        void OnPreAttack(Battlefield bf, IAttacker attacker, IDamageable defender);
     }
 }

@@ -1,5 +1,4 @@
-﻿using HsLib.Types.Cards;
-using HsLib.Types.Places;
+﻿using HsLib.Types.Places;
 
 namespace HsLib.Systems
 {
@@ -7,10 +6,5 @@ namespace HsLib.Systems
     {
         void Subscribe(Battlefield bf);
         void Unsubscribe(Battlefield bf, Place previousPlace);
-
-        void OnTurnEnd(Battlefield bf);
-        void OnTurnStart(Battlefield bf);
-
-        void OnPreAttack(Battlefield bf, IAttacker attacker, IDamageable defender);
     }
 }
