@@ -14,7 +14,7 @@ namespace HsLib.Types.Effects
         private readonly List<CardId> _cardIds;
         public IEnumerable<CardId> CardIds => _cardIds.AsEnumerable();
 
-        public Action UseEffect(Battlefield bf, ICard owner, ICard target)
+        public Action UseEffect(Battlefield bf, ICard owner, ICard? target)
         {
             return () => UseEffect(bf, owner);
         }

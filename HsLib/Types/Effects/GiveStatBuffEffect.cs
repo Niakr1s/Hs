@@ -20,19 +20,24 @@ namespace HsLib.Types.Effects
 
         public bool TillEndOfTurn { get; set; }
 
-        public Action UseEffect(Battlefield bf, ICard owner, ICard target)
+        public Action UseEffect(Battlefield bf, ICard owner, ICard? target)
         {
-            Minion m = (Minion)target;
-
-            return () =>
+            if (target is Minion m)
             {
-                Enchant<T> buff = _statChooser(target).AddBuff(Value);
-                if (TillEndOfTurn)
+                return () =>
                 {
-                    Do.Once<TurnEventArgs>(h => bf.Turn.Event += h, h => bf.Turn.Event -= h,
-                        e => e.Type == TurnEventType.End, () => buff.Deactivate());
-                }
-            };
+                    Enchant<T> buff = _statChooser(target).AddBuff(Value);
+                    if (TillEndOfTurn)
+                    {
+                        Do.Once<TurnEventArgs>(h => bf.Turn.Event += h, h => bf.Turn.Event -= h,
+                            e => e.Type == TurnEventType.End, () => buff.Deactivate());
+                    }
+                };
+            }
+            else
+            {
+                throw new ValidationException("target is not Minion");
+            }
         }
     }
 }

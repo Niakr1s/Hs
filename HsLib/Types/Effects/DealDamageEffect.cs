@@ -7,7 +7,7 @@ namespace HsLib.Types.Effects
     {
         public int Damage { get; set; }
 
-        public Action UseEffect(Battlefield bf, ICard owner, ICard target)
+        public Action UseEffect(Battlefield bf, ICard owner, ICard? target)
         {
             if (target is IDamageable d)
             {
