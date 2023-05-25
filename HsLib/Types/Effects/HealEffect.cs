@@ -3,7 +3,7 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Effects
 {
-    public class HealEffect : IEffect
+    public class HealEffect : IHealEffect
     {
         public int Heal { get; set; }
 
