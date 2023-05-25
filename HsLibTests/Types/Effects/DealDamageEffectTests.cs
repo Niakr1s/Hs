@@ -13,7 +13,7 @@ namespace HsLibTests.Types.Effects
         {
             Battlefield bf = TestBattlefield.New();
 
-            DealDamageEffect effect = new() { Damage = 2 };
+            DamageEffect effect = new() { Damage = 2 };
 
             Minion minion = new ChillwindYeti();
             int startHp = minion.Hp;

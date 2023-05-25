@@ -3,7 +3,7 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Effects
 {
-    public class DealDamageEffect : IEffect
+    public class DamageEffect : IEffect
     {
         public int Damage { get; set; }
 

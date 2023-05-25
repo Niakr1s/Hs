@@ -34,9 +34,9 @@ namespace HsLibTests.Types.Effects
 
             Targets validTargets = new Targets() { Sides = PidSide.He, Locs = Loc.Field };
             // valid effect to target minion
-            BattlecryEffect? havePossibleTargetsEffect = new(null!, new DealDamageEffect(), validTargets);
+            BattlecryEffect? havePossibleTargetsEffect = new(null!, new DamageEffect(), validTargets);
             // invalid effect to target minion
-            BattlecryEffect? noPossibleTargetsEffect = new(null!, new DealDamageEffect());
+            BattlecryEffect? noPossibleTargetsEffect = new(null!, new DamageEffect());
 
             List<(BattlecryEffect?, ICard?, bool)> testCases = new()
             {

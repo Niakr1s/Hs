@@ -9,7 +9,7 @@ namespace HsLib.KnownCards.Minions
     {
         public Abomintaion() : base(5, 4, 4)
         {
-            DealDamageEffect effect = new() { Damage = 2 };
+            DamageEffect effect = new() { Damage = 2 };
             Targets targetsChooser = new Targets { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He, };
             DeathrattleEffect = new(effect, targetsChooser);
         }
