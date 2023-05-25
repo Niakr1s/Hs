@@ -4,6 +4,6 @@ namespace HsLib.Types.Effects
 {
     public interface IDamageEffect : IEffect
     {
-        IntStat Damage { get; }
+        IntStat DamageAmount { get; }
     }
 }

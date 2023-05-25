@@ -18,7 +18,7 @@ namespace HsLibTests.Types.Effects
             Minion minion = new ChillwindYeti();
             int startHp = minion.Hp;
             effect.UseEffect(bf, null!, minion)();
-            Assert.AreEqual(startHp - effect.Damage, minion.Hp);
+            Assert.AreEqual(startHp - effect.DamageAmount, minion.Hp);
         }
     }
 }

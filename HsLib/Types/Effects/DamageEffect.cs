@@ -8,16 +8,16 @@ namespace HsLib.Types.Effects
     {
         public DamageEffect(int damageAmount)
         {
-            Damage = new(damageAmount);
+            DamageAmount = new(damageAmount);
         }
 
-        public IntStat Damage { get; }
+        public IntStat DamageAmount { get; }
 
         public Action UseEffect(Battlefield bf, ICard owner, ICard? target)
         {
             if (target is IDamageable d)
             {
-                return () => d.Hp.Decrease(Damage);
+                return () => d.Hp.Decrease(DamageAmount);
             }
             else
             {
