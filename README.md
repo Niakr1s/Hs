@@ -5,7 +5,7 @@
 
 - [x] Garrosh Hellscream
 - [x] Mind Control
-- [ ] Prophet Velen
+- [x] Prophet Velen
 - [ ] Mana Addict
 - [ ] Barrel
 - [ ] Inner Rage

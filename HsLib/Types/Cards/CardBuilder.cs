@@ -28,6 +28,7 @@ namespace HsLib.Types.Cards
                 CardId.Armorsmith => new Armorsmith(),
                 CardId.Doomsayer => new Doomsayer(),
                 CardId.FacelessManipulator => new FacelessManipulator(),
+                CardId.ProphetVelen => new ProphetVelen(),
 
                 CardId.JainaProudmoore => new JainaProudmoore(),
                 CardId.Fireblast => new Fireblast(),

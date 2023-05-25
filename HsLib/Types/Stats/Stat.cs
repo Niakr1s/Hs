@@ -47,7 +47,7 @@ namespace HsLib.Types.Stats
         protected readonly T _initialValue;
 
         protected T _value;
-        public T Value
+        public virtual T Value
         {
             get
             {
@@ -117,8 +117,12 @@ namespace HsLib.Types.Stats
             Auras.Clear();
 
             _value = _initialValue;
+            DoReset();
+
             EmitStatChanged(StatChangedEventType.Reset);
         }
+
+        protected virtual void DoReset() { }
 
         private void EmitStatChanged(StatChangedEventType type)
         {
@@ -134,7 +138,7 @@ namespace HsLib.Types.Stats
         /// <returns>Value after sanitizing</returns>
         protected abstract T Sanitize(T value);
 
-        public Stat<T> Clone()
+        public virtual Stat<T> Clone()
         {
             Stat<T> cloned = this.DeepClone();
             cloned.Auras.Clear();

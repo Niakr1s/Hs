@@ -6,9 +6,21 @@
         {
         }
 
+        private readonly EnchantList<int> _finalMultipliers = new();
+
         public event EventHandler<StatDecreasedEventArgs>? Decreased;
 
         public event EventHandler<StatIncreasedEventArgs>? Increased;
+
+        public override int Value
+        {
+            get
+            {
+                int value = base.Value;
+                foreach (var item in _finalMultipliers.Enchants) { value *= item.Value; }
+                return value;
+            }
+        }
 
         protected sealed override int Sum(int a1, int a2)
         {
@@ -45,5 +57,25 @@
         }
 
         public static implicit operator int(IntStat stat) => stat.Value;
+
+        public Enchant<int> AddFinalMultiplierAura(int value)
+        {
+            Enchant<int> aura = new Enchant<int>(value);
+            _finalMultipliers.Add(aura);
+            return aura;
+        }
+
+        protected override void DoReset()
+        {
+            base.DoReset();
+            _finalMultipliers.Clear();
+        }
+
+        public override Stat<int> Clone()
+        {
+            Stat<int> cloned = base.Clone();
+            _finalMultipliers.Clear();
+            return cloned;
+        }
     }
 }

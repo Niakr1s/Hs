@@ -20,16 +20,16 @@ namespace HsLib.Types.Effects
             IChooser<TOwner>? targetsChooser = null)
         {
             Owner = owner;
-            _effect = effect;
+            Effect = effect;
             _targetsChooser = targetsChooser;
             _possibleTargetsChooser = possibleTargetsChooser;
         }
-
-        protected readonly IEffect _effect;
         private readonly IChooser<TOwner>? _targetsChooser;
         private readonly IChooser<TOwner>? _possibleTargetsChooser;
 
         public ICard Owner { get; set; }
+
+        public IEffect Effect { get; }
 
         public IEnumerable<ICard> GetPossibleTargets(Battlefield bf, TOwner owner)
         {
@@ -53,14 +53,14 @@ namespace HsLib.Types.Effects
             List<Action> effectActions = new();
             if (_targetsChooser is null)
             {
-                effectActions.Add(_effect.UseEffect(bf, Owner, target));
+                effectActions.Add(Effect.UseEffect(bf, Owner, target));
             }
             else
             {
                 if (target is not null) { throw new ValidationException("target should be null"); }
 
                 IEnumerable<Action>? toAdd = _targetsChooser?.ChooseCards(owner, bf.Cards)
-                    .Select(target => _effect.UseEffect(bf, Owner, target));
+                    .Select(target => Effect.UseEffect(bf, Owner, target));
 
                 if (toAdd is not null) effectActions.AddRange(toAdd);
             }
