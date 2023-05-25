@@ -139,9 +139,11 @@ namespace HsLib.Types.Containers
             }
         }
 
+        // todo: remvoe transformTo
         public Action MoveToContainer(int fromIndex, IContainer toContainer, bool canBurn, int? toIndex = 0, object? transformTo = default)
         {
-            TCard? fromCard = this[fromIndex]; // this can throw IndexOutOfRangeException
+
+            var _ = this[fromIndex]; // easiest check for if index exists
             toIndex ??= toContainer.Count;
 
             bool canBeInserted = toContainer.CanBeInserted;
@@ -151,14 +153,13 @@ namespace HsLib.Types.Containers
             }
             // check section ended
 
-            object? toCard = transformTo ?? fromCard;
-
             return () =>
             {
+                var card = this[fromIndex];
                 RemoveAt(fromIndex);
                 if (canBeInserted)
                 {
-                    toContainer.Insert(toIndex.Value, toCard);
+                    toContainer.Insert(toIndex.Value, card);
                 }
             };
         }

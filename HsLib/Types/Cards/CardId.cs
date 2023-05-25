@@ -9,6 +9,7 @@
         Abomination,
         Armorsmith,
         Doomsayer,
+        FacelessManipulator,
 
         DruidOfTheClaw, DruidOfTheClawTaunt, DruidOfTheClawCharge,
 

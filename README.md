@@ -205,7 +205,7 @@
 - [ ] Archmage
 - [ ] Gruul
 - [ ] Captain's Parrot
-- [ ] Faceless Manipulator
+- [x] Faceless Manipulator
 - [ ] Spirit Wolf
 - [ ] Searing Totem
 - [ ] Arathi Weaponsmith
