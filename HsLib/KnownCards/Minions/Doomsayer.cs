@@ -1,6 +1,6 @@
-﻿using HsLib.Types.Cards;
+﻿using HsLib.Types.BattlefieldSubscribers;
+using HsLib.Types.Cards;
 using HsLib.Types.Choosers;
-using HsLib.Types.BattlefieldSubscribers;
 using HsLib.Types.Places;
 
 namespace HsLib.KnownCards.Minions
@@ -14,7 +14,7 @@ namespace HsLib.KnownCards.Minions
         }
     }
 
-    public class DoomsayerEffectSource : BattlefieldSubscriber<Minion, ICard>
+    public class DoomsayerEffectSource : BattlefieldSubscriber<ICard>
     {
         public DoomsayerEffectSource(Minion owner) : base(owner)
         {

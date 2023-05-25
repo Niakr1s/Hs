@@ -6,7 +6,7 @@ using HsLib.Types.Stats;
 
 namespace HsLib.Types.Auras
 {
-    public class AuraSource : BattlefieldSubscriber<Minion, ICard>
+    public class AuraSource : BattlefieldSubscriber<ICard>
     {
         public AuraSource(Minion owner, IAuraEffect auraEffect, IChooser<PlaceInContainer> cardsChooser)
             : base(owner)

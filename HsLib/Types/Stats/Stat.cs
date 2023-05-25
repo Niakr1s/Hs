@@ -1,4 +1,6 @@
-﻿namespace HsLib.Types.Stats
+﻿using Force.DeepCloner;
+
+namespace HsLib.Types.Stats
 {
     public abstract class Stat<T> : IStat
         where T : struct
@@ -131,5 +133,12 @@
         /// <param name="value"></param>
         /// <returns>Value after sanitizing</returns>
         protected abstract T Sanitize(T value);
+
+        public Stat<T> Clone()
+        {
+            Stat<T> cloned = this.DeepClone();
+            cloned.Auras.Clear();
+            return cloned;
+        }
     }
 }

@@ -1,9 +1,10 @@
-﻿using HsLib.Systems;
+﻿using HsLib.KnownCards.Minions;
+using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
 using HsLib.Types.Places;
 
-namespace HsLib.KnownCards.Minions
+namespace HsLibTests.KnownCards.Minions
 {
     [TestClass()]
     public class DoomsayerTests

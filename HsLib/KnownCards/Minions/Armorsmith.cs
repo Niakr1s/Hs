@@ -1,5 +1,5 @@
-﻿using HsLib.Types.Cards;
-using HsLib.Types.BattlefieldSubscribers;
+﻿using HsLib.Types.BattlefieldSubscribers;
+using HsLib.Types.Cards;
 
 namespace HsLib.KnownCards.Minions
 {
@@ -12,7 +12,7 @@ namespace HsLib.KnownCards.Minions
         }
     }
 
-    public class ArmorsmithEffectSource : BattlefieldSubscriber<Minion, Minion>
+    public class ArmorsmithEffectSource : BattlefieldSubscriber<Minion>
     {
         public ArmorsmithEffectSource(Minion owner) : base(owner)
         {

@@ -13,18 +13,17 @@ namespace HsLib.Types.BattlefieldSubscribers
     /// Type of card, you want to subscribe to. Other types will be filtered out.
     /// If you don't want to sub to each individual card, just use ICard.
     /// </typeparam>
-    public abstract class BattlefieldSubscriber<TOwner, TSubscribedCard> : IBattlefieldSubscriber
-        where TOwner : ICard
+    public abstract class BattlefieldSubscriber<TSubscribedCard> : IBattlefieldSubscriber
         where TSubscribedCard : ICard
     {
-        protected BattlefieldSubscriber(TOwner owner)
+        protected BattlefieldSubscriber(ICard owner)
         {
             Owner = owner;
         }
 
         public bool IsActive { get; private set; }
 
-        public TOwner Owner { get; }
+        public ICard Owner { get; set; }
 
         protected Battlefield? Bf { get; private set; }
 

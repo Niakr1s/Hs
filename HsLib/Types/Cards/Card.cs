@@ -21,7 +21,7 @@ namespace HsLib.Types.Cards
 
         public PlaceInContainer? PlaceInContainer { get; set; }
 
-        public Mp Mp { get; }
+        public Mp Mp { get; protected set; }
 
         public virtual bool ShouldBeRemovedFromCurrentContainer() { return false; }
 

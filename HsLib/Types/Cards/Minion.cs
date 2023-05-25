@@ -1,4 +1,5 @@
-﻿using HsLib.Systems;
+﻿using Force.DeepCloner;
+using HsLib.Systems;
 using HsLib.Types.BattlefieldSubscribers;
 using HsLib.Types.Effects;
 using HsLib.Types.Places;
@@ -14,17 +15,17 @@ namespace HsLib.Types.Cards
             Hp = new Hp(hp);
         }
 
-        public Atk Atk { get; }
+        public Atk Atk { get; private set; }
 
         public int AtksThisTurn { get; private set; }
 
-        public Hp Hp { get; }
+        public Hp Hp { get; private set; }
 
-        public BoolStat Taunt { get; init; } = new BoolStat(false);
-        public BoolStat Charge { get; init; } = new BoolStat(false);
-        public Windfury Windfury { get; init; } = new Windfury(false);
-        public BoolStat DivineShield { get; init; } = new BoolStat(false);
-        public BoolStat Stealth { get; init; } = new BoolStat(false);
+        public BoolStat Taunt { get; private set; } = new BoolStat(false);
+        public BoolStat Charge { get; private set; } = new BoolStat(false);
+        public Windfury Windfury { get; private set; } = new Windfury(false);
+        public BoolStat DivineShield { get; private set; } = new BoolStat(false);
+        public BoolStat Stealth { get; private set; } = new BoolStat(false);
 
         public BattlecryEffect? BattlecryEffect { get; protected set; }
 
@@ -120,6 +121,27 @@ namespace HsLib.Types.Cards
         public override bool ShouldBeRemovedFromCurrentContainer()
         {
             return PlaceInContainer!.Loc == Loc.Field && Dead;
+        }
+
+        public Minion Clone()
+        {
+            Minion cloned = this.DeepClone();
+
+            cloned.PlaceInContainer = null;
+
+            cloned.Mp = (Mp)Mp.Clone();
+            cloned.Atk = (Atk)Atk.Clone();
+            cloned.Hp = (Hp)Hp.Clone();
+            cloned.Taunt = (BoolStat)Taunt.Clone();
+            cloned.Charge = (BoolStat)Charge.Clone();
+            cloned.Windfury = (Windfury)Windfury.Clone();
+            cloned.DivineShield = (BoolStat)DivineShield.Clone();
+            cloned.Stealth = (BoolStat)Stealth.Clone();
+
+            if (cloned.BattlecryEffect is not null) { cloned.BattlecryEffect.Owner = cloned; }
+            cloned.FieldEffectSources.ForEach(s => s.Owner = cloned);
+
+            return cloned;
         }
     }
 }

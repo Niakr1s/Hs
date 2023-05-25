@@ -1,10 +1,13 @@
 ﻿using HsLib.Systems;
+using HsLib.Types.Cards;
 using HsLib.Types.Places;
 
 namespace HsLib.Types.BattlefieldSubscribers
 {
     public interface IBattlefieldSubscriber
     {
+        ICard Owner { get; set; }
+
         /// <summary>
         /// Called after implementator was inserted to container.
         /// Implementators should decide if they should subscribe by themselves.
