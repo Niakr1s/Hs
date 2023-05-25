@@ -1,7 +1,9 @@
-﻿namespace HsLib.Types.Effects
+﻿using HsLib.Types.Stats;
+
+namespace HsLib.Types.Effects
 {
     public interface IHealEffect : IEffect
     {
-        int Heal { get; set; }
+        IntStat Heal { get; }
     }
 }

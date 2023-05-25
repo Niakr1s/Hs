@@ -10,7 +10,7 @@ namespace HsLib.KnownCards.Abilities
 
         public Fireblast() : base(2)
         {
-            DamageEffect effect = new() { Damage = 1 };
+            DamageEffect effect = new(1);
             Targets possibleTargets = new() { Locs = Loc.Field | Loc.Hero, Sides = PidSide.Me | PidSide.He };
             AbilityEffect = new(this, effect, possibleTargetsChooser: possibleTargets);
         }

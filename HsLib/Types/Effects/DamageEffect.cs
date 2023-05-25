@@ -1,11 +1,17 @@
 ﻿using HsLib.Systems;
 using HsLib.Types.Cards;
+using HsLib.Types.Stats;
 
 namespace HsLib.Types.Effects
 {
     public class DamageEffect : IDamageEffect
     {
-        public int Damage { get; set; }
+        public DamageEffect(int damageAmount)
+        {
+            Damage = new(damageAmount);
+        }
+
+        public IntStat Damage { get; }
 
         public Action UseEffect(Battlefield bf, ICard owner, ICard? target)
         {

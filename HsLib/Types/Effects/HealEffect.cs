@@ -1,11 +1,17 @@
 ﻿using HsLib.Systems;
 using HsLib.Types.Cards;
+using HsLib.Types.Stats;
 
 namespace HsLib.Types.Effects
 {
     public class HealEffect : IHealEffect
     {
-        public int Heal { get; set; }
+        public HealEffect(int healAmount)
+        {
+            Heal = new(healAmount);
+        }
+
+        public IntStat Heal { get; }
 
         public Action UseEffect(Battlefield bf, ICard owner, ICard? target)
         {
