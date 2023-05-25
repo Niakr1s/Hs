@@ -2,7 +2,6 @@
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.Types.Effects
 {
@@ -24,7 +23,7 @@ namespace HsLibTests.Types.Effects
 
             Minion minion = new ChillwindYeti();
             int startAtk = minion.Atk;
-            effect.UseEffect(bf, minion)();
+            effect.UseEffect(bf, null!, minion)();
 
             int expectedAtk = startAtk + effect.Value;
             Assert.AreEqual(expectedAtk, minion.Atk);

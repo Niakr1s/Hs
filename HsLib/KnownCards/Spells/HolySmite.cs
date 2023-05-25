@@ -11,7 +11,7 @@ namespace HsLib.KnownCards.Spells
         {
             IEffect effect = new DealDamageEffect() { Damage = 2 };
             Targets possibleTargets = new Targets { Locs = Loc.Field | Loc.Hero, Sides = PidSide.He | PidSide.Me };
-            SpellEffect = new(effect, possibleTargetsChooser: possibleTargets);
+            SpellEffect = new(this, effect, possibleTargetsChooser: possibleTargets);
         }
 
         public override SpellEffect SpellEffect { get; }

@@ -7,9 +7,9 @@ namespace HsLib.Types.Effects
 {
     public class SpellEffect : PlayerEffect
     {
-        public SpellEffect(IEffect effect,
+        public SpellEffect(ICard owner, IEffect effect,
             IChooser<Pid>? possibleTargetsChooser = null, IChooser<Pid>? targetsChooser = null)
-            : base(effect, possibleTargetsChooser, targetsChooser)
+            : base(owner, effect, possibleTargetsChooser, targetsChooser)
         {
         }
 

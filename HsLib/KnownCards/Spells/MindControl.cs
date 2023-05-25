@@ -9,7 +9,7 @@ namespace HsLib.KnownCards.Spells
     {
         public MindControl() : base(10)
         {
-            SpellEffect = new(
+            SpellEffect = new(this,
                 new MindControlEffect(),
                 possibleTargetsChooser: new Targets { Locs = Loc.Field, Sides = PidSide.He }
                 );

@@ -7,6 +7,11 @@ namespace HsLib.Interfaces
     public interface ITargetableEffect<TOwner>
     {
         /// <summary>
+        /// Owner of effect.
+        /// </summary>
+        ICard Owner { get; set; }
+
+        /// <summary>
         /// Gets all targets from battlefield, effect can be used on.
         /// </summary>
         /// <param name="bf"></param>

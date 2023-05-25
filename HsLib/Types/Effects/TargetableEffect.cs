@@ -15,10 +15,11 @@ namespace HsLib.Types.Effects
         /// <param name="possibleTargetsChooser">Chooses possible targets for effect.</param>
         /// <param name="targetsChooser">Chooses targets for effect.
         /// If provided, will ignore target in <see cref="UseEffect(Battlefield, PlaceInContainer, ICard?)"/> and use it instead.</param>
-        public TargetableEffect(IEffect effect,
+        public TargetableEffect(ICard owner, IEffect effect,
             IChooser<TOwner>? possibleTargetsChooser = null,
             IChooser<TOwner>? targetsChooser = null)
         {
+            Owner = owner;
             _effect = effect;
             _targetsChooser = targetsChooser;
             _possibleTargetsChooser = possibleTargetsChooser;
@@ -27,6 +28,8 @@ namespace HsLib.Types.Effects
         protected readonly IEffect _effect;
         private readonly IChooser<TOwner>? _targetsChooser;
         private readonly IChooser<TOwner>? _possibleTargetsChooser;
+
+        public ICard Owner { get; set; }
 
         public IEnumerable<ICard> GetPossibleTargets(Battlefield bf, TOwner owner)
         {
@@ -42,7 +45,7 @@ namespace HsLib.Types.Effects
         /// Uses effect. Param target can be ignored if custom targets chooser is provided.
         /// </summary>
         /// <param name="bf"></param>
-        /// <param name="ownerPlace"></param>
+        /// <param name="owner"></param>
         /// <param name="target">Will be ignored, if <see cref="_targetsChooser"/>is set, and will uses effects on every target, choosed by it.</param>
         /// 
         public Action UseEffect(Battlefield bf, TOwner owner, ICard? target)
@@ -52,7 +55,7 @@ namespace HsLib.Types.Effects
             {
                 if (target is not null)
                 {
-                    effectActions.Add(_effect.UseEffect(bf, target));
+                    effectActions.Add(_effect.UseEffect(bf, Owner, target));
                 }
             }
             else
@@ -60,7 +63,7 @@ namespace HsLib.Types.Effects
                 if (target is not null) { throw new ValidationException("target should be null"); }
 
                 IEnumerable<Action>? toAdd = _targetsChooser?.ChooseCards(owner, bf.Cards)
-                    .Select(target => _effect.UseEffect(bf, target));
+                    .Select(target => _effect.UseEffect(bf, Owner, target));
 
                 if (toAdd is not null) effectActions.AddRange(toAdd);
             }

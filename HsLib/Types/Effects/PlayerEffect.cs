@@ -7,9 +7,9 @@ namespace HsLib.Types.Effects
 {
     public abstract class PlayerEffect : TargetableEffect<Pid>
     {
-        protected PlayerEffect(IEffect effect,
+        protected PlayerEffect(ICard owner, IEffect effect,
             IChooser<Pid>? possibleTargetsChooser = null, IChooser<Pid>? targetsChooser = null)
-            : base(effect, possibleTargetsChooser, targetsChooser)
+            : base(owner, effect, possibleTargetsChooser, targetsChooser)
         {
         }
 

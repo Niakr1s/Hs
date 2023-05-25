@@ -3,7 +3,6 @@
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.Types.Effects
 {
@@ -26,7 +25,7 @@ namespace HsLibTests.Types.Effects
             Minion minion = new ChillwindYeti();
 
             _bf.Enemy.Field.Add(minion);
-            _effect.UseEffect(_bf, minion)();
+            _effect.UseEffect(_bf, null!, minion)();
 
             Assert.AreEqual(0, _bf.Enemy.Field.Count);
             Assert.AreEqual(1, _bf.Player.Field.Count);
@@ -39,7 +38,7 @@ namespace HsLibTests.Types.Effects
             Minion minion = new ChillwindYeti();
 
             _bf.Enemy.Hand.Add(minion);
-            Assert.ThrowsException<ValidationException>(() => _effect.UseEffect(_bf, minion));
+            Assert.ThrowsException<ValidationException>(() => _effect.UseEffect(_bf, null!, minion));
 
             Assert.AreEqual(1, _bf.Enemy.Hand.Count);
             Assert.AreEqual(0, _bf.Player.Field.Count);

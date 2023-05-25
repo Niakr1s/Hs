@@ -7,9 +7,9 @@ namespace HsLib.Types.Effects
 {
     public class AbilityEffect : PlayerEffect
     {
-        public AbilityEffect(IEffect effect,
+        public AbilityEffect(ICard owner, IEffect effect,
             IChooser<Pid>? possibleTargetsChooser = null, IChooser<Pid>? targetsChooser = null)
-            : base(effect, possibleTargetsChooser, targetsChooser)
+            : base(owner, effect, possibleTargetsChooser, targetsChooser)
         {
         }
         public override void ValidateEffectTarget(Battlefield bf, Pid ownerPid, ICard? effectTarget)

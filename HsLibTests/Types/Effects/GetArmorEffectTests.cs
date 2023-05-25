@@ -3,7 +3,6 @@
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Effects;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.Types.Effects
 {
@@ -18,7 +17,7 @@ namespace HsLibTests.Types.Effects
 
             Hero hero = bf.Enemy.Hero.Card;
             int startArmor = hero.Armor;
-            effect.UseEffect(bf, hero)();
+            effect.UseEffect(bf, null!, hero)();
             Assert.AreEqual(startArmor + 2, hero.Armor);
         }
 
@@ -29,7 +28,7 @@ namespace HsLibTests.Types.Effects
             GetArmorEffect effect = new() { Armor = 2 };
 
             Minion minion = new ChillwindYeti();
-            Assert.ThrowsException<ValidationException>(() => effect.UseEffect(bf, minion));
+            Assert.ThrowsException<ValidationException>(() => effect.UseEffect(bf, null!, minion));
         }
     }
 }

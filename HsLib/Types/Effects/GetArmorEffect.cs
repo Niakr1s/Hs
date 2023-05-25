@@ -7,7 +7,7 @@ namespace HsLib.Types.Effects
     {
         public int Armor { get; set; }
 
-        public Action UseEffect(Battlefield bf, ICard? target)
+        public Action UseEffect(Battlefield bf, ICard owner, ICard? target)
         {
             if (target is IWithArmor a)
             {

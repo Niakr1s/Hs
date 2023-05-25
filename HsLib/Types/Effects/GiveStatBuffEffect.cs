@@ -20,7 +20,7 @@ namespace HsLib.Types.Effects
 
         public bool TillEndOfTurn { get; set; }
 
-        public Action UseEffect(Battlefield bf, ICard target)
+        public Action UseEffect(Battlefield bf, ICard owner, ICard target)
         {
             Minion m = (Minion)target;
 

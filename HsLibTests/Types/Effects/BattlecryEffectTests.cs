@@ -4,7 +4,6 @@ using HsLib.Types.Cards;
 using HsLib.Types.Choosers;
 using HsLib.Types.Effects;
 using HsLib.Types.Places;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.Types.Effects
 {
@@ -35,9 +34,9 @@ namespace HsLibTests.Types.Effects
 
             Targets validTargets = new Targets() { Sides = PidSide.He, Locs = Loc.Field };
             // valid effect to target minion
-            BattlecryEffect? havePossibleTargetsEffect = new(new DealDamageEffect(), validTargets);
+            BattlecryEffect? havePossibleTargetsEffect = new(null!, new DealDamageEffect(), validTargets);
             // invalid effect to target minion
-            BattlecryEffect? noPossibleTargetsEffect = new(new DealDamageEffect());
+            BattlecryEffect? noPossibleTargetsEffect = new(null!, new DealDamageEffect());
 
             List<(BattlecryEffect?, ICard?, bool)> testCases = new()
             {

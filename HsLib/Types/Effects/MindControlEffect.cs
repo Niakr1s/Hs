@@ -7,7 +7,7 @@ namespace HsLib.Types.Effects
 {
     public class MindControlEffect : IEffect
     {
-        public Action UseEffect(Battlefield bf, ICard target)
+        public Action UseEffect(Battlefield bf, ICard owner, ICard target)
         {
             Minion m = (Minion)target;
             Field enemyField = bf[m.PlaceInContainer!.Pid].Field;

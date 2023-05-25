@@ -11,7 +11,7 @@ namespace HsLib.KnownCards.Minions
         {
             GiveStatBuffEffect<int> effect = new(c => ((IWithAtk)c).Atk) { Value = 2, TillEndOfTurn = true };
             Targets possibleTargets = new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He };
-            BattlecryEffect = new(effect, possibleTargetsChooser: possibleTargets);
+            BattlecryEffect = new(this, effect, possibleTargetsChooser: possibleTargets);
         }
     }
 }
