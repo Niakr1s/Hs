@@ -1,16 +1,16 @@
 ﻿using HsLib.Types.Cards;
+using HsLib.Types.Effects;
 
 namespace HsLib.KnownCards.Minions
 {
     public class DruidOfTheClaw : Minion
     {
+        private readonly List<CardId> _chooseIds = new() { CardId.DruidOfTheClawCharge, CardId.DruidOfTheClawTaunt };
+
         public DruidOfTheClaw() : base(5, 4, 4)
         {
-            _chooseOne = new() { CardId.DruidOfTheClawCharge, CardId.DruidOfTheClawTaunt };
+            ChooseOneEffect effect = new(_chooseIds);
+            BattlecryEffect = new(this, effect);
         }
-
-        private readonly List<CardId> _chooseOne;
-
-        public override IEnumerable<CardId>? ChoseOne => _chooseOne.AsEnumerable();
     }
 }

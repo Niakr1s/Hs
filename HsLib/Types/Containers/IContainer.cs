@@ -13,6 +13,6 @@ namespace HsLib.Types.Containers
 
         void CleanInactiveCards();
 
-        Action MoveToContainer(int fromIndex, IContainer toContainer, bool canBurn, int? toIndex = null, object? transformTo = default);
+        Action MoveToContainer(int fromIndex, IContainer toContainer, bool canBurn, int? toIndex = null);
     }
 }

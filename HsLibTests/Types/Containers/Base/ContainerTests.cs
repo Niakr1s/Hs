@@ -3,7 +3,6 @@ using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
 using HsLib.Types.Places;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.Types.Containers.Base
 {
@@ -177,17 +176,6 @@ namespace HsLibTests.Types.Containers.Base
         [TestMethod()]
         public void MoveToContainerTests()
         {
-            DoMoveToContainerTests(false);
-        }
-
-        [TestMethod()]
-        public void MoveToContainerTests_WithTransformTo()
-        {
-            DoMoveToContainerTests(true);
-        }
-
-        public void DoMoveToContainerTests(bool shouldTransform)
-        {
             IContainer _containerTo = _bf.Enemy.Field;
 
             Assert.AreEqual(_initCards.Count, _container.Count);
@@ -195,16 +183,7 @@ namespace HsLibTests.Types.Containers.Base
             for (int i = 0; i < initialCount; i++)
             {
                 ICard expectedCard = _container[0];
-
-                if (shouldTransform)
-                {
-                    expectedCard = new ChillwindYeti();
-                    _container.MoveToContainer(0, _containerTo, false, toIndex: i, transformTo: expectedCard)();
-                }
-                else
-                {
-                    _container.MoveToContainer(0, _containerTo, false, toIndex: i)();
-                }
+                _container.MoveToContainer(0, _containerTo, false, toIndex: i)();
 
 
                 Assert.AreEqual(expectedCard, _containerTo[i]);

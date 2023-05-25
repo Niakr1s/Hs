@@ -53,10 +53,7 @@ namespace HsLib.Types.Effects
             List<Action> effectActions = new();
             if (_targetsChooser is null)
             {
-                if (target is not null)
-                {
-                    effectActions.Add(_effect.UseEffect(bf, Owner, target));
-                }
+                effectActions.Add(_effect.UseEffect(bf, Owner, target));
             }
             else
             {

@@ -139,8 +139,7 @@ namespace HsLib.Types.Containers
             }
         }
 
-        // todo: remvoe transformTo
-        public Action MoveToContainer(int fromIndex, IContainer toContainer, bool canBurn, int? toIndex = 0, object? transformTo = default)
+        public Action MoveToContainer(int fromIndex, IContainer toContainer, bool canBurn, int? toIndex = 0)
         {
 
             var _ = this[fromIndex]; // easiest check for if index exists

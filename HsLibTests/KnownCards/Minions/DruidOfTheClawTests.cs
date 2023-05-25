@@ -1,7 +1,6 @@
 ﻿using HsLib.KnownCards.Minions;
 using HsLib.Systems;
 using HsLib.Types.Cards;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.KnownCards.Minions
 {

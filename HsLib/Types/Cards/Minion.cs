@@ -45,8 +45,6 @@ namespace HsLib.Types.Cards
             }
         }
 
-        public virtual IEnumerable<CardId>? ChoseOne { get; }
-
         public virtual void AfterAttack(Battlefield bf)
         {
             AtksThisTurn++;
@@ -103,10 +101,8 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            Minion transformTo = ChoseOne is null ? this : (Minion)CardBuilder.FromId(bf[PlaceInContainer!.Pid].Player.ChooseOne(ChoseOne));
-
             Action move = bf[PlaceInContainer!.Pid].Hand.MoveToContainer(PlaceInContainer.Index, bf[PlaceInContainer.Pid].Field,
-                canBurn: false, toIndex: fieldIndex, transformTo: transformTo);
+                canBurn: false, toIndex: fieldIndex);
 
             TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, PlaceInContainer!.Pid, effectTarget);
             Action? battlectyAction = BattlecryEffect?.UseEffect(bf, PlaceInContainer!.Pid, effectTarget);
