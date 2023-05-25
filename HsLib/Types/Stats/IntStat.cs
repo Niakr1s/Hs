@@ -73,8 +73,8 @@
 
         public override Stat<int> Clone()
         {
-            Stat<int> cloned = base.Clone();
-            _finalMultipliers.Clear();
+            IntStat cloned = (IntStat)base.Clone();
+            cloned._finalMultipliers.Clear();
             return cloned;
         }
     }

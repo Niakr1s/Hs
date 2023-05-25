@@ -46,5 +46,15 @@ namespace HsLibTests.Types.Stats
             Hp hp = new(30);
             Assert.ThrowsException<ArgumentException>(() => hp.Increase(-1));
         }
+
+        [TestMethod()]
+        public void CloneTest()
+        {
+            IntStat stat = new(3);
+            stat.AddFinalMultiplierAura(3);
+
+            IntStat cloned = (IntStat)stat.Clone();
+            Assert.AreEqual(3, cloned);
+        }
     }
 }

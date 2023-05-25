@@ -169,5 +169,22 @@ namespace HsLibTests.Types.Stats
 
             Assert.AreEqual(initialValue, stat.Value);
         }
+
+        [TestMethod()]
+        public void CloneTest()
+        {
+            IntStat stat = new(0);
+            var buff = stat.AddBuff(1);
+            var aura = stat.AddAura(2);
+
+            IntStat cloned = (IntStat)stat.Clone();
+            Assert.AreEqual(1, cloned);
+
+            aura.Deactivate();
+            Assert.AreEqual(1, cloned);
+
+            buff.Deactivate();
+            Assert.AreEqual(1, cloned);
+        }
     }
 }
