@@ -2,6 +2,7 @@
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
+using HsLib.Types.Places;
 using HsLib.Types.Stats;
 
 namespace HsLibTests.Types.Cards
@@ -20,6 +21,15 @@ namespace HsLibTests.Types.Cards
             DoStatTest<bool>(m => m.Windfury);
             DoStatTest<bool>(m => m.DivineShield);
             DoStatTest<bool>(m => m.Stealth);
+        }
+
+        [TestMethod()]
+        public void CloneTest_PlaceClonedProperly()
+        {
+            Minion minion = new ChillwindYeti();
+            minion.PlaceInContainer = new(Pid.P1, Loc.Hand, 0, 0);
+            Minion cloned = minion.Clone();
+            Assert.IsNull(cloned.PlaceInContainer);
         }
 
         [TestMethod()]
