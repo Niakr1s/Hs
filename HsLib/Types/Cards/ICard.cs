@@ -20,5 +20,9 @@ namespace HsLib.Types.Cards
 
         void Subscribe(Battlefield bf);
         void Unsubscribe(Battlefield bf, Place previousPlace);
+
+
+
+        ICard Clone();
     }
 }

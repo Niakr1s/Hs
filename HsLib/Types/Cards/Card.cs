@@ -1,4 +1,5 @@
-﻿using HsLib.Systems;
+﻿using Force.DeepCloner;
+using HsLib.Systems;
 using HsLib.Types.Places;
 using HsLib.Types.Stats;
 
@@ -41,6 +42,14 @@ namespace HsLib.Types.Cards
 
 
         public virtual void OnPreAttack(Battlefield bf, IAttacker attacker, IDamageable defender) { }
+
+        public virtual ICard Clone()
+        {
+            Card cloned = this.DeepClone();
+            cloned.PlaceInContainer = null;
+            cloned.Mp = (Mp)Mp.Clone();
+            return cloned;
+        }
 
         #endregion
     }

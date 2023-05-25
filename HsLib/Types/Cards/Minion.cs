@@ -1,5 +1,4 @@
-﻿using Force.DeepCloner;
-using HsLib.Systems;
+﻿using HsLib.Systems;
 using HsLib.Types.BattlefieldSubscribers;
 using HsLib.Types.Effects;
 using HsLib.Types.Places;
@@ -119,13 +118,10 @@ namespace HsLib.Types.Cards
             return PlaceInContainer!.Loc == Loc.Field && Dead;
         }
 
-        public Minion Clone()
+        public override ICard Clone()
         {
-            Minion cloned = this.DeepClone();
+            Minion cloned = (Minion)base.Clone();
 
-            cloned.PlaceInContainer = null;
-
-            cloned.Mp = (Mp)Mp.Clone();
             cloned.Atk = (Atk)Atk.Clone();
             cloned.Hp = (Hp)Hp.Clone();
             cloned.Taunt = (BoolStat)Taunt.Clone();
