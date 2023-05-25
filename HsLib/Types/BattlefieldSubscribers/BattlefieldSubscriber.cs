@@ -21,8 +21,6 @@ namespace HsLib.Types.BattlefieldSubscribers
             Owner = owner;
         }
 
-        public bool IsActive { get; private set; }
-
         public ICard Owner { get; set; }
 
         protected Battlefield? Bf { get; private set; }
@@ -35,10 +33,8 @@ namespace HsLib.Types.BattlefieldSubscribers
         /// <param name="bf"></param>
         public void Subscribe(Battlefield bf)
         {
-            if (IsActive) { return; }
             Bf = bf;
             DoSubscribe(bf);
-            IsActive = true;
         }
 
         /// <summary>
@@ -49,10 +45,8 @@ namespace HsLib.Types.BattlefieldSubscribers
         /// <returns>True, if was success deactivated.</returns>
         public void Unsubscribe(Battlefield bf, Place previousPlace)
         {
-            if (!IsActive) { return; }
             Bf = null;
             DoUnsubscribe(bf, previousPlace);
-            IsActive = false;
         }
 
         private void DoSubscribe(Battlefield bf)
