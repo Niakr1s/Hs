@@ -17,18 +17,18 @@ namespace HsLibTests.Types.Effects
 
         private static void DoUseEffectTest(bool tillEndOfTurn)
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             GiveStatBuffEffect<int> effect = new(c => ((IWithAtk)c).Atk) { Value = 2, TillEndOfTurn = tillEndOfTurn };
 
             Minion minion = new ChillwindYeti();
             int startAtk = minion.Atk;
-            effect.UseEffect(bf, null!, minion)();
+            effect.UseEffect(board, null!, minion)();
 
             int expectedAtk = startAtk + effect.Value;
             Assert.AreEqual(expectedAtk, minion.Atk);
 
-            bf.Turn.Next();
+            board.Turn.Next();
             if (tillEndOfTurn) { expectedAtk = startAtk; }
             Assert.AreEqual(expectedAtk, minion.Atk);
         }

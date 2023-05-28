@@ -5,12 +5,12 @@ namespace HsLib.Systems
 {
     public class MeleeService
     {
-        public MeleeService(Battlefield bf)
+        public MeleeService(Board board)
         {
-            Bf = bf;
+            Board = board;
         }
 
-        public Battlefield Bf { get; }
+        public Board Board { get; }
 
         /// <summary>
         /// Attacker attacks defender.
@@ -21,31 +21,31 @@ namespace HsLib.Systems
         /// <returns>Action, that makes attack.</returns>
         public Action MeleeAttack(IAttacker attacker, IDamageable defender)
         {
-            if (!defender.CanBeMeleeAttacked(Bf)) { throw new Exception("defender can't be melee attacked"); }
-            if (!attacker.CanMeleeAttack(Bf)) throw new Exception("attacker can't attack");
+            if (!defender.CanBeMeleeAttacked(Board)) { throw new Exception("defender can't be melee attacked"); }
+            if (!attacker.CanMeleeAttack(Board)) throw new Exception("attacker can't attack");
             // checks done
 
             return () =>
             {
                 // todo
-                //foreach (ICard card in Bf.Cards) { card.OnPreAttack(Bf, attacker, defender); }
+                //foreach (ICard card in Board.Cards) { card.OnPreAttack(Board, attacker, defender); }
 
                 // checking again, because attacker can be dead
-                bool canAttack = attacker.CanMeleeAttack(Bf);
+                bool canAttack = attacker.CanMeleeAttack(Board);
 
-                if (attacker.CanMeleeAttack(Bf))
+                if (attacker.CanMeleeAttack(Board))
                 {
                     defender.Hp.Decrease(attacker.Atk);
 
                     if (defender is IAttacker counterAttacker)
                     {
-                        attacker.GetDefender(Bf).Hp.Decrease(counterAttacker.Atk);
+                        attacker.GetDefender(Board).Hp.Decrease(counterAttacker.Atk);
                     }
 
-                    attacker.AfterAttack(Bf);
+                    attacker.AfterAttack(Board);
                 }
 
-                Bf.DeathService.ProcessDeaths();
+                Board.DeathService.ProcessDeaths();
             };
         }
 
@@ -60,13 +60,13 @@ namespace HsLib.Systems
         {
             if (attacker.Place.IsNone()) { throw new ArgumentException("attacker place is none"); }
             if (defender.Place.IsNone()) { throw new ArgumentException("defender place is none"); }
-            if (attacker.Place.Pid != Bf.Player.Pid) { throw new ArgumentException("wrong attacker turn"); }
+            if (attacker.Place.Pid != Board.Player.Pid) { throw new ArgumentException("wrong attacker turn"); }
             if (attacker.Place.Loc != Loc.Field) { throw new ArgumentException("wrong attacker's location"); }
-            if (defender.Place.Pid != Bf.Enemy.Pid) { throw new ArgumentException("wrong defender turn"); }
+            if (defender.Place.Pid != Board.Enemy.Pid) { throw new ArgumentException("wrong defender turn"); }
             if (defender.Place.Loc != Loc.Field && defender.Place.Loc != Loc.Hero) { throw new ArgumentException("wrong defender location"); }
 
-            if (!attacker.CanMeleeAttack(Bf)) { throw new ArgumentException("attacker can't attack"); }
-            if (!defender.CanBeMeleeAttacked(Bf)) { throw new ArgumentException("defender can't be attacked"); }
+            if (!attacker.CanMeleeAttack(Board)) { throw new ArgumentException("attacker can't attack"); }
+            if (!defender.CanBeMeleeAttacked(Board)) { throw new ArgumentException("defender can't be attacked"); }
 
             return MeleeAttack(attacker, defender);
         }
@@ -79,14 +79,14 @@ namespace HsLib.Systems
         /// <returns>Action, that makes attack.</returns>
         public Action WeaponAttack(IDamageable defender)
         {
-            if (defender.Place.Pid == Bf.Turn.Pid) { throw new ArgumentException("wrong defender turn"); }
-            if (Bf.Player.Weapon is null)
+            if (defender.Place.Pid == Board.Turn.Pid) { throw new ArgumentException("wrong defender turn"); }
+            if (Board.Player.Weapon is null)
             {
                 return () => { };
             }
             else
             {
-                return MeleeAttack(Bf.Player.Weapon, defender);
+                return MeleeAttack(Board.Player.Weapon, defender);
             }
         }
     }

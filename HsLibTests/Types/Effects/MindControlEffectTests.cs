@@ -9,13 +9,13 @@ namespace HsLibTests.Types.Effects
     [TestClass()]
     public class MindControlEffectTests
     {
-        Battlefield _bf = null!;
+        Board _board = null!;
         MindControlEffect _effect = null!;
 
         [TestInitialize()]
         public void MindControlEffectTestsInitialize()
         {
-            _bf = TestBattlefield.New();
+            _board = TestBoard.New();
             _effect = new();
         }
 
@@ -24,12 +24,12 @@ namespace HsLibTests.Types.Effects
         {
             Minion minion = new ChillwindYeti();
 
-            _bf.Enemy.Field.Add(minion);
-            _effect.UseEffect(_bf, null!, minion)();
+            _board.Enemy.Field.Add(minion);
+            _effect.UseEffect(_board, null!, minion)();
 
-            Assert.AreEqual(0, _bf.Enemy.Field.Count);
-            Assert.AreEqual(1, _bf.Player.Field.Count);
-            Assert.AreEqual(minion, _bf.Player.Field[0]);
+            Assert.AreEqual(0, _board.Enemy.Field.Count);
+            Assert.AreEqual(1, _board.Player.Field.Count);
+            Assert.AreEqual(minion, _board.Player.Field[0]);
         }
 
         [TestMethod()]
@@ -37,12 +37,12 @@ namespace HsLibTests.Types.Effects
         {
             Minion minion = new ChillwindYeti();
 
-            _bf.Enemy.Hand.Add(minion);
-            Assert.ThrowsException<ValidationException>(() => _effect.UseEffect(_bf, null!, minion));
+            _board.Enemy.Hand.Add(minion);
+            Assert.ThrowsException<ValidationException>(() => _effect.UseEffect(_board, null!, minion));
 
-            Assert.AreEqual(1, _bf.Enemy.Hand.Count);
-            Assert.AreEqual(0, _bf.Player.Field.Count);
-            Assert.AreEqual(minion, _bf.Enemy.Hand[0]);
+            Assert.AreEqual(1, _board.Enemy.Hand.Count);
+            Assert.AreEqual(0, _board.Player.Field.Count);
+            Assert.AreEqual(minion, _board.Enemy.Hand[0]);
         }
     }
 }

@@ -12,19 +12,19 @@ namespace HsLibTests.KnownCards.Abilities
         [TestMethod()]
         public void ArmorUpTest()
         {
-            Battlefield bf = TestBattlefield.New(p1: CardId.GarroshHellscream);
-            Ability armorUp = bf.Player.Ability;
+            Board board = TestBoard.New(p1: CardId.GarroshHellscream);
+            Ability armorUp = board.Player.Ability;
             Assert.IsInstanceOfType(armorUp, typeof(ArmorUp));
-            Assert.AreEqual(0, armorUp.AbilityEffect.GetPossibleTargets(bf).Count());
+            Assert.AreEqual(0, armorUp.AbilityEffect.GetPossibleTargets(board).Count());
 
 
-            Assert.AreEqual(0, bf.Player.Hero.Armor);
-            Assert.AreEqual(true, bf.UseAbility());
-            Assert.AreEqual(2, bf.Player.Hero.Armor);
+            Assert.AreEqual(0, board.Player.Hero.Armor);
+            Assert.AreEqual(true, board.UseAbility());
+            Assert.AreEqual(2, board.Player.Hero.Armor);
 
             Minion y1 = new ChillwindYeti();
-            bf[Pid.P1].Field.Add(y1);
-            Assert.AreEqual(0, armorUp.AbilityEffect.GetPossibleTargets(bf).Count());
+            board[Pid.P1].Field.Add(y1);
+            Assert.AreEqual(0, armorUp.AbilityEffect.GetPossibleTargets(board).Count());
         }
     }
 }

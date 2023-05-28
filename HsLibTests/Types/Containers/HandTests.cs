@@ -10,7 +10,7 @@ namespace HsLibTests.Types.Containers
     [TestClass()]
     public class HandTests
     {
-        private Battlefield _bf = null!;
+        private Board _board = null!;
 
         /// <summary>
         /// Inits with minion x 3.
@@ -25,8 +25,8 @@ namespace HsLibTests.Types.Containers
         [TestInitialize()]
         public void ContainerTestInitialize()
         {
-            _bf = TestBattlefield.New();
-            _hand = _bf.Player.Hand;
+            _board = TestBoard.New();
+            _hand = _board.Player.Hand;
 
             foreach (Minion card in _initCards)
             {
@@ -43,7 +43,7 @@ namespace HsLibTests.Types.Containers
         [TestMethod()]
         public void PlayFromHandTest_Works()
         {
-            Field field = _bf[_hand.Place.Pid].Field;
+            Field field = _board[_hand.Place.Pid].Field;
 
             int handCount = _hand.Count;
             Assert.AreNotEqual(0, handCount);
@@ -52,7 +52,7 @@ namespace HsLibTests.Types.Containers
             {
                 Minion cardToPlay = (Minion)_hand[0];
                 cardToPlay.Mp.Set(0);
-                _bf.Turn.Skip(_hand.Place.Pid);
+                _board.Turn.Skip(_hand.Place.Pid);
 
                 _hand.PlayFromHand(0, fieldIndex: 0)();
                 Assert.AreEqual(cardToPlay, field[0]);
@@ -62,7 +62,7 @@ namespace HsLibTests.Types.Containers
         [TestMethod()]
         public void PlayFromHandTest_WorksWithNullIndex()
         {
-            Field field = _bf[_hand.Place.Pid].Field;
+            Field field = _board[_hand.Place.Pid].Field;
 
             int handCount = _hand.Count;
             Assert.AreNotEqual(0, handCount);
@@ -71,7 +71,7 @@ namespace HsLibTests.Types.Containers
             {
                 Minion cardToPlay = (Minion)_hand[0];
                 cardToPlay.Mp.Set(0);
-                _bf.Turn.Skip(_hand.Place.Pid);
+                _board.Turn.Skip(_hand.Place.Pid);
 
                 _hand.PlayFromHand(0, fieldIndex: null)();
                 Assert.AreEqual(cardToPlay, field[^1]);
@@ -81,7 +81,7 @@ namespace HsLibTests.Types.Containers
         [TestMethod()]
         public void PlayFromHandTest_NonEffectMinion_NullEffectTarget()
         {
-            Field field = _bf[_hand.Place.Pid].Field;
+            Field field = _board[_hand.Place.Pid].Field;
 
             int handCount = _hand.Count;
             Assert.AreNotEqual(0, handCount);
@@ -104,7 +104,7 @@ namespace HsLibTests.Types.Containers
         [TestMethod()]
         public void PlayFromHandTest_NonEffectMinion_NonNullEffectTarget()
         {
-            Field field = _bf[_hand.Place.Pid].Field;
+            Field field = _board[_hand.Place.Pid].Field;
 
             int handCount = _hand.Count;
             Assert.AreNotEqual(0, handCount);
@@ -127,7 +127,7 @@ namespace HsLibTests.Types.Containers
         [TestMethod()]
         public void PlayFromHandTest_EffectMinion_NullEffectTarget()
         {
-            Field field = _bf[_hand.Place.Pid].Field;
+            Field field = _board[_hand.Place.Pid].Field;
 
             int handCount = _hand.Count;
             Assert.AreNotEqual(0, handCount);
@@ -150,7 +150,7 @@ namespace HsLibTests.Types.Containers
         [TestMethod()]
         public void PlayFromHandTest_EffectMinion_NonNullEffectTarget()
         {
-            Field field = _bf[_hand.Place.Pid].Field;
+            Field field = _board[_hand.Place.Pid].Field;
 
             int handCount = _hand.Count;
             Assert.AreNotEqual(0, handCount);
@@ -172,7 +172,7 @@ namespace HsLibTests.Types.Containers
         [TestMethod()]
         public void PlayFromHandTest_FailsOnWrongIndex()
         {
-            Field field = _bf[_hand.Place.Pid].Field;
+            Field field = _board[_hand.Place.Pid].Field;
 
             int handCount = _hand.Count;
             for (int i = -20; i < 20; i++)
@@ -188,7 +188,7 @@ namespace HsLibTests.Types.Containers
             Minion cardToPlay = (Minion)_hand[0];
             Assert.AreNotEqual(0, cardToPlay.Mp);
 
-            PlayerMp playerMp = _bf[_hand.Place.Pid].Mp;
+            PlayerMp playerMp = _board[_hand.Place.Pid].Mp;
             int initialMp = playerMp;
 
             _hand.PlayFromHand(0, fieldIndex: 0)();
@@ -201,7 +201,7 @@ namespace HsLibTests.Types.Containers
             Minion cardToPlay = (Minion)_hand[0];
             Assert.AreNotEqual(0, cardToPlay.Mp);
 
-            PlayerMp playerMp = _bf[_hand.Place.Pid].Mp;
+            PlayerMp playerMp = _board[_hand.Place.Pid].Mp;
             playerMp.Set(cardToPlay.Mp - 1);
             int initialMp = playerMp;
 

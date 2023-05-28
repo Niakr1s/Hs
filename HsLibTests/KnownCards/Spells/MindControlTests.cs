@@ -12,27 +12,27 @@ namespace HsLibTests.KnownCards.Spells
         [TestMethod()]
         public void MindControlTest()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             Spell mindControl = new MindControl();
-            Assert.AreEqual(0, mindControl.SpellEffect.GetPossibleTargets(bf).Count());
+            Assert.AreEqual(0, mindControl.SpellEffect.GetPossibleTargets(board).Count());
 
             Minion yeti = new ChillwindYeti();
 
-            bf[Pid.P1].Hand.Add(mindControl);
-            Assert.AreEqual(0, mindControl.SpellEffect.GetPossibleTargets(bf).Count());
+            board[Pid.P1].Hand.Add(mindControl);
+            Assert.AreEqual(0, mindControl.SpellEffect.GetPossibleTargets(board).Count());
 
-            bf[Pid.P1].Field.Add(yeti);
-            Assert.AreEqual(0, mindControl.SpellEffect.GetPossibleTargets(bf).Count());
+            board[Pid.P1].Field.Add(yeti);
+            Assert.AreEqual(0, mindControl.SpellEffect.GetPossibleTargets(board).Count());
 
-            bf[Pid.P1].Field.Remove(yeti);
-            bf[Pid.P2].Field.Add(yeti);
-            Assert.AreEqual(1, mindControl.SpellEffect.GetPossibleTargets(bf).Count());
+            board[Pid.P1].Field.Remove(yeti);
+            board[Pid.P2].Field.Add(yeti);
+            Assert.AreEqual(1, mindControl.SpellEffect.GetPossibleTargets(board).Count());
 
-            mindControl.SpellEffect.UseEffect(bf, yeti)();
+            mindControl.SpellEffect.UseEffect(board, yeti)();
             Assert.AreEqual(Pid.P1, yeti.Place.Pid);
-            Assert.AreEqual(1, bf[Pid.P1].Field.Count);
-            Assert.AreEqual(0, bf[Pid.P2].Field.Count);
+            Assert.AreEqual(1, board[Pid.P1].Field.Count);
+            Assert.AreEqual(0, board[Pid.P2].Field.Count);
         }
     }
 }

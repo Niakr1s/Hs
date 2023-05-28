@@ -23,8 +23,8 @@ namespace HsLibTests.Types.Cards
         [TestMethod()]
         public void CloneTest_AurasClonedProperly()
         {
-            Battlefield bf = TestBattlefield.New();
-            Field f = bf.Player.Field;
+            Board board = TestBoard.New();
+            Field f = board.Player.Field;
             f.Add(new ChillwindYeti());
             f.Add(new FlametongTotem());
             f.Add(new ChillwindYeti());

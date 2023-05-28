@@ -9,7 +9,7 @@ namespace HsLibTests.Types.Containers.Base
     [TestClass()]
     public class ContainerTests
     {
-        private Battlefield _bf = null!;
+        private Board board = null!;
 
         /// <summary>
         /// Inits with minion x 3.
@@ -24,8 +24,8 @@ namespace HsLibTests.Types.Containers.Base
         [TestInitialize()]
         public void ContainerTestInitialize()
         {
-            _bf = TestBattlefield.New();
-            _container = _bf.Player.Field;
+            board = TestBoard.New();
+            _container = board.Player.Field;
 
             foreach (Minion card in _initCards)
             {
@@ -36,7 +36,7 @@ namespace HsLibTests.Types.Containers.Base
         [TestMethod()]
         public void Constructor_StartCardsTest()
         {
-            Container<Minion> container = new(_bf, new Place(Pid.P1, Loc.Field), startCards: _initCards);
+            Container<Minion> container = new(board, new Place(Pid.P1, Loc.Field), startCards: _initCards);
             Assert.AreEqual(_initCards.Count, container.Count);
             ContainerTestHelpers.AssertCardsHaveValidPlaces(container);
         }
@@ -45,7 +45,7 @@ namespace HsLibTests.Types.Containers.Base
         public void Constructor_LimitTest()
         {
             const int limit = 2;
-            Container<Minion> container = new(_bf, new Place(Pid.P1, Loc.Field), limit: limit);
+            Container<Minion> container = new(board, new Place(Pid.P1, Loc.Field), limit: limit);
 
             for (int i = 0; i < limit; i++)
             {
@@ -176,7 +176,7 @@ namespace HsLibTests.Types.Containers.Base
         [TestMethod()]
         public void MoveToContainerTests()
         {
-            IContainer _containerTo = _bf.Enemy.Field;
+            IContainer _containerTo = board.Enemy.Field;
 
             Assert.AreEqual(_initCards.Count, _container.Count);
             int initialCount = _container.Count;

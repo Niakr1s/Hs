@@ -2,9 +2,9 @@
 using HsLib.Types.Cards;
 using HsLib.Types.Places;
 
-namespace HsLib.Types.BattlefieldSubscribers
+namespace HsLib.Types.BoardSubscribers
 {
-    public interface IBattlefieldSubscriber
+    public interface IBoardSubscriber
     {
         ICard Owner { get; set; }
 
@@ -12,14 +12,14 @@ namespace HsLib.Types.BattlefieldSubscribers
         /// Called after implementator was inserted to container.
         /// Implementators should decide if they should subscribe by themselves.
         /// </summary>
-        /// <param name="bf"></param>
-        void Subscribe(Battlefield bf);
+        /// <param name="board"></param>
+        void Subscribe(Board board);
 
         /// <summary>
         /// Called after implementator was removed from container.
         /// Implementators should decide if they should subscribe by themselves.
         /// </summary>
-        /// <param name="bf"></param>
-        void Unsubscribe(Battlefield bf, Place previousPlace);
+        /// <param name="board"></param>
+        void Unsubscribe(Board board, Place previousPlace);
     }
 }

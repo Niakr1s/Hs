@@ -11,20 +11,20 @@ namespace HsLibTests.KnownCards.Minions
         [TestMethod()]
         public void AbusiveSergeantTest()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             Minion yeti = new ChillwindYeti();
-            bf[Pid.P1].Field.Add(yeti);
+            board[Pid.P1].Field.Add(yeti);
             Assert.AreEqual(4, yeti.Atk);
 
             Minion abusiveSergeant = new AbusiveSergeant();
-            bf[Pid.P1].Hand.Add(abusiveSergeant);
+            board[Pid.P1].Hand.Add(abusiveSergeant);
             Assert.AreEqual(4, yeti.Atk);
 
-            abusiveSergeant.BattlecryEffect?.UseEffect(bf, yeti)();
+            abusiveSergeant.BattlecryEffect?.UseEffect(board, yeti)();
             Assert.AreEqual(6, yeti.Atk);
 
-            bf.Turn.Next();
+            board.Turn.Next();
             Assert.AreEqual(4, yeti.Atk);
         }
     }

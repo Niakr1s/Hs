@@ -8,7 +8,7 @@ namespace HsLib.Types.Containers
 {
     public interface IContainer : IList, IWithPlace, INotifyCollectionChanged
     {
-        Battlefield Bf { get; }
+        Board Board { get; }
 
         bool CanBeInserted { get; }
 

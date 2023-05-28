@@ -16,7 +16,7 @@ namespace HsLib.Types.Auras
 
         public T Value { get; init; }
 
-        public IEnchantHandler GiveAura(Battlefield bf, ICard owner, ICard target)
+        public IEnchantHandler GiveAura(Board board, ICard owner, ICard target)
         {
             return _statChooser(target).AddAura(Value);
         }

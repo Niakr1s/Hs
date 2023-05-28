@@ -9,10 +9,10 @@ namespace HsLibTests.Types.Choosers
         public void HeroChooserTest()
         {
             var chooser = new HeroChooser();
-            var bf = TestBattlefield.New();
+            var board = TestBoard.New();
 
-            Assert.AreEqual(1, chooser.ChooseCards(bf, bf.Player.Ability).Count());
-            Assert.AreEqual(1, chooser.ChooseCards(bf, bf.Enemy.Ability).Count());
+            Assert.AreEqual(1, chooser.ChooseCards(board, board.Player.Ability).Count());
+            Assert.AreEqual(1, chooser.ChooseCards(board, board.Enemy.Ability).Count());
         }
     }
 }

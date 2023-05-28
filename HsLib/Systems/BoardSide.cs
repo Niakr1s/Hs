@@ -8,26 +8,26 @@ using System.Diagnostics;
 
 namespace HsLib.Systems
 {
-    public class BattlefieldPlayer : INotifyCollectionChanged
+    public class BoardSide : INotifyCollectionChanged
     {
-        public BattlefieldPlayer(Battlefield bf, Pid pid, StartingDeck startingDeck)
+        public BoardSide(Board board, Pid pid, StartingDeck startingDeck)
         {
-            Bf = bf;
+            Board = board;
             Pid = pid;
 
-            Deck = new(bf, pid, startCards: startingDeck.Cards);
-            Hand = new(bf, pid);
-            Field = new(bf, pid);
-            Secrets = new Secrets(bf, pid);
+            Deck = new(board, pid, startCards: startingDeck.Cards);
+            Hand = new(board, pid);
+            Field = new(board, pid);
+            Secrets = new Secrets(board, pid);
 
-            HeroContainer = new(bf, pid, (Hero)startingDeck.HeroId.ToCard());
-            AbilityContainer = new(bf, pid, Hero.ProduceAbility());
-            WeaponContainer = new(bf, pid);
+            HeroContainer = new(board, pid, (Hero)startingDeck.HeroId.ToCard());
+            AbilityContainer = new(board, pid, Hero.ProduceAbility());
+            WeaponContainer = new(board, pid);
         }
 
         public Pid Pid { get; }
 
-        public Battlefield Bf { get; }
+        public Board Board { get; }
 
         public event NotifyCollectionChangedEventHandler? CollectionChanged
         {

@@ -16,20 +16,20 @@ namespace HsLib.Types.Cards
         /// <summary>
         /// First call will throw exceptions, if effect can't be used. Second call actually uses effect.
         /// </summary>
-        /// <param name="bf"></param>
+        /// <param name="board"></param>
         /// <param name="target"></param>
         /// 
         /// <returns>Action, that actually uses effect.</returns>
-        public Action UseAbility(Battlefield bf, ICard? target)
+        public Action UseAbility(Board board, ICard? target)
         {
-            TargetableEffectValidator.ValidateEffectTarget(AbilityEffect, bf, target);
-            Action useEffectAction = AbilityEffect.UseEffect(bf, target);
+            TargetableEffectValidator.ValidateEffectTarget(AbilityEffect, board, target);
+            Action useEffectAction = AbilityEffect.UseEffect(board, target);
 
             return () =>
             {
                 useEffectAction();
                 EffectUsedThisTurn = true;
-                bf[Place.Pid].Mp.Decrease(Mp);
+                board[Place.Pid].Mp.Decrease(Mp);
             };
         }
 

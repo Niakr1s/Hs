@@ -2,14 +2,13 @@
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.Types.Containers
 {
     [TestClass()]
     public class FieldTests
     {
-        private Battlefield _bf = null!;
+        private Board _board = null!;
 
         /// <summary>
         /// Inits with minion x 3.
@@ -24,8 +23,8 @@ namespace HsLibTests.Types.Containers
         [TestInitialize()]
         public void ContainerTestInitialize()
         {
-            _bf = TestBattlefield.New();
-            _field = _bf.Player.Field;
+            _board = TestBoard.New();
+            _field = _board.Player.Field;
 
             foreach (Minion card in _initCards)
             {

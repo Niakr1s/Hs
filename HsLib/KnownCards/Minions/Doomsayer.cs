@@ -1,4 +1,4 @@
-﻿using HsLib.Types.BattlefieldSubscribers;
+﻿using HsLib.Types.BoardSubscribers;
 using HsLib.Types.Cards;
 using HsLib.Types.Choosers;
 using HsLib.Types.Places;
@@ -14,7 +14,7 @@ namespace HsLib.KnownCards.Minions
         }
     }
 
-    public class DoomsayerEffectSource : BattlefieldSubscriber<ICard>
+    public class DoomsayerEffectSource : BoardSubscriber<ICard>
     {
         public DoomsayerEffectSource(Minion owner) : base(owner)
         {
@@ -24,14 +24,14 @@ namespace HsLib.KnownCards.Minions
 
         protected override void OnTurnStart()
         {
-            if (Bf!.Turn.Pid == Owner.Place.Pid)
+            if (Board!.Turn.Pid == Owner.Place.Pid)
             {
-                foreach (IMortal card in _targets.ChooseCards(Bf, Owner)
+                foreach (IMortal card in _targets.ChooseCards(Board, Owner)
                     .Cast<IMortal>())
                 {
                     card.Dead = true;
                 }
-                Bf.DeathService.ProcessDeaths();
+                Board.DeathService.ProcessDeaths();
             }
         }
     }

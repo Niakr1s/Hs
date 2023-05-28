@@ -7,11 +7,11 @@ namespace HsLib.Types.Cards
 {
     /// <summary>
     /// Parent for all cards.<br/><br/>
-    /// Card reacts on 4 Battlefield events:<br/>
-    /// <see cref="Subscribe(Battlefield)"/><br/>
-    /// <see cref="Unsubscribe(Battlefield, Place)"/><br/>
-    /// <see cref="OnTurnEnd(Battlefield)"/><br/>
-    /// <see cref="OnTurnStart(Battlefield)"/>.<br/><br/>
+    /// Card reacts on 4 board events:<br/>
+    /// <see cref="Subscribe(Board)"/><br/>
+    /// <see cref="Unsubscribe(Board, Place)"/><br/>
+    /// <see cref="OnTurnEnd(Board)"/><br/>
+    /// <see cref="OnTurnStart(Board)"/>.<br/><br/>
     /// </summary>
     public abstract class Card : ICard, IWithPlace
     {
@@ -25,7 +25,7 @@ namespace HsLib.Types.Cards
 
         public int? AddedTurnNo { get; private set; }
 
-        protected Battlefield? Bf { get; private set; }
+        protected Board? Board { get; private set; }
 
         public Mp Mp { get; protected set; }
 
@@ -34,15 +34,15 @@ namespace HsLib.Types.Cards
 
         #region reactive
 
-        public virtual void Subscribe(Battlefield bf)
+        public virtual void Subscribe(Board board)
         {
-            Bf = bf;
-            AddedTurnNo = bf.Turn.No;
+            Board = board;
+            AddedTurnNo = board.Turn.No;
         }
 
-        public virtual void Unsubscribe(Battlefield bf, Place previousPlace)
+        public virtual void Unsubscribe(Board board, Place previousPlace)
         {
-            Bf = null;
+            Board = null;
             AddedTurnNo = null;
         }
 

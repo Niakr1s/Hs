@@ -11,14 +11,14 @@ namespace HsLibTests.Types.Effects
     public class SpellEffectTests
     {
 
-        Battlefield _bf = null!;
+        Board _board = null!;
 
         public TestContext? TestContext { get; set; }
 
         [TestInitialize()]
         public void Setup()
         {
-            _bf = TestBattlefield.New();
+            _board = TestBoard.New();
         }
 
         [TestMethod()]
@@ -27,16 +27,11 @@ namespace HsLibTests.Types.Effects
             Minion? nullMinion = null;
 
             Minion enemyMinion = new ChillwindYeti();
-            _bf.Enemy.Field.Add(enemyMinion);
+            _board.Enemy.Field.Add(enemyMinion);
 
             Minion playerMinion = new ChillwindYeti();
-            _bf.Player.Field.Add(playerMinion);
+            _board.Player.Field.Add(playerMinion);
 
-            //Spell havePossibleTargetsEffectSpell = new SpellWithPossibleTargetsEffect();
-            //Spell haveNoPossibleTargetsEffectSpell = new SpellWithNoPossibleTargetsEffect();
-
-            //_bf.Player.Hand.Add(havePossibleTargetsEffectSpell);
-            //_bf.Player.Hand.Add(haveNoPossibleTargetsEffectSpell);
             Targets validTargets = new Targets() { Sides = PidSide.He, Locs = Loc.Field };
 
             // valid effect to target minion
@@ -65,7 +60,7 @@ namespace HsLibTests.Types.Effects
             {
                 (SpellEffect? effect, ICard? target, bool shouldPass) = testCases[i];
 
-                void doTest() => TargetableEffectValidator.ValidateEffectTarget(effect, _bf, target);
+                void doTest() => TargetableEffectValidator.ValidateEffectTarget(effect, _board, target);
 
                 if (shouldPass)
                 {

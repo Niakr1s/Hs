@@ -10,15 +10,15 @@ namespace HsLibTests.KnownCards.Minions
         [TestMethod()]
         public void DruidOfTheClawTest()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             Minion m = new DruidOfTheClaw();
-            bf.Player.Hand.Add(m);
+            board.Player.Hand.Add(m);
 
-            Assert.AreEqual(true, bf.PlayFromHand(0));
-            Assert.IsNotInstanceOfType(bf.Player.Field[0], typeof(DruidOfTheClaw));
+            Assert.AreEqual(true, board.PlayFromHand(0));
+            Assert.IsNotInstanceOfType(board.Player.Field[0], typeof(DruidOfTheClaw));
 
-            Assert.AreEqual(0, bf.Player.Hand.Count);
+            Assert.AreEqual(0, board.Player.Hand.Count);
         }
     }
 }

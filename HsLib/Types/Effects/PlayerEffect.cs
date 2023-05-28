@@ -12,18 +12,18 @@ namespace HsLib.Types.Effects
         {
         }
 
-        public override void ValidateEffectTarget(Battlefield bf, ICard? effectTarget)
+        public override void ValidateEffectTarget(Board board, ICard? effectTarget)
         {
             if (effectTarget is null)
             {
-                if (GetPossibleTargets(bf).Any())
+                if (GetPossibleTargets(board).Any())
                 {
                     throw new ValidationException("effect target is null even though some possible targets are present");
                 }
             }
             else
             {
-                if (!GetPossibleTargets(bf).Contains(effectTarget))
+                if (!GetPossibleTargets(board).Contains(effectTarget))
                 {
                     throw new ValidationException(
                     "effect target is not null even though no possible targets are present");

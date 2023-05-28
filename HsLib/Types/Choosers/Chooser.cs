@@ -12,9 +12,9 @@ namespace HsLib.Types.Choosers
 
         private readonly ChooserFunc<TOwner> _cardChooserFunc;
 
-        public IEnumerable<ICard> ChooseCards(Battlefield bf, TOwner owner)
+        public IEnumerable<ICard> ChooseCards(Board board, TOwner owner)
         {
-            return _cardChooserFunc.Invoke(bf, owner);
+            return _cardChooserFunc.Invoke(board, owner);
         }
     }
 }

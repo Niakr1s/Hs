@@ -4,12 +4,12 @@ namespace HsLib.Systems
 {
     public class CleanService
     {
-        public CleanService(Battlefield bf)
+        public CleanService(Board board)
         {
-            Bf = bf;
+            Board = board;
         }
 
-        public Battlefield Bf { get; }
+        public Board Board { get; }
 
         /// <summary>
         /// Removes dead cards from containers in insert order.
@@ -17,12 +17,12 @@ namespace HsLib.Systems
         /// <returns>Removed cards.</returns>
         public IEnumerable<RemovedCard> CleanInactiveCards()
         {
-            IEnumerable<RemovedCard> cardsToClean = Bf.Cards.Where(c => c.ShouldBeCleaned())
+            IEnumerable<RemovedCard> cardsToClean = Board.Cards.Where(c => c.ShouldBeCleaned())
                 .Select(c => new RemovedCard(c, c.Place)).ToList();
 
             foreach (RemovedCard card in cardsToClean)
             {
-                Bf[card.Place.Pid].Remove(card.Card);
+                Board[card.Place.Pid].Remove(card.Card);
             }
             return cardsToClean.AsEnumerable();
         }

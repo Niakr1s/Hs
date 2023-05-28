@@ -11,17 +11,17 @@ namespace HsLibTests.KnownCards.Spells
         [TestMethod()]
         public void HolySmiteTest()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             Spell holySmite = new HolySmite();
-            bf.Player.Hand.Add(holySmite);
-            Assert.AreEqual(2, holySmite.SpellEffect.GetPossibleTargets(bf).Count()); // mine and his heros
+            board.Player.Hand.Add(holySmite);
+            Assert.AreEqual(2, holySmite.SpellEffect.GetPossibleTargets(board).Count()); // mine and his heros
 
             Minion yeti = new ChillwindYeti();
-            bf.Enemy.Field.Add(yeti);
-            Assert.AreEqual(3, holySmite.SpellEffect.GetPossibleTargets(bf).Count());
+            board.Enemy.Field.Add(yeti);
+            Assert.AreEqual(3, holySmite.SpellEffect.GetPossibleTargets(board).Count());
 
-            holySmite.SpellEffect.UseEffect(bf, yeti)();
+            holySmite.SpellEffect.UseEffect(board, yeti)();
             Assert.AreEqual(3, yeti.Hp);
         }
     }

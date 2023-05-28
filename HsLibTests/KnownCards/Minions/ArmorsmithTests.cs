@@ -12,22 +12,22 @@ namespace HsLibTests.KnownCards.Minions
         [TestMethod()]
         public void ArmorsmithTest()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             Minion armorsmith = new Armorsmith();
             Minion y1 = new ChillwindYeti();
             Minion y2 = new ChillwindYeti();
             Minion enemyYeti = new ChillwindYeti();
 
-            Field playerField = bf[Pid.P1].Field;
-            Field enemyField = bf[Pid.P2].Field;
+            Field playerField = board[Pid.P1].Field;
+            Field enemyField = board[Pid.P2].Field;
 
             enemyField.Add(enemyYeti);
             playerField.Add(y1);
             playerField.Add(y2);
             playerField.Add(armorsmith);
 
-            var playerArmor = bf.Player.Hero.Armor;
+            var playerArmor = board.Player.Hero.Armor;
             int expectedArmor = playerArmor;
 
             enemyYeti.Hp.Decrease(1);
@@ -44,7 +44,7 @@ namespace HsLibTests.KnownCards.Minions
             y3.Hp.Decrease(1);
             Assert.AreEqual(++expectedArmor, playerArmor);
 
-            bf.Enemy.Hero.Hp.Decrease(1);
+            board.Enemy.Hero.Hp.Decrease(1);
             Assert.AreEqual(expectedArmor, playerArmor);
 
             // removing y2 and trying to damage it
@@ -59,7 +59,7 @@ namespace HsLibTests.KnownCards.Minions
             Assert.AreEqual(expectedArmor, playerArmor);
 
             // shouldn't work at hand
-            bf.Player.Hand.Add(armorsmith);
+            board.Player.Hand.Add(armorsmith);
             y1.Hp.Decrease(1);
             Assert.AreEqual(expectedArmor, playerArmor);
 

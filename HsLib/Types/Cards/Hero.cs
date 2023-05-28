@@ -19,11 +19,11 @@ namespace HsLib.Types.Cards
 
         public bool Dead => Hp <= 0;
 
-        public bool CanBeMeleeAttacked(Battlefield bf)
+        public bool CanBeMeleeAttacked(Board board)
         {
             if (Place.Loc != Loc.Hero) { return false; }
             if (Dead) { return false; }
-            return !bf[Place.Pid].Field.HasAnyActiveTaunt();
+            return !board[Place.Pid].Field.HasAnyActiveTaunt();
         }
 
         /// <summary>

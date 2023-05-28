@@ -6,13 +6,13 @@ using System.Collections.Specialized;
 
 namespace HsLib.Systems
 {
-    public partial class Battlefield : INotifyCollectionChanged
+    public partial class Board : INotifyCollectionChanged
     {
-        public Battlefield(StartingDeck p1, StartingDeck p2)
+        public Board(StartingDeck p1, StartingDeck p2)
         {
             Turn = new Turn();
 
-            _bf = new()
+            _board = new()
             {
                 [Pid.P1] = new(this, Pid.P1, p1),
                 [Pid.P2] = new(this, Pid.P2, p2),
@@ -28,7 +28,7 @@ namespace HsLib.Systems
             ConnectEvents();
         }
 
-        public Battlefield(CardId p1, CardId p2) : this(new StartingDeck(p1), new StartingDeck(p2))
+        public Board(CardId p1, CardId p2) : this(new StartingDeck(p1), new StartingDeck(p2))
         {
         }
 
@@ -65,23 +65,23 @@ namespace HsLib.Systems
         private readonly List<ICard> _cards;
         public IEnumerable<ICard> Cards => _cards.AsEnumerable();
 
-        private readonly Dictionary<Pid, BattlefieldPlayer> _bf;
+        private readonly Dictionary<Pid, BoardSide> _board;
 
         /// <summary>
         /// Gets player.
         /// </summary>
         /// <param name="pid"></param>
-        public BattlefieldPlayer this[Pid pid] => _bf[pid];
+        public BoardSide this[Pid pid] => _board[pid];
 
         /// <summary>
         /// Current player.
         /// </summary>
-        public BattlefieldPlayer Player => this[Turn.Pid];
+        public BoardSide Player => this[Turn.Pid];
 
         /// <summary>
         /// Current enemy.
         /// </summary>
-        public BattlefieldPlayer Enemy => this[Turn.Pid.He()];
+        public BoardSide Enemy => this[Turn.Pid.He()];
 
         public IContainer this[Place place] => this[place.Pid][place.Loc];
 

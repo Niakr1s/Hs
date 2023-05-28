@@ -2,7 +2,6 @@
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
-using HsLibTests.Helpers;
 using HsLibTests.Types.Containers.Base;
 
 namespace HsLibTests.Types.Containers
@@ -10,7 +9,7 @@ namespace HsLibTests.Types.Containers
     [TestClass()]
     public class DeckTests
     {
-        private Battlefield _bf = null!;
+        private Board _board = null!;
 
         /// <summary>
         /// Inits with minion x 3.
@@ -25,8 +24,8 @@ namespace HsLibTests.Types.Containers
         [TestInitialize()]
         public void ContainerTestInitialize()
         {
-            _bf = TestBattlefield.New();
-            _deck = _bf.Player.Deck;
+            _board = TestBoard.New();
+            _deck = _board.Player.Deck;
 
             foreach (Minion card in _initCards)
             {
@@ -43,7 +42,7 @@ namespace HsLibTests.Types.Containers
         [TestMethod()]
         public void TakeNextCardTest()
         {
-            Hand hand = _bf[_deck.Place.Pid].Hand;
+            Hand hand = _board[_deck.Place.Pid].Hand;
 
             for (int i = 0; i < _initCards.Count; i++)
             {

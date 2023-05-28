@@ -2,7 +2,6 @@
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Places;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.KnownCards.Minions
 {
@@ -12,19 +11,19 @@ namespace HsLibTests.KnownCards.Minions
         [TestMethod()]
         public void AbomintaionTest()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
             Minion abom1 = new Abomintaion();
             Minion abom2 = new Abomintaion();
             Minion yeti1 = new ChillwindYeti();
             Minion yeti2 = new ChillwindYeti();
 
-            bf[Pid.P1].Field.Add(abom1);
-            bf[Pid.P2].Field.Add(abom2);
-            bf[Pid.P1].Field.Add(yeti1);
-            bf[Pid.P2].Field.Add(yeti2);
+            board[Pid.P1].Field.Add(abom1);
+            board[Pid.P2].Field.Add(abom2);
+            board[Pid.P1].Field.Add(yeti1);
+            board[Pid.P2].Field.Add(yeti2);
 
-            bf.Turn.Skip(bf.Player.Pid);
-            Assert.AreEqual(true, bf.MinionAttack(0, Loc.Field, 0));
+            board.Turn.Skip(board.Player.Pid);
+            Assert.AreEqual(true, board.MinionAttack(0, Loc.Field, 0));
             Assert.AreEqual(0, abom1.Hp);
             Assert.AreEqual(0, abom1.Hp);
             Assert.AreEqual(1, yeti1.Hp);

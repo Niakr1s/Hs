@@ -6,7 +6,7 @@ namespace HsLib.Types.Containers
 {
     public class HeroContainer : SingleContainer<Hero>
     {
-        public HeroContainer(Battlefield bf, Pid pid, Hero hero) : base(bf, new(pid, Loc.Hero), hero)
+        public HeroContainer(Board board, Pid pid, Hero hero) : base(board, new(pid, Loc.Hero), hero)
         {
         }
     }

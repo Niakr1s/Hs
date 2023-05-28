@@ -11,14 +11,14 @@ namespace HsLibTests.Types.Effects
     public class BattlecryEffectTests
     {
 
-        Battlefield _bf = null!;
+        Board _board = null!;
 
         public TestContext? TestContext { get; set; }
 
         [TestInitialize()]
         public void Setup()
         {
-            _bf = TestBattlefield.New();
+            _board = TestBoard.New();
         }
 
         [TestMethod()]
@@ -27,10 +27,10 @@ namespace HsLibTests.Types.Effects
             Minion? nullMinion = null;
 
             Minion enemyMinion = new ChillwindYeti();
-            _bf.Enemy.Field.Add(enemyMinion);
+            _board.Enemy.Field.Add(enemyMinion);
 
             Minion playerMInion = new ChillwindYeti();
-            _bf.Player.Field.Add(playerMInion);
+            _board.Player.Field.Add(playerMInion);
 
             Targets validTargets = new Targets() { Sides = PidSide.He, Locs = Loc.Field };
             // valid effect to target minion
@@ -59,7 +59,7 @@ namespace HsLibTests.Types.Effects
             {
                 (BattlecryEffect? effect, ICard? target, bool shouldPass) = testCases[i];
 
-                void doTest() => TargetableEffectValidator.ValidateEffectTarget(effect, _bf, target);
+                void doTest() => TargetableEffectValidator.ValidateEffectTarget(effect, _board, target);
 
                 if (shouldPass)
                 {

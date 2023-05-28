@@ -1,11 +1,11 @@
-﻿using HsLib.Types.BattlefieldSubscribers;
+﻿using HsLib.Types.BoardSubscribers;
 using HsLib.Types.Cards;
 using HsLib.Types.Choosers;
 using HsLib.Types.Stats;
 
 namespace HsLib.Types.Auras
 {
-    public class AuraSource : BattlefieldSubscriber<ICard>
+    public class AuraSource : BoardSubscriber<ICard>
     {
         public AuraSource(Minion owner, IAuraEffect auraEffect, IChooser<ICard> cardsChooser)
             : base(owner)
@@ -36,12 +36,12 @@ namespace HsLib.Types.Auras
         /// <exception cref="InvalidOperationException"></exception>
         private void ReapplyAuras()
         {
-            if (Bf is null) { return; }
+            if (Board is null) { return; }
             if (Owner.Place.IsNone()) { throw new InvalidOperationException("owner doesn't in container"); }
 
-            foreach (ICard card in _cardsChooser.ChooseCards(Bf, Owner))
+            foreach (ICard card in _cardsChooser.ChooseCards(Board, Owner))
             {
-                _appliedAuras.Add(_auraEffect.GiveAura(Bf, Owner, card));
+                _appliedAuras.Add(_auraEffect.GiveAura(Board, Owner, card));
             }
         }
     }

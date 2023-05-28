@@ -16,14 +16,14 @@ namespace HsLib.Types.Effects
         public IEffect Effect { get; }
         public IChooser<Pid> TargetsChooser { get; }
 
-        public Action ActivateDeathrattle(Battlefield bf, Pid owner)
+        public Action ActivateDeathrattle(Board board, Pid owner)
         {
             List<Action> effectActions = new();
 
-            foreach (ICard target in TargetsChooser.ChooseCards(bf, owner))
+            foreach (ICard target in TargetsChooser.ChooseCards(board, owner))
             {
                 // using null! for owner param, coz deathrattle should use only ono-owner effects
-                effectActions.Add(Effect.UseEffect(bf, null!, target));
+                effectActions.Add(Effect.UseEffect(board, null!, target));
             }
             return () => effectActions.ForEach(a => a.Invoke());
         }

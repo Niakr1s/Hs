@@ -10,11 +10,11 @@ namespace HsLib.Types.Effects
         /// Validates nullable active effect.
         /// </summary>
         /// <param name="activeEffect"></param>
-        /// <param name="bf"></param>
+        /// <param name="board"></param>
         /// <param name="effectTarget"></param>
         /// <exception cref="ValidationException"></exception>
         public static void ValidateEffectTarget(ITargetableEffect? activeEffect,
-            Battlefield bf, ICard? effectTarget)
+            Board board, ICard? effectTarget)
         {
             if (activeEffect is null)
             {
@@ -25,7 +25,7 @@ namespace HsLib.Types.Effects
             }
             else
             {
-                activeEffect.ValidateEffectTarget(bf, effectTarget);
+                activeEffect.ValidateEffectTarget(board, effectTarget);
             }
         }
     }

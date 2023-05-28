@@ -11,10 +11,10 @@ namespace HsLib.Types.Effects
             : base(owner, effect, possibleTargetsChooser, targetsChooser)
         {
         }
-        public override void ValidateEffectTarget(Battlefield bf, ICard? effectTarget)
+        public override void ValidateEffectTarget(Board board, ICard? effectTarget)
         {
-            base.ValidateEffectTarget(bf, effectTarget);
-            if (GetPossibleTargets(bf).Any() && effectTarget is null)
+            base.ValidateEffectTarget(board, effectTarget);
+            if (GetPossibleTargets(board).Any() && effectTarget is null)
             {
                 throw new ValidationException("ability must have any effect target even though it have none possible targets");
             }

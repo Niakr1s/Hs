@@ -15,15 +15,15 @@ namespace HsLib.Types.Effects
         private readonly List<CardId> _cardIds;
         public IEnumerable<CardId> CardIds => _cardIds.AsEnumerable();
 
-        public Action UseEffect(Battlefield bf, ICard owner, ICard? target)
+        public Action UseEffect(Board board, ICard owner, ICard? target)
         {
-            return () => UseEffect(bf, owner);
+            return () => UseEffect(board, owner);
         }
 
-        private void UseEffect(Battlefield bf, ICard owner)
+        private void UseEffect(Board board, ICard owner)
         {
-            CardId transformToId = bf[owner.Place.Pid].Player.ChooseOne(CardIds);
-            IContainer? container = bf[owner.Place.Pid].GetContainer(owner);
+            CardId transformToId = board[owner.Place.Pid].Player.ChooseOne(CardIds);
+            IContainer? container = board[owner.Place.Pid].GetContainer(owner);
             if (container is null) { return; }
 
             int index = container.IndexOf(owner);

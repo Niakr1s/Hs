@@ -6,7 +6,7 @@ namespace HsLib.Types.Containers
 {
     public class Field : Container<Minion>
     {
-        public Field(Battlefield bf, Pid pid) : base(bf, new Place(pid, Loc.Field), limit: 7)
+        public Field(Board board, Pid pid) : base(board, new Place(pid, Loc.Field), limit: 7)
         {
         }
 

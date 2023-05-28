@@ -7,13 +7,13 @@ namespace HsLib.Types.Effects
 {
     public class MindControlEffect : IEffect
     {
-        public Action UseEffect(Battlefield bf, ICard owner, ICard? target)
+        public Action UseEffect(Board board, ICard owner, ICard? target)
         {
             if (target is Minion m)
             {
 
-                Field enemyField = bf[m.Place.Pid].Field;
-                Field playerField = bf[m.Place.Pid.He()].Field;
+                Field enemyField = board[m.Place.Pid].Field;
+                Field playerField = board[m.Place.Pid.He()].Field;
 
                 if (!enemyField.Contains(m)) { throw new ValidationException("enemy field doesn't contain target"); }
                 if (playerField.IsFull) { throw new ValidationException("can't insert to full field"); }

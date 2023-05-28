@@ -11,14 +11,14 @@ namespace HsLibTests.KnownCards.Minions
         [TestMethod()]
         public void FacelessManipulatorTest()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             Minion yeti = new ChillwindYeti();
-            Field f = bf.Player.Field;
+            Field f = board.Player.Field;
             f.Add(yeti);
-            bf.Player.Hand.Add(new FacelessManipulator());
+            board.Player.Hand.Add(new FacelessManipulator());
 
-            bf.PlayFromHand(0, effectTarget: yeti);
+            board.PlayFromHand(0, effectTarget: yeti);
             Assert.AreEqual(2, f.Count);
             Assert.IsInstanceOfType(f[1], typeof(ChillwindYeti));
             Assert.AreNotSame(f[0], f[1]);

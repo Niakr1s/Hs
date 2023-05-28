@@ -7,21 +7,21 @@ namespace HsLib.Types.Cards
         /// <summary>
         /// Shows if attacker has some attacks left and it is valid and alive.
         /// </summary>
-        /// <param name="bf"></param>
+        /// <param name="board"></param>
         /// <returns></returns>
-        bool CanMeleeAttack(Battlefield bf);
+        bool CanMeleeAttack(Board board);
 
         /// <summary>
         /// Will be called after minion successfully attacked.
         /// </summary>
-        /// <param name="bf"></param>
-        void AfterAttack(Battlefield bf);
+        /// <param name="board"></param>
+        void AfterAttack(Board board);
 
         /// <summary>
         /// Returns defender, who will receive counterattack.
         /// </summary>
-        /// <param name="bf"></param>
+        /// <param name="board"></param>
         /// <returns></returns>
-        IDamageable GetDefender(Battlefield bf);
+        IDamageable GetDefender(Board board);
     }
 }

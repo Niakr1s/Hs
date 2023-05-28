@@ -35,44 +35,44 @@ namespace HsLib.Types.Cards
             }
         }
 
-        public virtual bool ActivateDeathrattle(Battlefield bf) { return false; }
+        public virtual bool ActivateDeathrattle(Board board) { return false; }
 
-        public void AfterAttack(Battlefield bf)
+        public void AfterAttack(Board board)
         {
             AtksThisTurn++;
             Hp.Decrease();
         }
 
-        public override void Subscribe(Battlefield bf)
+        public override void Subscribe(Board board)
         {
-            base.Subscribe(bf);
+            base.Subscribe(board);
             AtksThisTurn = 0;
         }
 
-        public override void Unsubscribe(Battlefield bf, Place previousPlace)
+        public override void Unsubscribe(Board board, Place previousPlace)
         {
-            base.Unsubscribe(bf, previousPlace);
+            base.Unsubscribe(board, previousPlace);
             AtksThisTurn = 0;
         }
 
-        public bool CanMeleeAttack(Battlefield bf)
+        public bool CanMeleeAttack(Board board)
         {
             if (Dead) { return false; }
             return Windfury.AttacksLeft(AtksThisTurn) > 0;
         }
 
-        public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
+        public Action PlayFromHand(Board board, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, effectTarget);
+            TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, board, effectTarget);
 
             void move()
             {
-                BattlefieldPlayer player = bf[Place.Pid];
+                BoardSide player = board[Place.Pid];
                 player.Hand.Remove(this);
                 player.Weapon = this;
             }
 
-            Action? battlecryAction = BattlecryEffect?.UseEffect(bf, effectTarget);
+            Action? battlecryAction = BattlecryEffect?.UseEffect(board, effectTarget);
 
             return () =>
             {
@@ -81,9 +81,9 @@ namespace HsLib.Types.Cards
             };
         }
 
-        public IDamageable GetDefender(Battlefield bf)
+        public IDamageable GetDefender(Board board)
         {
-            return bf[Place.Pid].Hero;
+            return board[Place.Pid].Hero;
         }
 
         protected override void OnTurnEnd()

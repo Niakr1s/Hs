@@ -4,12 +4,12 @@ namespace HsLib.Systems
 {
     public class DeathService
     {
-        public DeathService(Battlefield bf)
+        public DeathService(Board board)
         {
-            Bf = bf;
+            Board = board;
         }
 
-        public Battlefield Bf { get; }
+        public Board Board { get; }
 
         public void ProcessDeaths()
         {
@@ -22,7 +22,7 @@ namespace HsLib.Systems
         /// <returns>False, if didn't notice dead minions</returns>
         private bool DoStep()
         {
-            List<RemovedCard> removedCards = Bf.CleanService.CleanInactiveCards().ToList();
+            List<RemovedCard> removedCards = Board.CleanService.CleanInactiveCards().ToList();
             return removedCards.Count != 0;
         }
     }

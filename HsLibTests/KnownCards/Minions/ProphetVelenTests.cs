@@ -14,24 +14,24 @@ namespace HsLibTests.KnownCards.Minions
         [TestMethod()]
         public void ProphetVelenTest_Ability()
         {
-            Battlefield bf = TestBattlefield.New();
-            bf.Player.Ability = new Fireblast();
+            Board board = TestBoard.New();
+            board.Player.Ability = new Fireblast();
 
             Minion yeti = new ChillwindYeti();
             int expectedHp = yeti.Hp;
 
-            bf.Enemy.Field.Add(yeti);
+            board.Enemy.Field.Add(yeti);
             Assert.AreEqual(expectedHp, yeti.Hp);
-            Assert.AreEqual(1, ((IDamageEffect)bf.Player.Ability.AbilityEffect.Effect).DamageAmount);
+            Assert.AreEqual(1, ((IDamageEffect)board.Player.Ability.AbilityEffect.Effect).DamageAmount);
 
-            Assert.AreEqual(true, bf.UseAbility(Pid.P2, Loc.Field, 0));
+            Assert.AreEqual(true, board.UseAbility(Pid.P2, Loc.Field, 0));
             expectedHp--;
             Assert.AreEqual(expectedHp, yeti.Hp);
 
-            bf.Turn.Skip(bf.Player.Pid);
-            bf.Player.Field.Add(new ProphetVelen());
+            board.Turn.Skip(board.Player.Pid);
+            board.Player.Field.Add(new ProphetVelen());
 
-            Assert.AreEqual(true, bf.UseAbility(Pid.P2, Loc.Field, 0));
+            Assert.AreEqual(true, board.UseAbility(Pid.P2, Loc.Field, 0));
             expectedHp -= 2;
             Assert.AreEqual(expectedHp, yeti.Hp);
         }
@@ -39,19 +39,19 @@ namespace HsLibTests.KnownCards.Minions
         [TestMethod()]
         public void ProphetVelenTest_Spell()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             Spell holySmite = new HolySmite();
-            bf.Player.Hand.Add(holySmite);
+            board.Player.Hand.Add(holySmite);
 
             Minion yeti = new ChillwindYeti();
             int expectedHp = yeti.Hp;
 
-            bf.Enemy.Field.Add(yeti);
-            bf.Player.Field.Add(new ProphetVelen());
+            board.Enemy.Field.Add(yeti);
+            board.Player.Field.Add(new ProphetVelen());
             Assert.AreEqual(expectedHp, yeti.Hp);
 
-            Assert.AreEqual(true, bf.PlayFromHand(0, effectTarget: yeti));
+            Assert.AreEqual(true, board.PlayFromHand(0, effectTarget: yeti));
             expectedHp -= 4;
             Assert.AreEqual(expectedHp, yeti.Hp);
         }

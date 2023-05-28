@@ -12,27 +12,27 @@ namespace HsLib.Interfaces
         ICard Owner { get; set; }
 
         /// <summary>
-        /// Gets all targets from battlefield, effect can be used on.
+        /// Gets all targets from board, effect can be used on.
         /// </summary>
-        /// <param name="bf"></param>
-        IEnumerable<ICard> GetPossibleTargets(Battlefield bf);
+        /// <param name="board"></param>
+        IEnumerable<ICard> GetPossibleTargets(Board board);
 
         /// <summary>
         /// Uses effect. 
         /// </summary>
-        /// <param name="bf"></param>
+        /// <param name="board"></param>
         /// <param name="target"></param>
         /// <exception cref="ValidationException">Any exception, that prevents for using effect</exception>
         /// <returns>Action, that actually uses effect</returns>
-        Action UseEffect(Battlefield bf, ICard? target);
+        Action UseEffect(Board board, ICard? target);
 
         /// <summary>
         /// Validates of validity or effect target while playing from hand.
         /// </summary>
-        /// <param name="bf"></param>
+        /// <param name="board"></param>
         /// <param name="effectTarget"></param>
         /// <exception cref="ValidationException"></exception>
         /// 
-        void ValidateEffectTarget(Battlefield bf, ICard? effectTarget);
+        void ValidateEffectTarget(Board board, ICard? effectTarget);
     }
 }

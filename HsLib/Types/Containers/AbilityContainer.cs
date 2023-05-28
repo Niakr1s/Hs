@@ -6,7 +6,7 @@ namespace HsLib.Types.Containers
 {
     public class AbilityContainer : SingleContainer<Ability>
     {
-        public AbilityContainer(Battlefield bf, Pid pid, Ability ability) : base(bf, new(pid, Loc.Ability), ability)
+        public AbilityContainer(Board board, Pid pid, Ability ability) : base(board, new(pid, Loc.Ability), ability)
         {
         }
     }

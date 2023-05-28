@@ -3,7 +3,7 @@ using HsLib.Types.Cards;
 using HsLib.Types.Places;
 using System.Collections.Specialized;
 
-namespace HsLib.Types.BattlefieldSubscribers
+namespace HsLib.Types.BoardSubscribers
 {
     /// <summary>
     /// Is used to be source for lingering effects.
@@ -12,59 +12,59 @@ namespace HsLib.Types.BattlefieldSubscribers
     /// Type of card, you want to subscribe to. Other types will be filtered out.
     /// If you don't want to sub to each individual card, just use ICard.
     /// </typeparam>
-    public abstract class BattlefieldSubscriber<TSubscribedCard> : IBattlefieldSubscriber
+    public abstract class BoardSubscriber<TSubscribedCard> : IBoardSubscriber
         where TSubscribedCard : ICard
     {
-        protected BattlefieldSubscriber(ICard owner)
+        protected BoardSubscriber(ICard owner)
         {
             Owner = owner;
         }
 
         public ICard Owner { get; set; }
 
-        protected Battlefield? Bf { get; private set; }
+        protected Board? Board { get; private set; }
 
         private readonly List<TSubscribedCard> _subs = new();
 
         /// <summary>
         /// Called on every container.
         /// </summary>
-        /// <param name="bf"></param>
-        public void Subscribe(Battlefield bf)
+        /// <param name="board"></param>
+        public void Subscribe(Board board)
         {
-            Bf = bf;
-            DoSubscribe(bf);
+            Board = board;
+            DoSubscribe(board);
         }
 
         /// <summary>
         /// Deactivates aura.
         /// </summary>
-        /// <param name="bf"></param>
+        /// <param name="board"></param>
         /// <exception cref="Exception">Throws, if anything unexpected occurs.</exception>
         /// <returns>True, if was success deactivated.</returns>
-        public void Unsubscribe(Battlefield bf, Place previousPlace)
+        public void Unsubscribe(Board board, Place previousPlace)
         {
-            Bf = null;
-            DoUnsubscribe(bf, previousPlace);
+            Board = null;
+            DoUnsubscribe(board, previousPlace);
         }
 
-        private void DoSubscribe(Battlefield bf)
+        private void DoSubscribe(Board board)
         {
-            bf.CollectionChanged += Bf_CollectionChanged;
-            bf.TurnEvent += Bf_TurnEvent;
+            board.CollectionChanged += Board_CollectionChanged;
+            board.TurnEvent += Board_TurnEvent;
 
-            foreach (TSubscribedCard card in bf.Cards.OfType<TSubscribedCard>()) { SubscribeCard(card); }
+            foreach (TSubscribedCard card in board.Cards.OfType<TSubscribedCard>()) { SubscribeCard(card); }
             OnCollectionChanged();
         }
 
-        private void DoUnsubscribe(Battlefield bf, Place previousPlace)
+        private void DoUnsubscribe(Board board, Place previousPlace)
         {
-            bf.CollectionChanged -= Bf_CollectionChanged;
-            bf.TurnEvent -= Bf_TurnEvent;
+            board.CollectionChanged -= Board_CollectionChanged;
+            board.TurnEvent -= Board_TurnEvent;
             Clear();
         }
 
-        private void Bf_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        private void Board_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.OldItems is not null)
             {
@@ -85,7 +85,7 @@ namespace HsLib.Types.BattlefieldSubscribers
             OnCollectionChanged();
         }
 
-        private void Bf_TurnEvent(object? sender, Turns.TurnEventArgs e)
+        private void Board_TurnEvent(object? sender, Turns.TurnEventArgs e)
         {
             switch (e.Type)
             {

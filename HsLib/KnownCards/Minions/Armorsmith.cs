@@ -1,4 +1,4 @@
-﻿using HsLib.Types.BattlefieldSubscribers;
+﻿using HsLib.Types.BoardSubscribers;
 using HsLib.Types.Cards;
 
 namespace HsLib.KnownCards.Minions
@@ -12,7 +12,7 @@ namespace HsLib.KnownCards.Minions
         }
     }
 
-    public class ArmorsmithEffectSource : BattlefieldSubscriber<Minion>
+    public class ArmorsmithEffectSource : BoardSubscriber<Minion>
     {
         public ArmorsmithEffectSource(Minion owner) : base(owner)
         {
@@ -35,7 +35,7 @@ namespace HsLib.KnownCards.Minions
 
         private void Hp_Decreased(object? sender, Types.Stats.StatDecreasedEventArgs e)
         {
-            Bf![Owner.Place.Pid].Hero.Armor.Increase(1);
+            Board![Owner.Place.Pid].Hero.Armor.Increase(1);
         }
     }
 }

@@ -12,29 +12,29 @@ namespace HsLibTests.KnownCards.Minions
         [TestMethod()]
         public void DoomsayerTest()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             Minion doomsayer = new Doomsayer();
             Minion y1 = new ChillwindYeti();
             Minion y2 = new ChillwindYeti();
             Minion enemyYeti = new ChillwindYeti();
 
-            Field playerField = bf[Pid.P1].Field;
-            Field enemyField = bf[Pid.P2].Field;
+            Field playerField = board[Pid.P1].Field;
+            Field enemyField = board[Pid.P2].Field;
 
             enemyField.Add(enemyYeti);
             playerField.Add(y1);
             playerField.Add(doomsayer);
             playerField.Add(y2);
 
-            bf.Turn.Skip(Pid.P1);
+            board.Turn.Skip(Pid.P1);
             Assert.AreEqual(0, playerField.Count);
             Assert.AreEqual(0, enemyField.Count);
 
             // make sure, it wont occurs again
             playerField.Add(new ChillwindYeti());
             enemyField.Add(new ChillwindYeti());
-            bf.Turn.Skip(Pid.P1);
+            board.Turn.Skip(Pid.P1);
             Assert.AreNotEqual(0, playerField.Count);
             Assert.AreNotEqual(0, enemyField.Count);
         }

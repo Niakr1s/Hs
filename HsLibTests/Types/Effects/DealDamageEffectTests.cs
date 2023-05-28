@@ -11,13 +11,13 @@ namespace HsLibTests.Types.Effects
         [TestMethod()]
         public void UseEffectTest()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             DamageEffect effect = new(2);
 
             Minion minion = new ChillwindYeti();
             int startHp = minion.Hp;
-            effect.UseEffect(bf, null!, minion)();
+            effect.UseEffect(board, null!, minion)();
             Assert.AreEqual(startHp - effect.DamageAmount, minion.Hp);
         }
     }

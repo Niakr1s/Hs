@@ -7,7 +7,7 @@ namespace HsLib.Types.Containers
 {
     public class Hand : Container<IPlayableFromHand>
     {
-        public Hand(Battlefield bf, Pid pid) : base(bf, new Place(pid, Loc.Hand), limit: 10)
+        public Hand(Board board, Pid pid) : base(board, new Place(pid, Loc.Hand), limit: 10)
         {
         }
 
@@ -24,10 +24,10 @@ namespace HsLib.Types.Containers
         {
             IPlayableFromHand card = this[index];
 
-            PlayerMp mp = Bf[Place.Pid].Mp;
+            PlayerMp mp = Board[Place.Pid].Mp;
             if (!mp.IsEnough(card.Mp)) { throw new ValidationException("mp is not enough"); }
 
-            Action playFromHandAction = card.PlayFromHand(Bf, fieldIndex, effectTarget);
+            Action playFromHandAction = card.PlayFromHand(Board, fieldIndex, effectTarget);
 
             return () =>
             {

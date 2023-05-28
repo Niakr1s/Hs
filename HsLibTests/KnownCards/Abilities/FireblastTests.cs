@@ -15,35 +15,35 @@ namespace HsLibTests.KnownCards.Abilities
         [TestMethod()]
         public void FireblastTest()
         {
-            Battlefield bf = TestBattlefield.New(p1: CardId.JainaProudmoore);
-            Ability fireblast = bf.Player.Ability;
+            Board board = TestBoard.New(p1: CardId.JainaProudmoore);
+            Ability fireblast = board.Player.Ability;
             Assert.IsInstanceOfType(fireblast, typeof(Fireblast));
-            Assert.AreEqual(2, fireblast.AbilityEffect.GetPossibleTargets(bf).Count());
+            Assert.AreEqual(2, fireblast.AbilityEffect.GetPossibleTargets(board).Count());
 
-            int startMp = bf.Player.Mp;
+            int startMp = board.Player.Mp;
 
-            Assert.AreEqual(30, bf.Player.Hero.Hp);
-            fireblast.UseAbility(bf, bf.Player.Hero)();
-            Assert.AreEqual(29, bf.Player.Hero.Hp);
-            Assert.AreEqual(startMp - 2, bf.Player.Mp);
+            Assert.AreEqual(30, board.Player.Hero.Hp);
+            fireblast.UseAbility(board, board.Player.Hero)();
+            Assert.AreEqual(29, board.Player.Hero.Hp);
+            Assert.AreEqual(startMp - 2, board.Player.Mp);
 
             Minion y1 = new ChillwindYeti();
             Minion y2 = new ChillwindYeti();
 
-            bf[Pid.P1].Field.Add(y1);
-            Assert.AreEqual(3, fireblast.AbilityEffect.GetPossibleTargets(bf).Count());
-            bf[Pid.P2].Field.Add(y2);
-            Assert.AreEqual(4, fireblast.AbilityEffect.GetPossibleTargets(bf).Count());
+            board[Pid.P1].Field.Add(y1);
+            Assert.AreEqual(3, fireblast.AbilityEffect.GetPossibleTargets(board).Count());
+            board[Pid.P2].Field.Add(y2);
+            Assert.AreEqual(4, fireblast.AbilityEffect.GetPossibleTargets(board).Count());
 
             Assert.AreEqual(5, y1.Hp);
             Assert.AreEqual(5, y2.Hp);
 
-            bf.Turn.Skip(bf.Player.Pid);
-            fireblast.UseAbility(bf, y1)();
+            board.Turn.Skip(board.Player.Pid);
+            fireblast.UseAbility(board, y1)();
             Assert.AreEqual(4, y1.Hp);
 
-            bf.Turn.Skip(bf.Player.Pid);
-            fireblast.UseAbility(bf, y2)();
+            board.Turn.Skip(board.Player.Pid);
+            fireblast.UseAbility(board, y2)();
             Assert.AreEqual(4, y2.Hp);
         }
     }

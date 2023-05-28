@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 
 namespace HsLib.Systems
 {
-    public partial class Battlefield
+    public partial class Board
     {
         private void ConnectEvents()
         {

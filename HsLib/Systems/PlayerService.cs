@@ -4,16 +4,16 @@ namespace HsLib.Systems
 {
     public class PlayerService
     {
-        public PlayerService(Battlefield bf)
+        public PlayerService(Board board)
         {
-            Bf = bf;
+            Board = board;
         }
 
-        public Battlefield Bf { get; }
+        public Board Board { get; }
 
         public CardId ChooseCard(IEnumerable<CardId> cards)
         {
-            return Bf.Player.Player.ChooseOne(cards);
+            return Board.Player.Player.ChooseOne(cards);
         }
     }
 }

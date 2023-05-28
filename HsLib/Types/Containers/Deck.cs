@@ -6,8 +6,8 @@ namespace HsLib.Types.Containers
 {
     public class Deck : Container<IPlayableFromHand>
     {
-        public Deck(Battlefield bf, Pid pid, IEnumerable<IPlayableFromHand>? startCards = null) :
-            base(bf, new Place(pid, Loc.Deck), startCards: startCards)
+        public Deck(Board board, Pid pid, IEnumerable<IPlayableFromHand>? startCards = null) :
+            base(board, new Place(pid, Loc.Deck), startCards: startCards)
         {
         }
 
@@ -19,10 +19,10 @@ namespace HsLib.Types.Containers
             var removedCard = Pop();
             if (removedCard is null) { return; }
 
-            Hand hand = Bf[Place.Pid].Hand;
+            Hand hand = Board[Place.Pid].Hand;
             if (!hand.IsFull)
             {
-                Bf[Place.Pid].Hand.Add(removedCard);
+                Board[Place.Pid].Hand.Add(removedCard);
             }
         }
     }

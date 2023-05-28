@@ -20,7 +20,7 @@ namespace HsLib.Types.Effects
 
         public bool TillEndOfTurn { get; set; }
 
-        public Action UseEffect(Battlefield bf, ICard owner, ICard? target)
+        public Action UseEffect(Board board, ICard owner, ICard? target)
         {
             if (target is Minion m)
             {
@@ -29,7 +29,7 @@ namespace HsLib.Types.Effects
                     Enchant<T> buff = _statChooser(target).AddBuff(Value);
                     if (TillEndOfTurn)
                     {
-                        Do.Once<TurnEventArgs>(h => bf.Turn.Event += h, h => bf.Turn.Event -= h,
+                        Do.Once<TurnEventArgs>(h => board.Turn.Event += h, h => board.Turn.Event -= h,
                             e => e.Type == TurnEventType.End, () => buff.Deactivate());
                     }
                 };

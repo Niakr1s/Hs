@@ -6,8 +6,8 @@
         /// Does action once, till when predicate pass.
         /// </summary>
         /// <typeparam name="TEventArgs"></typeparam>
-        /// <param name="sub">example: h => bf.Turn.Event += h</param>
-        /// <param name="unsub">example: h => bf.Turn.Event -= h</param>
+        /// <param name="sub">example: h => board.Turn.Event += h</param>
+        /// <param name="unsub">example: h => board.Turn.Event -= h</param>
         /// <param name="predicate"></param>
         /// <param name="action"></param>
         public static void Once<TEventArgs>(Action<EventHandler<TEventArgs>> sub, Action<EventHandler<TEventArgs>> unsub,

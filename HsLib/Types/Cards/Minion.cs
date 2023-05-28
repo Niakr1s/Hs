@@ -1,5 +1,5 @@
 ﻿using HsLib.Systems;
-using HsLib.Types.BattlefieldSubscribers;
+using HsLib.Types.BoardSubscribers;
 using HsLib.Types.Effects;
 using HsLib.Types.Places;
 using HsLib.Types.Stats;
@@ -28,7 +28,7 @@ namespace HsLib.Types.Cards
 
         public BattlecryEffect? BattlecryEffect { get; protected set; }
 
-        protected List<IBattlefieldSubscriber> FieldEffectSources { get; } = new();
+        protected List<IBoardSubscriber> FieldEffectSources { get; } = new();
 
         public DeathrattleEffect? DeathrattleEffect { get; protected set; }
 
@@ -44,33 +44,33 @@ namespace HsLib.Types.Cards
             }
         }
 
-        public virtual void AfterAttack(Battlefield bf)
+        public virtual void AfterAttack(Board board)
         {
             AtksThisTurn++;
         }
 
-        public override void Subscribe(Battlefield bf)
+        public override void Subscribe(Board board)
         {
-            base.Subscribe(bf);
+            base.Subscribe(board);
             AtksThisTurn = 0;
 
             if (Place.Loc == Loc.Field)
             {
-                FieldEffectSources.ForEach(e => e.Subscribe(bf));
+                FieldEffectSources.ForEach(e => e.Subscribe(board));
             }
         }
 
-        public override void Unsubscribe(Battlefield bf, Place previousPlace)
+        public override void Unsubscribe(Board board, Place previousPlace)
         {
-            base.Unsubscribe(bf, previousPlace);
+            base.Unsubscribe(board, previousPlace);
             AtksThisTurn = 0;
 
             if (previousPlace.Loc == Loc.Field)
             {
-                FieldEffectSources.ForEach(e => e.Unsubscribe(bf, previousPlace));
+                FieldEffectSources.ForEach(e => e.Unsubscribe(board, previousPlace));
             }
 
-            if (Dead) { DeathrattleEffect?.ActivateDeathrattle(bf, previousPlace.Pid)(); }
+            if (Dead) { DeathrattleEffect?.ActivateDeathrattle(board, previousPlace.Pid)(); }
         }
 
         protected override void OnTurnEnd()
@@ -79,32 +79,32 @@ namespace HsLib.Types.Cards
             AtksThisTurn = 0;
         }
 
-        public virtual bool ActivateDeathrattle(Battlefield bf) { return false; }
+        public virtual bool ActivateDeathrattle(Board board) { return false; }
 
-        public bool CanMeleeAttack(Battlefield bf)
+        public bool CanMeleeAttack(Board board)
         {
             if (Dead) { return false; }
             if (Windfury.AttacksLeft(AtksThisTurn) <= 0) { return false; }
-            return !bf.Turn.IsFirstTurn(AddedTurnNo) || Charge;
+            return !board.Turn.IsFirstTurn(AddedTurnNo) || Charge;
         }
 
-        public bool CanBeMeleeAttacked(Battlefield bf)
+        public bool CanBeMeleeAttacked(Board board)
         {
-            return !Stealth && (Taunt || !bf[Place.Pid].Field.HasAnyActiveTaunt());
+            return !Stealth && (Taunt || !board[Place.Pid].Field.HasAnyActiveTaunt());
         }
 
-        public IDamageable GetDefender(Battlefield bf)
+        public IDamageable GetDefender(Board board)
         {
             return this;
         }
 
-        public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
+        public Action PlayFromHand(Board board, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            Action move = bf[Place.Pid].Hand.MoveToContainer(this, bf[Place.Pid].Field,
+            Action move = board[Place.Pid].Hand.MoveToContainer(this, board[Place.Pid].Field,
                 canBurn: false, toIndex: fieldIndex);
 
-            TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, effectTarget);
-            Action? battlectyAction = BattlecryEffect?.UseEffect(bf, effectTarget);
+            TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, board, effectTarget);
+            Action? battlectyAction = BattlecryEffect?.UseEffect(board, effectTarget);
 
             return () =>
             {

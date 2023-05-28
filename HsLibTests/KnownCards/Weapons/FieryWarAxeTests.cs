@@ -10,15 +10,15 @@ namespace HsLibTests.KnownCards.Weapons
         [TestMethod()]
         public void FieryWarAxeTest()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             for (int i = 0; i < 3; i++)
             {
                 Weapon weapon = new FieryWarAxe();
-                bf.Player.Hand.Add(weapon);
-                bf.Player.Hand.PlayFromHand(0)();
+                board.Player.Hand.Add(weapon);
+                board.Player.Hand.PlayFromHand(0)();
 
-                Assert.AreEqual(weapon, bf.Player.Weapon);
+                Assert.AreEqual(weapon, board.Player.Weapon);
             }
         }
     }

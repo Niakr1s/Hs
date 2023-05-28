@@ -8,7 +8,7 @@ namespace HsLibTests.Types.Choosers
     [TestClass()]
     public class FieldAdjacentMinionsChooserTests
     {
-        Battlefield _bf = null!;
+        Board _board = null!;
         List<Minion> _minions = null!;
         Minion _playerHandMinion = null!;
         Minion _enemyFieldMinion = null!;
@@ -16,20 +16,20 @@ namespace HsLibTests.Types.Choosers
         [TestInitialize()]
         public void Setup()
         {
-            _bf = TestBattlefield.New();
+            _board = TestBoard.New();
             _minions = new()
             {
                 new ChillwindYeti(),
                 new ChillwindYeti(),
                 new ChillwindYeti(),
             };
-            _minions.ForEach(_bf.Player.Field.Add);
+            _minions.ForEach(_board.Player.Field.Add);
 
             _playerHandMinion = new ChillwindYeti();
-            _bf.Player.Hand.Add(_playerHandMinion);
+            _board.Player.Hand.Add(_playerHandMinion);
 
             _enemyFieldMinion = new ChillwindYeti();
-            _bf.Enemy.Field.Add(_enemyFieldMinion);
+            _board.Enemy.Field.Add(_enemyFieldMinion);
         }
 
         [TestMethod()]
@@ -40,7 +40,7 @@ namespace HsLibTests.Types.Choosers
             for (int i = 0; i < _minions.Count; i++)
             {
                 int expected = i == 0 || i == _minions.Count - 1 ? 1 : 2;
-                Assert.AreEqual(expected, chooser.ChooseCards(_bf, _minions[i]).Count());
+                Assert.AreEqual(expected, chooser.ChooseCards(_board, _minions[i]).Count());
             }
         }
     }

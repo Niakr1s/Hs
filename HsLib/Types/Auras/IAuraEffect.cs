@@ -6,6 +6,6 @@ namespace HsLib.Types.Auras
 {
     public interface IAuraEffect
     {
-        IEnchantHandler GiveAura(Battlefield bf, ICard owner, ICard target);
+        IEnchantHandler GiveAura(Board board, ICard owner, ICard target);
     }
 }

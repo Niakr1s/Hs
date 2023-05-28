@@ -3,7 +3,6 @@ using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
 using HsLib.Types.Places;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.KnownCards.Minions
 {
@@ -13,13 +12,13 @@ namespace HsLibTests.KnownCards.Minions
         [TestMethod()]
         public void FlametongTotemTest()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             Minion totem = new FlametongTotem();
             Minion y1 = new ChillwindYeti();
             Minion y2 = new ChillwindYeti();
 
-            Field f = bf[Pid.P1].Field;
+            Field f = board[Pid.P1].Field;
 
             f.Add(y1);
             Assert.AreEqual(0, totem.Atk);
@@ -56,15 +55,15 @@ namespace HsLibTests.KnownCards.Minions
         [TestMethod()]
         public void FlametongWorksOnlyAtFieldTest()
         {
-            Battlefield bf = TestBattlefield.New();
+            Board board = TestBoard.New();
 
             Minion totem = new FlametongTotem();
             Minion y1 = new ChillwindYeti();
 
-            Hand h = bf[Pid.P1].Hand;
+            Hand h = board[Pid.P1].Hand;
             h.Add(y1);
 
-            bf[Pid.P1].Hand.Add(totem);
+            board[Pid.P1].Hand.Add(totem);
             Assert.AreEqual(4, y1.Atk);
             Assert.AreEqual(0, totem.Atk);
         }

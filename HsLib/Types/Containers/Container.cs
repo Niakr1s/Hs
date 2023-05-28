@@ -10,9 +10,9 @@ namespace HsLib.Types.Containers
     {
         #region ctors
 
-        public Container(Battlefield bf, Place place, int? limit = null, IEnumerable<TCard>? startCards = null)
+        public Container(Board board, Place place, int? limit = null, IEnumerable<TCard>? startCards = null)
         {
-            Bf = bf;
+            Board = board;
             Place = place;
             Limit = limit;
             CollectionChanged += OnCollectionChanged;
@@ -32,7 +32,7 @@ namespace HsLib.Types.Containers
                 foreach (TCard item in e.NewItems)
                 {
                     item.Place = Place;
-                    item.Subscribe(Bf);
+                    item.Subscribe(Board);
                 }
             }
 
@@ -41,12 +41,12 @@ namespace HsLib.Types.Containers
                 foreach (TCard item in e.OldItems)
                 {
                     item.Place = new();
-                    item.Unsubscribe(Bf, Place);
+                    item.Unsubscribe(Board, Place);
                 }
             }
         }
 
-        public Battlefield Bf { get; }
+        public Board Board { get; }
 
         public Place Place { get; }
 
