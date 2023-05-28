@@ -32,7 +32,14 @@ namespace HsLib.Types.Containers
                 }
                 else
                 {
-                    this[0] = value;
+                    if (Count == 0)
+                    {
+                        Add(value);
+                    }
+                    else
+                    {
+                        this[0] = value;
+                    }
                 }
             }
         }

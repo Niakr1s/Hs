@@ -21,7 +21,13 @@ namespace HsLibTests.Systems
         [TestMethod()]
         public void CardsTest_CountValid()
         {
-            int expectedCount = 6; // 2x hero + weapon + ability
+            int expectedCount = 4; // 2x hero + ability
+            Assert.AreEqual(expectedCount, _bf.Cards.Count());
+
+            _bf.Player.Weapon = new FieryWarAxe();
+            _bf.Enemy.Weapon = new FieryWarAxe();
+
+            expectedCount += 2;
             Assert.AreEqual(expectedCount, _bf.Cards.Count());
 
             var doTest = (IContainer container) =>
