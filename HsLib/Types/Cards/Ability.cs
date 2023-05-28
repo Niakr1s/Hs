@@ -29,6 +29,7 @@ namespace HsLib.Types.Cards
             {
                 useEffectAction();
                 EffectUsedThisTurn = true;
+                bf[Place.Pid].Mp.Decrease(Mp);
             };
         }
 
