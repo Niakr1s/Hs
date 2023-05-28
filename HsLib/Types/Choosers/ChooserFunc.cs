@@ -3,13 +3,13 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Choosers
 {
-    public delegate IEnumerable<ICard> ChooserFunc(Battlefield bf, ICard owner);
+    public delegate IEnumerable<ICard> ChooserFunc<TOwner>(Battlefield bf, TOwner owner);
 
     public static class CardsChooserFuncExtensions
     {
-        public static IChooser ToCardsChooser(this ChooserFunc f)
+        public static IChooser<TOwner> ToCardsChooser<TOwner>(this ChooserFunc<TOwner> f)
         {
-            return new Chooser(f);
+            return new Chooser<TOwner>(f);
         }
     }
 }

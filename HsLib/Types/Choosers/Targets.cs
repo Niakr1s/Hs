@@ -4,7 +4,7 @@ using HsLib.Types.Places;
 
 namespace HsLib.Types.Choosers
 {
-    public readonly struct Targets : IChooser
+    public readonly struct Targets : IChooser<ICard>
     {
         public Loc Locs { get; init; }
 

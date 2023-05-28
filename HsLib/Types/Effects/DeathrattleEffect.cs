@@ -1,4 +1,5 @@
 ﻿using HsLib.Systems;
+using HsLib.Types.Cards;
 using HsLib.Types.Choosers;
 using HsLib.Types.Places;
 
@@ -6,14 +7,14 @@ namespace HsLib.Types.Effects
 {
     public class DeathrattleEffect
     {
-        public DeathrattleEffect(IEffect effect, IChooser targetsChooser)
+        public DeathrattleEffect(IEffect effect, IChooser<ICard> targetsChooser)
         {
             Effect = effect;
             TargetsChooser = targetsChooser;
         }
 
         public IEffect Effect { get; }
-        public IChooser TargetsChooser { get; }
+        public IChooser<ICard> TargetsChooser { get; }
 
         public Action ActivateDeathrattle(Battlefield bf, Pid owner)
         {

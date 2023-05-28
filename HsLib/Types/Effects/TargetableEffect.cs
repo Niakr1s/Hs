@@ -15,16 +15,16 @@ namespace HsLib.Types.Effects
         /// <param name="targetsChooser">Chooses targets for effect.
         /// If provided, will ignore target in <see cref="UseEffect(Battlefield, PlaceInContainer, ICard?)"/> and use it instead.</param>
         public TargetableEffect(ICard owner, IEffect effect,
-            IChooser? possibleTargetsChooser = null,
-            IChooser? targetsChooser = null)
+            IChooser<ICard>? possibleTargetsChooser = null,
+            IChooser<ICard>? targetsChooser = null)
         {
             Owner = owner;
             Effect = effect;
             _targetsChooser = targetsChooser;
             _possibleTargetsChooser = possibleTargetsChooser;
         }
-        private readonly IChooser? _targetsChooser;
-        private readonly IChooser? _possibleTargetsChooser;
+        private readonly IChooser<ICard>? _targetsChooser;
+        private readonly IChooser<ICard>? _possibleTargetsChooser;
 
         public ICard Owner { get; set; }
 

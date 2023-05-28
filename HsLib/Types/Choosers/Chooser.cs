@@ -3,16 +3,16 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Choosers
 {
-    public class Chooser : IChooser
+    public class Chooser<TOwner> : IChooser<TOwner>
     {
-        public Chooser(ChooserFunc cardChooserFunc)
+        public Chooser(ChooserFunc<TOwner> cardChooserFunc)
         {
             _cardChooserFunc = cardChooserFunc;
         }
 
-        private readonly ChooserFunc _cardChooserFunc;
+        private readonly ChooserFunc<TOwner> _cardChooserFunc;
 
-        public IEnumerable<ICard> ChooseCards(Battlefield bf, ICard owner)
+        public IEnumerable<ICard> ChooseCards(Battlefield bf, TOwner owner)
         {
             return _cardChooserFunc.Invoke(bf, owner);
         }

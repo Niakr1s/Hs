@@ -7,7 +7,7 @@ namespace HsLib.Types.Auras
 {
     public class AuraSource : BattlefieldSubscriber<ICard>
     {
-        public AuraSource(Minion owner, IAuraEffect auraEffect, IChooser cardsChooser)
+        public AuraSource(Minion owner, IAuraEffect auraEffect, IChooser<ICard> cardsChooser)
             : base(owner)
         {
             _auraEffect = auraEffect;
@@ -15,7 +15,7 @@ namespace HsLib.Types.Auras
         }
 
         private readonly IAuraEffect _auraEffect;
-        private readonly IChooser _cardsChooser;
+        private readonly IChooser<ICard> _cardsChooser;
         private readonly List<IEnchantHandler> _appliedAuras = new();
 
         protected override void OnCollectionChanged()

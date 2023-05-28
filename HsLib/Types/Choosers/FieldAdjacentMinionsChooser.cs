@@ -4,7 +4,7 @@ using HsLib.Types.Containers;
 
 namespace HsLib.Types.Choosers
 {
-    public class FieldAdjacentMinionsChooser : IChooser
+    public class FieldAdjacentMinionsChooser : IChooser<ICard>
     {
         public bool ExcludeLeft { get; init; }
 

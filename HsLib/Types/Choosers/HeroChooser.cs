@@ -3,9 +3,9 @@ using HsLib.Types.Places;
 
 namespace HsLib.Types.Choosers
 {
-    public class HeroChooser : Chooser
+    public class HeroChooser : Chooser<ICard>
     {
-        private static readonly ChooserFunc _f =
+        private static readonly ChooserFunc<ICard> _f =
             (bf, owner) => bf.Cards
             .Where(c => c is Hero && c.Place.Pid == owner.Place.Pid && c.Place.Loc == Loc.Hero);
 

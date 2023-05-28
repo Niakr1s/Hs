@@ -7,7 +7,7 @@ namespace HsLib.Types.Effects
     public class AbilityEffect : PlayerEffect
     {
         public AbilityEffect(ICard owner, IEffect effect,
-            IChooser? possibleTargetsChooser = null, IChooser? targetsChooser = null)
+            IChooser<ICard>? possibleTargetsChooser = null, IChooser<ICard>? targetsChooser = null)
             : base(owner, effect, possibleTargetsChooser, targetsChooser)
         {
         }
