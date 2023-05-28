@@ -32,7 +32,7 @@ namespace HsLibTests.Types.Effects
             Minion playerMInion = new ChillwindYeti();
             _board.Player.Field.Add(playerMInion);
 
-            Targets validTargets = new Targets() { Sides = PidSide.He, Locs = Loc.Field };
+            Targets validTargets = new Targets() { Sides = Side.He, Locs = Loc.Field };
             // valid effect to target minion
             BattlecryEffect? havePossibleTargetsEffect = new(playerMInion, new DamageEffect(1), validTargets);
             // invalid effect to target minion

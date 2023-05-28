@@ -13,7 +13,7 @@
     [Flags]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1135:Declare enum member with zero value (when enum has FlagsAttribute).",
         Justification = "<Pending>")] // never should be none
-    public enum PidSide
+    public enum Side
     {
         Me = 1,
         He = 2,
@@ -36,12 +36,12 @@
             _ => throw new InvalidOperationException()
         };
 
-        public static PidSide Side(this Pid pid, Pid other)
+        public static Side Side(this Pid pid, Pid other)
         {
             return (pid == other) switch
             {
-                true => PidSide.Me,
-                false => PidSide.He,
+                true => Places.Side.Me,
+                false => Places.Side.He,
             };
         }
     }

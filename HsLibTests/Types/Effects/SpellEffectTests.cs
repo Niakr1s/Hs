@@ -32,7 +32,7 @@ namespace HsLibTests.Types.Effects
             Minion playerMinion = new ChillwindYeti();
             _board.Player.Field.Add(playerMinion);
 
-            Targets validTargets = new Targets() { Sides = PidSide.He, Locs = Loc.Field };
+            Targets validTargets = new Targets() { Sides = Side.He, Locs = Loc.Field };
 
             // valid effect to target minion
             SpellEffect havePossibleTargetsEffect = new(playerMinion, new DamageEffect(1), validTargets);

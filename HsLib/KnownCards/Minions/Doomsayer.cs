@@ -20,7 +20,7 @@ namespace HsLib.KnownCards.Minions
         {
         }
 
-        private static readonly Targets _targets = new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He };
+        private static readonly Targets _targets = new() { Locs = Loc.Field, Sides = Side.Me | Side.He };
 
         protected override void OnTurnStart()
         {

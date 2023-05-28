@@ -11,7 +11,7 @@ namespace HsLib.KnownCards.Spells
         {
             SpellEffect = new(this,
                 new MindControlEffect(),
-                possibleTargetsChooser: new Targets { Locs = Loc.Field, Sides = PidSide.He }
+                possibleTargetsChooser: new Targets { Locs = Loc.Field, Sides = Side.He }
                 );
         }
 

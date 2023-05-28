@@ -23,7 +23,7 @@ namespace HsLib.KnownCards.Minions
 
         internal class ProphetVelenCardsChooser : IChooser<ICard>
         {
-            private static readonly Targets _targets = new Targets { Locs = Loc.Ability | Loc.Hand, Sides = PidSide.Me };
+            private static readonly Targets _targets = new Targets { Locs = Loc.Ability | Loc.Hand, Sides = Side.Me };
 
             public IEnumerable<ICard> ChooseCards(Board board, ICard owner)
             {

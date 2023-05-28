@@ -8,7 +8,7 @@ namespace HsLib.Types.Choosers
     {
         public Loc Locs { get; init; }
 
-        public PidSide Sides { get; init; }
+        public Side Sides { get; init; }
 
         private bool IsValidTarget(ICard owner, ICard target)
         {

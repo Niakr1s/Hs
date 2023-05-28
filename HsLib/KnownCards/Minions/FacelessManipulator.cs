@@ -10,7 +10,7 @@ namespace HsLib.KnownCards.Minions
         public FacelessManipulator() : base(5, 3, 3)
         {
             TransformEffect effect = new();
-            Targets possibleTargets = new() { Locs = Loc.Field, Sides = PidSide.Me | PidSide.He };
+            Targets possibleTargets = new() { Locs = Loc.Field, Sides = Side.Me | Side.He };
             BattlecryEffect = new(this, effect, possibleTargetsChooser: possibleTargets);
         }
     }

@@ -10,7 +10,7 @@ namespace HsLib.KnownCards.Spells
         public HolySmite() : base(1)
         {
             IEffect effect = new DamageEffect(2);
-            Targets possibleTargets = new Targets { Locs = Loc.Field | Loc.Hero, Sides = PidSide.He | PidSide.Me };
+            Targets possibleTargets = new Targets { Locs = Loc.Field | Loc.Hero, Sides = Side.He | Side.Me };
             SpellEffect = new(this, effect, possibleTargetsChooser: possibleTargets);
         }
 
