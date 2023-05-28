@@ -10,7 +10,7 @@ namespace HsLib.Types.Choosers
 
         public bool ExcludeRight { get; init; }
 
-        public IEnumerable<ICard> ChooseCards(Battlefield bf, ICard owner, IEnumerable<ICard> cards)
+        public IEnumerable<ICard> ChooseCards(Battlefield bf, ICard owner)
         {
             if (owner.Place.IsNone()) { yield break; }
 
@@ -18,7 +18,7 @@ namespace HsLib.Types.Choosers
             ICard? left = container?.Left(owner);
             ICard? right = container?.Right(owner);
 
-            foreach (var card in cards.Where(c =>
+            foreach (var card in bf.Cards.Where(c =>
                     (!ExcludeLeft && left is not null && c == left) ||
                     (!ExcludeRight && right is not null && c == right)))
             {

@@ -39,7 +39,7 @@ namespace HsLib.Types.Auras
             if (Bf is null) { return; }
             if (Owner.Place.IsNone()) { throw new InvalidOperationException("owner doesn't in container"); }
 
-            foreach (ICard card in _cardsChooser.ChooseCards(Bf, Owner, Bf.Cards))
+            foreach (ICard card in _cardsChooser.ChooseCards(Bf, Owner))
             {
                 _appliedAuras.Add(_auraEffect.GiveAura(Bf, Owner, card));
             }

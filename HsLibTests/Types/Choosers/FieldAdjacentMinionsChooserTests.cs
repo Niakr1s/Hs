@@ -42,7 +42,7 @@ namespace HsLibTests.Types.Choosers
             for (int i = 0; i < _minions.Count; i++)
             {
                 int expected = i == 0 || i == _minions.Count - 1 ? 1 : 2;
-                Assert.AreEqual(expected, chooser.ChooseCards(_bf, _minions[0], _bf.Cards).Count());
+                Assert.AreEqual(expected, chooser.ChooseCards(_bf, _minions[0]).Count());
             }
         }
     }

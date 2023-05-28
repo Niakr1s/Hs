@@ -11,8 +11,8 @@ namespace HsLibTests.Types.Choosers
             var chooser = new HeroChooser();
             var bf = TestBattlefield.New();
 
-            Assert.AreEqual(1, chooser.ChooseCards(bf, bf.Player.Ability, bf.Cards).Count());
-            Assert.AreEqual(1, chooser.ChooseCards(bf, bf.Enemy.Ability, bf.Cards).Count());
+            Assert.AreEqual(1, chooser.ChooseCards(bf, bf.Player.Ability).Count());
+            Assert.AreEqual(1, chooser.ChooseCards(bf, bf.Enemy.Ability).Count());
         }
     }
 }

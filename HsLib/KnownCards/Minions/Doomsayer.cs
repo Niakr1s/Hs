@@ -26,7 +26,7 @@ namespace HsLib.KnownCards.Minions
         {
             if (Bf!.Turn.Pid == Owner.Place.Pid)
             {
-                foreach (IMortal card in _targets.ChooseCards(Bf, Owner, Bf.Cards)
+                foreach (IMortal card in _targets.ChooseCards(Bf, Owner)
                     .Cast<IMortal>())
                 {
                     card.Dead = true;

@@ -34,7 +34,7 @@ namespace HsLib.Types.Effects
         {
             if (_possibleTargetsChooser is null) { yield break; }
 
-            foreach (var t in _possibleTargetsChooser.ChooseCards(bf, Owner, bf.Cards))
+            foreach (var t in _possibleTargetsChooser.ChooseCards(bf, Owner))
             {
                 yield return t;
             }
@@ -57,7 +57,7 @@ namespace HsLib.Types.Effects
             {
                 if (target is not null) { throw new ValidationException("target should be null"); }
 
-                IEnumerable<Action>? toAdd = _targetsChooser?.ChooseCards(bf, Owner, bf.Cards)
+                IEnumerable<Action>? toAdd = _targetsChooser?.ChooseCards(bf, Owner)
                     .Select(target => Effect.UseEffect(bf, Owner, target));
 
                 if (toAdd is not null) effectActions.AddRange(toAdd);

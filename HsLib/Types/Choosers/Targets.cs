@@ -19,9 +19,9 @@ namespace HsLib.Types.Choosers
             return sideIsCorrect && locIsCorrect;
         }
 
-        public IEnumerable<ICard> ChooseCards(Battlefield bf, ICard owner, IEnumerable<ICard> cards)
+        public IEnumerable<ICard> ChooseCards(Battlefield bf, ICard owner)
         {
-            foreach (var t in cards)
+            foreach (var t in bf.Cards)
             {
                 if (IsValidTarget(owner, t))
                 {
