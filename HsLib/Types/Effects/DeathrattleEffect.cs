@@ -19,7 +19,8 @@ namespace HsLib.Types.Effects
         public Action ActivateDeathrattle(Battlefield bf, Pid owner)
         {
             List<Action> effectActions = new();
-            foreach (ICard target in TargetsChooser.ChooseCards(owner, bf.Cards))
+
+            foreach (ICard target in TargetsChooser.ChooseCards(bf, owner))
             {
                 // using null! for owner param, coz deathrattle should use only ono-owner effects
                 effectActions.Add(Effect.UseEffect(bf, null!, target));

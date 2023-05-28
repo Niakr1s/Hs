@@ -27,7 +27,7 @@ namespace HsLibTests.KnownCards.Minions
             playerField.Add(y2);
             playerField.Add(armorsmith);
 
-            var playerArmor = bf.Player.Hero.Card.Armor;
+            var playerArmor = bf.Player.Hero.Armor;
             int expectedArmor = playerArmor;
 
             enemyYeti.Hp.Decrease(1);
@@ -44,7 +44,7 @@ namespace HsLibTests.KnownCards.Minions
             y3.Hp.Decrease(1);
             Assert.AreEqual(++expectedArmor, playerArmor);
 
-            bf.Enemy.Hero.Card.Hp.Decrease(1);
+            bf.Enemy.Hero.Hp.Decrease(1);
             Assert.AreEqual(expectedArmor, playerArmor);
 
             // removing y2 and trying to damage it

@@ -8,20 +8,15 @@ namespace HsLib.Types.Cards
     {
         Mp Mp { get; }
 
-        PlaceInContainer? PlaceInContainer { get; set; }
-        bool ShouldBeRemovedFromCurrentContainer();
+        Place Place { get; set; }
 
-        void OnTurnEnd(Battlefield bf);
-        void OnTurnStart(Battlefield bf);
-
-        void OnPreAttack(Battlefield bf, IAttacker attacker, IDamageable defender);
-
-
+        /// <summary>
+        /// Called to check, if card should be cleaned by clean service.
+        /// </summary>
+        bool ShouldBeCleaned();
 
         void Subscribe(Battlefield bf);
         void Unsubscribe(Battlefield bf, Place previousPlace);
-
-
 
         ICard Clone();
     }

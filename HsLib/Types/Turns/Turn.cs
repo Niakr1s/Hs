@@ -60,9 +60,16 @@ namespace HsLib.Types.Turns
             }
         }
 
-        public bool IsFirstTurn(int turnAdded)
+        public bool IsFirstTurn(int? turnAdded)
         {
-            return turnAdded == No;
+            if (turnAdded is null)
+            {
+                return false;
+            }
+            else
+            {
+                return turnAdded == No;
+            }
         }
 
         public bool IsActivePid(Pid pid)

@@ -1,10 +1,10 @@
 ﻿namespace HsLib.Types.Places
 {
     [Flags]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1135:Declare enum member with zero value (when enum has FlagsAttribute).",
-        Justification = "<Pending>")] // never should be none
     public enum Pid
     {
+        None = 0,
+
         P1 = 1,
         P2 = 2,
     }

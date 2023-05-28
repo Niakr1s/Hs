@@ -2,7 +2,6 @@
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Places;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.KnownCards.Minions
 {
@@ -22,7 +21,7 @@ namespace HsLibTests.KnownCards.Minions
             bf[Pid.P1].Hand.Add(abusiveSergeant);
             Assert.AreEqual(4, yeti.Atk);
 
-            abusiveSergeant.BattlecryEffect?.UseEffect(bf, abusiveSergeant.PlaceInContainer!.Pid, yeti)();
+            abusiveSergeant.BattlecryEffect?.UseEffect(bf, yeti)();
             Assert.AreEqual(6, yeti.Atk);
 
             bf.Turn.Next();

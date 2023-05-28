@@ -22,19 +22,20 @@ namespace HsLib.Types.Cards
         /// <returns>Action, that actually uses effect.</returns>
         public Action UseAbility(Battlefield bf, ICard? target)
         {
-            TargetableEffectValidator.ValidateEffectTarget(AbilityEffect, bf, PlaceInContainer!.Pid, target);
-            Action useEffectAction = AbilityEffect.UseEffect(bf, PlaceInContainer!.Pid, target);
+            TargetableEffectValidator.ValidateEffectTarget(AbilityEffect, bf, target);
+            Action useEffectAction = AbilityEffect.UseEffect(bf, target);
 
             return () =>
             {
                 useEffectAction();
                 EffectUsedThisTurn = true;
+                bf[Place.Pid].Mp.Decrease(Mp);
             };
         }
 
-        public override void OnTurnStart(Battlefield bf)
+        protected override void OnTurnStart()
         {
-            base.OnTurnStart(bf);
+            base.OnTurnStart();
             EffectUsedThisTurn = false;
         }
     }

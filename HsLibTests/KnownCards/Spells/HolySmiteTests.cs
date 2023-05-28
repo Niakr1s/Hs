@@ -2,7 +2,6 @@
 using HsLib.KnownCards.Spells;
 using HsLib.Systems;
 using HsLib.Types.Cards;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.KnownCards.Spells
 {
@@ -16,13 +15,13 @@ namespace HsLibTests.KnownCards.Spells
 
             Spell holySmite = new HolySmite();
             bf.Player.Hand.Add(holySmite);
-            Assert.AreEqual(2, holySmite.SpellEffect.GetPossibleTargets(bf, holySmite.PlaceInContainer!.Pid).Count()); // mine and his heros
+            Assert.AreEqual(2, holySmite.SpellEffect.GetPossibleTargets(bf).Count()); // mine and his heros
 
             Minion yeti = new ChillwindYeti();
             bf.Enemy.Field.Add(yeti);
-            Assert.AreEqual(3, holySmite.SpellEffect.GetPossibleTargets(bf, holySmite.PlaceInContainer!.Pid).Count());
+            Assert.AreEqual(3, holySmite.SpellEffect.GetPossibleTargets(bf).Count());
 
-            holySmite.SpellEffect.UseEffect(bf, holySmite.PlaceInContainer!.Pid, yeti)();
+            holySmite.SpellEffect.UseEffect(bf, yeti)();
             Assert.AreEqual(3, yeti.Hp);
         }
     }

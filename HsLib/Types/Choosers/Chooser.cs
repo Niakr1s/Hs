@@ -1,4 +1,5 @@
-﻿using HsLib.Types.Cards;
+﻿using HsLib.Systems;
+using HsLib.Types.Cards;
 
 namespace HsLib.Types.Choosers
 {
@@ -11,9 +12,9 @@ namespace HsLib.Types.Choosers
 
         private readonly ChooserFunc<TOwner> _cardChooserFunc;
 
-        public IEnumerable<ICard> ChooseCards(TOwner owner, IEnumerable<ICard> cards)
+        public IEnumerable<ICard> ChooseCards(Battlefield bf, TOwner owner)
         {
-            return _cardChooserFunc.Invoke(owner, cards);
+            return _cardChooserFunc.Invoke(bf, owner);
         }
     }
 }

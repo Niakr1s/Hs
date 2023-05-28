@@ -1,5 +1,4 @@
 ﻿using HsLib.Types.Cards;
-using HsLib.Types.Turns;
 using System.Collections.Specialized;
 
 namespace HsLib.Systems
@@ -8,22 +7,7 @@ namespace HsLib.Systems
     {
         private void ConnectEvents()
         {
-            TurnEvent += Turn_Event;
             CollectionChanged += Collection_Event;
-        }
-
-        private void Turn_Event(object? sender, TurnEventArgs e)
-        {
-            switch (e.Type)
-            {
-                case TurnEventType.Start:
-                    foreach (ICard card in Cards) card.OnTurnStart(this);
-                    break;
-
-                case TurnEventType.End:
-                    foreach (ICard card in Cards) card.OnTurnEnd(this);
-                    break;
-            }
         }
 
         private void Collection_Event(object? sender, NotifyCollectionChangedEventArgs e)

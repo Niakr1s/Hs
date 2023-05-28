@@ -1,5 +1,4 @@
-﻿using HsLib.Extensions;
-using HsLib.Systems;
+﻿using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Places;
 using System.Collections.ObjectModel;
@@ -28,13 +27,11 @@ namespace HsLib.Types.Containers
 
         private void OnCollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            UpdateCardsPlaces();
-
             if (e.NewItems is not null)
             {
                 foreach (TCard item in e.NewItems)
                 {
-                    item.PlaceInContainer = Place.InContainer(Bf.Turn.No, IndexOf(item));
+                    item.Place = Place;
                     item.Subscribe(Bf);
                 }
             }
@@ -43,7 +40,7 @@ namespace HsLib.Types.Containers
             {
                 foreach (TCard item in e.OldItems)
                 {
-                    item.PlaceInContainer = default;
+                    item.Place = new();
                     item.Unsubscribe(Bf, Place);
                 }
             }
@@ -115,6 +112,18 @@ namespace HsLib.Types.Containers
             }
         }
 
+        public bool Remove(ICard card)
+        {
+            if (card is TCard tcard)
+            {
+                return base.Remove(tcard);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public TCard? Left(int index)
         {
             try
@@ -124,6 +133,19 @@ namespace HsLib.Types.Containers
             catch
             {
                 return default;
+            }
+        }
+
+        public ICard? Left(ICard card)
+        {
+            if (card is TCard tcard)
+            {
+                int index = IndexOf(tcard);
+                return Left(index);
+            }
+            else
+            {
+                return null;
             }
         }
 
@@ -139,10 +161,30 @@ namespace HsLib.Types.Containers
             }
         }
 
-        public Action MoveToContainer(int fromIndex, IContainer toContainer, bool canBurn, int? toIndex = 0)
+        public ICard? Right(ICard card)
+        {
+            if (card is TCard tcard)
+            {
+                int index = IndexOf(tcard);
+                return Right(index);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public Action MoveToContainer(ICard card, IContainer toContainer, bool canBurn, int? toIndex = 0)
+        {
+            return MoveToContainer((TCard)card, toContainer, canBurn, toIndex);
+        }
+
+        public Action MoveToContainer(TCard card, IContainer toContainer, bool canBurn, int? toIndex = 0)
         {
 
-            var _ = this[fromIndex]; // easiest check for if index exists
+            int fromIndex = IndexOf(card);
+            if (fromIndex == -1) { throw new ValidationException("card doesn't belong to this container"); }
+
             toIndex ??= toContainer.Count;
 
             bool canBeInserted = toContainer.CanBeInserted;
@@ -171,17 +213,6 @@ namespace HsLib.Types.Containers
         private void CollectionIsFullCheck()
         {
             if (IsFull) { throw new InvalidOperationException("collection is full"); }
-        }
-
-        private void UpdateCardsPlaces()
-        {
-            foreach (var (card, index) in this.WithIndex())
-            {
-                if (card.PlaceInContainer is not null)
-                {
-                    card.PlaceInContainer = card.PlaceInContainer with { Index = index };
-                }
-            }
         }
 
         #endregion

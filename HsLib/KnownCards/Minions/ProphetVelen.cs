@@ -21,13 +21,13 @@ namespace HsLib.KnownCards.Minions
 
 
 
-        internal class ProphetVelenCardsChooser : IChooser<PlaceInContainer>
+        internal class ProphetVelenCardsChooser : IChooser<ICard>
         {
             private static readonly Targets _targets = new Targets { Locs = Loc.Ability | Loc.Hand, Sides = PidSide.Me };
 
-            public IEnumerable<ICard> ChooseCards(PlaceInContainer owner, IEnumerable<ICard> cards)
+            public IEnumerable<ICard> ChooseCards(Battlefield bf, ICard owner)
             {
-                return _targets.ChooseCards(owner, cards).Where(CardIsValid);
+                return _targets.ChooseCards(bf, owner).Where(CardIsValid);
             }
 
             private static bool CardIsValid(ICard c) => (c is Ability a && EffectIsValid(a.AbilityEffect.Effect)) ||

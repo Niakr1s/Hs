@@ -6,21 +6,8 @@ namespace HsLib.Types.Containers
 {
     public class AbilityContainer : SingleContainer<Ability>
     {
-        public AbilityContainer(Battlefield bf, Pid pid, Ability card) : base(bf, new Place(pid, Loc.Ability), card)
+        public AbilityContainer(Battlefield bf, Pid pid, Ability ability) : base(bf, new(pid, Loc.Ability), ability)
         {
-        }
-
-        public Action UseAbility(ICard? target = null)
-        {
-            BattlefieldPlayer player = Bf[Place!.Pid];
-            if (!player.Mp.IsEnough(Card.Mp)) { throw new ValidationException("not enough mp"); }
-            Action effectAction = Card.UseAbility(Bf, target);
-
-            return () =>
-            {
-                player.Mp.Decrease(Card.Mp);
-                effectAction();
-            };
         }
     }
 }

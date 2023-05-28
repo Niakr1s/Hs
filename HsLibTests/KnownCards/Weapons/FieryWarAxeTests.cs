@@ -1,7 +1,6 @@
 ﻿using HsLib.KnownCards.Weapons;
 using HsLib.Systems;
 using HsLib.Types.Cards;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.KnownCards.Weapons
 {
@@ -13,11 +12,14 @@ namespace HsLibTests.KnownCards.Weapons
         {
             Battlefield bf = TestBattlefield.New();
 
-            Weapon weapon = new FieryWarAxe();
-            bf.Player.Hand.Add(weapon);
-            bf.Player.Hand.PlayFromHand(0)();
+            for (int i = 0; i < 3; i++)
+            {
+                Weapon weapon = new FieryWarAxe();
+                bf.Player.Hand.Add(weapon);
+                bf.Player.Hand.PlayFromHand(0)();
 
-            Assert.AreEqual(weapon, bf.Player.Weapon.Card);
+                Assert.AreEqual(weapon, bf.Player.Weapon);
+            }
         }
     }
 }

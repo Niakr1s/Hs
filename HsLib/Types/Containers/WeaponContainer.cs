@@ -4,15 +4,11 @@ using HsLib.Types.Places;
 
 namespace HsLib.Types.Containers
 {
-    public class WeaponContainer : SingleContainer<Weapon>
+    public class WeaponContainer : SingleMaybeContainer<Weapon>
     {
-        public WeaponContainer(Battlefield bf, Pid pid, Weapon card) : base(bf, new Place(pid, Loc.Weapon), card)
+        public WeaponContainer(Battlefield bf, Pid pid, Weapon? startCard = null) : base(bf, new(pid, Loc.Weapon))
         {
-        }
-
-        protected override bool IsCardActive(Weapon card)
-        {
-            return !card.Dead;
+            Card = startCard;
         }
     }
 }

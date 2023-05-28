@@ -26,40 +26,46 @@ namespace HsLibTests.Types.Effects
         {
             Minion? nullMinion = null;
 
-            Minion validMinion = new ChillwindYeti();
-            _bf.Enemy.Field.Add(validMinion);
+            Minion enemyMinion = new ChillwindYeti();
+            _bf.Enemy.Field.Add(enemyMinion);
 
-            Minion invalidMinion = new ChillwindYeti();
-            _bf.Player.Field.Add(invalidMinion);
+            Minion playerMinion = new ChillwindYeti();
+            _bf.Player.Field.Add(playerMinion);
 
+            //Spell havePossibleTargetsEffectSpell = new SpellWithPossibleTargetsEffect();
+            //Spell haveNoPossibleTargetsEffectSpell = new SpellWithNoPossibleTargetsEffect();
+
+            //_bf.Player.Hand.Add(havePossibleTargetsEffectSpell);
+            //_bf.Player.Hand.Add(haveNoPossibleTargetsEffectSpell);
             Targets validTargets = new Targets() { Sides = PidSide.He, Locs = Loc.Field };
+
             // valid effect to target minion
-            SpellEffect havePossibleTargetsEffect = new(null!, new DamageEffect(1), validTargets);
+            SpellEffect havePossibleTargetsEffect = new(playerMinion, new DamageEffect(1), validTargets);
             // invalid effect to target minion
-            SpellEffect noPossibleTargetsEffect = new(null!, new DamageEffect(1));
+            SpellEffect noPossibleTargetsEffect = new(playerMinion, new DamageEffect(1));
 
             List<(SpellEffect?, ICard?, bool)> testCases = new()
             {
                 (null, nullMinion, true),
-                (null, validMinion, false),
-                (null, invalidMinion, false),
+                (null, enemyMinion, false),
+                (null, playerMinion, false),
 
                 // now validMinion is in possible targets
                 (havePossibleTargetsEffect, nullMinion, false),
-                (havePossibleTargetsEffect, validMinion, true),
-                (havePossibleTargetsEffect, invalidMinion, false),
+                (havePossibleTargetsEffect, enemyMinion, true),
+                (havePossibleTargetsEffect, playerMinion, false),
 
                 // now validMinion is in not possible targets
                 (noPossibleTargetsEffect, nullMinion, true),
-                (noPossibleTargetsEffect, validMinion, false),
-                (noPossibleTargetsEffect, invalidMinion, false),
+                (noPossibleTargetsEffect, enemyMinion, false),
+                (noPossibleTargetsEffect, playerMinion, false),
             };
 
             for (int i = 0; i < testCases.Count; i++)
             {
                 (SpellEffect? effect, ICard? target, bool shouldPass) = testCases[i];
 
-                void doTest() => TargetableEffectValidator.ValidateEffectTarget(effect, _bf, Pid.P1, target);
+                void doTest() => TargetableEffectValidator.ValidateEffectTarget(effect, _bf, target);
 
                 if (shouldPass)
                 {

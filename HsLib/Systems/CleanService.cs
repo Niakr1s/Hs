@@ -17,12 +17,12 @@ namespace HsLib.Systems
         /// <returns>Removed cards.</returns>
         public IEnumerable<RemovedCard> CleanInactiveCards()
         {
-            IEnumerable<RemovedCard> cardsToClean = Bf.Cards.Where(c => c.ShouldBeRemovedFromCurrentContainer())
-                .Select(c => new RemovedCard(c, c.PlaceInContainer!)).ToList();
+            IEnumerable<RemovedCard> cardsToClean = Bf.Cards.Where(c => c.ShouldBeCleaned())
+                .Select(c => new RemovedCard(c, c.Place)).ToList();
 
             foreach (RemovedCard card in cardsToClean)
             {
-                Bf[card.Place].Remove(card.Card);
+                Bf[card.Place.Pid].Remove(card.Card);
             }
             return cardsToClean.AsEnumerable();
         }

@@ -42,11 +42,11 @@ namespace HsLib.Systems
         {
             add
             {
-                Array.ForEach(Enum.GetValues<Pid>(), p => this[p].CollectionChanged += value);
+                Array.ForEach(Pids.All(), p => this[p].CollectionChanged += value);
             }
             remove
             {
-                Array.ForEach(Enum.GetValues<Pid>(), p => this[p].CollectionChanged -= value);
+                Array.ForEach(Pids.All(), p => this[p].CollectionChanged -= value);
             }
         }
 
@@ -111,7 +111,7 @@ namespace HsLib.Systems
             try
             {
 
-                Minion attacker = (Minion)Player.GetCard(Loc.Field, attackerIndex);
+                Minion attacker = Player.Field[attackerIndex];
                 IDamageable defender = GetDefender(defenderLoc, defenderIndex);
                 attackAction = MeleeService.MinionAttack(attacker, defender);
             }
@@ -131,7 +131,7 @@ namespace HsLib.Systems
                 throw new ValidationException("wrong loc");
             }
 
-            return Enemy.GetCard(loc, index) as IDamageable ?? throw new ArgumentException("not damageable");
+            return Enemy[loc][index] as IDamageable ?? throw new ArgumentException("not damageable");
         }
 
         #endregion
@@ -186,7 +186,7 @@ namespace HsLib.Systems
         /// <returns></returns>
         public bool UseAbility(Pid targetPid, Loc targetLoc, int targetIndex = 0)
         {
-            ICard target = this[targetPid].GetCard(targetLoc, targetIndex);
+            ICard? target = this[targetPid][targetLoc][targetIndex] as ICard;
             return UseAbility(target);
         }
 
@@ -196,7 +196,7 @@ namespace HsLib.Systems
 
             try
             {
-                abilityAction = Player.Ability.UseAbility(target);
+                abilityAction = Player.Ability.UseAbility(this, target);
             }
             catch
             {

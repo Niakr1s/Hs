@@ -13,13 +13,13 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            TargetableEffectValidator.ValidateEffectTarget(SpellEffect, bf, PlaceInContainer!.Pid, effectTarget);
+            TargetableEffectValidator.ValidateEffectTarget(SpellEffect, bf, effectTarget);
 
-            Action spellEffectAction = SpellEffect.UseEffect(bf, PlaceInContainer!.Pid, effectTarget);
+            Action spellEffectAction = SpellEffect.UseEffect(bf, effectTarget);
             return () =>
             {
                 spellEffectAction();
-                bf[PlaceInContainer!.Pid].Hand.Remove(this);
+                bf[Place.Pid].Hand.Remove(this);
             };
         }
     }

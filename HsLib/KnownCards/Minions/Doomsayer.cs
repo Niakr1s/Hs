@@ -24,9 +24,9 @@ namespace HsLib.KnownCards.Minions
 
         protected override void OnTurnStart()
         {
-            if (Bf!.Turn.Pid == Owner.PlaceInContainer!.Pid)
+            if (Bf!.Turn.Pid == Owner.Place.Pid)
             {
-                foreach (IMortal card in _targets.ChooseCards(Owner.PlaceInContainer.Pid, Bf.Cards)
+                foreach (IMortal card in _targets.ChooseCards(Bf, Owner)
                     .Cast<IMortal>())
                 {
                     card.Dead = true;

@@ -1,8 +1,9 @@
-﻿using HsLib.Types.Cards;
+﻿using HsLib.Systems;
+using HsLib.Types.Cards;
 
 namespace HsLib.Types.Choosers
 {
-    public delegate IEnumerable<ICard> ChooserFunc<TOwner>(TOwner owner, IEnumerable<ICard> cards);
+    public delegate IEnumerable<ICard> ChooserFunc<TOwner>(Battlefield bf, TOwner owner);
 
     public static class CardsChooserFuncExtensions
     {

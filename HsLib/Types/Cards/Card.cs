@@ -13,40 +13,48 @@ namespace HsLib.Types.Cards
     /// <see cref="OnTurnEnd(Battlefield)"/><br/>
     /// <see cref="OnTurnStart(Battlefield)"/>.<br/><br/>
     /// </summary>
-    public abstract class Card : ICard, IWithPlaceInContainer
+    public abstract class Card : ICard, IWithPlace
     {
         protected Card(int mp)
         {
             Mp = new Mp(mp);
+            Place = new();
         }
 
-        public PlaceInContainer? PlaceInContainer { get; set; }
+        public Place Place { get; set; }
+
+        public int? AddedTurnNo { get; private set; }
+
+        protected Battlefield? Bf { get; private set; }
 
         public Mp Mp { get; protected set; }
 
-        public virtual bool ShouldBeRemovedFromCurrentContainer() { return false; }
+        public virtual bool ShouldBeCleaned() { return false; }
 
 
         #region reactive
 
-        public virtual void Subscribe(Battlefield bf) { }
+        public virtual void Subscribe(Battlefield bf)
+        {
+            Bf = bf;
+            AddedTurnNo = bf.Turn.No;
+        }
 
-        public virtual void Unsubscribe(Battlefield bf, Place previousPlace) { }
+        public virtual void Unsubscribe(Battlefield bf, Place previousPlace)
+        {
+            Bf = null;
+            AddedTurnNo = null;
+        }
 
+        protected virtual void OnTurnStart() { }
 
-
-        public virtual void OnTurnEnd(Battlefield bf) { }
-
-        public virtual void OnTurnStart(Battlefield bf) { }
-
-
-
-        public virtual void OnPreAttack(Battlefield bf, IAttacker attacker, IDamageable defender) { }
+        protected virtual void OnTurnEnd() { }
 
         public virtual ICard Clone()
         {
+            // todo
             Card cloned = this.DeepClone();
-            cloned.PlaceInContainer = null;
+            cloned.Place = new();
             cloned.Mp = (Mp)Mp.Clone();
             return cloned;
         }

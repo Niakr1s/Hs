@@ -63,12 +63,16 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, PlaceInContainer!.Pid, effectTarget);
+            TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, effectTarget);
 
-            Action move = bf[PlaceInContainer!.Pid].Hand.MoveToContainer(PlaceInContainer.Index, bf[PlaceInContainer.Pid].Weapon,
-                canBurn: false, toIndex: 0);
+            void move()
+            {
+                BattlefieldPlayer player = bf[Place.Pid];
+                player.Hand.Remove(this);
+                player.Weapon = this;
+            }
 
-            Action? battlecryAction = BattlecryEffect?.UseEffect(bf, PlaceInContainer!.Pid, effectTarget);
+            Action? battlecryAction = BattlecryEffect?.UseEffect(bf, effectTarget);
 
             return () =>
             {
@@ -79,18 +83,18 @@ namespace HsLib.Types.Cards
 
         public IDamageable GetDefender(Battlefield bf)
         {
-            return bf[PlaceInContainer!.Pid].Hero.Card;
+            return bf[Place.Pid].Hero;
         }
 
-        public override void OnTurnEnd(Battlefield bf)
+        protected override void OnTurnEnd()
         {
-            base.OnTurnEnd(bf);
+            base.OnTurnEnd();
             AtksThisTurn = 0;
         }
 
-        public override bool ShouldBeRemovedFromCurrentContainer()
+        public override bool ShouldBeCleaned()
         {
-            return PlaceInContainer!.Loc == Loc.Field && Dead;
+            return Place.Loc == Loc.Field && Dead;
         }
     }
 }

@@ -9,14 +9,12 @@ namespace HsLib.Types.Effects
         /// <summary>
         /// Validates nullable active effect.
         /// </summary>
-        /// <typeparam name="TOwner"></typeparam>
         /// <param name="activeEffect"></param>
         /// <param name="bf"></param>
-        /// <param name="owner"></param>
         /// <param name="effectTarget"></param>
         /// <exception cref="ValidationException"></exception>
-        public static void ValidateEffectTarget<TOwner>(ITargetableEffect<TOwner>? activeEffect,
-            Battlefield bf, TOwner owner, ICard? effectTarget)
+        public static void ValidateEffectTarget(ITargetableEffect? activeEffect,
+            Battlefield bf, ICard? effectTarget)
         {
             if (activeEffect is null)
             {
@@ -27,7 +25,7 @@ namespace HsLib.Types.Effects
             }
             else
             {
-                activeEffect.ValidateEffectTarget(bf, owner, effectTarget);
+                activeEffect.ValidateEffectTarget(bf, effectTarget);
             }
         }
     }

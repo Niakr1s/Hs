@@ -54,7 +54,7 @@ namespace HsLib.Types.Cards
             base.Subscribe(bf);
             AtksThisTurn = 0;
 
-            if (PlaceInContainer!.Loc == Loc.Field)
+            if (Place.Loc == Loc.Field)
             {
                 FieldEffectSources.ForEach(e => e.Subscribe(bf));
             }
@@ -73,9 +73,9 @@ namespace HsLib.Types.Cards
             if (Dead) { DeathrattleEffect?.ActivateDeathrattle(bf, previousPlace.Pid)(); }
         }
 
-        public override void OnTurnEnd(Battlefield bf)
+        protected override void OnTurnEnd()
         {
-            base.OnTurnEnd(bf);
+            base.OnTurnEnd();
             AtksThisTurn = 0;
         }
 
@@ -85,12 +85,12 @@ namespace HsLib.Types.Cards
         {
             if (Dead) { return false; }
             if (Windfury.AttacksLeft(AtksThisTurn) <= 0) { return false; }
-            return !bf.Turn.IsFirstTurn(PlaceInContainer!.AddedTurnNo) || Charge;
+            return !bf.Turn.IsFirstTurn(AddedTurnNo) || Charge;
         }
 
         public bool CanBeMeleeAttacked(Battlefield bf)
         {
-            return !Stealth && (Taunt || !bf[PlaceInContainer!.Pid].Field.HasAnyActiveTaunt());
+            return !Stealth && (Taunt || !bf[Place.Pid].Field.HasAnyActiveTaunt());
         }
 
         public IDamageable GetDefender(Battlefield bf)
@@ -100,11 +100,11 @@ namespace HsLib.Types.Cards
 
         public Action PlayFromHand(Battlefield bf, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            Action move = bf[PlaceInContainer!.Pid].Hand.MoveToContainer(PlaceInContainer.Index, bf[PlaceInContainer.Pid].Field,
+            Action move = bf[Place.Pid].Hand.MoveToContainer(this, bf[Place.Pid].Field,
                 canBurn: false, toIndex: fieldIndex);
 
-            TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, PlaceInContainer!.Pid, effectTarget);
-            Action? battlectyAction = BattlecryEffect?.UseEffect(bf, PlaceInContainer!.Pid, effectTarget);
+            TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, effectTarget);
+            Action? battlectyAction = BattlecryEffect?.UseEffect(bf, effectTarget);
 
             return () =>
             {
@@ -113,9 +113,9 @@ namespace HsLib.Types.Cards
             };
         }
 
-        public override bool ShouldBeRemovedFromCurrentContainer()
+        public override bool ShouldBeCleaned()
         {
-            return PlaceInContainer!.Loc == Loc.Field && Dead;
+            return Place.Loc == Loc.Field && Dead;
         }
 
         public override ICard Clone()

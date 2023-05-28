@@ -1,5 +1,6 @@
 ﻿using HsLib.Systems;
 using HsLib.Types.Cards;
+using HsLib.Types.Containers;
 
 namespace HsLib.Types.Effects
 {
@@ -21,8 +22,14 @@ namespace HsLib.Types.Effects
 
         private void UseEffect(Battlefield bf, ICard owner)
         {
-            CardId transformToId = bf[owner.PlaceInContainer!.Pid].Player.ChooseOne(CardIds);
-            bf[owner.PlaceInContainer!][owner.PlaceInContainer!.Index] = CardBuilder.FromId(transformToId);
+            CardId transformToId = bf[owner.Place.Pid].Player.ChooseOne(CardIds);
+            IContainer? container = bf[owner.Place.Pid].GetContainer(owner);
+            if (container is null) { return; }
+
+            int index = container.IndexOf(owner);
+            if (index == -1) { return; }
+
+            container[index] = CardBuilder.FromId(transformToId);
         }
     }
 }

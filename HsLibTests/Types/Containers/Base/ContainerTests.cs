@@ -78,7 +78,7 @@ namespace HsLibTests.Types.Containers.Base
                 _container.Insert(i, m);
                 ContainerTestHelpers.AssertCardsHaveValidPlaces(_container);
 
-                Assert.AreEqual(_container.Place, m.PlaceInContainer!);
+                Assert.AreEqual(_container.Place, m.Place);
                 Assert.AreEqual(++startCount, _container.Count);
             }
             Assert.ThrowsException<InvalidOperationException>(() => _container.Insert(_container.Count + 1, new ChillwindYeti()));
@@ -93,7 +93,7 @@ namespace HsLibTests.Types.Containers.Base
                 Minion? removedCard = _container.Pop();
                 ContainerTestHelpers.AssertCardsHaveValidPlaces(_container);
                 Assert.IsNotNull(removedCard);
-                Assert.IsNull(removedCard.PlaceInContainer);
+                Assert.AreEqual(true, removedCard.Place.IsNone());
             }
 
             Assert.IsNull(_container.Pop());
@@ -133,7 +133,7 @@ namespace HsLibTests.Types.Containers.Base
             {
                 ICard? card = (ICard)oldItems[i]!;
                 Assert.IsNotNull(card);
-                Assert.IsNull(card.PlaceInContainer);
+                Assert.AreEqual(true, card.Place.IsNone());
                 Assert.AreEqual(_initCards[i], card);
             }
 
@@ -183,7 +183,7 @@ namespace HsLibTests.Types.Containers.Base
             for (int i = 0; i < initialCount; i++)
             {
                 ICard expectedCard = _container[0];
-                _container.MoveToContainer(0, _containerTo, false, toIndex: i)();
+                _container.MoveToContainer(_initCards[i], _containerTo, false, toIndex: i)();
 
 
                 Assert.AreEqual(expectedCard, _containerTo[i]);

@@ -2,9 +2,11 @@
 {
     public record Place(Pid Pid, Loc Loc)
     {
-        public PlaceInContainer InContainer(int addedTurn, int atIndex)
+        public Place() : this(Pid.None, Loc.None) { }
+
+        public bool IsNone()
         {
-            return new PlaceInContainer(Pid, Loc, addedTurn, atIndex);
+            return Pid == Pid.None || Loc == Loc.None;
         }
     }
 }
