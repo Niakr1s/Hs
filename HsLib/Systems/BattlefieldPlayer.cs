@@ -4,6 +4,7 @@ using HsLib.Types.Places;
 using HsLib.Types.Player;
 using HsLib.Types.Stats;
 using System.Collections.Specialized;
+using System.Diagnostics;
 
 namespace HsLib.Systems
 {
@@ -105,8 +106,18 @@ namespace HsLib.Systems
                     .Concat(HeroContainer).Concat(AbilityContainer).Concat(WeaponContainer);
 
 
-        public IEnumerable<ICard> this[Loc loc] =>
-    Cards.Where(c => loc.HasFlag(c.Place.Loc));
+        public IContainer this[Loc loc] => loc switch
+        {
+            Loc.Deck => Deck,
+            Loc.Hand => Hand,
+            Loc.Field => Field,
+            Loc.Secrets => Secrets,
+            Loc.Hero => HeroContainer,
+            Loc.Weapon => WeaponContainer,
+            Loc.Ability => AbilityContainer,
+            _ => throw new UnreachableException(),
+        };
+
 
         public bool Remove(ICard card)
         {
@@ -117,18 +128,7 @@ namespace HsLib.Systems
         public IContainer? GetContainer(ICard card)
         {
             if (card.Place.Pid != Pid) { return null; }
-
-            return card.Place.Loc switch
-            {
-                Loc.Deck => Deck,
-                Loc.Hand => Hand,
-                Loc.Field => Field,
-                Loc.Secrets => Secrets,
-                Loc.Hero => HeroContainer,
-                Loc.Weapon => WeaponContainer,
-                Loc.Ability => AbilityContainer,
-                _ => null,
-            };
+            return this[card.Place.Loc];
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HsLib.Types.Cards;
+using HsLib.Types.Containers;
 using HsLib.Types.Places;
 using HsLib.Types.Turns;
 using System.Collections.Specialized;
@@ -82,7 +83,7 @@ namespace HsLib.Systems
         /// </summary>
         public BattlefieldPlayer Enemy => this[Turn.Pid.He()];
 
-        public IEnumerable<ICard> this[Place place] => this[place.Pid][place.Loc];
+        public IContainer this[Place place] => this[place.Pid][place.Loc];
 
 
 
@@ -130,7 +131,7 @@ namespace HsLib.Systems
                 throw new ValidationException("wrong loc");
             }
 
-            return Enemy[loc].ToList()[index] as IDamageable ?? throw new ArgumentException("not damageable");
+            return Enemy[loc][index] as IDamageable ?? throw new ArgumentException("not damageable");
         }
 
         #endregion
@@ -185,7 +186,7 @@ namespace HsLib.Systems
         /// <returns></returns>
         public bool UseAbility(Pid targetPid, Loc targetLoc, int targetIndex = 0)
         {
-            ICard target = this[targetPid][targetLoc].ToList()[targetIndex];
+            ICard? target = this[targetPid][targetLoc][targetIndex] as ICard;
             return UseAbility(target);
         }
 
