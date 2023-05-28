@@ -41,11 +41,11 @@ namespace HsLib.Systems
         {
             add
             {
-                Array.ForEach(Enum.GetValues<Pid>(), p => this[p].CollectionChanged += value);
+                Array.ForEach(Pids.All(), p => this[p].CollectionChanged += value);
             }
             remove
             {
-                Array.ForEach(Enum.GetValues<Pid>(), p => this[p].CollectionChanged -= value);
+                Array.ForEach(Pids.All(), p => this[p].CollectionChanged -= value);
             }
         }
 
