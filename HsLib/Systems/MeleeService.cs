@@ -77,7 +77,7 @@ namespace HsLib.Systems
         public Action WeaponAttack(IDamageable defender)
         {
             if (defender.PlaceInContainer!.Pid == Bf.Turn.Pid) { throw new ArgumentException("wrong defender turn"); }
-            return MeleeAttack(Bf.Player.Weapon.Card, defender);
+            return MeleeAttack(Bf.Player.Weapon, defender);
         }
     }
 }

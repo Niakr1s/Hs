@@ -15,14 +15,14 @@ namespace HsLibTests.KnownCards.Minions
         public void ProphetVelenTest_Ability()
         {
             Battlefield bf = TestBattlefield.New();
-            bf.Player.Ability.Set(new Fireblast());
+            bf.Player.Ability = new Fireblast();
 
             Minion yeti = new ChillwindYeti();
             int expectedHp = yeti.Hp;
 
             bf.Enemy.Field.Add(yeti);
             Assert.AreEqual(expectedHp, yeti.Hp);
-            Assert.AreEqual(1, ((IDamageEffect)bf.Player.Ability.Card.AbilityEffect.Effect).DamageAmount);
+            Assert.AreEqual(1, ((IDamageEffect)bf.Player.Ability.AbilityEffect.Effect).DamageAmount);
 
             Assert.AreEqual(true, bf.UseAbility(Pid.P2, Loc.Field, 0));
             expectedHp--;

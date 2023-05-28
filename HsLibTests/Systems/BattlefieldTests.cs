@@ -4,7 +4,6 @@ using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Containers;
 using HsLib.Types.Places;
-using HsLibTests.Helpers;
 
 namespace HsLibTests.Systems
 {
@@ -66,29 +65,29 @@ namespace HsLibTests.Systems
         public void WeaponAttackTest_ShouldWorkOnEnemyHero()
         {
             Weapon weapon = new FieryWarAxe();
-            _bf.Player.Weapon.Set(weapon);
+            _bf.Player.Weapon = weapon;
 
-            int playerStartHp = _bf.Player.Hero.Card.Hp;
-            int enemyStartHp = _bf.Enemy.Hero.Card.Hp;
+            int playerStartHp = _bf.Player.Hero.Hp;
+            int enemyStartHp = _bf.Enemy.Hero.Hp;
 
             Assert.AreEqual(true, _bf.WeaponAttack(Loc.Hero));
-            Assert.AreEqual(playerStartHp, _bf.Player.Hero.Card.Hp);
-            Assert.AreEqual(enemyStartHp - weapon.Atk, _bf.Enemy.Hero.Card.Hp);
+            Assert.AreEqual(playerStartHp, _bf.Player.Hero.Hp);
+            Assert.AreEqual(enemyStartHp - weapon.Atk, _bf.Enemy.Hero.Hp);
         }
 
         [TestMethod()]
         public void WeaponAttackTest_ShouldWorkOnEnemyFieldMinion()
         {
             Weapon weapon = new FieryWarAxe();
-            _bf.Player.Weapon.Set(weapon);
+            _bf.Player.Weapon = weapon;
 
             Minion minion = new ChillwindYeti();
             _bf.Enemy.Field.Add(minion);
 
-            int playerStartHp = _bf.Player.Hero.Card.Hp;
+            int playerStartHp = _bf.Player.Hero.Hp;
             int minionHp = minion.Hp;
             Assert.AreEqual(true, _bf.WeaponAttack(Loc.Field, 0));
-            Assert.AreEqual(playerStartHp - minion.Atk, _bf.Player.Hero.Card.Hp);
+            Assert.AreEqual(playerStartHp - minion.Atk, _bf.Player.Hero.Hp);
             Assert.AreEqual(minionHp - weapon.Atk, minion.Hp);
         }
 
@@ -96,14 +95,14 @@ namespace HsLibTests.Systems
         public void WeaponAttackTest_ShouldNotWorkOnEnemyMinionOutsideBattleField()
         {
             Weapon weapon = new FieryWarAxe();
-            _bf.Player.Weapon.Set(weapon);
+            _bf.Player.Weapon = weapon;
 
             Minion minion = new ChillwindYeti();
 
-            int playerStartHp = _bf.Player.Hero.Card.Hp;
+            int playerStartHp = _bf.Player.Hero.Hp;
             int minionHp = minion.Hp;
             Assert.AreEqual(false, _bf.WeaponAttack(Loc.Field, 0));
-            Assert.AreEqual(playerStartHp, _bf.Player.Hero.Card.Hp);
+            Assert.AreEqual(playerStartHp, _bf.Player.Hero.Hp);
             Assert.AreEqual(minionHp, minion.Hp);
         }
 
@@ -111,16 +110,16 @@ namespace HsLibTests.Systems
         public void WeaponAttackTest_FailCases()
         {
             Weapon weapon = new FieryWarAxe();
-            _bf.Player.Weapon.Set(weapon);
+            _bf.Player.Weapon = weapon;
 
             Minion minion = new ChillwindYeti();
 
-            int playerStartHp = _bf.Player.Hero.Card.Hp;
+            int playerStartHp = _bf.Player.Hero.Hp;
             int minionHp = minion.Hp;
 
             void testSameHp()
             {
-                Assert.AreEqual(playerStartHp, _bf.Player.Hero.Card.Hp);
+                Assert.AreEqual(playerStartHp, _bf.Player.Hero.Hp);
                 Assert.AreEqual(minionHp, minion.Hp);
             }
 

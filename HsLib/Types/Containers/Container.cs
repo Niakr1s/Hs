@@ -115,6 +115,18 @@ namespace HsLib.Types.Containers
             }
         }
 
+        public bool Remove(ICard card)
+        {
+            if (card is TCard tcard)
+            {
+                return base.Remove(tcard);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public TCard? Left(int index)
         {
             try

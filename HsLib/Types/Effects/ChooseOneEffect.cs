@@ -22,7 +22,8 @@ namespace HsLib.Types.Effects
         private void UseEffect(Battlefield bf, ICard owner)
         {
             CardId transformToId = bf[owner.PlaceInContainer!.Pid].Player.ChooseOne(CardIds);
-            bf[owner.PlaceInContainer!][owner.PlaceInContainer!.Index] = CardBuilder.FromId(transformToId);
+            //bf[owner.PlaceInContainer!][owner.PlaceInContainer!.Index] = CardBuilder.FromId(transformToId);
+            // todo
         }
     }
 }

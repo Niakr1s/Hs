@@ -8,7 +8,9 @@ namespace HsLib.Types.Effects
         public Action UseEffect(Battlefield bf, ICard owner, ICard? target)
         {
             if (target is null) { throw new ValidationException("target is null"); }
-            return () => bf[owner.PlaceInContainer!][owner.PlaceInContainer!.Index] = target.Clone();
+            //return () => bf[owner.PlaceInContainer!][owner.PlaceInContainer!.Index] = target.Clone();
+            // todo
+            return () => { };
         }
     }
 }

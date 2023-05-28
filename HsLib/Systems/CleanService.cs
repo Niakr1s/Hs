@@ -22,7 +22,7 @@ namespace HsLib.Systems
 
             foreach (RemovedCard card in cardsToClean)
             {
-                Bf[card.Place].Remove(card.Card);
+                Bf[card.Place.Pid].Remove(card.Card);
             }
             return cardsToClean.AsEnumerable();
         }

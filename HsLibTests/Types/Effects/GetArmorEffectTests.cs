@@ -15,7 +15,7 @@ namespace HsLibTests.Types.Effects
             Battlefield bf = TestBattlefield.New();
             GetArmorEffect effect = new() { Armor = 2 };
 
-            Hero hero = bf.Enemy.Hero.Card;
+            Hero hero = bf.Enemy.Hero;
             int startArmor = hero.Armor;
             effect.UseEffect(bf, null!, hero)();
             Assert.AreEqual(startArmor + 2, hero.Armor);

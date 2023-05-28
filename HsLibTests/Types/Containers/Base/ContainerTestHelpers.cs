@@ -16,16 +16,5 @@ namespace HsLibTests.Types.Containers.Base
                 Assert.AreEqual(i, card.PlaceInContainer.Index);
             }
         }
-
-        internal static void AssertCardIsSet<TCard>(SingleContainer<TCard> container, TCard card)
-            where TCard : ICard
-        {
-            AssertCardsHaveValidPlaces(container);
-
-            Assert.AreEqual(card, container.Card);
-
-            Assert.IsNotNull(card.PlaceInContainer);
-            Assert.AreEqual(container.Place, card.PlaceInContainer);
-        }
     }
 }

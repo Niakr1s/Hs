@@ -1,5 +1,4 @@
 ﻿using HsLib.Types.Cards;
-using HsLib.Types.Containers;
 using HsLib.Types.Places;
 using HsLib.Types.Turns;
 using System.Collections.Specialized;
@@ -83,7 +82,7 @@ namespace HsLib.Systems
         /// </summary>
         public BattlefieldPlayer Enemy => this[Turn.Pid.He()];
 
-        public IContainer this[Place place] => this[place.Pid][place.Loc];
+        public IEnumerable<ICard> this[Place place] => this[place.Pid][place.Loc];
 
 
 
@@ -111,7 +110,7 @@ namespace HsLib.Systems
             try
             {
 
-                Minion attacker = (Minion)Player.GetCard(Loc.Field, attackerIndex);
+                Minion attacker = Player.Field[attackerIndex];
                 IDamageable defender = GetDefender(defenderLoc, defenderIndex);
                 attackAction = MeleeService.MinionAttack(attacker, defender);
             }
@@ -131,7 +130,7 @@ namespace HsLib.Systems
                 throw new ValidationException("wrong loc");
             }
 
-            return Enemy.GetCard(loc, index) as IDamageable ?? throw new ArgumentException("not damageable");
+            return Enemy[loc].ToList()[index] as IDamageable ?? throw new ArgumentException("not damageable");
         }
 
         #endregion
@@ -186,7 +185,7 @@ namespace HsLib.Systems
         /// <returns></returns>
         public bool UseAbility(Pid targetPid, Loc targetLoc, int targetIndex = 0)
         {
-            ICard target = this[targetPid].GetCard(targetLoc, targetIndex);
+            ICard target = this[targetPid][targetLoc].ToList()[targetIndex];
             return UseAbility(target);
         }
 
@@ -196,7 +195,7 @@ namespace HsLib.Systems
 
             try
             {
-                abilityAction = Player.Ability.UseAbility(target);
+                abilityAction = Player.Ability.UseAbility(this, target);
             }
             catch
             {

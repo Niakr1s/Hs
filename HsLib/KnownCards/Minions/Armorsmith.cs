@@ -36,7 +36,7 @@ namespace HsLib.KnownCards.Minions
 
         private void Hp_Decreased(object? sender, Types.Stats.StatDecreasedEventArgs e)
         {
-            Bf![Owner.PlaceInContainer!.Pid].Hero.Card.Armor.Increase(1);
+            Bf![Owner.PlaceInContainer!.Pid].Hero.Armor.Increase(1);
         }
     }
 }

@@ -2,9 +2,7 @@
 using HsLib.KnownCards.Minions;
 using HsLib.Systems;
 using HsLib.Types.Cards;
-using HsLib.Types.Containers;
 using HsLib.Types.Places;
-using HsLibTests.Helpers;
 
 
 
@@ -18,16 +16,15 @@ namespace HsLibTests.KnownCards.Abilities
         public void FireblastTest()
         {
             Battlefield bf = TestBattlefield.New(p1: CardId.JainaProudmoore);
-            AbilityContainer ability = bf.Player.Ability;
-            Ability fireblast = ability.Card;
+            Ability fireblast = bf.Player.Ability;
             Assert.IsInstanceOfType(fireblast, typeof(Fireblast));
             Assert.AreEqual(2, fireblast.AbilityEffect.GetPossibleTargets(bf, fireblast.PlaceInContainer!.Pid).Count());
 
             int startMp = bf.Player.Mp;
 
-            Assert.AreEqual(30, bf.Player.Hero.Card.Hp);
-            ability.UseAbility(bf.Player.Hero.Card)();
-            Assert.AreEqual(29, bf.Player.Hero.Card.Hp);
+            Assert.AreEqual(30, bf.Player.Hero.Hp);
+            fireblast.UseAbility(bf, bf.Player.Hero)();
+            Assert.AreEqual(29, bf.Player.Hero.Hp);
             Assert.AreEqual(startMp - 2, bf.Player.Mp);
 
             Minion y1 = new ChillwindYeti();
@@ -42,11 +39,11 @@ namespace HsLibTests.KnownCards.Abilities
             Assert.AreEqual(5, y2.Hp);
 
             bf.Turn.Skip(bf.Player.Pid);
-            ability.UseAbility(y1)();
+            fireblast.UseAbility(bf, y1)();
             Assert.AreEqual(4, y1.Hp);
 
             bf.Turn.Skip(bf.Player.Pid);
-            ability.UseAbility(y2)();
+            fireblast.UseAbility(bf, y2)();
             Assert.AreEqual(4, y2.Hp);
         }
     }

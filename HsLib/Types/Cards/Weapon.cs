@@ -65,21 +65,22 @@ namespace HsLib.Types.Cards
         {
             TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, PlaceInContainer!.Pid, effectTarget);
 
-            Action move = bf[PlaceInContainer!.Pid].Hand.MoveToContainer(PlaceInContainer.Index, bf[PlaceInContainer.Pid].Weapon,
-                canBurn: false, toIndex: 0);
+            //Action move = bf[PlaceInContainer!.Pid].Hand.MoveToContainer(PlaceInContainer.Index, bf[PlaceInContainer.Pid].Weapon,
+            //    canBurn: false, toIndex: 0);
+            // todo
 
             Action? battlecryAction = BattlecryEffect?.UseEffect(bf, PlaceInContainer!.Pid, effectTarget);
 
             return () =>
             {
                 battlecryAction?.Invoke();
-                move();
+                //move();
             };
         }
 
         public IDamageable GetDefender(Battlefield bf)
         {
-            return bf[PlaceInContainer!.Pid].Hero.Card;
+            return bf[PlaceInContainer!.Pid].Hero;
         }
 
         public override void OnTurnEnd(Battlefield bf)
