@@ -65,16 +65,19 @@ namespace HsLib.Types.Cards
         {
             TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, bf, effectTarget);
 
-            //Action move = bf[PlaceInContainer!.Pid].Hand.MoveToContainer(PlaceInContainer.Index, bf[PlaceInContainer.Pid].Weapon,
-            //    canBurn: false, toIndex: 0);
-            // todo
+            void move()
+            {
+                BattlefieldPlayer player = bf[Place.Pid];
+                player.Hand.Remove(this);
+                player.Weapon = this;
+            }
 
             Action? battlecryAction = BattlecryEffect?.UseEffect(bf, effectTarget);
 
             return () =>
             {
                 battlecryAction?.Invoke();
-                //move();
+                move();
             };
         }
 
