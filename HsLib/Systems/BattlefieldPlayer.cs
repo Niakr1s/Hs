@@ -19,34 +19,38 @@ namespace HsLib.Systems
             Field = new(bf, pid);
             Secrets = new Secrets(bf, pid);
 
-            _hero = (Hero)startingDeck.HeroId.ToCard();
-            _ability = Hero.ProduceAbility();
+            _heroContainer = new(bf, pid, (Hero)startingDeck.HeroId.ToCard());
+            _abilityContainer = new(bf, pid, Hero.ProduceAbility());
+            _weaponContainer = new(bf, pid);
         }
 
         public Pid Pid { get; }
 
         public Battlefield Bf { get; }
 
-        private NotifyCollectionChangedEventHandler? _collectionChanged;
-
-
         public event NotifyCollectionChangedEventHandler? CollectionChanged
         {
             add
             {
-                _collectionChanged += value;
                 Deck.CollectionChanged += value;
                 Hand.CollectionChanged += value;
                 Field.CollectionChanged += value;
                 Secrets.CollectionChanged += value;
+
+                _heroContainer.CollectionChanged += value;
+                _abilityContainer.CollectionChanged += value;
+                _weaponContainer.CollectionChanged += value;
             }
             remove
             {
-                _collectionChanged -= value;
                 Deck.CollectionChanged -= value;
                 Hand.CollectionChanged -= value;
                 Field.CollectionChanged -= value;
                 Secrets.CollectionChanged -= value;
+
+                _heroContainer.CollectionChanged -= value;
+                _abilityContainer.CollectionChanged -= value;
+                _weaponContainer.CollectionChanged -= value;
             }
         }
 
@@ -70,66 +74,27 @@ namespace HsLib.Systems
 
 
 
-        #region single cards
+        #region single containers
 
-        private Hero _hero;
+        private readonly HeroContainer _heroContainer;
         public Hero Hero
         {
-            get { return _hero; }
-            set
-            {
-                if (_hero == value)
-                {
-                    return;
-                }
-
-                Hero old = _hero;
-                old.Place = new();
-                value.Place = new(Pid, Loc.Hero);
-                _hero = value;
-                _collectionChanged?.Invoke(this,
-                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, value, old));
-            }
+            get => _heroContainer.Card;
+            set => _heroContainer.Card = value;
         }
 
-        private Ability _ability;
+        private readonly AbilityContainer _abilityContainer;
         public Ability Ability
         {
-            get { return _ability; }
-            set
-            {
-                if (_ability == value)
-                {
-                    return;
-                }
-
-                Ability old = _ability;
-                old.Place = new();
-                value.Place = new(Pid, Loc.Ability);
-                _ability = value;
-                _collectionChanged?.Invoke(this,
-                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, value, old));
-            }
+            get => _abilityContainer.Card;
+            set => _abilityContainer.Card = value;
         }
 
-        private Weapon? _weapon;
+        private readonly WeaponContainer _weaponContainer;
         public Weapon? Weapon
         {
-            get { return _weapon; }
-            set
-            {
-                if (_weapon == value)
-                {
-                    return;
-                }
-
-                Weapon? old = _weapon;
-                if (old is not null) { old.Place = new(); }
-                if (value is not null) { value.Place = new(Pid, Loc.Weapon); }
-                _weapon = value;
-                _collectionChanged?.Invoke(this,
-                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, value, old));
-            }
+            get => _weaponContainer.Card;
+            set => _weaponContainer.Card = value;
         }
 
         #endregion
@@ -139,39 +104,31 @@ namespace HsLib.Systems
         /// <summary>
         /// Gets all cards in all containers in non-chronological order.
         /// </summary>
-        public IEnumerable<ICard> Cards
-        {
-            get
-            {
-                yield return Hero;
-                yield return Ability;
-                if (Weapon is not null) { yield return Weapon; }
-
-                foreach (ICard card in Deck.AsEnumerable<ICard>().Concat(Hand).Concat(Field).Concat(Secrets))
-                {
-                    yield return card;
-                }
-            }
-        }
+        public IEnumerable<ICard> Cards => Deck.AsEnumerable<ICard>().Concat(Hand).Concat(Field).Concat(Secrets)
+                    .Concat(_heroContainer).Concat(_abilityContainer).Concat(_weaponContainer);
 
         public IEnumerable<ICard> this[Loc loc] =>
             Cards.Where(c => loc.HasFlag(c.Place.Loc));
 
         public bool Remove(ICard card)
         {
-            if (Weapon == card) { Weapon = null; return true; }
-            return Deck.Remove(card) || Hand.Remove(card) || Field.Remove(card) || Secrets.Remove(card);
+            return Deck.Remove(card) || Hand.Remove(card) || Field.Remove(card) || Secrets.Remove(card) ||
+                _weaponContainer.Remove(card);
         }
 
         public IContainer? GetContainer(ICard card)
         {
             if (card.Place.Pid != Pid) { return null; }
+
             return card.Place.Loc switch
             {
                 Loc.Deck => Deck,
                 Loc.Hand => Hand,
                 Loc.Field => Field,
                 Loc.Secrets => Secrets,
+                Loc.Hero => _heroContainer,
+                Loc.Weapon => _weaponContainer,
+                Loc.Ability => _abilityContainer,
                 _ => null,
             };
         }
