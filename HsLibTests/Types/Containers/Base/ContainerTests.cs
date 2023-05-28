@@ -93,7 +93,7 @@ namespace HsLibTests.Types.Containers.Base
                 Minion? removedCard = _container.Pop();
                 ContainerTestHelpers.AssertCardsHaveValidPlaces(_container);
                 Assert.IsNotNull(removedCard);
-                Assert.AreEqual(false, removedCard.Place.IsNone());
+                Assert.AreEqual(true, removedCard.Place.IsNone());
             }
 
             Assert.IsNull(_container.Pop());
@@ -133,7 +133,7 @@ namespace HsLibTests.Types.Containers.Base
             {
                 ICard? card = (ICard)oldItems[i]!;
                 Assert.IsNotNull(card);
-                Assert.AreEqual(false, card.Place.IsNone());
+                Assert.AreEqual(true, card.Place.IsNone());
                 Assert.AreEqual(_initCards[i], card);
             }
 

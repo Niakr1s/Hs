@@ -7,7 +7,7 @@ namespace HsLibTests.Types.Containers.Base
     {
         internal static void AssertCardsHaveValidPlaces(IContainer container)
         {
-            Assert.IsNotNull(container.Place);
+            Assert.AreEqual(false, container.Place.IsNone());
             for (int i = 0; i < container.Count; i++)
             {
                 ICard card = (ICard)container[i]!;
