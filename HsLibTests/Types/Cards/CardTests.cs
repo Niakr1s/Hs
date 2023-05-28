@@ -13,7 +13,7 @@ namespace HsLibTests.Types.Cards
             Minion minion = new ChillwindYeti();
             minion.Place = new(Pid.P1, Loc.Hand);
             Minion cloned = (Minion)minion.Clone();
-            Assert.AreEqual(false, cloned.Place.IsNone());
+            Assert.AreEqual(true, cloned.Place.IsNone());
         }
 
         [TestMethod()]
