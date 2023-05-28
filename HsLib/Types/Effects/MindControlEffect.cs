@@ -12,8 +12,8 @@ namespace HsLib.Types.Effects
             if (target is Minion m)
             {
 
-                Field enemyField = bf[m.PlaceInContainer!.Pid].Field;
-                Field playerField = bf[m.PlaceInContainer!.Pid.He()].Field;
+                Field enemyField = bf[m.Place.Pid].Field;
+                Field playerField = bf[m.Place.Pid.He()].Field;
 
                 if (!enemyField.Contains(m)) { throw new ValidationException("enemy field doesn't contain target"); }
                 if (playerField.IsFull) { throw new ValidationException("can't insert to full field"); }

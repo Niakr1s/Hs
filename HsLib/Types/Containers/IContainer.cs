@@ -1,4 +1,5 @@
 ﻿using HsLib.Systems;
+using HsLib.Types.Cards;
 using HsLib.Types.Places;
 using System.Collections;
 using System.Collections.Specialized;
@@ -13,6 +14,10 @@ namespace HsLib.Types.Containers
 
         void CleanInactiveCards();
 
-        Action MoveToContainer(int fromIndex, IContainer toContainer, bool canBurn, int? toIndex = null);
+        Action MoveToContainer(ICard card, IContainer toContainer, bool canBurn, int? toIndex = null);
+
+        ICard? Left(ICard card);
+
+        ICard? Right(ICard card);
     }
 }

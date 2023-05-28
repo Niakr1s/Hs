@@ -1,19 +1,20 @@
-﻿using HsLib.Types.Cards;
+﻿using HsLib.Systems;
+using HsLib.Types.Cards;
 
 namespace HsLib.Types.Choosers
 {
-    public class Chooser<TOwner> : IChooser<TOwner>
+    public class Chooser : IChooser
     {
-        public Chooser(ChooserFunc<TOwner> cardChooserFunc)
+        public Chooser(ChooserFunc cardChooserFunc)
         {
             _cardChooserFunc = cardChooserFunc;
         }
 
-        private readonly ChooserFunc<TOwner> _cardChooserFunc;
+        private readonly ChooserFunc _cardChooserFunc;
 
-        public IEnumerable<ICard> ChooseCards(TOwner owner, IEnumerable<ICard> cards)
+        public IEnumerable<ICard> ChooseCards(Battlefield bf, ICard owner, IEnumerable<ICard> cards)
         {
-            return _cardChooserFunc.Invoke(owner, cards);
+            return _cardChooserFunc.Invoke(bf, owner, cards);
         }
     }
 }

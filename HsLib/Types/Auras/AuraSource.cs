@@ -1,14 +1,13 @@
 ﻿using HsLib.Types.BattlefieldSubscribers;
 using HsLib.Types.Cards;
 using HsLib.Types.Choosers;
-using HsLib.Types.Places;
 using HsLib.Types.Stats;
 
 namespace HsLib.Types.Auras
 {
     public class AuraSource : BattlefieldSubscriber<ICard>
     {
-        public AuraSource(Minion owner, IAuraEffect auraEffect, IChooser<PlaceInContainer> cardsChooser)
+        public AuraSource(Minion owner, IAuraEffect auraEffect, IChooser cardsChooser)
             : base(owner)
         {
             _auraEffect = auraEffect;
@@ -16,7 +15,7 @@ namespace HsLib.Types.Auras
         }
 
         private readonly IAuraEffect _auraEffect;
-        private readonly IChooser<PlaceInContainer> _cardsChooser;
+        private readonly IChooser _cardsChooser;
         private readonly List<IEnchantHandler> _appliedAuras = new();
 
         protected override void OnCollectionChanged()
@@ -38,9 +37,9 @@ namespace HsLib.Types.Auras
         private void ReapplyAuras()
         {
             if (Bf is null) { return; }
-            if (Owner.PlaceInContainer is null) { throw new InvalidOperationException("owner doesn't in container"); }
+            if (Owner.Place.IsNone()) { throw new InvalidOperationException("owner doesn't in container"); }
 
-            foreach (ICard card in _cardsChooser.ChooseCards(Owner.PlaceInContainer, Bf.Cards))
+            foreach (ICard card in _cardsChooser.ChooseCards(Bf, Owner, Bf.Cards))
             {
                 _appliedAuras.Add(_auraEffect.GiveAura(Bf, Owner, card));
             }

@@ -3,11 +3,11 @@ using HsLib.Types.Places;
 
 namespace HsLib.Types.Choosers
 {
-    public class HeroChooser : Chooser<Pid>
+    public class HeroChooser : Chooser
     {
-        private static readonly ChooserFunc<Pid> _f =
-            (owner, cards) => cards
-            .Where(c => c is Hero && c.PlaceInContainer!.Pid == owner && c.PlaceInContainer!.Loc == Loc.Hero);
+        private static readonly ChooserFunc _f =
+            (bf, owner, cards) => cards
+            .Where(c => c is Hero && c.Place.Pid == owner.Place.Pid && c.Place.Loc == Loc.Hero);
 
         public HeroChooser() : base(_f)
         {

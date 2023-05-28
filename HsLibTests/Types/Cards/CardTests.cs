@@ -11,9 +11,9 @@ namespace HsLibTests.Types.Cards
         public void CloneTest_PlaceClonedProperly()
         {
             Minion minion = new ChillwindYeti();
-            minion.PlaceInContainer = new(Pid.P1, Loc.Hand, 0, 0);
+            minion.Place = new(Pid.P1, Loc.Hand);
             Minion cloned = (Minion)minion.Clone();
-            Assert.IsNull(cloned.PlaceInContainer);
+            Assert.AreEqual(false, cloned.Place.IsNone());
         }
 
         [TestMethod()]

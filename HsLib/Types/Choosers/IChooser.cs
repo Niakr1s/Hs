@@ -1,9 +1,10 @@
-﻿using HsLib.Types.Cards;
+﻿using HsLib.Systems;
+using HsLib.Types.Cards;
 
 namespace HsLib.Types.Choosers
 {
-    public interface IChooser<TOwner>
+    public interface IChooser
     {
-        IEnumerable<ICard> ChooseCards(TOwner owner, IEnumerable<ICard> cards);
+        IEnumerable<ICard> ChooseCards(Battlefield bf, ICard owner, IEnumerable<ICard> cards);
     }
 }

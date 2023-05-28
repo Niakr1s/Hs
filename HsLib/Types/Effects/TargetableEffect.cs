@@ -2,11 +2,10 @@
 using HsLib.Systems;
 using HsLib.Types.Cards;
 using HsLib.Types.Choosers;
-using HsLib.Types.Places;
 
 namespace HsLib.Types.Effects
 {
-    public abstract class TargetableEffect<TOwner> : ITargetableEffect<TOwner>
+    public abstract class TargetableEffect : ITargetableEffect
     {
         /// <summary>
         /// Default constructor.
@@ -16,26 +15,26 @@ namespace HsLib.Types.Effects
         /// <param name="targetsChooser">Chooses targets for effect.
         /// If provided, will ignore target in <see cref="UseEffect(Battlefield, PlaceInContainer, ICard?)"/> and use it instead.</param>
         public TargetableEffect(ICard owner, IEffect effect,
-            IChooser<TOwner>? possibleTargetsChooser = null,
-            IChooser<TOwner>? targetsChooser = null)
+            IChooser? possibleTargetsChooser = null,
+            IChooser? targetsChooser = null)
         {
             Owner = owner;
             Effect = effect;
             _targetsChooser = targetsChooser;
             _possibleTargetsChooser = possibleTargetsChooser;
         }
-        private readonly IChooser<TOwner>? _targetsChooser;
-        private readonly IChooser<TOwner>? _possibleTargetsChooser;
+        private readonly IChooser? _targetsChooser;
+        private readonly IChooser? _possibleTargetsChooser;
 
         public ICard Owner { get; set; }
 
         public IEffect Effect { get; }
 
-        public IEnumerable<ICard> GetPossibleTargets(Battlefield bf, TOwner owner)
+        public IEnumerable<ICard> GetPossibleTargets(Battlefield bf)
         {
             if (_possibleTargetsChooser is null) { yield break; }
 
-            foreach (var t in _possibleTargetsChooser.ChooseCards(owner, bf.Cards))
+            foreach (var t in _possibleTargetsChooser.ChooseCards(bf, Owner, bf.Cards))
             {
                 yield return t;
             }
@@ -45,10 +44,9 @@ namespace HsLib.Types.Effects
         /// Uses effect. Param target can be ignored if custom targets chooser is provided.
         /// </summary>
         /// <param name="bf"></param>
-        /// <param name="owner"></param>
         /// <param name="target">Will be ignored, if <see cref="_targetsChooser"/>is set, and will uses effects on every target, choosed by it.</param>
         /// 
-        public Action UseEffect(Battlefield bf, TOwner owner, ICard? target)
+        public Action UseEffect(Battlefield bf, ICard? target)
         {
             List<Action> effectActions = new();
             if (_targetsChooser is null)
@@ -59,7 +57,7 @@ namespace HsLib.Types.Effects
             {
                 if (target is not null) { throw new ValidationException("target should be null"); }
 
-                IEnumerable<Action>? toAdd = _targetsChooser?.ChooseCards(owner, bf.Cards)
+                IEnumerable<Action>? toAdd = _targetsChooser?.ChooseCards(bf, Owner, bf.Cards)
                     .Select(target => Effect.UseEffect(bf, Owner, target));
 
                 if (toAdd is not null) effectActions.AddRange(toAdd);
@@ -67,6 +65,6 @@ namespace HsLib.Types.Effects
             return () => effectActions?.ForEach(a => a());
         }
 
-        public abstract void ValidateEffectTarget(Battlefield bf, TOwner owner, ICard? effectTarget);
+        public abstract void ValidateEffectTarget(Battlefield bf, ICard? effectTarget);
     }
 }

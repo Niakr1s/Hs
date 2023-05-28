@@ -8,7 +8,6 @@ namespace HsLib.Types.BattlefieldSubscribers
     /// <summary>
     /// Is used to be source for lingering effects.
     /// </summary>
-    /// <typeparam name="TOwner"></typeparam>
     /// <typeparam name="TSubscribedCard">
     /// Type of card, you want to subscribe to. Other types will be filtered out.
     /// If you don't want to sub to each individual card, just use ICard.

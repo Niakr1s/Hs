@@ -20,8 +20,7 @@ namespace HsLib.KnownCards.Minions
 
         protected override bool ShoudBeSubscribed(Minion card)
         {
-            return card.PlaceInContainer is not null && Owner.PlaceInContainer is not null &&
-                card.PlaceInContainer.Pid == Owner.PlaceInContainer.Pid;
+            return !card.Place.IsNone() && !Owner.Place.IsNone() && card.Place.Pid == Owner.Place.Pid;
         }
 
         protected override void DoSubscribeCard(Minion card)
@@ -36,7 +35,7 @@ namespace HsLib.KnownCards.Minions
 
         private void Hp_Decreased(object? sender, Types.Stats.StatDecreasedEventArgs e)
         {
-            Bf![Owner.PlaceInContainer!.Pid].Hero.Armor.Increase(1);
+            Bf![Owner.Place.Pid].Hero.Armor.Increase(1);
         }
     }
 }

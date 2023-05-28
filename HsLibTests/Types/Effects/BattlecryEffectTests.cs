@@ -59,7 +59,7 @@ namespace HsLibTests.Types.Effects
             {
                 (BattlecryEffect? effect, ICard? target, bool shouldPass) = testCases[i];
 
-                void doTest() => TargetableEffectValidator.ValidateEffectTarget(effect, _bf, Pid.P1, target);
+                void doTest() => TargetableEffectValidator.ValidateEffectTarget(effect, _bf, target);
 
                 if (shouldPass)
                 {

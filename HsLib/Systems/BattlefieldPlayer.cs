@@ -84,8 +84,8 @@ namespace HsLib.Systems
                 }
 
                 Hero old = _hero;
-                old.PlaceInContainer = null;
-                value.PlaceInContainer = new(Pid, Loc.Hero, Bf.Turn.No, 0);
+                old.Place = new();
+                value.Place = new(Pid, Loc.Hero);
                 _hero = value;
                 _collectionChanged?.Invoke(this,
                     new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, value, old));
@@ -104,8 +104,8 @@ namespace HsLib.Systems
                 }
 
                 Ability old = _ability;
-                old.PlaceInContainer = null;
-                value.PlaceInContainer = new(Pid, Loc.Ability, Bf.Turn.No, 0);
+                old.Place = new();
+                value.Place = new(Pid, Loc.Ability);
                 _ability = value;
                 _collectionChanged?.Invoke(this,
                     new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, value, old));
@@ -124,8 +124,8 @@ namespace HsLib.Systems
                 }
 
                 Weapon? old = _weapon;
-                if (old is not null) { old.PlaceInContainer = null; }
-                if (value is not null) { value.PlaceInContainer = new(Pid, Loc.Ability, Bf.Turn.No, 0); }
+                if (old is not null) { old.Place = new(); }
+                if (value is not null) { value.Place = new(Pid, Loc.Weapon); }
                 _weapon = value;
                 _collectionChanged?.Invoke(this,
                     new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, value, old));
@@ -155,12 +155,25 @@ namespace HsLib.Systems
         }
 
         public IEnumerable<ICard> this[Loc loc] =>
-            Cards.Where(c => c.PlaceInContainer is not null && loc.HasFlag(c.PlaceInContainer.Loc));
+            Cards.Where(c => loc.HasFlag(c.Place.Loc));
 
         public bool Remove(ICard card)
         {
             if (Weapon == card) { Weapon = null; return true; }
             return Deck.Remove(card) || Hand.Remove(card) || Field.Remove(card) || Secrets.Remove(card);
+        }
+
+        public IContainer? GetContainer(ICard card)
+        {
+            if (card.Place.Pid != Pid) { return null; }
+            return card.Place.Loc switch
+            {
+                Loc.Deck => Deck,
+                Loc.Hand => Hand,
+                Loc.Field => Field,
+                Loc.Secrets => Secrets,
+                _ => null,
+            };
         }
     }
 }
