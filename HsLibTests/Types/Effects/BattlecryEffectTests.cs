@@ -26,33 +26,33 @@ namespace HsLibTests.Types.Effects
         {
             Minion? nullMinion = null;
 
-            Minion validMinion = new ChillwindYeti();
-            _bf.Enemy.Field.Add(validMinion);
+            Minion enemyMinion = new ChillwindYeti();
+            _bf.Enemy.Field.Add(enemyMinion);
 
-            Minion invalidMinion = new ChillwindYeti();
-            _bf.Player.Field.Add(invalidMinion);
+            Minion playerMInion = new ChillwindYeti();
+            _bf.Player.Field.Add(playerMInion);
 
             Targets validTargets = new Targets() { Sides = PidSide.He, Locs = Loc.Field };
             // valid effect to target minion
-            BattlecryEffect? havePossibleTargetsEffect = new(null!, new DamageEffect(1), validTargets);
+            BattlecryEffect? havePossibleTargetsEffect = new(playerMInion, new DamageEffect(1), validTargets);
             // invalid effect to target minion
-            BattlecryEffect? noPossibleTargetsEffect = new(null!, new DamageEffect(1));
+            BattlecryEffect? noPossibleTargetsEffect = new(playerMInion, new DamageEffect(1));
 
             List<(BattlecryEffect?, ICard?, bool)> testCases = new()
             {
                 (null, nullMinion, true),
-                (null, validMinion, false),
-                (null, invalidMinion, false),
+                (null, enemyMinion, false),
+                (null, playerMInion, false),
 
                 // now validMinion is in possible targets
                 (havePossibleTargetsEffect, nullMinion, false),
-                (havePossibleTargetsEffect, validMinion, true),
-                (havePossibleTargetsEffect, invalidMinion, false),
+                (havePossibleTargetsEffect, enemyMinion, true),
+                (havePossibleTargetsEffect, playerMInion, false),
 
                 // now validMinion is in not possible targets
                 (noPossibleTargetsEffect, nullMinion, true),
-                (noPossibleTargetsEffect, validMinion, false),
-                (noPossibleTargetsEffect, invalidMinion, false),
+                (noPossibleTargetsEffect, enemyMinion, false),
+                (noPossibleTargetsEffect, playerMInion, false),
             };
 
             for (int i = 0; i < testCases.Count; i++)
