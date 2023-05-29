@@ -6,7 +6,7 @@ using System.Collections.Specialized;
 
 namespace HsLib.Systems
 {
-    public partial class Board : INotifyCollectionChanged
+    public partial class Board : IBoard
     {
         public Board(StartingDeck p1, StartingDeck p2)
         {
@@ -71,17 +71,17 @@ namespace HsLib.Systems
         /// Gets player.
         /// </summary>
         /// <param name="pid"></param>
-        public BoardSide this[Pid pid] => _board[pid];
+        public IBoardSide this[Pid pid] => _board[pid];
 
         /// <summary>
         /// Current player.
         /// </summary>
-        public BoardSide Player => this[Turn.Pid];
+        public IBoardSide Player => this[Turn.Pid];
 
         /// <summary>
         /// Current enemy.
         /// </summary>
-        public BoardSide Enemy => this[Turn.Pid.He()];
+        public IBoardSide Enemy => this[Turn.Pid.He()];
 
         public IContainer this[Place place] => this[place.Pid][place.Loc];
 

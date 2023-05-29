@@ -67,7 +67,7 @@ namespace HsLib.Types.Cards
 
             void move()
             {
-                BoardSide player = board[Place.Pid];
+                IBoardSide player = board[Place.Pid];
                 player.Hand.Remove(this);
                 player.Weapon = this;
             }
