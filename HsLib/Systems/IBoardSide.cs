@@ -3,11 +3,10 @@ using HsLib.Types.Containers;
 using HsLib.Types.Places;
 using HsLib.Types.Player;
 using HsLib.Types.Stats;
-using System.Collections.Specialized;
 
 namespace HsLib.Systems
 {
-    public interface IBoardSide : INotifyCollectionChanged
+    public interface IBoardSide
     {
         Pid Pid { get; }
         PlayerMp Mp { get; }

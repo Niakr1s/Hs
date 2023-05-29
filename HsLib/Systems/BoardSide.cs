@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace HsLib.Systems
 {
-    public class BoardSide : IBoardSide
+    public class BoardSide : IBoardSide, INotifyCollectionChanged
     {
         public BoardSide(Board board, Pid pid, StartingDeck startingDeck)
         {

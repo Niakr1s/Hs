@@ -63,17 +63,21 @@ namespace HsLib.Systems
         /// Gets player.
         /// </summary>
         /// <param name="pid"></param>
-        public IBoardSide this[Pid pid] => _board[pid];
+        public BoardSide this[Pid pid] => _board[pid];
+        IBoardSide IBoard.this[Pid pid] => this[pid];
 
         /// <summary>
         /// Current player.
         /// </summary>
-        public IBoardSide Player => this[Turn.Pid];
+        public BoardSide Player => this[Turn.Pid];
+        IBoardSide IBoard.Player => Player;
 
         /// <summary>
         /// Current enemy.
         /// </summary>
-        public IBoardSide Enemy => this[Turn.Pid.He()];
+        public BoardSide Enemy => this[Turn.Pid.He()];
+        IBoardSide IBoard.Enemy => Enemy;
+
 
 
         public IContainer this[Place place] => this[place.Pid][place.Loc];
