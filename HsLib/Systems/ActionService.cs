@@ -10,8 +10,17 @@ namespace HsLib.Systems
 
         public void ProcessAction(GameAction action)
         {
-            if (!action.CanProcess(Board)) { return; }
-            action.Process(Board);
+            ProcessActions(new GameAction[] { action });
+        }
+
+        public void ProcessActions(IEnumerable<GameAction> actions)
+        {
+            actions.ToList().ForEach(action =>
+            {
+                if (!action.CanProcess(Board)) { return; }
+                action.Process(Board);
+            });
+            Board.DeathService.ProcessDeaths();
         }
     }
 }

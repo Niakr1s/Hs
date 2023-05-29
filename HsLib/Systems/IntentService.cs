@@ -21,7 +21,10 @@ namespace HsLib.Systems
             if (intentToProcess.Actor.CanProcessIntent(intentToProcess))
             {
                 var actions = intentToProcess.Actor.ProcessIntent(intentToProcess);
-                actions?.ToList().ForEach(Board.ActionService.ProcessAction);
+                if (actions is not null)
+                {
+                    Board.ActionService.ProcessActions(actions);
+                }
             }
         }
     }
