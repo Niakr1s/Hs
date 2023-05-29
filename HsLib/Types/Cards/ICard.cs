@@ -11,6 +11,7 @@ namespace HsLib.Types.Cards
         Mp Mp { get; }
 
         Place Place { get; set; }
+        IBoard? Board { get; }
 
         /// <summary>
         /// Called to check, if card should be cleaned by clean service.

@@ -1,18 +1,19 @@
-﻿using HsLib.Systems;
-using HsLib.Types.Cards;
+﻿using HsLib.Types.Cards;
+using HsLib.Types.GameActions;
 
 namespace HsLib.Types.GameIntents
 {
     public abstract class GameIntent
     {
-        protected GameIntent(IBoard board, ICard actor)
+        protected GameIntent(ICard actor)
         {
-            Board = board;
             Actor = actor;
         }
 
-        protected IBoard Board { get; }
-
         public ICard Actor { get; }
+
+        public abstract bool CanBeProcessed();
+
+        public abstract IEnumerable<GameAction>? Process();
     }
 }

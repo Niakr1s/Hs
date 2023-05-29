@@ -27,7 +27,7 @@ namespace HsLib.Types.Cards
 
         public int? AddedTurnNo { get; private set; }
 
-        protected IBoard? Board { get; private set; }
+        public IBoard? Board { get; private set; }
 
         public Mp Mp { get; protected set; }
 
@@ -61,6 +61,11 @@ namespace HsLib.Types.Cards
             return cloned;
         }
 
+        /// <summary>
+        /// Called after <see cref="GameIntent.CanBeProcessed"/> checks.
+        /// Childs can add additional class-specific checks.
+        /// </summary>
+        /// <param name="intent"><see cref="GameIntent.Actor"/> is garanteed to be same as this.</param>
         public virtual bool CanProcessIntent(GameIntent intent)
         {
             return false;

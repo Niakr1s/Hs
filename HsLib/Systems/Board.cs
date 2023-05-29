@@ -149,21 +149,12 @@ namespace HsLib.Systems
         /// <returns>True, if actually was played, false - if can't play from hand.</returns>
         public bool PlayFromHand(int index, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            IPlayableFromHand? card = Player.Hand.ElementAtOrDefault(index);
-            if (card is null) { return false; }
+            IPlayableFromHand card = Player.Hand[index];
 
-            PlayFromHandIntent intent = new(this, card, fieldIndex, effectTarget);
+            PlayFromHandIntent intent = new(card, fieldIndex, effectTarget);
 
-            // do checks
-            try
-            {
-                IntentService.ProcessIntent(intent);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            IntentService.ProcessIntent(intent);
+            return true;
         }
 
         #endregion

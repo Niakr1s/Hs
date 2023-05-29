@@ -2,7 +2,7 @@
 
 namespace HsLib.Systems
 {
-    internal class IntentService : Service
+    public class IntentService : Service
     {
         public IntentService(Board board) : base(board)
         {
@@ -12,15 +12,17 @@ namespace HsLib.Systems
 
         public void ProcessIntent(GameIntent intent)
         {
+            if (!intent.CanBeProcessed()) { throw new ValidationException("can't be processed"); }
+
             IntentEventArgs intentEventArgs = new(intent);
             Intent?.Invoke(this, intentEventArgs);
 
             GameIntent? intentToProcess = intentEventArgs.Intent;
             if (intentToProcess is null) { return; }
 
-            if (intentToProcess.Actor.CanProcessIntent(intentToProcess))
+            if (intentToProcess.CanBeProcessed())
             {
-                var actions = intentToProcess.Actor.ProcessIntent(intentToProcess);
+                var actions = intentToProcess.Process();
                 if (actions is not null)
                 {
                     Board.ActionService.ProcessActions(actions);
@@ -29,7 +31,7 @@ namespace HsLib.Systems
         }
     }
 
-    internal class IntentEventArgs : EventArgs
+    public class IntentEventArgs : EventArgs
     {
         public IntentEventArgs(GameIntent intent)
         {

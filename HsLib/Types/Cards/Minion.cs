@@ -102,14 +102,12 @@ namespace HsLib.Types.Cards
 
         public override bool CanProcessIntent(GameIntent intent)
         {
-            if (intent.Actor != this) { return false; }
             if (Board is null) { return false; }
 
             switch (intent)
             {
                 case PlayFromHandIntent playFromHandIntent:
-                    int fieldIndex = playFromHandIntent.FieldIndex ?? -1;
-                    if (!Board[Place.Pid].Field.CanBeInsertedAt(fieldIndex)) { return false; }
+                    if (!Board[Place.Pid].Mp.IsEnough(Mp)) { return false; }
 
                     ICard? effectTarget = playFromHandIntent.EffectTarget;
                     return TargetableEffectValidator.IsEffectTargetValid(BattlecryEffect, Board, effectTarget);
@@ -121,14 +119,23 @@ namespace HsLib.Types.Cards
 
         public override IEnumerable<GameAction>? ProcessIntent(GameIntent intent)
         {
-            base.ProcessIntent(intent);
+            if (Board is null) { return null; }
 
             switch (intent)
             {
                 case PlayFromHandIntent playFromHandIntent:
                     List<GameAction> actions = new();
                     actions.Add(new ContainerRemoveAction(this, Place));
-                    actions.Add(new ContainerInsertAction(this, Place with { Loc = Loc.Field }));
+                    int? fieldIndex = playFromHandIntent.FieldIndex;
+                    if (fieldIndex is null)
+                    {
+                        actions.Add(new ContainerAddAction(this, Place with { Loc = Loc.Field }));
+                    }
+                    else
+                    {
+                        actions.Add(new ContainerInsertAction(this, Place with { Loc = Loc.Field }, fieldIndex.Value));
+                    }
+                    Board[Place.Pid].Mp.Decrease(Mp); // todo to GameAction
 
                     // todo refactor this:
                     //Action? battlectyAction = BattlecryEffect?.UseEffect(board, effectTarget);
@@ -138,21 +145,6 @@ namespace HsLib.Types.Cards
                 default:
                     return null;
             }
-        }
-
-        public Action PlayFromHand(IBoard board, int? fieldIndex = null, ICard? effectTarget = null)
-        {
-            Action move = board[Place.Pid].Hand.MoveToContainer(this, board[Place.Pid].Field,
-                canBurn: false, toIndex: fieldIndex);
-
-            TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, board, effectTarget);
-            Action? battlectyAction = BattlecryEffect?.UseEffect(board, effectTarget);
-
-            return () =>
-            {
-                battlectyAction?.Invoke();
-                move();
-            };
         }
 
         public override bool ShouldBeCleaned()

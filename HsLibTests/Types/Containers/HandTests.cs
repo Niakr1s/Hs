@@ -54,7 +54,7 @@ namespace HsLibTests.Types.Containers
                 cardToPlay.Mp.Set(0);
                 _board.Turn.Skip(_hand.Place.Pid);
 
-                _hand.PlayFromHand(0, fieldIndex: 0)();
+                _board.PlayFromHand(0, fieldIndex: 0);
                 Assert.AreEqual(cardToPlay, field[0]);
             }
         }
@@ -73,7 +73,7 @@ namespace HsLibTests.Types.Containers
                 cardToPlay.Mp.Set(0);
                 _board.Turn.Skip(_hand.Place.Pid);
 
-                _hand.PlayFromHand(0, fieldIndex: null)();
+                _board.PlayFromHand(0, fieldIndex: null);
                 Assert.AreEqual(cardToPlay, field[^1]);
             }
         }
@@ -96,7 +96,7 @@ namespace HsLibTests.Types.Containers
             minion.Mp.Set(0);
             _hand.Add(minion);
 
-            _hand.PlayFromHand(0, effectTarget: null)();
+            _board.PlayFromHand(0, effectTarget: null);
             Assert.AreEqual(targetStartAtk, target.Atk);
         }
 
@@ -119,7 +119,7 @@ namespace HsLibTests.Types.Containers
             minion.Mp.Set(0);
             _hand.Add(minion);
 
-            Assert.ThrowsException<ValidationException>(() => _hand.PlayFromHand(0, effectTarget: target));
+            Assert.ThrowsException<ValidationException>(() => _board.PlayFromHand(0, effectTarget: target));
             Assert.AreEqual(targetStartAtk, target.Atk);
         }
 
@@ -142,7 +142,7 @@ namespace HsLibTests.Types.Containers
             minion.Mp.Set(0);
             _hand.Add(minion);
 
-            Assert.ThrowsException<ValidationException>(() => _hand.PlayFromHand(0, effectTarget: null));
+            Assert.ThrowsException<ValidationException>(() => _board.PlayFromHand(0, effectTarget: null));
             Assert.AreEqual(targetStartAtk, target.Atk);
         }
 
@@ -165,7 +165,7 @@ namespace HsLibTests.Types.Containers
             minion.Mp.Set(0);
             _hand.Add(minion);
 
-            _hand.PlayFromHand(0, effectTarget: target)();
+            _board.PlayFromHand(0, effectTarget: target);
             Assert.AreEqual(targetStartAtk + 2, target.Atk);
         }
 
@@ -178,7 +178,7 @@ namespace HsLibTests.Types.Containers
             for (int i = -20; i < 20; i++)
             {
                 if (i >= 0 && i < handCount) { continue; }
-                Assert.ThrowsException<ArgumentOutOfRangeException>(() => _hand.PlayFromHand(i, 0));
+                Assert.ThrowsException<ArgumentOutOfRangeException>(() => _board.PlayFromHand(i, 0));
             }
         }
 
@@ -191,7 +191,7 @@ namespace HsLibTests.Types.Containers
             PlayerMp playerMp = _board[_hand.Place.Pid].Mp;
             int initialMp = playerMp;
 
-            _hand.PlayFromHand(0, fieldIndex: 0)();
+            _board.PlayFromHand(0, fieldIndex: 0);
             Assert.AreEqual(initialMp - cardToPlay.Mp, playerMp);
         }
 
@@ -205,7 +205,7 @@ namespace HsLibTests.Types.Containers
             playerMp.Set(cardToPlay.Mp - 1);
             int initialMp = playerMp;
 
-            Assert.ThrowsException<ValidationException>(() => _hand.PlayFromHand(0, fieldIndex: 0)());
+            Assert.ThrowsException<ValidationException>(() => _board.PlayFromHand(0, fieldIndex: 0));
             Assert.AreEqual(initialMp, playerMp);
         }
 

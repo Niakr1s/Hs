@@ -2,7 +2,7 @@
 
 namespace HsLib.Systems
 {
-    internal class ActionService : Service
+    public class ActionService : Service
     {
         public ActionService(Board board) : base(board)
         {

@@ -139,7 +139,8 @@ namespace HsLibTests.Systems
             Assert.AreEqual(false, _board.WeaponAttack(Loc.Hand, 0));
             testSameHp();
 
-            _board.Enemy.Hand.PlayFromHand(0)();
+            _board[minion.Place].Remove(minion);
+            _board.Enemy.Field.Add(minion);
             Assert.AreEqual(1, _board.Enemy.Field.Count);
             Assert.AreEqual(true, _board.WeaponAttack(Loc.Field, 0));
         }
