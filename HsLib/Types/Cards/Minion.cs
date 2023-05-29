@@ -1,6 +1,8 @@
 ﻿using HsLib.Systems;
 using HsLib.Types.BoardSubscribers;
 using HsLib.Types.Effects;
+using HsLib.Types.GameActions;
+using HsLib.Types.GameIntents;
 using HsLib.Types.Places;
 using HsLib.Types.Stats;
 
@@ -96,6 +98,46 @@ namespace HsLib.Types.Cards
         public IDamageable GetDefender(IBoard board)
         {
             return this;
+        }
+
+        public override bool CanProcessIntent(GameIntent intent)
+        {
+            if (intent.Actor != this) { return false; }
+            if (Board is null) { return false; }
+
+            switch (intent)
+            {
+                case PlayFromHandIntent playFromHandIntent:
+                    int fieldIndex = playFromHandIntent.FieldIndex ?? -1;
+                    if (!Board[Place.Pid].Field.CanBeInsertedAt(fieldIndex)) { return false; }
+
+                    ICard? effectTarget = playFromHandIntent.EffectTarget;
+                    return TargetableEffectValidator.IsEffectTargetValid(BattlecryEffect, Board, effectTarget);
+
+                default:
+                    return false;
+            }
+        }
+
+        public override IEnumerable<GameAction>? ProcessIntent(GameIntent intent)
+        {
+            base.ProcessIntent(intent);
+
+            switch (intent)
+            {
+                case PlayFromHandIntent playFromHandIntent:
+                    List<GameAction> actions = new();
+                    actions.Add(new ContainerRemoveAction(this, Place));
+                    actions.Add(new ContainerInsertAction(this, Place with { Loc = Loc.Field }));
+
+                    // todo refactor this:
+                    //Action? battlectyAction = BattlecryEffect?.UseEffect(board, effectTarget);
+
+                    return actions.AsEnumerable();
+
+                default:
+                    return null;
+            }
         }
 
         public Action PlayFromHand(IBoard board, int? fieldIndex = null, ICard? effectTarget = null)

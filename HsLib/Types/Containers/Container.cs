@@ -56,6 +56,11 @@ namespace HsLib.Types.Containers
 
         public virtual bool CanBeInserted => !IsFull;
 
+        public bool CanBeInsertedAt(int index)
+        {
+            if (!CanBeInserted) { return false; }
+            return index >= 0 && index <= Count;
+        }
 
 
         #region ObservableCollection overrides

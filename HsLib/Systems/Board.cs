@@ -1,5 +1,6 @@
 ﻿using HsLib.Types.Cards;
 using HsLib.Types.Containers;
+using HsLib.Types.GameIntents;
 using HsLib.Types.Places;
 using HsLib.Types.Turns;
 using System.Collections.Specialized;
@@ -24,6 +25,8 @@ namespace HsLib.Systems
             PlayerService = new PlayerService(this);
             MeleeService = new MeleeService(this);
             CleanService = new CleanService(this);
+            IntentService = new IntentService(this);
+            ActionService = new ActionService(this);
 
             ConnectEvents();
         }
@@ -52,6 +55,8 @@ namespace HsLib.Systems
         internal PlayerService PlayerService { get; }
         internal MeleeService MeleeService { get; }
         internal CleanService CleanService { get; }
+        internal IntentService IntentService { get; }
+        internal ActionService ActionService { get; }
         #endregion
 
         private readonly List<ICard> _cards;
@@ -146,21 +151,21 @@ namespace HsLib.Systems
         /// <returns>True, if actually was played, false - if can't play from hand.</returns>
         public bool PlayFromHand(int index, int? fieldIndex = null, ICard? effectTarget = null)
         {
-            Action playFromHandAction;
+            IPlayableFromHand? card = Player.Hand.ElementAtOrDefault(index);
+            if (card is null) { return false; }
+
+            PlayFromHandIntent intent = new(this, card, fieldIndex, effectTarget);
 
             // do checks
             try
             {
-                playFromHandAction = Player.Hand.PlayFromHand(index, fieldIndex, effectTarget);
+                IntentService.ProcessIntent(intent);
+                return true;
             }
             catch
             {
                 return false;
             }
-
-            // do actual play
-            playFromHandAction();
-            return true;
         }
 
         #endregion

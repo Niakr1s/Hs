@@ -1,5 +1,7 @@
 ﻿using Force.DeepCloner;
 using HsLib.Systems;
+using HsLib.Types.GameActions;
+using HsLib.Types.GameIntents;
 using HsLib.Types.Places;
 using HsLib.Types.Stats;
 
@@ -57,6 +59,16 @@ namespace HsLib.Types.Cards
             cloned.Place = new();
             cloned.Mp = (Mp)Mp.Clone();
             return cloned;
+        }
+
+        public virtual bool CanProcessIntent(GameIntent intent)
+        {
+            return false;
+        }
+
+        public virtual IEnumerable<GameAction>? ProcessIntent(GameIntent intent)
+        {
+            return null;
         }
 
         #endregion

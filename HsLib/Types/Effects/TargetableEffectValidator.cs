@@ -28,5 +28,19 @@ namespace HsLib.Types.Effects
                 activeEffect.ValidateEffectTarget(board, effectTarget);
             }
         }
+
+        public static bool IsEffectTargetValid(ITargetableEffect? activeEffect,
+            IBoard board, ICard? effectTarget)
+        {
+            try
+            {
+                ValidateEffectTarget(activeEffect, board, effectTarget);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

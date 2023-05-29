@@ -1,4 +1,6 @@
 ﻿using HsLib.Systems;
+using HsLib.Types.GameActions;
+using HsLib.Types.GameIntents;
 using HsLib.Types.Places;
 using HsLib.Types.Stats;
 
@@ -19,5 +21,7 @@ namespace HsLib.Types.Cards
         void Unsubscribe(IBoard board, Place previousPlace);
 
         ICard Clone();
+        bool CanProcessIntent(GameIntent intent);
+        IEnumerable<GameAction>? ProcessIntent(GameIntent intent);
     }
 }

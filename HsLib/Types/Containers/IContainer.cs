@@ -8,7 +8,9 @@ namespace HsLib.Types.Containers
     // todo: make readonly
     public interface IContainer : IList, IWithPlace, INotifyCollectionChanged
     {
-        bool CanBeInserted { get; }
+        bool CanBeInserted { get; } // todo change to method
+
+        bool CanBeInsertedAt(int index);
 
         void CleanInactiveCards(); // todo to readonly interface
 

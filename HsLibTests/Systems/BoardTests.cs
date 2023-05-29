@@ -143,5 +143,14 @@ namespace HsLibTests.Systems
             Assert.AreEqual(1, _board.Enemy.Field.Count);
             Assert.AreEqual(true, _board.WeaponAttack(Loc.Field, 0));
         }
+
+        [TestMethod()]
+        public void PlayFromHand_Works()
+        {
+            _board.Player.Hand.Add(new ChillwindYeti());
+            Assert.AreEqual(true, _board.PlayFromHand(0, 0, null));
+            Assert.AreEqual(0, _board.Player.Hand.Count);
+            Assert.AreEqual(1, _board.Player.Field.Count);
+        }
     }
 }
