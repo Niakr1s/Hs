@@ -20,7 +20,7 @@ namespace HsLib.Systems
                 if (!action.CanProcess(Board)) { return; }
                 action.Process(Board);
             });
-            Board.DeathService.ProcessDeaths();
+            Board.CleanService.CleanInactiveCards();
         }
     }
 }

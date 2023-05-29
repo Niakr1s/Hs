@@ -42,7 +42,7 @@ namespace HsLib.Systems
                     attacker.AfterAttack(Board);
                 }
 
-                Board.DeathService.ProcessDeaths();
+                Board.CleanService.CleanInactiveCards();
             };
         }
 
