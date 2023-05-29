@@ -25,7 +25,7 @@ namespace HsLib.KnownCards.Minions
         {
             private static readonly Targets _targets = new Targets { Locs = Loc.Ability | Loc.Hand, Sides = Side.Me };
 
-            public IEnumerable<ICard> ChooseCards(Board board, ICard owner)
+            public IEnumerable<ICard> ChooseCards(IBoard board, ICard owner)
             {
                 return _targets.ChooseCards(board, owner).Where(CardIsValid);
             }
@@ -39,7 +39,7 @@ namespace HsLib.KnownCards.Minions
 
         internal class ProphetVelenAuraEffect : IAuraEffect
         {
-            public IEnchantHandler GiveAura(Board board, ICard owner, ICard target)
+            public IEnchantHandler GiveAura(IBoard board, ICard owner, ICard target)
             {
                 IntStat stat = target switch
                 {

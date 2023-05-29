@@ -2,7 +2,7 @@
 
 namespace HsLib.Types.Turns
 {
-    public class Turn
+    public class Turn : ITurn
     {
         /// <summary>
         /// Starts with 1.

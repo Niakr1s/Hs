@@ -3,7 +3,7 @@ using HsLib.Types.Cards;
 
 namespace HsLib.Types.Choosers
 {
-    public delegate IEnumerable<ICard> ChooserFunc<TOwner>(Board board, TOwner owner);
+    public delegate IEnumerable<ICard> ChooserFunc<TOwner>(IBoard board, TOwner owner);
 
     public static class CardsChooserFuncExtensions
     {

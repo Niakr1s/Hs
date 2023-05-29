@@ -11,7 +11,7 @@ namespace HsLib.Types.Effects
             : base(owner, effect, possibleTargetsChooser, targetsChooser)
         {
         }
-        public override void ValidateEffectTarget(Board board, ICard? effectTarget)
+        public override void ValidateEffectTarget(IBoard board, ICard? effectTarget)
         {
             base.ValidateEffectTarget(board, effectTarget);
             if (GetPossibleTargets(board).Any() && effectTarget is null)

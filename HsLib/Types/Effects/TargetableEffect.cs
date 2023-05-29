@@ -30,7 +30,7 @@ namespace HsLib.Types.Effects
 
         public IEffect Effect { get; }
 
-        public IEnumerable<ICard> GetPossibleTargets(Board board)
+        public IEnumerable<ICard> GetPossibleTargets(IBoard board)
         {
             if (_possibleTargetsChooser is null) { yield break; }
 
@@ -46,7 +46,7 @@ namespace HsLib.Types.Effects
         /// <param name="board"></param>
         /// <param name="target">Will be ignored, if <see cref="_targetsChooser"/>is set, and will uses effects on every target, choosed by it.</param>
         /// 
-        public Action UseEffect(Board board, ICard? target)
+        public Action UseEffect(IBoard board, ICard? target)
         {
             List<Action> effectActions = new();
             if (_targetsChooser is null)
@@ -65,6 +65,6 @@ namespace HsLib.Types.Effects
             return () => effectActions?.ForEach(a => a());
         }
 
-        public abstract void ValidateEffectTarget(Board board, ICard? effectTarget);
+        public abstract void ValidateEffectTarget(IBoard board, ICard? effectTarget);
     }
 }

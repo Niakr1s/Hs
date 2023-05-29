@@ -19,7 +19,7 @@ namespace HsLib.Types.Cards
 
         public bool Dead => Hp <= 0;
 
-        public bool CanBeMeleeAttacked(Board board)
+        public bool CanBeMeleeAttacked(IBoard board)
         {
             if (Place.Loc != Loc.Hero) { return false; }
             if (Dead) { return false; }

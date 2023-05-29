@@ -12,7 +12,7 @@ namespace HsLib.Types.Effects
         {
         }
 
-        public override void ValidateEffectTarget(Board board, ICard? effectTarget)
+        public override void ValidateEffectTarget(IBoard board, ICard? effectTarget)
         {
             if (effectTarget is null)
             {

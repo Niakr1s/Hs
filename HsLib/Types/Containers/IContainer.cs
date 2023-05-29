@@ -1,5 +1,4 @@
-﻿using HsLib.Systems;
-using HsLib.Types.Cards;
+﻿using HsLib.Types.Cards;
 using HsLib.Types.Places;
 using System.Collections;
 using System.Collections.Specialized;
@@ -8,8 +7,6 @@ namespace HsLib.Types.Containers
 {
     public interface IContainer : IList, IWithPlace, INotifyCollectionChanged
     {
-        Board Board { get; }
-
         bool CanBeInserted { get; }
 
         void CleanInactiveCards();

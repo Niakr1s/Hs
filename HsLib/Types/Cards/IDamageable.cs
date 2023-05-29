@@ -5,7 +5,7 @@ namespace HsLib.Types.Cards
 {
     public interface IDamageable : ICard
     {
-        bool CanBeMeleeAttacked(Board board);
+        bool CanBeMeleeAttacked(IBoard board);
 
         Hp Hp { get; }
     }

@@ -32,12 +32,6 @@ namespace HsLib.Systems
         {
         }
 
-        public event EventHandler<TurnEventArgs>? TurnEvent
-        {
-            add { Turn.Event += value; }
-            remove { Turn.Event -= value; }
-        }
-
         public event NotifyCollectionChangedEventHandler? CollectionChanged
         {
             add
@@ -51,6 +45,7 @@ namespace HsLib.Systems
         }
 
         public Turn Turn { get; }
+        ITurn IBoard.Turn => Turn;
 
         #region Services
         internal DeathService DeathService { get; }
@@ -59,9 +54,6 @@ namespace HsLib.Systems
         internal CleanService CleanService { get; }
         #endregion
 
-        /// <summary>
-        /// Get all cards in all containers in chronological order.
-        /// </summary>
         private readonly List<ICard> _cards;
         public IEnumerable<ICard> Cards => _cards.AsEnumerable();
 
@@ -82,6 +74,7 @@ namespace HsLib.Systems
         /// Current enemy.
         /// </summary>
         public IBoardSide Enemy => this[Turn.Pid.He()];
+
 
         public IContainer this[Place place] => this[place.Pid][place.Loc];
 

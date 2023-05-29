@@ -6,7 +6,7 @@ namespace HsLib.Types.Containers
 {
     public class Secrets : Container<Card>
     {
-        public Secrets(Board board, Pid pid, IEnumerable<Card>? startCards = null) :
+        public Secrets(IBoard board, Pid pid, IEnumerable<Card>? startCards = null) :
             base(board, new Place(pid, Loc.Secrets), startCards: startCards)
         {
         }

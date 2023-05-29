@@ -9,21 +9,27 @@ namespace HsLib.Systems
 {
     public interface IBoardSide : INotifyCollectionChanged
     {
-        IContainer this[Loc loc] { get; }
+        Pid Pid { get; }
+        PlayerMp Mp { get; }
+        IPlayer Player { get; set; } // todo: remove this from interface
 
-        Ability Ability { get; set; }
-        IEnumerable<ICard> Cards { get; }
+        IContainer this[Loc loc] { get; }
+        IContainer? GetContainer(ICard card);
+        bool Remove(ICard card);
+
         Deck Deck { get; }
         Field Field { get; }
         Hand Hand { get; }
-        Hero Hero { get; set; }
-        PlayerMp Mp { get; }
-        Pid Pid { get; }
         Secrets Secrets { get; }
-        Weapon? Weapon { get; set; }
-        IPlayer Player { get; set; }
 
-        IContainer? GetContainer(ICard card);
-        bool Remove(ICard card);
+        Hero Hero { get; set; }
+        Ability Ability { get; set; }
+        Weapon? Weapon { get; set; }
+
+        /// <summary>
+        /// Can return cards in non-chronogical order.
+        /// </summary>
+        IEnumerable<ICard> Cards { get; }
+
     }
 }

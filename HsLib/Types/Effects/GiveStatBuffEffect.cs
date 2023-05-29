@@ -20,7 +20,7 @@ namespace HsLib.Types.Effects
 
         public bool TillEndOfTurn { get; set; }
 
-        public Action UseEffect(Board board, ICard owner, ICard? target)
+        public Action UseEffect(IBoard board, ICard owner, ICard? target)
         {
             if (target is Minion m)
             {

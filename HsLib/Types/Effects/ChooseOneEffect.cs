@@ -15,12 +15,12 @@ namespace HsLib.Types.Effects
         private readonly List<CardId> _cardIds;
         public IEnumerable<CardId> CardIds => _cardIds.AsEnumerable();
 
-        public Action UseEffect(Board board, ICard owner, ICard? target)
+        public Action UseEffect(IBoard board, ICard owner, ICard? target)
         {
             return () => UseEffect(board, owner);
         }
 
-        private void UseEffect(Board board, ICard owner)
+        private void UseEffect(IBoard board, ICard owner)
         {
             CardId transformToId = board[owner.Place.Pid].Player.ChooseOne(CardIds);
             IContainer? container = board[owner.Place.Pid].GetContainer(owner);

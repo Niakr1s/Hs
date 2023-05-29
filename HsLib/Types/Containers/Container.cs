@@ -10,7 +10,7 @@ namespace HsLib.Types.Containers
     {
         #region ctors
 
-        public Container(Board board, Place place, int? limit = null, IEnumerable<TCard>? startCards = null)
+        public Container(IBoard board, Place place, int? limit = null, IEnumerable<TCard>? startCards = null)
         {
             Board = board;
             Place = place;
@@ -46,7 +46,7 @@ namespace HsLib.Types.Containers
             }
         }
 
-        public Board Board { get; }
+        public IBoard Board { get; }
 
         public Place Place { get; }
 

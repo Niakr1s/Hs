@@ -6,7 +6,7 @@ namespace HsLib.Types.Containers
 {
     public class WeaponContainer : SingleMaybeContainer<Weapon>
     {
-        public WeaponContainer(Board board, Pid pid, Weapon? startCard = null) : base(board, new(pid, Loc.Weapon))
+        public WeaponContainer(IBoard board, Pid pid, Weapon? startCard = null) : base(board, new(pid, Loc.Weapon))
         {
             Card = startCard;
         }

@@ -13,7 +13,7 @@ namespace HsLib.Types.Effects
 
         public IntStat DamageAmount { get; }
 
-        public Action UseEffect(Board board, ICard owner, ICard? target)
+        public Action UseEffect(IBoard board, ICard owner, ICard? target)
         {
             if (target is IDamageable d)
             {

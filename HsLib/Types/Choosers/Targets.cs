@@ -25,7 +25,7 @@ namespace HsLib.Types.Choosers
             return sideIsCorrect && locIsCorrect;
         }
 
-        public IEnumerable<ICard> ChooseCards(Board board, ICard owner)
+        public IEnumerable<ICard> ChooseCards(IBoard board, ICard owner)
         {
             foreach (var t in board.Cards)
             {
@@ -36,7 +36,7 @@ namespace HsLib.Types.Choosers
             }
         }
 
-        public IEnumerable<ICard> ChooseCards(Board board, Pid owner)
+        public IEnumerable<ICard> ChooseCards(IBoard board, Pid owner)
         {
             foreach (var t in board.Cards)
             {

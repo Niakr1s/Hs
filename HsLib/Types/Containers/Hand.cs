@@ -7,7 +7,7 @@ namespace HsLib.Types.Containers
 {
     public class Hand : Container<IPlayableFromHand>
     {
-        public Hand(Board board, Pid pid) : base(board, new Place(pid, Loc.Hand), limit: 10)
+        public Hand(IBoard board, Pid pid) : base(board, new Place(pid, Loc.Hand), limit: 10)
         {
         }
 

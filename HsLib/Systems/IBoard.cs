@@ -8,13 +8,19 @@ namespace HsLib.Systems
 {
     public interface IBoard : INotifyCollectionChanged
     {
-        IBoardSide this[Pid pid] { get; }
+        ITurn Turn { get; }
+
         IContainer this[Place place] { get; }
 
+        /// <summary>
+        /// Should return cards in chronogical order.
+        /// </summary>
         IEnumerable<ICard> Cards { get; }
-        IBoardSide Enemy { get; }
-        IBoardSide Player { get; }
 
-        event EventHandler<TurnEventArgs>? TurnEvent;
+        IBoardSide this[Pid pid] { get; }
+
+        IBoardSide Enemy { get; }
+
+        IBoardSide Player { get; }
     }
 }

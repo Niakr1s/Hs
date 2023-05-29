@@ -35,33 +35,33 @@ namespace HsLib.Types.Cards
             }
         }
 
-        public virtual bool ActivateDeathrattle(Board board) { return false; }
+        public virtual bool ActivateDeathrattle(IBoard board) { return false; }
 
-        public void AfterAttack(Board board)
+        public void AfterAttack(IBoard board)
         {
             AtksThisTurn++;
             Hp.Decrease();
         }
 
-        public override void Subscribe(Board board)
+        public override void Subscribe(IBoard board)
         {
             base.Subscribe(board);
             AtksThisTurn = 0;
         }
 
-        public override void Unsubscribe(Board board, Place previousPlace)
+        public override void Unsubscribe(IBoard board, Place previousPlace)
         {
             base.Unsubscribe(board, previousPlace);
             AtksThisTurn = 0;
         }
 
-        public bool CanMeleeAttack(Board board)
+        public bool CanMeleeAttack(IBoard board)
         {
             if (Dead) { return false; }
             return Windfury.AttacksLeft(AtksThisTurn) > 0;
         }
 
-        public Action PlayFromHand(Board board, int? fieldIndex = null, ICard? effectTarget = null)
+        public Action PlayFromHand(IBoard board, int? fieldIndex = null, ICard? effectTarget = null)
         {
             TargetableEffectValidator.ValidateEffectTarget(BattlecryEffect, board, effectTarget);
 
@@ -81,7 +81,7 @@ namespace HsLib.Types.Cards
             };
         }
 
-        public IDamageable GetDefender(Board board)
+        public IDamageable GetDefender(IBoard board)
         {
             return board[Place.Pid].Hero;
         }

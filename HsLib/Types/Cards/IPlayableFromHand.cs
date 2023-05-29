@@ -11,6 +11,6 @@ namespace HsLib.Types.Cards
         /// <param name="fieldIndex"></param>
         /// <param name="effectTarget"></param>
         /// <returns>Action, that actually plays from hand.</returns>
-        Action PlayFromHand(Board board, int? fieldIndex = null, ICard? effectTarget = null);
+        Action PlayFromHand(IBoard board, int? fieldIndex = null, ICard? effectTarget = null);
     }
 }

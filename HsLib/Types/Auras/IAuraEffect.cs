@@ -6,6 +6,6 @@ namespace HsLib.Types.Auras
 {
     public interface IAuraEffect
     {
-        IEnchantHandler GiveAura(Board board, ICard owner, ICard target);
+        IEnchantHandler GiveAura(IBoard board, ICard owner, ICard target);
     }
 }

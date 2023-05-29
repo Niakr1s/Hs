@@ -15,7 +15,7 @@ namespace HsLib.Interfaces
         /// Gets all targets from board, effect can be used on.
         /// </summary>
         /// <param name="board"></param>
-        IEnumerable<ICard> GetPossibleTargets(Board board);
+        IEnumerable<ICard> GetPossibleTargets(IBoard board);
 
         /// <summary>
         /// Uses effect. 
@@ -24,7 +24,7 @@ namespace HsLib.Interfaces
         /// <param name="target"></param>
         /// <exception cref="ValidationException">Any exception, that prevents for using effect</exception>
         /// <returns>Action, that actually uses effect</returns>
-        Action UseEffect(Board board, ICard? target);
+        Action UseEffect(IBoard board, ICard? target);
 
         /// <summary>
         /// Validates of validity or effect target while playing from hand.
@@ -33,6 +33,6 @@ namespace HsLib.Interfaces
         /// <param name="effectTarget"></param>
         /// <exception cref="ValidationException"></exception>
         /// 
-        void ValidateEffectTarget(Board board, ICard? effectTarget);
+        void ValidateEffectTarget(IBoard board, ICard? effectTarget);
     }
 }

@@ -20,7 +20,7 @@ namespace HsLib.Types.Cards
         /// <param name="target"></param>
         /// 
         /// <returns>Action, that actually uses effect.</returns>
-        public Action UseAbility(Board board, ICard? target)
+        public Action UseAbility(IBoard board, ICard? target)
         {
             TargetableEffectValidator.ValidateEffectTarget(AbilityEffect, board, target);
             Action useEffectAction = AbilityEffect.UseEffect(board, target);

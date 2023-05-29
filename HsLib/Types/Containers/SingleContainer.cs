@@ -7,7 +7,7 @@ namespace HsLib.Types.Containers
     public abstract class SingleContainer<TCard> : Container<TCard>
         where TCard : ICard
     {
-        protected SingleContainer(Board board, Place place, TCard startCard) :
+        protected SingleContainer(IBoard board, Place place, TCard startCard) :
             base(board, place, 1, new List<TCard> { startCard })
         {
         }

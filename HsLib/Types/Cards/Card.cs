@@ -8,8 +8,8 @@ namespace HsLib.Types.Cards
     /// <summary>
     /// Parent for all cards.<br/><br/>
     /// Card reacts on 4 board events:<br/>
-    /// <see cref="Subscribe(Board)"/><br/>
-    /// <see cref="Unsubscribe(Board, Place)"/><br/>
+    /// <see cref="Subscribe(IBoard)"/><br/>
+    /// <see cref="Unsubscribe(IBoard, Place)"/><br/>
     /// <see cref="OnTurnEnd(Board)"/><br/>
     /// <see cref="OnTurnStart(Board)"/>.<br/><br/>
     /// </summary>
@@ -25,7 +25,7 @@ namespace HsLib.Types.Cards
 
         public int? AddedTurnNo { get; private set; }
 
-        protected Board? Board { get; private set; }
+        protected IBoard? Board { get; private set; }
 
         public Mp Mp { get; protected set; }
 
@@ -34,13 +34,13 @@ namespace HsLib.Types.Cards
 
         #region reactive
 
-        public virtual void Subscribe(Board board)
+        public virtual void Subscribe(IBoard board)
         {
             Board = board;
             AddedTurnNo = board.Turn.No;
         }
 
-        public virtual void Unsubscribe(Board board, Place previousPlace)
+        public virtual void Unsubscribe(IBoard board, Place previousPlace)
         {
             Board = null;
             AddedTurnNo = null;

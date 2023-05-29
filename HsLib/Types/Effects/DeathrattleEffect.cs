@@ -16,7 +16,7 @@ namespace HsLib.Types.Effects
         public IEffect Effect { get; }
         public IChooser<Pid> TargetsChooser { get; }
 
-        public Action ActivateDeathrattle(Board board, Pid owner)
+        public Action ActivateDeathrattle(IBoard board, Pid owner)
         {
             List<Action> effectActions = new();
 

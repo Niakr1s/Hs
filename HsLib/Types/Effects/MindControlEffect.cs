@@ -7,7 +7,7 @@ namespace HsLib.Types.Effects
 {
     public class MindControlEffect : IEffect
     {
-        public Action UseEffect(Board board, ICard owner, ICard? target)
+        public Action UseEffect(IBoard board, ICard owner, ICard? target)
         {
             if (target is Minion m)
             {

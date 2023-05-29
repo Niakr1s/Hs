@@ -14,7 +14,7 @@ namespace HsLib.Types.Effects
         /// <param name="effectTarget"></param>
         /// <exception cref="ValidationException"></exception>
         public static void ValidateEffectTarget(ITargetableEffect? activeEffect,
-            Board board, ICard? effectTarget)
+            IBoard board, ICard? effectTarget)
         {
             if (activeEffect is null)
             {

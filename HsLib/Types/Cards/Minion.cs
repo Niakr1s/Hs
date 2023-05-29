@@ -44,12 +44,12 @@ namespace HsLib.Types.Cards
             }
         }
 
-        public virtual void AfterAttack(Board board)
+        public virtual void AfterAttack(IBoard board)
         {
             AtksThisTurn++;
         }
 
-        public override void Subscribe(Board board)
+        public override void Subscribe(IBoard board)
         {
             base.Subscribe(board);
             AtksThisTurn = 0;
@@ -60,7 +60,7 @@ namespace HsLib.Types.Cards
             }
         }
 
-        public override void Unsubscribe(Board board, Place previousPlace)
+        public override void Unsubscribe(IBoard board, Place previousPlace)
         {
             base.Unsubscribe(board, previousPlace);
             AtksThisTurn = 0;
@@ -79,26 +79,26 @@ namespace HsLib.Types.Cards
             AtksThisTurn = 0;
         }
 
-        public virtual bool ActivateDeathrattle(Board board) { return false; }
+        public virtual bool ActivateDeathrattle(IBoard board) { return false; }
 
-        public bool CanMeleeAttack(Board board)
+        public bool CanMeleeAttack(IBoard board)
         {
             if (Dead) { return false; }
             if (Windfury.AttacksLeft(AtksThisTurn) <= 0) { return false; }
             return !board.Turn.IsFirstTurn(AddedTurnNo) || Charge;
         }
 
-        public bool CanBeMeleeAttacked(Board board)
+        public bool CanBeMeleeAttacked(IBoard board)
         {
             return !Stealth && (Taunt || !board[Place.Pid].Field.HasAnyActiveTaunt());
         }
 
-        public IDamageable GetDefender(Board board)
+        public IDamageable GetDefender(IBoard board)
         {
             return this;
         }
 
-        public Action PlayFromHand(Board board, int? fieldIndex = null, ICard? effectTarget = null)
+        public Action PlayFromHand(IBoard board, int? fieldIndex = null, ICard? effectTarget = null)
         {
             Action move = board[Place.Pid].Hand.MoveToContainer(this, board[Place.Pid].Field,
                 canBurn: false, toIndex: fieldIndex);

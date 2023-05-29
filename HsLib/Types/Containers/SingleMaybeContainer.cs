@@ -7,7 +7,7 @@ namespace HsLib.Types.Containers
     public abstract class SingleMaybeContainer<TCard> : Container<TCard>
         where TCard : ICard
     {
-        protected SingleMaybeContainer(Board board, Place place) : base(board, place)
+        protected SingleMaybeContainer(IBoard board, Place place) : base(board, place)
         {
         }
 

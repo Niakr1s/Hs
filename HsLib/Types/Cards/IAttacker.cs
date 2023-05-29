@@ -9,19 +9,19 @@ namespace HsLib.Types.Cards
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>
-        bool CanMeleeAttack(Board board);
+        bool CanMeleeAttack(IBoard board);
 
         /// <summary>
         /// Will be called after minion successfully attacked.
         /// </summary>
         /// <param name="board"></param>
-        void AfterAttack(Board board);
+        void AfterAttack(IBoard board);
 
         /// <summary>
         /// Returns defender, who will receive counterattack.
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>
-        IDamageable GetDefender(Board board);
+        IDamageable GetDefender(IBoard board);
     }
 }

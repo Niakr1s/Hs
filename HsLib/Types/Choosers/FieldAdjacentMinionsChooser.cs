@@ -10,7 +10,7 @@ namespace HsLib.Types.Choosers
 
         public bool ExcludeRight { get; init; }
 
-        public IEnumerable<ICard> ChooseCards(Board board, ICard owner)
+        public IEnumerable<ICard> ChooseCards(IBoard board, ICard owner)
         {
             if (owner.Place.IsNone()) { yield break; }
 

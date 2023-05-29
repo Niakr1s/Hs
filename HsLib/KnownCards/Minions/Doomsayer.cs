@@ -31,7 +31,8 @@ namespace HsLib.KnownCards.Minions
                 {
                     card.Dead = true;
                 }
-                Board.DeathService.ProcessDeaths();
+                // todo: after intent+action implementation, it should be fixed
+                //Board.DeathService.ProcessDeaths();
             }
         }
     }

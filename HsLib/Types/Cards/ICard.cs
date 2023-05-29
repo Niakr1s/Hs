@@ -15,8 +15,8 @@ namespace HsLib.Types.Cards
         /// </summary>
         bool ShouldBeCleaned();
 
-        void Subscribe(Board board);
-        void Unsubscribe(Board board, Place previousPlace);
+        void Subscribe(IBoard board);
+        void Unsubscribe(IBoard board, Place previousPlace);
 
         ICard Clone();
     }

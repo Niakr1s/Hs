@@ -5,6 +5,6 @@ namespace HsLib.Types.Choosers
 {
     public interface IChooser<TOwner>
     {
-        IEnumerable<ICard> ChooseCards(Board board, TOwner owner);
+        IEnumerable<ICard> ChooseCards(IBoard board, TOwner owner);
     }
 }

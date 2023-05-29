@@ -6,7 +6,7 @@ namespace HsLib.Types.Containers
 {
     public class Deck : Container<IPlayableFromHand>
     {
-        public Deck(Board board, Pid pid, IEnumerable<IPlayableFromHand>? startCards = null) :
+        public Deck(IBoard board, Pid pid, IEnumerable<IPlayableFromHand>? startCards = null) :
             base(board, new Place(pid, Loc.Deck), startCards: startCards)
         {
         }

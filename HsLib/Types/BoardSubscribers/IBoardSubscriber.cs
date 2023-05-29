@@ -13,13 +13,13 @@ namespace HsLib.Types.BoardSubscribers
         /// Implementators should decide if they should subscribe by themselves.
         /// </summary>
         /// <param name="board"></param>
-        void Subscribe(Board board);
+        void Subscribe(IBoard board);
 
         /// <summary>
         /// Called after implementator was removed from container.
         /// Implementators should decide if they should subscribe by themselves.
         /// </summary>
         /// <param name="board"></param>
-        void Unsubscribe(Board board, Place previousPlace);
+        void Unsubscribe(IBoard board, Place previousPlace);
     }
 }

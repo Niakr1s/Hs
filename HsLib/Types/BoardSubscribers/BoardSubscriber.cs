@@ -22,7 +22,7 @@ namespace HsLib.Types.BoardSubscribers
 
         public ICard Owner { get; set; }
 
-        protected Board? Board { get; private set; }
+        protected IBoard? Board { get; private set; }
 
         private readonly List<TSubscribedCard> _subs = new();
 
@@ -30,7 +30,7 @@ namespace HsLib.Types.BoardSubscribers
         /// Called on every container.
         /// </summary>
         /// <param name="board"></param>
-        public void Subscribe(Board board)
+        public void Subscribe(IBoard board)
         {
             Board = board;
             DoSubscribe(board);
@@ -42,25 +42,25 @@ namespace HsLib.Types.BoardSubscribers
         /// <param name="board"></param>
         /// <exception cref="Exception">Throws, if anything unexpected occurs.</exception>
         /// <returns>True, if was success deactivated.</returns>
-        public void Unsubscribe(Board board, Place previousPlace)
+        public void Unsubscribe(IBoard board, Place previousPlace)
         {
             Board = null;
             DoUnsubscribe(board, previousPlace);
         }
 
-        private void DoSubscribe(Board board)
+        private void DoSubscribe(IBoard board)
         {
             board.CollectionChanged += Board_CollectionChanged;
-            board.TurnEvent += Board_TurnEvent;
+            board.Turn.Event += Board_TurnEvent;
 
             foreach (TSubscribedCard card in board.Cards.OfType<TSubscribedCard>()) { SubscribeCard(card); }
             OnCollectionChanged();
         }
 
-        private void DoUnsubscribe(Board board, Place previousPlace)
+        private void DoUnsubscribe(IBoard board, Place previousPlace)
         {
             board.CollectionChanged -= Board_CollectionChanged;
-            board.TurnEvent -= Board_TurnEvent;
+            board.Turn.Event -= Board_TurnEvent;
             Clear();
         }
 

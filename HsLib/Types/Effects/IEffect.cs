@@ -16,6 +16,6 @@ namespace HsLib.Types.Effects
         /// <param name="target"></param>
         /// <exception cref="ValidationException"></exception>
         /// <returns>Action, that actually uses effect</returns>
-        Action UseEffect(Board board, ICard owner, ICard? target);
+        Action UseEffect(IBoard board, ICard owner, ICard? target);
     }
 }

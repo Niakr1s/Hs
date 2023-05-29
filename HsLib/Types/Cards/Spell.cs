@@ -11,7 +11,7 @@ namespace HsLib.Types.Cards
 
         public abstract SpellEffect SpellEffect { get; }
 
-        public Action PlayFromHand(Board board, int? fieldIndex = null, ICard? effectTarget = null)
+        public Action PlayFromHand(IBoard board, int? fieldIndex = null, ICard? effectTarget = null)
         {
             TargetableEffectValidator.ValidateEffectTarget(SpellEffect, board, effectTarget);
 
