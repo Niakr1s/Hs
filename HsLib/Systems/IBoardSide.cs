@@ -14,7 +14,6 @@ namespace HsLib.Systems
 
         IContainer this[Loc loc] { get; }
         IContainer? GetContainer(ICard card);
-        bool Remove(ICard card);
 
         Deck Deck { get; }
         Field Field { get; }
