@@ -3,14 +3,11 @@ using HsLib.Types.Places;
 
 namespace HsLib.Systems
 {
-    public class MeleeService
+    public class MeleeService : Service
     {
-        public MeleeService(Board board)
+        public MeleeService(Board board) : base(board)
         {
-            Board = board;
         }
-
-        public Board Board { get; }
 
         /// <summary>
         /// Attacker attacks defender.

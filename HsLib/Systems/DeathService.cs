@@ -2,14 +2,11 @@
 
 namespace HsLib.Systems
 {
-    public class DeathService
+    public class DeathService : Service
     {
-        public DeathService(Board board)
+        public DeathService(Board board) : base(board)
         {
-            Board = board;
         }
-
-        public Board Board { get; }
 
         public void ProcessDeaths()
         {

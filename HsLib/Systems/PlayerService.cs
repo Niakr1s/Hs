@@ -2,14 +2,11 @@
 
 namespace HsLib.Systems
 {
-    public class PlayerService
+    public class PlayerService : Service
     {
-        public PlayerService(Board board)
+        public PlayerService(Board board) : base(board)
         {
-            Board = board;
         }
-
-        public Board Board { get; }
 
         public CardId ChooseCard(IEnumerable<CardId> cards)
         {

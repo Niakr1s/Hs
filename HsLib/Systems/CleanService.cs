@@ -2,14 +2,11 @@
 
 namespace HsLib.Systems
 {
-    public class CleanService
+    public class CleanService : Service
     {
-        public CleanService(Board board)
+        public CleanService(Board board) : base(board)
         {
-            Board = board;
         }
-
-        public Board Board { get; }
 
         /// <summary>
         /// Removes dead cards from containers in insert order.
